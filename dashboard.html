@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dreamteam Dashboard — Biostat Locked Plan</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --bg-2: #ffffff;
+    --bg-3: #f4f4f2;
+    --bg-soft: #f8f7f3;
+    --border: #e6e4df;
+    --border-strong: #d5d2cb;
+    --fg: #1c1c19;
+    --fg-dim: #5f5d57;
+    --fg-dimmer: #8a877f;
+    --accent: #2954c8;
+    --accent-2: #7c3aed;
+    --accent-soft: #eaf0ff;
+    --ok: #1f8a4d;
+    --ok-soft: #e8f5ed;
+    --warn: #b06a00;
+    --warn-soft: #fbf2e1;
+    --urgent: #c8302a;
+    --urgent-soft: #fbeae8;
+    --info: #0d7e8c;
+    --info-soft: #e6f4f6;
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-md: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  }
+  body.dark {
+    --bg: #0f1216;
+    --bg-2: #161a21;
+    --bg-3: #1d232c;
+    --bg-soft: #181d25;
+    --border: #2a313d;
+    --border-strong: #3a414d;
+    --fg: #e3e8ef;
+    --fg-dim: #8a94a5;
+    --fg-dimmer: #5a6374;
+    --accent: #6ab0ff;
+    --accent-2: #a78bfa;
+    --accent-soft: #1a2940;
+    --ok: #62d17a;
+    --ok-soft: #15301d;
+    --warn: #f7b04a;
+    --warn-soft: #2b210d;
+    --urgent: #ff6961;
+    --urgent-soft: #2c1715;
+    --info: #4dc4d1;
+    --info-soft: #122a2d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 18px;
+    margin: 0 24px 4px 24px;
+    font-weight: 600;
+  }
+  aside .subtitle {
+    margin: 0 24px 24px 24px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  aside nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-family: var(--sans);
+    font-size: 14px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  aside nav button:hover {
+    background: var(--bg-3);
+    color: var(--fg);
+  }
+  aside nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  aside .footer {
+    margin: 32px 24px 16px 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-dimmer);
+  }
+  aside .footer button {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  aside .footer button:hover {
+    background: var(--border);
+  }
+  main {
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 12px 0;
+    font-weight: 600;
+  }
+  .tab-subtitle {
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .stat .value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .stat .value.small { font-size: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-3);
+    font-weight: 600;
+    color: var(--fg-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-soft); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.tier-1 { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.tier-2 { background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-3 { background: var(--info-soft); color: var(--info); }
+  .badge.tier-4 { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-pending { background: var(--bg-3); color: var(--fg-dim); }
+  .badge.status-progress { background: var(--info-soft); color: var(--info); }
+  .badge.status-done { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-blocked { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.status-soon { background: var(--warn-soft); color: var(--warn); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checkbox-row:last-child { border-bottom: none; }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .checkbox-row .task-content { flex: 1; }
+  .checkbox-row .task-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .checkbox-row.done .task-content > div:first-child {
+    text-decoration: line-through;
+    color: var(--fg-dim);
+  }
+  .deadline { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .deadline.past { color: var(--urgent); }
+  .deadline.soon { color: var(--warn); }
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .alert {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .alert.info { background: var(--info-soft); border-left-color: var(--info); }
+  .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+  .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .lock-item {
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-2);
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+  }
+  .lock-item strong { color: var(--accent); }
+  .month-group {
+    margin-bottom: 24px;
+  }
+  .month-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pill {
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+  details summary:hover { color: var(--accent); }
+  details[open] summary { margin-bottom: 12px; }
+  .small { font-size: 12px; color: var(--fg-dim); }
+  .mono { font-family: var(--mono); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .reset-btn {
+    background: var(--urgent-soft);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; }
+    main { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<aside>
+  <h1>Dreamteam</h1>
+  <p class="subtitle">Biostat-locked plan · Fall 2028 target</p>
+  <nav>
+    <button data-tab="overview" class="active">Overview</button>
+    <button data-tab="week">This Week</button>
+    <button data-tab="schedule">Schedule</button>
+    <button data-tab="literature">Literature</button>
+    <button data-tab="apply">Apply Portfolio</button>
+    <button data-tab="projects">Projects</button>
+    <button data-tab="email">Cold Email</button>
+    <button data-tab="gre">GRE Prep</button>
+    <button data-tab="verify">Verifications</button>
+    <button data-tab="locks">Critical Locks</button>
+  </nav>
+  <div class="footer">
+    Session 1 close: 2026-05-11<br>
+    <span id="task-progress" class="small"></span>
+    <button id="theme-toggle">Toggle theme</button>
+    <button class="reset-btn" id="reset-btn" style="margin-top: 4px;">Reset all checkboxes</button>
+  </div>
+</aside>
+
+<main>
+
+<!-- OVERVIEW TAB -->
+<section class="tab active" id="overview">
+  <h2>Overview</h2>
+  <p class="tab-subtitle">Current state of the biostat-locked plan. Read this first when opening a new session.</p>
+
+  <div class="card-grid">
+    <div class="stat">
+      <div class="label">Field</div>
+      <div class="value small">Biostatistics</div>
+    </div>
+    <div class="stat">
+      <div class="label">Target Entry</div>
+      <div class="value small">Fall 2028</div>
+    </div>
+    <div class="stat">
+      <div class="label">Tier Targeting</div>
+      <div class="value small">T1–T25 aim-high</div>
+    </div>
+    <div class="stat">
+      <div class="label">Lifestyle Target</div>
+      <div class="value small">$400–500K HH peak</div>
+    </div>
+    <div class="stat">
+      <div class="label">Apply Portfolio</div>
+      <div class="value small">~32–36 apps</div>
+    </div>
+    <div class="stat">
+      <div class="label">Math Gate</div>
+      <div class="value small">Real analysis ≥75% (Fall 2026 NU/KazNU OR Spring 2027 Athabasca)</div>
+    </div>
+  </div>
+
+  <h3>Probability snapshot</h3>
+  <table>
+    <thead>
+      <tr><th>Outcome</th><th>Plan executed 80–100%</th><th>Plan unfulfilled</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>US PhD T1–T10 admit</td><td><span class="badge status-progress">50–80%</span></td><td><span class="badge status-blocked">5–18%</span></td></tr>
+      <tr><td>US PhD T1–T25 admit</td><td><span class="badge status-progress">50–70%</span></td><td><span class="badge status-blocked">10–25%</span></td></tr>
+      <tr><td>Any US-side admit (PhD/bridge/MS)</td><td><span class="badge status-done">85–95%</span></td><td><span class="badge status-pending">30–55%</span></td></tr>
+      <tr><td>Any funded admit anywhere</td><td><span class="badge status-done">95–99%</span></td><td><span class="badge status-progress">70–88%</span></td></tr>
+      <tr><td><strong>No funded admit anywhere</strong></td><td><span class="badge status-done">1–5%</span></td><td><span class="badge status-blocked">12–30%</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Critical execution insight</h3>
+  <div class="alert">
+    <strong>Plan execution buys ~45–62pp of T1–T10 admit probability.</strong> That's the entire value of the May 2026 → Dec 2027 18-month execution window. <strong>biotech-research-AI paper submission to ML4H @ NeurIPS 2026 (deadline 27 Aug 2026)</strong> is the single highest-leverage near-term milestone — DR-learner + calibration on NHANES, grf replication as comparator section.
+  </div>
+
+  <h3>Apply portfolio at a glance</h3>
+  <div class="card-grid">
+    <div class="stat">
+      <div class="label">US Biostat PhDs (primary)</div>
+      <div class="value">16</div>
+      <div class="small">T1–T5 reach (3–4) + T6–T10 stretch (3–4) + T11–T15 match (3–4) + T16–T25 floor (4–5)</div>
+    </div>
+    <div class="stat">
+      <div class="label">UK Funded MSc</div>
+      <div class="value">3</div>
+      <div class="small">Cambridge MASt + Gates · Oxford MSc Stat Sci + Clarendon/W-H · Stanford MS + Knight-Hennessy</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mid-tier US Stats MSc + TA</div>
+      <div class="value">4–6</div>
+      <div class="small">Iowa State, Penn State, Texas A&M, NC State · UW Biostat MS Thesis · TA funds tuition + stipend</div>
+    </div>
+    <div class="stat">
+      <div class="label">US Bridge Positions</div>
+      <div class="value">5–7</div>
+      <div class="small">Dana-Farber, MD Anderson, MSK, Harvard HCP + cold-email RAs</div>
+    </div>
+    <div class="stat">
+      <div class="label">Euro MSc Backup (Plan C)</div>
+      <div class="value">4</div>
+      <div class="small">TU Dortmund, Bremen, Helsinki, LMU · cheap structural tuition</div>
+    </div>
+    <div class="stat">
+      <div class="label">US MS Hedges</div>
+      <div class="value">2</div>
+      <div class="small">Iowa MS Biostat, Vanderbilt MS Biostat</div>
+    </div>
+  </div>
+
+  <h3>Top 3 next-action items</h3>
+  <table>
+    <thead><tr><th>Priority</th><th>Action</th><th>Deadline</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Send KBTU SAM / NU / KazNU enquiry emails (real-analysis course inquiry) + UoL Enquiry Hub (MT3041 / course load / RA credential)</td><td><span class="deadline soon">Week of 18 May</span></td></tr>
+      <tr><td>2</td><td>biotech-research-AI Bug #2 fix (bootstrap SE) — replaces approximated formula; central new finding depends on this</td><td><span class="deadline soon">By 7 June 2026</span></td></tr>
+      <tr><td>3</td><td>Hernán-Robins Part I (Ch 1–10) foundation reading — required before Kennedy 2020 / McClean-Kennedy 2025 is meaningful</td><td><span class="deadline">By mid-June 2026</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- THIS WEEK TAB -->
+<section class="tab" id="week">
+  <h2>This Week</h2>
+  <p class="tab-subtitle" id="week-date">Current week tasks. Tasks roll automatically based on date.</p>
+
+  <div class="alert info" id="week-alert">
+    Today is 2026-05-17. New recurring schedule activates Thursday 21 May. This week: send KBTU SAM / NU / KazNU enquiries, follow up UoL Enquiry Hub, begin biotech-research-AI Bug #2 prep.
+  </div>
+
+  <div class="card">
+    <h3 id="current-week-heading">Week of May 18–24, 2026</h3>
+    <div id="week-tasks">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <h3>Lookahead — Next 4 weeks</h3>
+  <details>
+    <summary>Week of May 25–31, 2026 — H-R Ch 4–5 + Bug #2 implementation start</summary>
+    <div class="checkbox-row" data-task-id="may25-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Hernán–Robins Part I Ch 4–5 (counterfactual outcomes under exchangeability, IP weighting machinery)</div>
+        <div class="task-meta">~5 hrs. Foundation vocabulary for DR-learner reading later. Free at hsph.harvard.edu/miguel-hernan/causal-inference-book/.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="may25-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>biotech-research-AI: begin Bug #2 implementation (bootstrap SE)</div>
+        <div class="task-meta">Engineering task — not gated on Kennedy 2020. Replace approximated SE formula with bootstrap. Validate against NHANES. Update DEVIATIONS.md.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="may25-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Confirm KBTU spring grades + verify graduation-year timing</div>
+        <div class="task-meta">Per `predoc-pre-phd-calendar-2026.md` Stage 0 — confirm 4-year vs 3-year track in writing.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="may25-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Test new daily schedule activation (Mon 25 May)</div>
+        <div class="task-meta">First full week of recurring schedule. Adjust block timings if needed.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of June 1–7, 2026 — H-R Ch 6–10 + Bug #2 finish</summary>
+    <div class="checkbox-row" data-task-id="jun1-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Hernán–Robins Part I Ch 6–10 (effect modification, confounding, IPW + standardization)</div>
+        <div class="task-meta">~6 hrs. Completes H-R Part I (Ch 1–10). Core causal-inference vocabulary now in place.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun1-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Re-run NHANES analysis with bootstrap CIs (Bug #2 validation)</div>
+        <div class="task-meta">Document SE changes vs reported figures. Verify coverage claims hold.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun1-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Read Künzel et al. 2019 — metalearners overview (PNAS)</div>
+        <div class="task-meta">~3 hrs. Defines S/T/X learners; DR-learner sits adjacent. Bridges H-R conceptual base to DR-learner machinery.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of June 8–14, 2026 — H-R Part II + DoubleML intro + simulation</summary>
+    <div class="checkbox-row" data-task-id="jun8-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Hernán–Robins Part II Ch 11–13 (standardization, g-formula, marginal structural models)</div>
+        <div class="task-meta">~8 hrs. Time-varying treatment + g-methods.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun8-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Read Chernozhukov et al. 2018 DoubleML — introduction + §2 carefully</div>
+        <div class="task-meta">~5 hrs. The framework Kennedy 2020 builds on. Skip technical appendix on first pass.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun8-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Begin 3,600-run simulation (36 cells × 100 reps)</div>
+        <div class="task-meta">Replaces underpowered 540-run version. Monitor convergence overnight.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun8-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Check NU/KazNU replies — if received, confirm Fall 2026 real analysis enrollment</div>
+        <div class="task-meta">If both fail by mid-July, plan reverts to Spring 2027 Athabasca self-paced.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of June 15–21, 2026 — H-R Part II finish + Kennedy 2020 first pass</summary>
+    <div class="checkbox-row" data-task-id="jun15-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Hernán–Robins Part II Ch 14–17 (g-estimation, sensitivity analysis, time-varying treatment continued)</div>
+        <div class="task-meta">~6 hrs. Completes H-R Part II. Now have full vocabulary for Kennedy 2020.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun15-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Kennedy 2020 first pass (arXiv:2004.14497) — focus §1 introduction + §3 algorithm</div>
+        <div class="task-meta">~3 hrs. Orientation pass. Skip technical proofs. Goal: understand the DR-learner algorithm and what R_3 is at high level.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun15-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Simulation continues; KAUST relationship-seed emails (Moraga, Ombao)</div>
+        <div class="task-meta">KAUST emails do NOT depend on Kennedy 2020 understanding — separate substantive question about Moraga's spatial-epi work.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of June 22–28, 2026 — Kennedy 2020 detailed read + McClean-Kennedy 2025</summary>
+    <div class="checkbox-row" data-task-id="jun22-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Kennedy 2020 detailed re-read with notes</div>
+        <div class="task-meta">~7 hrs. Work through math carefully now that vocabulary is in place. Notes will feed cold-email technical paragraph.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun22-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>McClean-Kennedy-Balakrishnan-Wasserman 2025 (JRSS-B) — read with R_3 framing focus</div>
+        <div class="task-meta">~6 hrs. The "Kennedy and someone else" anchor. Builds on Kennedy 2020 with explicit remainder-term treatment.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun22-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Send Assylbekov cold-email (Purdue Fort Wayne — KZ-origin recommender)</div>
+        <div class="task-meta">Independent of Kennedy track. Reference his recent ML paper.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of June 29–Jul 5, 2026 — Cold-email Kennedy + Kang (foundation complete)</summary>
+    <div class="checkbox-row" data-task-id="jun29-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Draft cold email to Edward Kennedy (CMU) with substantive R_3 technical paragraph</div>
+        <div class="task-meta">edward@stat.cmu.edu. Cite specific section of Kennedy 2020 + McClean-Kennedy 2025. Reference biotech-research-AI R_3 reframe question.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun29-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Send Kennedy email — first of Tier-A causal-inference batch</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun29-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Send Hyunseung Kang (Wisconsin) cold email — transfer-learning HTE</div>
+        <div class="task-meta">hyunseung@stat.wisc.edu. Reference Kang's 2024 transfer-learning paper.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="jun29-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>R_3 reframe drafting begins (informed by Kennedy + McClean-Kennedy reading)</div>
+        <div class="task-meta">Either honest demotion to "didactic exposition" or attempt formal proof.</div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- SCHEDULE TAB -->
+<section class="tab" id="schedule">
+  <h2>Schedule</h2>
+  <p class="tab-subtitle">Recurring weekly template + summer 2026 week-by-week plan + Fall 2026 / Spring 2027 outlook. Sleep 23:00–07:00. Gym Tue/Thu/Sat 15:00–18:00 (incl. shower). Last revised 2026-05-25 to reflect MT1173 Nov 2026 exam priority + GRE Feb 2027 test + UIUC NetMath MATH 447 Feb 2027 start.</p>
+
+  <h3>Recurring Weekly Template</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 110px;">Time</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>07:00–08:30</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Wake · Morning routine · Breakfast · Light reading (Hernán–Robins, papers in queue)</td></tr>
+      <tr><td><strong>08:30–12:30</strong></td><td colspan="7" style="text-align: center;"><strong>Deep work block</strong> — research (biotech-research-AI, real analysis, replication)</td></tr>
+      <tr><td><strong>12:30–13:30</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Lunch · Walk · Decompress</td></tr>
+      <tr><td><strong>13:30–15:00</strong></td><td colspan="7" style="text-align: center;">Second work block — KBTU coursework (in semester) / admin / email replies / lighter coding</td></tr>
+      <tr>
+        <td><strong>15:00–18:00</strong></td>
+        <td>Work continue</td>
+        <td style="background: var(--accent-soft); color: var(--accent); font-weight: 600;">GYM + shower</td>
+        <td>Work continue</td>
+        <td style="background: var(--accent-soft); color: var(--accent); font-weight: 600;">GYM + shower</td>
+        <td>Work continue · errands</td>
+        <td style="background: var(--accent-soft); color: var(--accent); font-weight: 600;">GYM + shower</td>
+        <td>Free · errands · family</td>
+      </tr>
+      <tr><td><strong>18:00–19:00</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Dinner</td></tr>
+      <tr><td><strong>19:00–22:00</strong></td><td colspan="7" style="text-align: center;">Lighter work · textbook reading · leisure · social</td></tr>
+      <tr><td><strong>22:00–23:00</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Wind down · plan tomorrow · shower (non-gym days)</td></tr>
+      <tr><td><strong>23:00–07:00</strong></td><td colspan="7" style="text-align: center; background: var(--bg-3); color: var(--fg-dim);">Sleep (8 hours)</td></tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>Block notes:</strong> ~7 hours of deep work + light work per weekday. ~3 hours of gym + shower 3× per week. ~9 hours of leisure/wind-down. Sundays intentionally lighter for rest and recovery. During KBTU semester, Mon-Fri morning and afternoon blocks compress around class times; during summer, they expand.
+  </p>
+
+  <h3>Summer 2026 Week-by-Week Plan (May 25 → Aug 27 ML4H deadline)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 130px;">Week</th>
+        <th>Primary focus</th>
+        <th>Specific deliverables</th>
+        <th>Cold-email batch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>May 25–31</strong></td><td>Foundations launch + GRE background setup</td><td>Wasserman Days F1-F2 (Ch 1-5 SKIM as ST1215 review). Order Norman Lewis + Manhattan 5lb. GregMat 2-wk trial start. Switch to higher-register reading. biotech-research-AI Bug #2 first draft. Order Anthony & Harvey for MT1173. KBTU finals wrap.</td><td>—</td></tr>
+      <tr><td><strong>Jun 1–7</strong></td><td>Wasserman Days F3-F4 (Inference framework + Bootstrap)</td><td>Wasserman Ch 6-7 (Models, Statistical Inference, Empirical CDF) + Ch 8 (Bootstrap — load-bearing for Bug #2). MUST READ Ch 8 carefully. biotech-research-AI Bug #2 reconcile with Ch 8 bootstrap mechanics.</td><td>—</td></tr>
+      <tr><td><strong>Jun 8–14</strong></td><td>Wasserman Days F5-F7 (MLE + Hypothesis testing + Regression)</td><td>Wasserman Ch 9 (MLE), Ch 10 (Hypothesis Testing — Holm-Bonferroni for project H1-H6), Ch 13 (Linear + Logistic Regression — propensity score foundation). End-of-Week-2 checkpoint: self-check the prereq table in PRE_PROJECT_READING.md.</td><td>—</td></tr>
+      <tr><td><strong>Jun 15–21</strong></td><td>ISL Days F8-F11 (ML basics)</td><td>ISL Ch 2 (Stat Learning) + Ch 3 (Linear Reg) + Ch 4 (Classification: logistic / KNN) + Ch 5 (Resampling: CV + Bootstrap — companion to Wasserman Ch 8) + Ch 8 (Trees + RF + XGBoost informal). biotech-research-AI Bug #2 finish; re-run NHANES with bootstrap CIs.</td><td>—</td></tr>
+      <tr><td><strong>Jun 22–28</strong></td><td>ISL Day F12 + Causal inference Day 0 (Cunningham Mixtape)</td><td>ISL Ch 10 (Deep Learning basics) + Calibration papers (Platt 1999, Niculescu-Mizil 2005, Kull 2017 beta calibration). Begin Causal Inference Day 0: Cunningham Mixtape Ch 1, 2, 4 (Potential Outcomes Causal Model — ~3 hrs).</td><td>—</td></tr>
+      <tr><td><strong>Jun 29–Jul 5</strong></td><td>Causal Inference Days 1-2 (Hernán-Robins foundations + IPW)</td><td>H-R Ch 1-4 (counterfactuals, randomized, observational, effect modification) + Ch 12 (IPW + MSMs) + Bang-Robins 2005 (AIPW). ~14 hrs. Start MT1173 prep planning (textbook in hand by now).</td><td>—</td></tr>
+      <tr><td><strong>Jul 6–12</strong></td><td>Causal Inference Days 3-4 (DML + DR-learner) + MT1173 prep start</td><td>Chernozhukov 2018 (DML) + Kennedy 2020 (DR-learner — central paper) + Nie-Wager 2021 (R-learner) + Athey-Tibshirani-Wager 2019 (grf). MT1173 prep: start Anthony & Harvey Ch 1-3 (matrices + linear systems). Cold-email Tier-A faculty pipeline begins next week.</td><td>—</td></tr>
+      <tr><td><strong>Jul 13–19</strong></td><td>Causal Inference Days 5-7 (calibration in CI + sensitivity) + MT1173 Ch 4-6</td><td>van der Laan 2024 (Calibrated DML) + van der Laan-Carone-Luedtke 2023 (Causal isotonic) + VanderWeele-Ding 2017 (E-value) + Lipsitch 2010 (negative controls). MT1173: Anthony & Harvey Ch 4-6 (matrix inversion + determinants + sequences). <strong>R_3 reframe + Bug #2 final fix begin.</strong></td><td>Assylbekov (KZ-origin)</td></tr>
+      <tr><td><strong>Jul 20–26</strong></td><td>biotech-research-AI: R_3 reframe + simulation scale-up + MT1173 Ch 7-9</td><td>Rewrite Stage 03b bias decomposition as "exposition of Kennedy 2020 Eq.(8)" not "novel theorem" per realistic review. Scale simulation 540 → 3,600 runs if compute permits. MT1173: Anthony & Harvey Ch 7-9 (vector spaces, subspaces, basis, dimension). <strong>Kennedy + Kang cold emails — fire only after R_3 reframe complete.</strong></td><td><strong>Kennedy (CMU), Kang (Wisconsin)</strong></td></tr>
+      <tr><td><strong>Jul 27–Aug 2</strong></td><td>Paper polish v1 + MT1173 Ch 10-12 (linear transformations + eigenvalues)</td><td>Internal coherence pass on paper. Generate Fig 5 NHANES CATE distribution. MT1173: linear transformations, eigenvalues, eigenvectors. Cold-email batch 2.</td><td>Ben-Michael (CMU), Westling (UMass)</td></tr>
+      <tr><td><strong>Aug 3–9</strong></td><td>Paper polish v2 + MT1173 diagonalization + applications</td><td>Editorial pass on paper. MT1173: diagonalization, Markov chains, ODE applications. Cold-email batch 3.</td><td>Stensrud (EPFL), Moreno-Betancur (Melbourne)</td></tr>
+      <tr><td><strong>Aug 10–16</strong></td><td>Paper draft v3 + MT1173 problem-set deep dive</td><td>Paper draft v3. MT1173: practice problem-sets across all topics, mock exam papers from UoL past papers. Cold-email batch 4.</td><td>L. Wang (Toronto), Volfovsky (Duke), Feller (Berkeley)</td></tr>
+      <tr><td><strong>Aug 17–23</strong></td><td>ML4H reformatting + arXiv prep + MT1173 weekly review</td><td>Reformat paper to ML4H template. Send Fan Li (Duke) + Fan Li (Yale). Reproducibility audit. arXiv submission package: title, abstract, README. MT1173: review weakness areas from problem-sets.</td><td>Fan Li (Duke + Yale)</td></tr>
+      <tr><td><strong>Aug 24–27</strong></td><td>ML4H submission</td><td>Submit to <strong>ML4H @ NeurIPS 2026 (Aug 27)</strong>. Upload arXiv preprint. Tagged GitHub v1.0 release. (If timeline slipped: defer to CDSM 2026 backup.)</td><td>—</td></tr>
+      <tr><td><strong>Aug 28–Sep 6</strong></td><td>Post-submission + MT1173 final prep ramp</td><td>arXiv preprint live. MT1173 prep enters final phase: full 3-4 months will have been late June through November. Begin researching Nov 2026 summer-2027-application sprint (CaCTüS, Yessenov, Summer@EPFL, ETH SSRF, KAUST VSRP) in lighter blocks.</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--fg-dim); font-size: 13px; margin-top: 16px;">
+    <strong>Schedule notes (revised 2026-05-25):</strong> Summer 2026 = foundations reading (Wasserman + ISL + causal inference week per <span class="mono">biotech-research-AI/PRE_PROJECT_READING.md</span>) + biotech-research-AI Bug #2 + R_3 reframe + paper polish + ML4H Aug 27 submission, with <strong>MT1173 Algebra prep ramping from July 6</strong> as the second spine. Real analysis credentialing path = <strong>UIUC NetMath MATH 447 starting mid-February 2027</strong> (after MT1173 exam Nov 2026 + GRE test Feb 2027) — NOT Fall 2026 NU/KazNU and NOT Athabasca. Cold-email batches stagger-paced ~2 emails/week starting Jul 20 (Kennedy + Kang) per <span class="mono">summer-2026-pivot-cold-email-deepread-2026.md</span> Section B. Sunday lighter blocks intentional.
+  </p>
+
+  <h3>Fall 2026 Outlook (Sep 1 – Dec 31)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 130px;">Window</th>
+        <th>Primary focus</th>
+        <th>Deliverables / deadlines</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Sep 1–30</strong></td><td>UoL Year 3 start + MT1173 prep intensifies + GRE background continues</td><td>UoL Year 3 coursework begins (MT2116 Abstract Maths, ST2133 Distribution Theory, ST2134 Statistical Inference, MT3042 Optimisation). <strong>MT1173 prep at 25-35 hr/wk</strong> — primary focus. GRE background continues at 5-7 hr/wk (Norman Lewis + GregMat + higher-register reading). CDSM 2026 submission if ML4H Aug deferred. Per-programme GRE policy preliminary check (Sep 2027 is the gate decision but start collecting data now).</td></tr>
+      <tr><td><strong>Oct 1–31</strong></td><td>MT1173 prep crunch + Summer 2027 application drafts</td><td><strong>MT1173 final ramp 30-35 hr/wk</strong> — mock exams, past papers, Anthony &amp; Harvey re-read of weakness chapters. CaCTüS draft + recommender outreach. Summer@EPFL Nov 29 deadline draft. ETH SSRF prep. GRE background unchanged.</td></tr>
+      <tr><td><strong>Nov 1–30</strong></td><td><strong>MT1173 EXAM</strong> (UoL October-November session) + Summer 2027 application sprint</td><td><strong>MT1173 EXAM IS THE PRIORITY.</strong> Suspend GRE prep entirely in Nov. Suspend project work in exam week. Other deadlines this month: <strong>Yessenov Research Internship (~Nov 7)</strong>, <strong>CaCTüS (~Nov 20)</strong>, <strong>Summer@EPFL (Nov 29)</strong>. AAAI 2027 workshop decisions arrive late Nov.</td></tr>
+      <tr><td><strong>Dec 1–31</strong></td><td>Post-MT1173 recovery + GRE calibration + ETH SSRF + KAUST VSRP</td><td>Post-MT1173 cognitive recovery week. <strong>Take POWERPREP Plus Test 1 (TIMED, $39.95)</strong> mid-December for GRE calibration baseline. ETH SSRF mid-Dec submission. KAUST VSRP rolling (target Dec). Begin Dec 2027 PhD-app cycle prep (12 months out). MT1173 grade visible by mid-January 2027.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Spring 2027 Outlook (Jan 1 – May 31)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 130px;">Window</th>
+        <th>Primary focus</th>
+        <th>Deliverables / deadlines</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Jan 1–31</strong></td><td><strong>GRE INTENSIVE (20-25 hr/wk for 4 weeks)</strong></td><td>Manhattan 5lb GRE Quant content + 1 timed Quant section + final Verbal vocab review + 3-4 essays from ETS prompt pool + POWERPREP Plus Test 2 + Manhattan PT 1. Book Almaty test center for early-mid February. Register UIUC NetMath MATH 447 ~Jan 25 for Feb 15 start.</td></tr>
+      <tr><td><strong>Feb 1–14</strong></td><td><strong>GRE TEST (early-mid February)</strong></td><td>Saturday morning slot if available. V/Q scores released immediately; AW score 8-10 days later. <strong>Decide retake based on score:</strong> retake mid-March if Q&lt;162 OR V&lt;150 OR AW&lt;3.5; otherwise done.</td></tr>
+      <tr><td><strong>Feb 15–Jun 7</strong></td><td><strong>UIUC NetMath MATH 447 (16 weeks)</strong> + Project 2 prep</td><td>UIUC course Feb 15 start, standard 16-wk pace finishes Jun 7. ~10-15 hr/wk on UIUC (3-credit course, ~120-135 hr total). Three proctored 90-min midterms + 3-hr proctored final via ProctorU. A-grade target. Project 2 (joint longitudinal-survival modeling per Critical Lock #5) draft prep. ICML 2027 workshop window (May 2027 deadlines).</td></tr>
+      <tr><td><strong>May 1–31</strong></td><td>UoL Year 3 final exams + UIUC midterm progress + Summer 2027 offers</td><td>UoL Year 3 finals (MT2116, ST2133, ST2134, MT3042). UIUC ~halfway through course. Summer 2027 program offers arriving (CaCTüS, ETH SSRF, KAUST VSRP). Project 2 submission to ICML 2027 workshop.</td></tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--fg-dim); font-size: 13px; margin-top: 16px;">
+    <strong>Real-analysis path (LOCKED 2026-05-25):</strong>
+    <br>(a) <strong>UIUC NetMath MATH 447 Feb 15, 2027 start.</strong> $1,653. Full Rudin Ch 1-7. UIUC R1 transcript. 16-wk standard pace → June 7 finish. A-grade target. Sufficient for T11-T25 lifestyle-compatible apply list per Critical Lock #2.
+    <br>(b) <strong>Earlier-start alternative (only if MT1173 prep going lighter than feared by July 2026):</strong> August 2026 UIUC start — finishes ~December 2026 standard pace. Requires confidence MT1173 prep won't suffer; default = wait for Feb 2027.
+    <br>(c) <strong>Brand-upgrade alternative (if expanding to T1-T15 reach):</strong> Harvard Extension MATH E-23a Spring 2027 ($2,160) + E-23b Fall 2027 ($2,160) = $4,320 total. Full Ch 1-7 across two semesters.
+    <br>(d) <strong>Elite-signal alternative (if budget + Special Student admission feasible):</strong> JHU EP EN.625.601 Spring 2027 ($5,620). Start WES ICAP credential evaluation by early Feb 2027. Strongest single-course signal for biostat (JHU Biostat #1 US News 2026).
+    <br>(e) <strong>DO NOT use Athabasca</strong> — MSCHE accreditation lost 31 March 2025; only viable as last-resort fallback. Full table: <span class="mono">phd-pipeline/artifacts/real-analysis-credential-options-2026.md</span>.
+  </p>
+
+</section>
+
+<!-- LITERATURE TAB -->
+<section class="tab" id="literature">
+  <h2>Literature — Reading List + References</h2>
+  <p class="tab-subtitle">Citations referenced across Projects, Cold Email, and Critical Locks tabs. Organized by purpose: (1) Project #1 anchors, (2) calibration / DR-learner papers, (3) cold-email faculty's recent work, (4) classical causal-inference foundations, (5) real-analysis + math foundations, (6) statistical inference foundations, (7) ML / statistical learning, (8) biostat methodology, (9) frontier 2024–2026 papers worth tracking.</p>
+
+  <h3>1. Project #1 anchors (biotech-research-AI core reading)</h3>
+  <div class="card">
+    <p class="small"><strong>Essential before any code on Project #1.</strong> These define the bias decomposition + DR-learner machinery + comparator (grf causal forest) for the biotech-research-AI paper.</p>
+    <ul>
+      <li><strong>Wager & Athey 2018</strong> — <em>"Estimation and Inference of Heterogeneous Treatment Effects using Random Forests"</em>. JASA 113(523):1228–1242. arXiv:1510.04342. The foundational causal-forest paper; grf R package implements this. Read 3×.</li>
+      <li><strong>Athey, Tibshirani & Wager 2019</strong> — <em>"Generalized Random Forests"</em>. Annals of Statistics 47(2):1148–1178. arXiv:1610.01271. Generalizes 2018 paper to broader local-moment models. Companion to grf package.</li>
+      <li><strong>Kennedy 2020</strong> — <em>"Optimal doubly robust estimation of heterogeneous causal effects"</em>. arXiv:2004.14497. <strong>The R_3 anchor.</strong> Defines the DR-learner; biotech-research-AI builds on this. Cited in cold-email template to Kennedy.</li>
+      <li><strong>McClean, Kennedy, Balakrishnan & Wasserman 2025</strong> — <em>"Double cross-fit doubly robust estimators: beyond series regression"</em>. JRSS-B. The "McClean-Kennedy 2025" you'll see referenced in This Week + Projects tabs. Builds on Kennedy 2020 with explicit R_3 / remainder-term treatment.</li>
+      <li><strong>Chernozhukov, Chetverikov, Demirer, Duflo, Hansen, Newey & Robins 2018</strong> — <em>"Double/Debiased Machine Learning for Treatment and Structural Parameters"</em>. Econometrics Journal 21(1):C1–C68. The DoubleML framework; comparator in biotech-research-AI.</li>
+      <li><strong>Künzel, Sekhon, Bickel & Yu 2019</strong> — <em>"Metalearners for estimating heterogeneous treatment effects using machine learning"</em>. PNAS 116(10):4156–4165. Defines S/T/X-learners; R-learner follows in Nie-Wager.</li>
+      <li><strong>Nie & Wager 2021</strong> — <em>"Quasi-oracle estimation of heterogeneous treatment effects"</em>. Biometrika 108(2):299–319. The R-learner. arXiv:1712.04912.</li>
+      <li><strong>Hahn, Murray & Carvalho 2020</strong> — <em>"Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects"</em>. Bayesian Analysis 15(3):965–1056. Bayesian Causal Forests (BCF) — stretch comparator if time allows.</li>
+      <li><strong>Cui, Kosorok, Sverdrup, Wager & Zhu 2023</strong> — <em>"Estimating heterogeneous treatment effects with right-censored data via causal survival forests"</em>. JRSS-B 85(2):179–211. Survival extension; relevant for Project #2.</li>
+    </ul>
+  </div>
+
+  <h3>2. Calibration of probability estimators (biotech-research-AI secondary)</h3>
+  <div class="card">
+    <p class="small">Background for the Platt / isotonic / beta calibration arms of biotech-research-AI. Less central than Section 1 but needed for the "calibration matters" framing.</p>
+    <ul>
+      <li><strong>Platt 1999</strong> — <em>"Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods"</em>. The original Platt scaling (logistic post-hoc calibration).</li>
+      <li><strong>Niculescu-Mizil & Caruana 2005</strong> — <em>"Predicting Good Probabilities With Supervised Learning"</em>. ICML 2005. The canonical comparison of calibration methods including isotonic regression.</li>
+      <li><strong>Guo, Pleiss, Sun & Weinberger 2017</strong> — <em>"On Calibration of Modern Neural Networks"</em>. ICML 2017. Re-popularized calibration analysis in the deep-learning era.</li>
+      <li><strong>Kull, Silva Filho & Flach 2017</strong> — <em>"Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers"</em>. AISTATS 2017. The beta-calibration method used in biotech-research-AI.</li>
+      <li><strong>Gneiting & Raftery 2007</strong> — <em>"Strictly Proper Scoring Rules, Prediction, and Estimation"</em>. JASA 102(477):359–378. Foundation for understanding what calibration optimizes.</li>
+    </ul>
+  </div>
+
+  <h3>3. Cold-email faculty's recent work (anchor papers for each)</h3>
+  <div class="card">
+    <p class="small">One representative recent paper per cold-email Tier-A target. Read before drafting the email — your technical paragraph should reference the specific paper.</p>
+    <ul>
+      <li><strong>Edward Kennedy (CMU)</strong> — McClean, Kennedy, Balakrishnan & Wasserman 2025 (above) is the anchor.</li>
+      <li><strong>Hyunseung Kang (Wisconsin)</strong> — <em>"Transfer learning for heterogeneous treatment effects"</em> 2024 (presidential ads application). arXiv pre-print as of late 2024.</li>
+      <li><strong>Iván Díaz (NYU Grossman)</strong> — Nov 2025 <em>JAMA Internal Medicine</em> telehealth heart-failure RCT paper. Plus his earlier work on modified treatment policies (Díaz & van der Laan 2018, Stochastic Interventions).</li>
+      <li><strong>Eli Ben-Michael (CMU)</strong> — Ben-Michael & Imai 2024, <em>"Longitudinal Causal Inference with Selective Eligibility"</em> arXiv preprint. Synthetic-control extensions also relevant.</li>
+      <li><strong>Mats Stensrud (EPFL)</strong> — Cui-Kosorok-Sverdrup-Wager-Zhu 2023 (above) is the causal-survival-forests anchor. Plus Stensrud's own separable-effects work 2022.</li>
+      <li><strong>Margarita Moreno-Betancur (Melbourne / MCRI)</strong> — <em>medRCT</em> R-package paper; plus Evans & Didelez 2024 <em>"Parameterizing and simulating from causal models"</em> JRSS-B (frequent collaborator anchor).</li>
+      <li><strong>Linbo Wang (Toronto)</strong> — <em>"A review of the three causal frameworks"</em> January 2026 in <em>Journal of Data Science</em>. Foundational reading anchor.</li>
+      <li><strong>Ted Westling (UMass Amherst)</strong> — Takatsu & Westling 2024 <em>"Debiased inference for a covariate-adjusted regression function"</em>. Natural extension if biotech-research-AI moves to continuous-exposure HTE.</li>
+      <li><strong>Alex Volfovsky (Duke)</strong> — Almost-Matching-Exactly Lab papers; causal inference under interference / on networks.</li>
+      <li><strong>Avi Feller (UC Berkeley)</strong> — <em>"Forest Kernel Balancing Weights"</em> preprint — direct Wager-network extension; compact comparator-friendly target.</li>
+      <li><strong>Stefan Wager (Stanford GSB)</strong> — Wager-Athey 2018 (above) + recent policy-learning work. Do NOT cold-email directly until merged grf PR. Use Stanford GSB contact form.</li>
+      <li><strong>Fan Li (Duke)</strong> — propensity-score / overlap-weighting work; 2025-26 cardiovascular and neurology applications.</li>
+      <li><strong>Fan Li (Yale Biostat)</strong> — Associate Prof, more junior than Duke Fan Li; more responsive. Distinguish carefully in emails.</li>
+    </ul>
+  </div>
+
+  <h3>4. Classical causal inference (Hernán-Robins-Pearl-Imbens foundation)</h3>
+  <div class="card">
+    <p class="small">Foundation reading. <strong>Hernán-Robins is free online; start there.</strong></p>
+    <ul>
+      <li><strong>Hernán & Robins 2024</strong> — <em>Causal Inference: What If</em>. Free at hsph.harvard.edu/miguel-hernan/causal-inference-book/. Modern standard for biostat causal inference. Parts I (Ch 1-10) + II (Ch 11-17) + III (Ch 18-25). Cite explicitly in SoP.</li>
+      <li><strong>Imbens & Rubin 2015</strong> — <em>Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction</em>. Cambridge. Potential-outcomes framework canonical text.</li>
+      <li><strong>Pearl 2009</strong> — <em>Causality: Models, Reasoning, and Inference</em>. 2nd ed. Cambridge. The do-calculus reference.</li>
+      <li><strong>Pearl, Glymour & Jewell 2016</strong> — <em>Causal Inference in Statistics: A Primer</em>. Wiley. Light entry to Pearl's framework; ~150 pages.</li>
+      <li><strong>VanderWeele 2015</strong> — <em>Explanation in Causal Inference: Methods for Mediation and Interaction</em>. Oxford. Standard mediation analysis reference.</li>
+      <li><strong>Rosenbaum 2002, 2010</strong> — <em>Observational Studies</em> (2002) and <em>Design of Observational Studies</em> (2010). Matching + sensitivity analysis canonical.</li>
+      <li><strong>Robins, Hernán & Brumback 2000</strong> — <em>"Marginal structural models and causal inference in epidemiology"</em>. Epidemiology 11(5):550–560. The MSM founding paper.</li>
+    </ul>
+  </div>
+
+  <h3>5. Real analysis + math foundations (Math Gate prep)</h3>
+  <div class="card">
+    <p class="small">For the real-analysis credential path (Athabasca / NU / KazNU / self-study). <strong>Rudin Ch 1-7 is the Math Gate target.</strong> Pugh and Tao are accessible alternatives. Davidson & Donsig is the Athabasca MATH 370 textbook. Russian / Soviet rigorous texts (Zorich, Fichtenholz, Kolmogorov-Fomin, Natanson) apply if you enroll at NU or KazNU.</p>
+    <ul>
+      <li><strong>Rudin 1976</strong> — <em>Principles of Mathematical Analysis</em>, 3rd ed. McGraw-Hill. "Baby Rudin." Ch 1-7 are the Math Gate target; Ch 11 is Lebesgue intro. <strong>Name explicitly in SoP per memory correction #37.</strong></li>
+      <li><strong>Royden 2010</strong> — <em>Real Analysis</em>, 4th ed. (with Fitzpatrick). Lebesgue measure + integration; Ch 1-5 is the measure-theoretic target.</li>
+      <li><strong>Pugh 2015</strong> — <em>Real Mathematical Analysis</em>, 2nd ed. Springer. More expository than Rudin; same content. Pugh + Rudin together is the standard pairing.</li>
+      <li><strong>Tao 2016</strong> — <em>Analysis I</em> + <em>Analysis II</em>, 4th ed. Springer / Hindustan Book Agency. Free PDFs on Tao's blog. Constructive build-up from naturals.</li>
+      <li><strong>Bartle & Sherbert 2011</strong> — <em>Introduction to Real Analysis</em>, 4th ed. Wiley. UIUC NetMath MATH 444 textbook.</li>
+      <li><strong>Davidson & Donsig 2010</strong> — <em>Real Analysis and Applications: Theory in Practice</em>. Springer. Athabasca MATH 370 textbook. Proof-based; covers Rudin Ch 1-7 equivalent.</li>
+      <li><strong>Zorich</strong> — <em>Mathematical Analysis</em> Vol I + II. Springer. Russian/Soviet rigorous standard (used at MGU mech-mat). If KazNU offers this textbook → strong signal.</li>
+      <li><strong>Fichtenholz</strong> — <em>Курс дифференциального и интегрального исчисления</em>, 3 vols. Russian classic. Used at top Russian math departments.</li>
+      <li><strong>Kolmogorov & Fomin</strong> — <em>Элементы теории функций и функционального анализа</em>. Russian classic for measure theory + functional analysis (= Royden + Folland equivalent).</li>
+      <li><strong>Natanson</strong> — <em>Theory of Functions of a Real Variable</em>. Russian measure-theoretic reference.</li>
+    </ul>
+  </div>
+
+  <h3>6. Statistical inference foundations (theory of estimation + testing)</h3>
+  <div class="card">
+    <p class="small">For first-year PhD course preparation and SoP technical depth signal.</p>
+    <ul>
+      <li><strong>Casella & Berger 2002</strong> — <em>Statistical Inference</em>, 2nd ed. Duxbury. Standard first-year PhD reference for math stats.</li>
+      <li><strong>Lehmann & Casella 1998</strong> — <em>Theory of Point Estimation</em>, 2nd ed. Springer. Advanced point estimation.</li>
+      <li><strong>Lehmann & Romano 2005</strong> — <em>Testing Statistical Hypotheses</em>, 3rd ed. Springer. The hypothesis-testing canonical text.</li>
+      <li><strong>van der Vaart 1998</strong> — <em>Asymptotic Statistics</em>. Cambridge. Standard reference for asymptotic theory; critical for understanding semi-parametric efficiency in DR-learner work.</li>
+      <li><strong>Wasserman 2004</strong> — <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer. Compact reference; useful as a complement to Casella-Berger.</li>
+      <li><strong>Wasserman 2006</strong> — <em>All of Nonparametric Statistics</em>. Springer. Nonparametric methods.</li>
+      <li><strong>Bickel & Doksum 2015</strong> — <em>Mathematical Statistics: Basic Ideas and Selected Topics</em>, Vol I + II, 2nd ed. CRC. Alternative to Casella-Berger at higher rigor.</li>
+    </ul>
+  </div>
+
+  <h3>7. ML / statistical learning (modern methods)</h3>
+  <div class="card">
+    <p class="small">For breadth + R/Python implementation literacy.</p>
+    <ul>
+      <li><strong>Hastie, Tibshirani & Friedman 2009</strong> — <em>The Elements of Statistical Learning</em>, 2nd ed. Springer. Free at hastie.su.domains/ElemStatLearn/. The standard ML reference.</li>
+      <li><strong>James, Witten, Hastie & Tibshirani 2023</strong> — <em>An Introduction to Statistical Learning</em>, 2nd ed. R/Python. Free at statlearning.com. Lighter ISL companion to ESL.</li>
+      <li><strong>Murphy 2022</strong> — <em>Probabilistic Machine Learning: An Introduction</em>. MIT Press. Free at probml.github.io/pml-book/. Modern probabilistic-ML textbook.</li>
+      <li><strong>Murphy 2023</strong> — <em>Probabilistic Machine Learning: Advanced Topics</em>. MIT Press. Vol 2 of the above. Covers more theoretical material.</li>
+      <li><strong>Wainwright 2019</strong> — <em>High-Dimensional Statistics: A Non-Asymptotic Viewpoint</em>. Cambridge. The rigorous high-dim ref.</li>
+      <li><strong>Bühlmann & van de Geer 2011</strong> — <em>Statistics for High-Dimensional Data: Methods, Theory and Applications</em>. Springer. Companion to Wainwright.</li>
+      <li><strong>Goodfellow, Bengio & Courville 2016</strong> — <em>Deep Learning</em>. MIT Press. Free at deeplearningbook.org. Background for neural-network-based causal methods.</li>
+    </ul>
+  </div>
+
+  <h3>8. Biostatistics methodology (Project #2 + biostat-specific tools)</h3>
+  <div class="card">
+    <p class="small">For Project #2 (Joint longitudinal-survival modeling) and broader biostat literacy.</p>
+    <ul>
+      <li><strong>Rizopoulos 2012</strong> — <em>Joint Models for Longitudinal and Time-to-Event Data: With Applications in R</em>. CRC. <strong>Project #2 anchor textbook.</strong> JM R package author.</li>
+      <li><strong>Diggle, Heagerty, Liang & Zeger 2002</strong> — <em>Analysis of Longitudinal Data</em>, 2nd ed. Oxford. Standard longitudinal-data reference.</li>
+      <li><strong>Fitzmaurice, Laird & Ware 2011</strong> — <em>Applied Longitudinal Analysis</em>, 2nd ed. Wiley.</li>
+      <li><strong>Klein & Moeschberger 2003</strong> — <em>Survival Analysis: Techniques for Censored and Truncated Data</em>, 2nd ed. Springer. Survival canonical.</li>
+      <li><strong>Fleming & Harrington 2011</strong> — <em>Counting Processes and Survival Analysis</em>. Wiley. More mathematical survival treatment.</li>
+      <li><strong>Therneau & Grambsch 2000</strong> — <em>Modeling Survival Data: Extending the Cox Model</em>. Springer.</li>
+      <li><strong>Robins & Hernán 2009</strong> — <em>"Estimation of the causal effects of time-varying exposures"</em>. In Longitudinal Data Analysis (Fitzmaurice et al., eds). Foundation for g-methods.</li>
+      <li><strong>Billingsley 1995</strong> — <em>Probability and Measure</em>, 3rd ed. Wiley. Foundational measure-theoretic probability for first-year PhD courses.</li>
+      <li><strong>Durrett 2019</strong> — <em>Probability: Theory and Examples</em>, 5th ed. Cambridge. Free PDF on author site. Alternative to Billingsley.</li>
+    </ul>
+  </div>
+
+  <h3>9. Frontier 2024–2026 papers worth tracking</h3>
+  <div class="card">
+    <p class="small">Recent ideas. Knowledge cutoff Jan 2026 limits coverage of late-2026 work; check arXiv stat.ME + cs.LG quarterly for new ones. <strong>Best monitoring tools:</strong> Scholar Inbox (scholar-inbox.com); arXiv-sanity-lite (arxiv-sanity-lite.com); Causal Inference Newsletter (substack.com/@hilanthropy).</p>
+    <ul>
+      <li><strong>Bibaut, Petersen, Vlassis, Dimakopoulou & van der Laan 2024</strong> — Various papers on adaptive sequential experimentation + TMLE / off-policy evaluation. arXiv. Relevant for biotech-research-AI extension to longitudinal.</li>
+      <li><strong>Vansteelandt et al. 2024</strong> — Multiple papers on mediation analysis under modern conditions. Ghent group.</li>
+      <li><strong>Curth & van der Schaar 2021</strong> — <em>"Nonparametric Estimation of Heterogeneous Treatment Effects: From Theory to Learning Algorithms"</em>. AISTATS 2021. Plus their 2024 follow-up work on overlap / extrapolation. arXiv:2101.10943.</li>
+      <li><strong>D'Amour, Ding, Feller, Lei & Sekhon 2021</strong> — <em>"Overlap in observational studies with high-dimensional covariates"</em>. Journal of Econometrics. Critical caveat for biotech-research-AI's NHANES analysis.</li>
+      <li><strong>Lei & Candès 2021</strong> — <em>"Conformal Inference of Counterfactuals and Individual Treatment Effects"</em>. JRSS-B. Conformal-prediction extensions to causal — frontier area.</li>
+      <li><strong>Yadlowsky, Fleming, Shah, Brunskill & Wager 2023</strong> — <em>"Evaluating Treatment Prioritization Rules via Rank-Weighted Average Treatment Effects"</em>. JASA. RATE / AUTOC machinery in grf; should be in Project #1 modernization per memory correction #12.</li>
+      <li><strong>Schölkopf, Locatello et al. 2021</strong> — <em>"Toward Causal Representation Learning"</em>. IEEE Proceedings 109(5). The CRL agenda; relevant if Project #3 or PhD direction pivots toward representation learning.</li>
+      <li><strong>Hahn, Carvalho, Puelz & He 2020+</strong> — BCF extensions; <em>"Bayesian regression tree models for causal inference"</em> series.</li>
+      <li><strong>Evans & Didelez 2024</strong> — <em>"Parameterizing and simulating from causal models"</em>. JRSS-B. The Moreno-Betancur anchor; relevant to medRCT simulation suite extension.</li>
+      <li><strong>Cui, Tchetgen Tchetgen & Pu 2024</strong> — Proximal causal inference recent extensions. arXiv preprints.</li>
+      <li><strong>Lewis & Syrgkanis 2021 / 2024</strong> — Double-ML extensions for dynamic and longitudinal settings. EconML package.</li>
+      <li><strong>Klosin & Vilhuber 2024</strong> — Reproducibility audit work on causal-ML applied papers; useful for biotech-research-AI reproducibility audit step.</li>
+    </ul>
+  </div>
+
+  <h3>10. R / Python tooling</h3>
+  <div class="card">
+    <ul>
+      <li><strong>grf</strong> (R) — Wager-Athey lab. github.com/grf-labs/grf. Project #1 comparator.</li>
+      <li><strong>DoubleML</strong> (R + Python) — Chernozhukov-Hansen-Spindler. doubleml.org. DR-learner / DML implementations.</li>
+      <li><strong>EconML</strong> (Python) — Microsoft Research; Lewis-Syrgkanis. github.com/py-why/EconML. Comparison.</li>
+      <li><strong>DoWhy</strong> (Python) — Microsoft Research. github.com/py-why/dowhy. Causal-inference pipeline framework.</li>
+      <li><strong>causaldata</strong> (R) — datasets for causal-inference textbooks. Hernán-Robins datasets included.</li>
+      <li><strong>medRCT</strong> (R) — Moreno-Betancur lab. Interventional mediation effects.</li>
+      <li><strong>JM</strong> (R) — Rizopoulos. Joint longitudinal-survival modeling. Project #2 anchor.</li>
+      <li><strong>Wickham — <em>R Packages</em></strong> 2nd ed (free at r-pkgs.org). For Project #1 packaging.</li>
+      <li><strong>Wickham — <em>Advanced R</em></strong> 2nd ed (free at adv-r.hadley.nz). R fluency.</li>
+    </ul>
+  </div>
+
+  <h3>How to use this list</h3>
+  <div class="alert">
+    <strong>Recommended sequence for the next 6 months:</strong><br>
+    (1) Section 4 — Hernán-Robins Part I (Ch 1–10) by mid-June 2026 · (2) Section 1 — Wager-Athey 2018 + Kennedy 2020 + McClean-Kennedy 2025 anchor for biotech-research-AI Bug #2 fix · (3) Section 2 — Niculescu-Mizil 2005 + Kull 2017 for calibration sections · (4) Section 5 — Rudin Ch 1–3 self-study in parallel for math gate prep (paired with Velleman or self-paced course) · (5) Section 9 — pick 2–3 frontier papers per month to read seriously.
+  </div>
+</section>
+
+<!-- APPLY PORTFOLIO TAB -->
+<section class="tab" id="apply">
+  <h2>Apply Portfolio</h2>
+  <p class="tab-subtitle">~32–36 applications across US PhD + UK funded MSc + Stanford MS + mid-tier US stats MSc + US bridge + Euro MSc + US MS hedge tracks. Track each application's status; checkboxes persist.</p>
+
+  <h3>US Biostat PhDs (16 — primary track)</h3>
+  <table>
+    <thead>
+      <tr><th></th><th>Program</th><th>Tier</th><th>Apply</th><th>Submitted</th><th>Decided</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Harvard Chan SPH Biostat</td><td><span class="badge tier-1">T1</span></td><td><input type="checkbox" data-task-id="apply-1-decide"></td><td><input type="checkbox" data-task-id="apply-1-sub"></td><td><input type="checkbox" data-task-id="apply-1-result"></td><td>Murphy, Hernán, Cai</td></tr>
+      <tr><td>2</td><td>JHU Bloomberg Biostat</td><td><span class="badge tier-1">T2</span></td><td><input type="checkbox" data-task-id="apply-2-decide"></td><td><input type="checkbox" data-task-id="apply-2-sub"></td><td><input type="checkbox" data-task-id="apply-2-result"></td><td>Stuart, Peng, Leek</td></tr>
+      <tr><td>3</td><td>UWashington Biostat</td><td><span class="badge tier-1">T3</span></td><td><input type="checkbox" data-task-id="apply-3-decide"></td><td><input type="checkbox" data-task-id="apply-3-sub"></td><td><input type="checkbox" data-task-id="apply-3-result"></td><td>Witten, Hubbard, Wakefield</td></tr>
+      <tr><td>4</td><td>UMichigan Biostat</td><td><span class="badge tier-1">T4</span></td><td><input type="checkbox" data-task-id="apply-4-decide"></td><td><input type="checkbox" data-task-id="apply-4-sub"></td><td><input type="checkbox" data-task-id="apply-4-result"></td><td>Mukherjee, Song, Banerjee</td></tr>
+      <tr><td>5</td><td>UNC Chapel Hill Biostat</td><td><span class="badge tier-1">T5</span></td><td><input type="checkbox" data-task-id="apply-5-decide"></td><td><input type="checkbox" data-task-id="apply-5-sub"></td><td><input type="checkbox" data-task-id="apply-5-result"></td><td>Lin, Davidian, Cole</td></tr>
+      <tr><td>6</td><td>UPenn Perelman Biostat</td><td><span class="badge tier-2">T6</span></td><td><input type="checkbox" data-task-id="apply-6-decide"></td><td><input type="checkbox" data-task-id="apply-6-sub"></td><td><input type="checkbox" data-task-id="apply-6-result"></td><td>Kennedy, Tchetgen Tchetgen</td></tr>
+      <tr><td>7</td><td>UC Berkeley Biostat Group</td><td><span class="badge tier-2">T7</span></td><td><input type="checkbox" data-task-id="apply-7-decide"></td><td><input type="checkbox" data-task-id="apply-7-sub"></td><td><input type="checkbox" data-task-id="apply-7-result"></td><td>van der Laan, Hubbard, Carone</td></tr>
+      <tr><td>8</td><td>Columbia Mailman Biostat</td><td><span class="badge tier-2">T8</span></td><td><input type="checkbox" data-task-id="apply-8-decide"></td><td><input type="checkbox" data-task-id="apply-8-sub"></td><td><input type="checkbox" data-task-id="apply-8-result"></td><td>Strawderman, Tang</td></tr>
+      <tr><td>9</td><td>Emory Rollins Biostat</td><td><span class="badge tier-2">T9</span></td><td><input type="checkbox" data-task-id="apply-9-decide"></td><td><input type="checkbox" data-task-id="apply-9-sub"></td><td><input type="checkbox" data-task-id="apply-9-result"></td><td>Nabi (PROMOTED), Lyles</td></tr>
+      <tr><td>10</td><td>UMinnesota Biostat</td><td><span class="badge tier-3">T11</span></td><td><input type="checkbox" data-task-id="apply-10-decide"></td><td><input type="checkbox" data-task-id="apply-10-sub"></td><td><input type="checkbox" data-task-id="apply-10-result"></td><td>Lock, Koopmeiners, Pan</td></tr>
+      <tr><td>11</td><td>BU Biostat</td><td><span class="badge tier-3">T12</span></td><td><input type="checkbox" data-task-id="apply-11-decide"></td><td><input type="checkbox" data-task-id="apply-11-sub"></td><td><input type="checkbox" data-task-id="apply-11-result"></td><td>Cabral, D'Agostino</td></tr>
+      <tr><td>12</td><td>UWisconsin-Madison Biostat</td><td><span class="badge tier-3">T13</span></td><td><input type="checkbox" data-task-id="apply-12-decide"></td><td><input type="checkbox" data-task-id="apply-12-sub"></td><td><input type="checkbox" data-task-id="apply-12-result"></td><td>Newton, Wahba</td></tr>
+      <tr><td>13</td><td>UPittsburgh Biostat</td><td><span class="badge tier-3">T15</span></td><td><input type="checkbox" data-task-id="apply-13-decide"></td><td><input type="checkbox" data-task-id="apply-13-sub"></td><td><input type="checkbox" data-task-id="apply-13-result"></td><td>Costantino, Tang, Wahed</td></tr>
+      <tr><td>14</td><td>UIowa Biostat</td><td><span class="badge tier-4">T16</span></td><td><input type="checkbox" data-task-id="apply-14-decide"></td><td><input type="checkbox" data-task-id="apply-14-sub"></td><td><input type="checkbox" data-task-id="apply-14-result"></td><td>Methodology faculty</td></tr>
+      <tr><td>15</td><td>MD Anderson / UT-Houston</td><td><span class="badge tier-4">T18</span></td><td><input type="checkbox" data-task-id="apply-15-decide"></td><td><input type="checkbox" data-task-id="apply-15-sub"></td><td><input type="checkbox" data-task-id="apply-15-result"></td><td>Berry, Yuan (adaptive trials)</td></tr>
+      <tr><td>16</td><td>NYU Biostat</td><td><span class="badge tier-4">T21</span></td><td><input type="checkbox" data-task-id="apply-16-decide"></td><td><input type="checkbox" data-task-id="apply-16-sub"></td><td><input type="checkbox" data-task-id="apply-16-result"></td><td>Liu, Goldfeld</td></tr>
+    </tbody>
+  </table>
+
+  <h3>US Bridge Positions (5–7)</h3>
+  <table>
+    <thead><tr><th></th><th>Position</th><th>Stipend</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>17</td><td>Dana-Farber Associate Computational Biologist</td><td>$70–85K</td><td><input type="checkbox" data-task-id="bridge-1-decide"></td><td><input type="checkbox" data-task-id="bridge-1-sub"></td><td><input type="checkbox" data-task-id="bridge-1-result"></td><td>Best risk-adjusted bet · cap-exempt H-1B</td></tr>
+      <tr><td>18</td><td>MD Anderson Postbac (Biostat track)</td><td>$36–37.5K</td><td><input type="checkbox" data-task-id="bridge-2-decide"></td><td><input type="checkbox" data-task-id="bridge-2-sub"></td><td><input type="checkbox" data-task-id="bridge-2-result"></td><td>VERIFY KBTU partner-institution status first</td></tr>
+      <tr><td>19</td><td>MSK Research Biostatistician</td><td>$70–95K</td><td><input type="checkbox" data-task-id="bridge-3-decide"></td><td><input type="checkbox" data-task-id="bridge-3-sub"></td><td><input type="checkbox" data-task-id="bridge-3-result"></td><td>Rolling 2027–28 · Gönen/Panageas/Iasonos</td></tr>
+      <tr><td>20</td><td>Harvard HCP RA (Zubizarreta)</td><td>$55–70K</td><td><input type="checkbox" data-task-id="bridge-4-decide"></td><td><input type="checkbox" data-task-id="bridge-4-sub"></td><td><input type="checkbox" data-task-id="bridge-4-result"></td><td>Nov–Dec 2027 deadline · matching/causal</td></tr>
+      <tr><td>21</td><td>Cold-email RA: Tchetgen Tchetgen (Penn) OR Nabi (Emory)</td><td>$50–70K</td><td><input type="checkbox" data-task-id="bridge-5-decide"></td><td><input type="checkbox" data-task-id="bridge-5-sub"></td><td><input type="checkbox" data-task-id="bridge-5-result"></td><td>March–May 2027 cold email</td></tr>
+      <tr><td>22</td><td>Cold-email RA: Volfovsky (Duke) OR Díaz (NYU Langone)</td><td>$50–70K</td><td><input type="checkbox" data-task-id="bridge-6-decide"></td><td><input type="checkbox" data-task-id="bridge-6-sub"></td><td><input type="checkbox" data-task-id="bridge-6-result"></td><td>Cap-exempt H-1B / J-1</td></tr>
+      <tr><td>23</td><td>Stanford King Center Predoc</td><td>$45–55K + tuition</td><td><input type="checkbox" data-task-id="bridge-7-decide"></td><td><input type="checkbox" data-task-id="bridge-7-sub"></td><td><input type="checkbox" data-task-id="bridge-7-result"></td><td>Optional · econ/policy not biostat · J-1 + LMIC explicit</td></tr>
+    </tbody>
+  </table>
+
+  <h3>US MS Hedges (2)</h3>
+  <table>
+    <thead><tr><th></th><th>Program</th><th>Funding</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>24</td><td>University of Iowa MS Biostatistics</td><td>Variable RA + tuition</td><td><input type="checkbox" data-task-id="usms-1-decide"></td><td><input type="checkbox" data-task-id="usms-1-sub"></td><td><input type="checkbox" data-task-id="usms-1-result"></td><td>Only US biostat MS with explicit MS Core Exam → PhD continuation · Dec 1 2027 deadline</td></tr>
+      <tr><td>25</td><td>Vanderbilt MS Biostat</td><td>80% tuition auto</td><td><input type="checkbox" data-task-id="usms-2-decide"></td><td><input type="checkbox" data-task-id="usms-2-sub"></td><td><input type="checkbox" data-task-id="usms-2-result"></td><td>Residual $22–27K/yr · small cohort 5–6 admits/yr</td></tr>
+    </tbody>
+  </table>
+
+  <h3>UK Funded MSc + Stanford MS (3 — full-ride track per Run 4 of full-conversation-transcript)</h3>
+  <table>
+    <thead><tr><th></th><th>Program</th><th>Funding</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>26</td><td>Cambridge MASt Part III Mathematical Statistics + Gates Cambridge</td><td>Full ride</td><td><input type="checkbox" data-task-id="uk-1-decide"></td><td><input type="checkbox" data-task-id="uk-1-sub"></td><td><input type="checkbox" data-task-id="uk-1-result"></td><td>Dec 2027 deadline · 9-month program · max math-theory rigor · Gates PhD-favored (~5-8% MASt admit) · also try Cambridge Trust as backup</td></tr>
+      <tr><td>27</td><td>Oxford MSc Statistical Science + Clarendon Fund + Weidenfeld-Hoffmann</td><td>Full ride</td><td><input type="checkbox" data-task-id="uk-2-decide"></td><td><input type="checkbox" data-task-id="uk-2-sub"></td><td><input type="checkbox" data-task-id="uk-2-result"></td><td>Jan 2028 deadline · 12 mo + summer dissertation · KZ explicitly listed for W-H · Clarendon automatic ~10-15%</td></tr>
+      <tr><td>28</td><td>Stanford MS Statistics / MS Biomedical Data Science + Knight-Hennessy</td><td>Full ride</td><td><input type="checkbox" data-task-id="uk-3-decide"></td><td><input type="checkbox" data-task-id="uk-3-sub"></td><td><input type="checkbox" data-task-id="uk-3-result"></td><td>Oct 2027 deadline · 2-3 yr · KZ precedent confirmed 2025 cohort · ~1-3%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Mid-tier US Stats MSc + TA funding (4–6 — added 2026-05-17 per msc-backup-reframed addendum)</h3>
+  <table>
+    <thead><tr><th></th><th>Program</th><th>Funding</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>29</td><td>Iowa State Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-1-decide"></td><td><input type="checkbox" data-task-id="midus-1-sub"></td><td><input type="checkbox" data-task-id="midus-1-result"></td><td>Large dept · documented international TAs · Dec 2027 deadline · 15-30% admit</td></tr>
+      <tr><td>30</td><td>Penn State Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-2-decide"></td><td><input type="checkbox" data-task-id="midus-2-sub"></td><td><input type="checkbox" data-task-id="midus-2-result"></td><td>Annual international TA hires · Dec 2027 deadline</td></tr>
+      <tr><td>31</td><td>Texas A&M Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-3-decide"></td><td><input type="checkbox" data-task-id="midus-3-sub"></td><td><input type="checkbox" data-task-id="midus-3-result"></td><td>Large dept · generous TA pool · Dec 2027 / Jan 2028 deadline</td></tr>
+      <tr><td>32</td><td>NC State Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-4-decide"></td><td><input type="checkbox" data-task-id="midus-4-sub"></td><td><input type="checkbox" data-task-id="midus-4-result"></td><td>Documented international TA funding · Dec 2027 deadline</td></tr>
+      <tr><td>33</td><td>UW Biostat MS Thesis</td><td>TA when available</td><td><input type="checkbox" data-task-id="midus-5-decide"></td><td><input type="checkbox" data-task-id="midus-5-sub"></td><td><input type="checkbox" data-task-id="midus-5-result"></td><td>5-7% external admit · TA variable · MS-to-PhD conversion "only on exceptional occasions" per Run 3</td></tr>
+      <tr><td>34</td><td>(Optional) Kansas State / Pittsburgh Biostat / Iowa Biostat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-6-decide"></td><td><input type="checkbox" data-task-id="midus-6-sub"></td><td><input type="checkbox" data-task-id="midus-6-result"></td><td>Smaller depts · less competitive · biostat-specific fit if needed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Euro MSc Backup (4 — Plan C floor)</h3>
+  <table>
+    <thead><tr><th></th><th>Program</th><th>Net cost/yr</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>27</td><td>TU Dortmund MSc Data Science</td><td>$5–8K</td><td><input type="checkbox" data-task-id="msc-1-decide"></td><td><input type="checkbox" data-task-id="msc-1-sub"></td><td><input type="checkbox" data-task-id="msc-1-result"></td><td>#1 by net cost · Bayer Werkstudent corridor · verify ADS prereq</td></tr>
+      <tr><td>28</td><td>University of Bremen MSc Medical Biometry</td><td>$6–9K</td><td><input type="checkbox" data-task-id="msc-2-decide"></td><td><input type="checkbox" data-task-id="msc-2-sub"></td><td><input type="checkbox" data-task-id="msc-2-result"></td><td>BIPS-integrated · biennial Winter 2028/29 = Fall 2028 entry</td></tr>
+      <tr><td>29</td><td>University of Helsinki MSc Math & Stats</td><td>$0–17K</td><td><input type="checkbox" data-task-id="msc-3-decide"></td><td><input type="checkbox" data-task-id="msc-3-sub"></td><td><input type="checkbox" data-task-id="msc-3-result"></td><td>Tuition waiver scheme (40–60% prob of 100% waiver) · 4-yr PR with study time</td></tr>
+      <tr><td>30</td><td>LMU Munich MSc Stat & DS (Biostat)</td><td>$10–14K</td><td><input type="checkbox" data-task-id="msc-4-decide"></td><td><input type="checkbox" data-task-id="msc-4-sub"></td><td><input type="checkbox" data-task-id="msc-4-result"></td><td>DAAD Master Studienstipendien target · Bavaria fee risk by 2028</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Backup options (if any of 17–30 falls through)</h3>
+  <ul>
+    <li>Hasselt MSc Stat & DS (Biostat) — $8–12K · I-BioStat consortium (Molenberghs)</li>
+    <li>KU Leuven Master Stat & DS (Biometrics) — bimodal pricing on Science@Leuven win</li>
+    <li>Broad Computational Associate I + BBPS overlay (verify intl eligibility)</li>
+    <li>Fred Hutch Statistical Research Associate</li>
+    <li>Mayo GREP</li>
+    <li>Duke DCRI Predoctoral Biostatistics Fellowship (verify intl eligibility)</li>
+  </ul>
+</section>
+
+<!-- PROJECTS TAB -->
+<section class="tab" id="projects">
+  <h2>Projects</h2>
+  <p class="tab-subtitle">Research portfolio: Project #1 (locked) + Project #2 (recommended) + Project #3 (TBD). Check milestones as you complete them.</p>
+
+  <div class="card">
+    <h3>Project #1 — biotech-research-AI: Calibrated DR-learner on NHANES (LEAD VEHICLE per 2026-05-17 addendum)</h3>
+    <div class="pill-row">
+      <span class="pill accent">DR-learner + Platt/isotonic/beta calibration</span>
+      <span class="pill">NHANES 1999-2014, n=17,803</span>
+      <span class="pill">grf as comparator</span>
+      <span class="pill">Ship 20-27 Aug 2026 → ML4H @ NeurIPS 2026</span>
+    </div>
+    <p class="small">Multi-stage research artifact at <code>/Users/phoenix/Documents/dreamteam/biotech-research-AI/</code>. 8 stages complete (meta plan → literature → methodology → data → exec → paper draft). Methodological contribution: calibrated nuisance estimation for doubly-robust HTE; bias decomposition with R_3 term. Real NHANES data, NCO/NCE sensitivity tests PASS. Grf replication folds in as comparator section. Target: ML4H @ NeurIPS 2026 (Aug 27 deadline).</p>
+
+    <h4 style="margin-top: 16px;">Critical milestones (14-week polish plan)</h4>
+    <div class="checkbox-row" data-task-id="p1-1"><input type="checkbox"><div class="task-content"><div><strong>Bug #2 fix: replace approximated SE with bootstrap SE</strong> (5-17% differential; affects central coverage claim)</div><div class="task-meta">Weeks May 28 – Jun 10. Highest-leverage technical task.</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-2"><input type="checkbox"><div class="task-content"><div>Re-run NHANES analysis with bootstrap CIs; verify coverage</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-3"><input type="checkbox"><div class="task-content"><div>Scale simulation from 540 runs (5%) to 3,600 runs (36 cells × 100 reps)</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-4"><input type="checkbox"><div class="task-content"><div>Reframe R_3 honestly — either demote to "didactic exposition" OR attempt formal proof</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-5"><input type="checkbox"><div class="task-content"><div>Generate Fig 5 NHANES CATE distribution (was missing, blocker)</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-6"><input type="checkbox"><div class="task-content"><div>Integrate grf replication as comparator section (LaLonde + NHEFS heads-up vs DR-learner)</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-7"><input type="checkbox"><div class="task-content"><div>Paper polish v3 + reformatting to ML4H template</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-8"><input type="checkbox"><div class="task-content"><div>Reproducibility audit (PRE_REGISTRATION + DEVIATIONS + repro environment)</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-9"><input type="checkbox"><div class="task-content"><div>Cold-email Edward Kennedy (CMU) — R_3 framing validator + potential senior co-author</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-10"><input type="checkbox"><div class="task-content"><div>Tagged GitHub v1.0 release + README + reproducibility one-liner</div></div></div>
+    <div class="checkbox-row" data-task-id="p1-11"><input type="checkbox"><div class="task-content"><div><strong>Submit to ML4H @ NeurIPS 2026 by Aug 27, 2026 + arXiv preprint same week</strong></div></div></div>
+  </div>
+
+  <div class="card">
+    <h3>Project #2 — Joint Longitudinal-Survival Modeling (RECOMMENDED)</h3>
+    <div class="pill-row">
+      <span class="pill accent">Rizopoulos JM package</span>
+      <span class="pill">Biostat-coded</span>
+      <span class="pill">Framingham OR NHANES</span>
+      <span class="pill">Ship spring 2027</span>
+    </div>
+    <p class="small">Biostat-coded supplement to Project #1 (which reads as causal-ML). Canonical biostat methodology — mixed-effects + Cox PH joint model. Rizopoulos JM package well-documented. Framingham/NHANES public + clean.</p>
+
+    <h4 style="margin-top: 16px;">Milestones (planned for fall 2026 onwards)</h4>
+    <div class="checkbox-row" data-task-id="p2-1"><input type="checkbox"><div class="task-content"><div>Confirm method = joint longitudinal-survival modeling (Rizopoulos JM)</div></div></div>
+    <div class="checkbox-row" data-task-id="p2-2"><input type="checkbox"><div class="task-content"><div>Pick dataset: Framingham OR NHANES</div></div></div>
+    <div class="checkbox-row" data-task-id="p2-3"><input type="checkbox"><div class="task-content"><div>Read Rizopoulos 2012 JM book chapters 1–6</div></div></div>
+    <div class="checkbox-row" data-task-id="p2-4"><input type="checkbox"><div class="task-content"><div>Implement baseline JM model on chosen dataset</div></div></div>
+    <div class="checkbox-row" data-task-id="p2-5"><input type="checkbox"><div class="task-content"><div>Implement extension (multi-state JM OR competing-risks JM)</div></div></div>
+    <div class="checkbox-row" data-task-id="p2-6"><input type="checkbox"><div class="task-content"><div>Validation + simulation study</div></div></div>
+    <div class="checkbox-row" data-task-id="p2-7"><input type="checkbox"><div class="task-content"><div>Public GitHub repo + vignette + writeup</div></div></div>
+    <div class="checkbox-row" data-task-id="p2-8"><input type="checkbox"><div class="task-content"><div><strong>Ship v1 by May 2027</strong></div></div></div>
+  </div>
+
+  <div class="card">
+    <h3>Project #3 — Original Research (TBD)</h3>
+    <div class="pill-row">
+      <span class="pill">Begin summer 2027</span>
+      <span class="pill">Workshop submission target NeurIPS/AISTATS 2027</span>
+    </div>
+    <p class="small">Direction depends on Project #2 outcomes + cold-email feedback by spring 2027. Options: extension of Project #1 (causal-ML direction), TARGET trial emulation on RWE (Hernán-Robins approach), recurrent events analysis, Bayesian adaptive trial design.</p>
+
+    <h4 style="margin-top: 16px;">Milestones (planned summer 2027)</h4>
+    <div class="checkbox-row" data-task-id="p3-1"><input type="checkbox"><div class="task-content"><div>Decide Project #3 topic (depend on Project #2 + cold-email feedback)</div></div></div>
+    <div class="checkbox-row" data-task-id="p3-2"><input type="checkbox"><div class="task-content"><div>Begin implementation (June 2027)</div></div></div>
+    <div class="checkbox-row" data-task-id="p3-3"><input type="checkbox"><div class="task-content"><div>NeurIPS 2027 workshop submission (Aug–Sep 2027)</div></div></div>
+    <div class="checkbox-row" data-task-id="p3-4"><input type="checkbox"><div class="task-content"><div>Ship v1 public on GitHub by Nov 2027</div></div></div>
+  </div>
+</section>
+
+<!-- COLD EMAIL TAB -->
+<section class="tab" id="email">
+  <h2>Cold Email Pipeline</h2>
+  <p class="tab-subtitle">10 biostat-leaning advisor targets per `cold-email-templates/00-update-dual-target-rebalance.md`. Track outreach status; checkboxes persist.</p>
+
+  <div class="alert info">
+    <strong>Current round (May-Aug 2026): biotech-research-AI anchor sprint.</strong> Tier-A causal-inference faculty (Kennedy, Kang, Ben-Michael, Westling, Stensrud, Moreno-Betancur, L. Wang) staggered ~2 emails/week per `summer-2026-pivot-cold-email-deepread-2026.md` Section B. Plus KAUST relationship-seed (Moraga, Ombao) for VSRP Summer 2027. Plus KZ-origin recommender Assylbekov (Purdue Fort Wayne, highest-leverage per memory #29). Subsequent rounds: Sep-Nov 2026 follow-ups · Mar-May 2027 explicit Summer 2027 RA ask · Sep 2027 final pre-application round.
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Edward Kennedy</td><td>UPenn Biostat</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td>DR-learner anchor · #1 priority · 40–60h prep · TEMPLATE EXISTS</td></tr>
+      <tr><td>2</td><td>Susan Murphy</td><td>Harvard Biostat</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td>RL+causal+precision medicine · 40–60h prep · TEMPLATE NEEDED</td></tr>
+      <tr><td>3</td><td>Eric Tchetgen Tchetgen</td><td>UPenn Biostat</td><td><input type="checkbox" data-task-id="email-3-r1"></td><td><input type="checkbox" data-task-id="email-3-resp"></td><td><input type="checkbox" data-task-id="email-3-r2"></td><td>Proximal causal + interpretability · 30–45h prep · TEMPLATE NEEDED</td></tr>
+      <tr><td>4</td><td>Tianxi Cai</td><td>Harvard Biostat</td><td><input type="checkbox" data-task-id="email-4-r1"></td><td><input type="checkbox" data-task-id="email-4-resp"></td><td><input type="checkbox" data-task-id="email-4-r2"></td><td>Translational + RWE · 25–40h prep · TEMPLATE NEEDED</td></tr>
+      <tr><td>5</td><td>Fan Li</td><td>Duke Biostat</td><td><input type="checkbox" data-task-id="email-5-r1"></td><td><input type="checkbox" data-task-id="email-5-resp"></td><td><input type="checkbox" data-task-id="email-5-r2"></td><td>Biostat causal · PROMOTED · 30–45h prep · TEMPLATE NEEDED</td></tr>
+      <tr><td>6</td><td>Alex Volfovsky</td><td>Duke Stat Sci</td><td><input type="checkbox" data-task-id="email-6-r1"></td><td><input type="checkbox" data-task-id="email-6-resp"></td><td><input type="checkbox" data-task-id="email-6-r2"></td><td>Methodological + ML · 40–60h prep · TEMPLATE EXISTS</td></tr>
+      <tr><td>7</td><td>Razieh Nabi</td><td>Emory Rollins Biostat</td><td><input type="checkbox" data-task-id="email-7-r1"></td><td><input type="checkbox" data-task-id="email-7-resp"></td><td><input type="checkbox" data-task-id="email-7-r2"></td><td>Causal-ML · PROMOTED · 25–40h prep · TEMPLATE NEEDED</td></tr>
+      <tr><td>8</td><td>Larry Han</td><td>Northeastern Biostat</td><td><input type="checkbox" data-task-id="email-8-r1"></td><td><input type="checkbox" data-task-id="email-8-resp"></td><td><input type="checkbox" data-task-id="email-8-r2"></td><td>Transportability · 20–35h prep · TEMPLATE NEEDED</td></tr>
+      <tr><td>9</td><td>Stefan Wager</td><td>Stanford GSB</td><td><input type="checkbox" data-task-id="email-9-r1"></td><td><input type="checkbox" data-task-id="email-9-resp"></td><td><input type="checkbox" data-task-id="email-9-r2"></td><td>Econ-biostat-bridge · GRF/policy learning · 35–50h prep · TEMPLATE EXISTS</td></tr>
+      <tr><td>10</td><td>Donglin Zeng</td><td>UNC Biostat</td><td><input type="checkbox" data-task-id="email-10-r1"></td><td><input type="checkbox" data-task-id="email-10-resp"></td><td><input type="checkbox" data-task-id="email-10-r2"></td><td>Survival + RL for healthcare · 20–35h prep · TEMPLATE NEEDED</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert urgent">
+    <strong>Gap:</strong> 7 of 10 templates not yet drafted (Murphy, Tchetgen Tchetgen, Cai, Fan Li, Nabi, Han, Zeng). Draft before formal Round 1 sends (Sep 2026 onwards). Current May-Aug 2026 sprint uses Kennedy + Volfovsky + Wager existing templates as starting points; tailor per recipient.
+  </div>
+
+  <h3 style="margin-top: 24px;">KAUST relationship-seed (added 2026-05-17 per Summer 2027 KAUST VSRP plan)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Faculty</th><th>Institution</th><th>Email sent</th><th>Response?</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>11</td><td>Paula Moraga</td><td>KAUST Statistics</td><td><input type="checkbox" data-task-id="email-11-r1"></td><td><input type="checkbox" data-task-id="email-11-resp"></td><td>Spatial epi · R-package developer · LMIC-mentoring track · best KAUST fit</td></tr>
+      <tr><td>12</td><td>Hernando Ombao</td><td>KAUST Statistics</td><td><input type="checkbox" data-task-id="email-12-r1"></td><td><input type="checkbox" data-task-id="email-12-resp"></td><td>Biostat / time series · documented international student mentorship</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 24px;">KZ-origin recommender map (added 2026-05-17 per memory correction #29)</h3>
+  <p class="tab-subtitle">Highest-leverage KZ-origin recommender candidates. The third PhD-application LoR is the binding constraint — these are the realistic Western-credentialed letter writers in your network.</p>
+  <table>
+    <thead><tr><th>#</th><th>Faculty</th><th>Institution</th><th>PhD origin</th><th>Outreach sent</th><th>Response?</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>13</td><td>Zhenisbek Assylbekov</td><td>Purdue Fort Wayne (formerly NU 2017-2023)</td><td>Hiroshima 2008</td><td><input type="checkbox" data-task-id="email-13-r1"></td><td><input type="checkbox" data-task-id="email-13-resp"></td><td><strong>Single highest-leverage KZ-origin recommender.</strong> ML/NLP/stats · 238 citations · active. Substantive technical email re recent paper.</td></tr>
+      <tr><td>14</td><td>Rustem Takhanov</td><td>NU Math</td><td>—</td><td><input type="checkbox" data-task-id="email-14-r1"></td><td><input type="checkbox" data-task-id="email-14-resp"></td><td>ML / constraint satisfaction · 257 citations · 2025 <em>Machine Learning</em> journal paper anchor</td></tr>
+      <tr><td>15</td><td>Dongming Wei</td><td>NU Math</td><td>Michigan State (US PhD)</td><td><input type="checkbox" data-task-id="email-15-r1"></td><td><input type="checkbox" data-task-id="email-15-resp"></td><td>Western PhD = automatically legible to US adcoms · locally accessible</td></tr>
+      <tr><td>16</td><td>Tolga Etgü</td><td>NU Math (Chair)</td><td>UC Berkeley</td><td><input type="checkbox" data-task-id="email-16-r1"></td><td><input type="checkbox" data-task-id="email-16-resp"></td><td>US PhD · Chair so very busy · approach only after Wei/Takhanov</td></tr>
+      <tr><td>17</td><td>Durvudkhan Suragan</td><td>NU Math</td><td>—</td><td><input type="checkbox" data-task-id="email-17-r1"></td><td><input type="checkbox" data-task-id="email-17-resp"></td><td>Ferran Sunyer i Balaguer Prize 2018 · 2,310 Google Scholar citations</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VERIFICATIONS TAB -->
+<section class="tab" id="verify">
+  <h2>Verification Emails (Sep–Oct 2026)</h2>
+  <p class="tab-subtitle">10 citizenship/eligibility verification questions to resolve before submitting MSc/bridge apps. Send these in fall 2026.</p>
+
+  <table>
+    <thead><tr><th>#</th><th>Recipient</th><th>Question</th><th>Sent</th><th>Response received</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="mono">biometrie@uni-bremen.de</td><td>Does Bremen MSc Medical Biometry accept applicants without biology/medical background? What bridge coursework required?</td><td><input type="checkbox" data-task-id="verify-1-sent"></td><td><input type="checkbox" data-task-id="verify-1-resp"></td></tr>
+      <tr><td>2</td><td class="mono">msc-data-science@statistik.tu-dortmund.de</td><td>Does TU Dortmund MSc Data Science require formal ADS course on transcript? Bridge courses available?</td><td><input type="checkbox" data-task-id="verify-2-sent"></td><td><input type="checkbox" data-task-id="verify-2-resp"></td></tr>
+      <tr><td>3</td><td class="mono">biostatistics@kth.se</td><td>Does Karolinska joint MSc require 90 ECTS in math/stats? How calculated for UoL EMFSS BSc DS&BA applicants?</td><td><input type="checkbox" data-task-id="verify-3-sent"></td><td><input type="checkbox" data-task-id="verify-3-resp"></td></tr>
+      <tr><td>4</td><td>Utrecht research master coordinator</td><td>Does DS&BA BSc qualify as "research-oriented" for MSBBSS admit framework?</td><td><input type="checkbox" data-task-id="verify-4-sent"></td><td><input type="checkbox" data-task-id="verify-4-resp"></td></tr>
+      <tr><td>5</td><td>Helsinki Math & Stats admissions</td><td>How does KZ GPA 3.5/4 convert to Finnish 5-scale? Eligible for 100% tuition waiver?</td><td><input type="checkbox" data-task-id="verify-5-sent"></td><td><input type="checkbox" data-task-id="verify-5-resp"></td></tr>
+      <tr><td>6</td><td>Basel MSc Epi admissions</td><td>Epi/public health background required? Bridge available for non-bio quant applicants?</td><td><input type="checkbox" data-task-id="verify-6-sent"></td><td><input type="checkbox" data-task-id="verify-6-resp"></td></tr>
+      <tr><td>7</td><td class="mono">james.alvarez@fredhutch.org</td><td>Is Fred Hutch Postbac Scholar Program open to international (KZ) applicants? Visa sponsorship?</td><td><input type="checkbox" data-task-id="verify-7-sent"></td><td><input type="checkbox" data-task-id="verify-7-resp"></td></tr>
+      <tr><td>8</td><td class="mono">bbps@broadinstitute.org</td><td>Is Broad BBPS overlay open to international applicants (separately from underlying CA I job)?</td><td><input type="checkbox" data-task-id="verify-8-sent"></td><td><input type="checkbox" data-task-id="verify-8-resp"></td></tr>
+      <tr><td>9</td><td>Penn Wharton Stats & DS admissions</td><td>Wharton Master's Bridge international eligibility? Funding for non-US/non-LPR students?</td><td><input type="checkbox" data-task-id="verify-9-sent"></td><td><input type="checkbox" data-task-id="verify-9-resp"></td></tr>
+      <tr><td>10</td><td>Duke DCRI faculty affairs</td><td>DCRI Predoctoral Biostatistics Fellowship international eligibility? Visa sponsorship?</td><td><input type="checkbox" data-task-id="verify-10-sent"></td><td><input type="checkbox" data-task-id="verify-10-resp"></td></tr>
+      <tr><td>11</td><td>MDACC postbac coordinator</td><td>Does KBTU qualify as partner institution for MD Anderson Postbac biostat track?</td><td><input type="checkbox" data-task-id="verify-11-sent"></td><td><input type="checkbox" data-task-id="verify-11-resp"></td></tr>
+      <tr><td>12</td><td>Astana Public Diplomacy Section</td><td>Is there a research-track Fulbright waiver for fresh BSc graduates (vs the 2-yr work-experience rule)?</td><td><input type="checkbox" data-task-id="verify-12-sent"></td><td><input type="checkbox" data-task-id="verify-12-resp"></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- GRE PREP TAB -->
+<section class="tab" id="gre">
+  <h2>GRE Prep — June 2026 → Feb 2027</h2>
+  <p class="tab-subtitle">Target test date: early-mid February 2027. Strategy: vocab-as-background June–Oct + Nov pause (UoL exams) + Dec calibration + Jan intensive + Feb test. Full plan in <span class="mono">phd-pipeline/artifacts/gre-prep-plan-2026-2027.md</span>.</p>
+
+  <h3>Diagnostic baseline (UNTIMED POWERPREP, 2026-05-25)</h3>
+  <table>
+    <thead><tr><th>Section</th><th>Raw</th><th>% correct</th><th>Untimed scaled est.</th><th>Timed est. without prep</th></tr></thead>
+    <tbody>
+      <tr><td>Verbal (Sec 2 + Sec 4)</td><td>15/27</td><td>55.6%</td><td>~152-154</td><td>~145-150</td></tr>
+      <tr><td>Quant (Sec 3 + Sec 5)</td><td>21/27</td><td>77.8%</td><td>~161-163</td><td>~154-159</td></tr>
+      <tr><td>Analytical Writing</td><td>N/A</td><td>N/A</td><td>not graded untimed</td><td>~3.5-4.0 untrained</td></tr>
+    </tbody>
+  </table>
+
+  <div class="lock-item">
+    <strong>Diagnosis (user-confirmed):</strong>
+    <ul>
+      <li><strong>Quant:</strong> NOT a content gap. Format familiarity + speed only. User finished untimed Quant in under 2 hrs, scored 91.7% on Sec 3. ~50-80 hrs of GRE-format practice needed.</li>
+      <li><strong>Verbal:</strong> Vocabulary is the bottleneck. "Knew only 1-2 of 4-6 options" on Text Completion / Sentence Equivalence. NOT a Reading Comp / inferential logic gap.</li>
+      <li><strong>AW:</strong> Standard low-time-investment section. Tackle in January batch.</li>
+    </ul>
+  </div>
+
+  <h3>Score targets by tier</h3>
+  <table>
+    <thead><tr><th>Tier</th><th>Verbal target</th><th>Quant target</th><th>AW target</th><th>GRE required (2026)?</th></tr></thead>
+    <tbody>
+      <tr><td>T1-T10 biostat (Harvard/Hopkins/UW)</td><td>158+</td><td>165+</td><td>4.5+</td><td>Mixed (Harvard waived; rest optional)</td></tr>
+      <tr><td><strong>T11-T25 biostat (PRIMARY apply list)</strong></td><td><strong>155+</strong></td><td><strong>162+</strong></td><td><strong>4.0+</strong></td><td><strong>Mostly OPTIONAL / WAIVED</strong></td></tr>
+      <tr><td>US stats T1-T10 (Stanford/Berkeley/CMU)</td><td>158+</td><td>167+</td><td>4.5+</td><td>Often required</td></tr>
+      <tr><td>Cambridge MASS / Oxford MSc / LSE MSc</td><td>n/a entry</td><td>n/a entry</td><td>n/a entry</td><td>NOT required at MSc entry</td></tr>
+    </tbody>
+  </table>
+
+  <div class="lock-item">
+    <strong>Realistic ceiling with this plan:</strong> V 155-158, Q 165-168, AW 4.0-4.5. <strong>Saturates T11-T25 biostat expectations</strong> (the primary target tier per Critical Lock #2). Marginal at T1-T10 — but T1-T10 are reaches, not targets.
+  </div>
+
+  <h3>Phase 1 — Background (June–October 2026, ~5-7 hr/wk)</h3>
+  <div class="lock-item">
+    <strong>Daily / weekly routine:</strong>
+    <ul>
+      <li><strong>Norman Lewis <em>Word Power Made Easy</em></strong> (PRIMARY) — 30 min × 5 days/wk. Roots/prefixes/suffixes. Teaches DECODING not memorization. ~30-40 hr total over phase. <strong>Highest-leverage approach for Anki-resistant learners.</strong></li>
+      <li><strong>GregMat $5/month</strong> (SECONDARY) — 15 min × 5 days/wk. Daily 5-word lessons with sentence context. <strong>2-week free trial first</strong>; continue only if retention is materially above prior SAT Anki experience.</li>
+      <li><strong>Higher-register reading habit</strong> — 30 min × 2-3 days/wk. <strong>NOT NYT/Atlantic/Economist</strong> (register too low per user feedback). Use: <strong>New Yorker long-form / TLS / LRB or NYRB / Foreign Affairs / Aeon.co / 19th-century fiction (Henry James, Wharton, Conrad, Eliot)</strong>. Active lookup of unknown words → personal notebook.</li>
+      <li><strong>Active vocab lookup from project papers</strong> — embedded in foundations reading (Wasserman + ISL) + biotech-research-AI project. Context-anchored vocab sticks ~10x better than isolated.</li>
+      <li><strong>Quant maintenance</strong> — 15 min × 1 day/wk. One Manhattan Quantitative Comparison problem set per week. Maintains GRE-format familiarity without diluting foundations / project work.</li>
+    </ul>
+    <strong>SKIP:</strong> Anki (user's known failure mode from SAT), Magoosh Vocab Builder app (isolated cards), Quizlet decks, NYT-tier passive reading.
+  </div>
+
+  <h3>Phase 2 — UoL exam pause (November 2026)</h3>
+  <div class="lock-item">
+    <strong>0 hr/wk on GRE. Full suspension.</strong> UoL Linear Algebra exam + ML4H Aug 27 / CDSM submission take precedence. GPA push from 5th semester onwards is higher-weight signal than GRE per memory #94. Reading habit can continue if energy permits but no formal study.
+  </div>
+
+  <h3>Phase 3 — December 2026 calibration (~3 hrs)</h3>
+  <div class="lock-item">
+    <strong>Take POWERPREP Plus Test 1 (TIMED, $39.95 from ETS).</strong> Real scaled scores + pacing diagnostic (where you ran out of time vs guess vs accuracy degrade). Review by section: pinpoint 3-5 weakest Quant question types and 3-5 weakest Verbal question types. Adjust January plan based on actual gap.
+  </div>
+
+  <h3>Phase 4 — January 2027 intensive (4 weeks, ~20-25 hr/wk)</h3>
+  <table>
+    <thead><tr><th>Week</th><th>Quant</th><th>Verbal</th><th>AW</th><th>Full timed practice</th></tr></thead>
+    <tbody>
+      <tr><td>Wk 1</td><td>Manhattan 5lb GRE Quant content review (geometry, data interpretation, probability) — 10 hr</td><td>Reading comprehension drill — 5 hr</td><td>—</td><td>—</td></tr>
+      <tr><td>Wk 2</td><td>100 problem set + 1 timed Quant section — 10 hr</td><td>Vocab final review — 4 hr</td><td>3 essays (mix Issue + Argument) — 3 hr</td><td>POWERPREP Plus Test 2 — 4 hr</td></tr>
+      <tr><td>Wk 3</td><td>1 timed Quant section + question-type weakness — 8 hr</td><td>2 timed Verbal + RC practice — 6 hr</td><td>3-4 essays + ScoreItNow! $20 — 5 hr</td><td>Manhattan PT 1 — 4 hr</td></tr>
+      <tr><td>Wk 4</td><td>Final timed practice — 5 hr</td><td>Final timed Verbal + AW polishing — 4 hr</td><td>2-3 final essays — 3 hr</td><td>Manhattan PT 2 — 4 hr</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Phase 5 — Test (early-mid February 2027)</h3>
+  <div class="lock-item">
+    Book Almaty test center <strong>late December 2026</strong> (~6 weeks ahead). Saturday morning slots fill fastest. Bring passport + snack + water. Verbal + Quant scores released immediately; AW + official report 8-10 days later.
+  </div>
+
+  <h3>Phase 6 — Retake schedule if needed</h3>
+  <div class="lock-item">
+    <strong>Retake if ANY:</strong> Quant &lt; 162; Verbal &lt; 150; AW &lt; 3.5.<br>
+    <strong>Don't retake if:</strong> Quant ≥ 165 AND Verbal ≥ 155 AND AW ≥ 4.0 (saturates T11-T25 expectations).<br>
+    <strong>Retake windows:</strong> Late Feb/Mar 2027 (21+ day rule); late Apr/May 2027 (post UoL spring exams); Aug-Sep 2027 (close to Dec 2027 deadline). Max 5 attempts per 12-month period.
+  </div>
+
+  <h3>Vocabulary strategy detail (the long pole)</h3>
+  <div class="alert">
+    <strong>Critical correction (2026-05-25):</strong> User confirmed NYT / Atlantic / Economist register is too low for GRE Verbal vocab gain. Modern journalism reads at ~10-11th grade Flesch ease; GRE Verbal tests one register higher.
+    <br><br>
+    <strong>GRE-frequent words rarely appearing in NYT-tier:</strong> abstemious, mendacious, loquacious, obstreperous, pellucid, recondite, vituperative, sanguine, specious, tendentious, perfidious, sycophantic, pusillanimous, fulsome.
+    <br><br>
+    <strong>Higher-register sources (use these instead):</strong> New Yorker long-form essays; TLS (Times Literary Supplement); LRB or NYRB; Foreign Affairs; Aeon.co; 19th-century fiction (Henry James, Edith Wharton, Joseph Conrad, T.S. Eliot — particularly <em>The Portrait of a Lady</em>, <em>The Age of Innocence</em>, <em>Heart of Darkness</em>).
+  </div>
+
+  <h3>Per-programme GRE policy verification (Autumn 2027 action)</h3>
+  <div class="lock-item">
+    In Sep-Oct 2027, before final commitment to submit, verify GRE policy at each target programme's admissions page. <strong>Policies change annually.</strong> Decision rule at the gate:
+    <ul>
+      <li>≥70% require / strongly consider GRE → prep as planned, take Feb 2027 test, retake if needed</li>
+      <li>≥80% waived / not-accepted → reduce Jan intensity to 8-10 hr/wk, take Feb 2027 to keep optionality, submit selectively</li>
+      <li>100% waived → SKIP entirely; redirect 80+ hours to higher-leverage work (ML4H polish, cold-email pipeline, MT2175 self-study)</li>
+    </ul>
+  </div>
+
+  <h3>Submission decision rule (per programme, Dec 2027 application time)</h3>
+  <table>
+    <thead><tr><th>Your score vs programme median admit</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr><td>Above programme median admit</td><td><strong>Submit.</strong> Strengthens.</td></tr>
+      <tr><td>At programme median</td><td><strong>Submit.</strong> Marginal positive.</td></tr>
+      <tr><td>Below programme median</td><td><strong>Don't submit.</strong> Actively weakens (suggests optional choice was made because score wasn't strong).</td></tr>
+      <tr><td>No published median</td><td><strong>Submit if Q ≥ 162 AND V ≥ 150</strong> (default safe threshold).</td></tr>
+    </tbody>
+  </table>
+  <div class="lock-item">
+    <strong>T11-T25 biostat median admit ranges (rough, varies by programme):</strong> Quant 161-166; Verbal 156-160; AW 4.0-4.5. Your realistic ceiling (Q 165-168, V 155-158) puts you at or above median for most T11-T25 — submission strengthens.
+  </div>
+
+  <h3>Key resources (ranked by ROI)</h3>
+  <table>
+    <thead><tr><th>Section</th><th>Primary resource</th><th>Cost</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Vocab</td><td>Norman Lewis <em>Word Power Made Easy</em></td><td>~$10</td><td>Roots-based decoding; highest leverage for Anki-resistant learners</td></tr>
+      <tr><td>Vocab</td><td>GregMat $5/mo (2-week free trial)</td><td>$5/mo</td><td>Daily 5-word lessons with context; cheap to test</td></tr>
+      <tr><td>Quant</td><td>Manhattan 5lb GRE Quant</td><td>~$25</td><td>~1800 problems organized by question type</td></tr>
+      <tr><td>Quant practice</td><td>POWERPREP Plus Tests 1, 2</td><td>$39.95 each</td><td>Real ETS scored practice; calibration + final practice</td></tr>
+      <tr><td>AW</td><td>ETS Issue + Argument prompt pool (free) + ScoreItNow! ($20)</td><td>$0 + $20-40</td><td>Pool is finite; official scaled rating for 1-2 essays</td></tr>
+      <tr><td>RC + Text Completion</td><td>Manhattan 5lb GRE Verbal</td><td>~$25</td><td>Companion to Quant 5lb</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Total budget</h3>
+  <div class="lock-item">
+    <strong>Time:</strong> ~210-300 hours over 9 months (background 100-140 hr + January intensive 80-100 hr + retake buffer 30-60 hr if needed).<br>
+    <strong>Money:</strong> Norman Lewis $10 + GregMat $30 (6 mo) + Manhattan 5lb Quant $25 + Manhattan 5lb Verbal $25 + POWERPREP Plus ×2 $80 + ScoreItNow! ×2 $40 + test fee ~$220 = <strong>~$430 total.</strong> Retake adds $220 if needed.
+  </div>
+</section>
+
+<!-- LOCKS TAB -->
+<section class="tab" id="locks">
+  <h2>Critical Locks — Do NOT Drift</h2>
+  <p class="tab-subtitle">23 locked decisions. If you (or future-session Claude) drift from these, refer back here. Last updated 2026-05-25.</p>
+
+  <div class="lock-item">
+    <strong>1. Biostat-primary</strong> — econ-flavored dropped; do not re-raise dual-target framing.
+  </div>
+  <div class="lock-item">
+    <strong>2. T11–T25 lifestyle-compatible primary (REVISED 2026-05-24)</strong> — Career-exits deep research: US biostat PhD dominates LSE PhD on 5/7 axes for biostat-primary + $400-500K HHI target. Primary apply list: <strong>Brown, BU, UMN, UCLA, Vanderbilt, Yale, Duke</strong>. T1-T10 (Harvard/Hopkins/UW/Michigan/UNC) = "chasing" — direct admit 0-3% AND postdoc trap rising AND lifestyle-strained geography (Boston/Bay Area). Application work IS still largely identical across tiers, so include 2-3 T1-T10 as reach — but lifestyle-compatible T11-T25 is the EV-peak.
+  </div>
+  <div class="lock-item">
+    <strong>3. Lifestyle target $400–500K HH peak</strong> — NOT $700K–1M (reframed). Multi-stage IT→ventures+consulting+work-to-75–80.
+  </div>
+  <div class="lock-item">
+    <strong>4. Project #1 = biotech-research-AI (calibrated DR-learner on NHANES, ML4H @ NeurIPS 2026 Aug 27 deadline)</strong> — REVISED 2026-05-17. Wager-Athey grf replication (LaLonde + NHEFS) folds in as comparator section. 8 stages complete; remaining work = Bug #2 (bootstrap SE) + simulation scale-up + R_3 honest reframe + paper polish.
+  </div>
+  <div class="lock-item">
+    <strong>5. Project #2 = joint longitudinal-survival modeling (Rizopoulos JM)</strong> — biostat-coded supplement. Project #1 reads as econometrics; Project #2 adds core biostat signal.
+  </div>
+  <div class="lock-item">
+    <strong>6. RESNA SDG = open-source data infrastructure + NLP</strong> — NOT translation system, NOT publishable causal-inference paper, NOT arXiv preprint.
+  </div>
+  <div class="lock-item">
+    <strong>7. Real analysis ≥75% = binary gate for T1–T15 — REVISED 2026-05-25 (real analysis course deep research)</strong>. <strong>UoL MT3041 DISCONTINUED</strong> — external credential MANDATORY. Verified options ranked by EV (full table in <span class="mono">phd-pipeline/artifacts/real-analysis-credential-options-2026.md</span>):
+    <ul>
+      <li><strong>#1 PRIMARY: UIUC NetMath MATH 447 = $1,653</strong> — full Rudin Ch 1-7, US R1 UIUC transcript, undergrad credit. <strong>Target start: mid-February 2027</strong> (after UoL MT1173 Algebra exam Nov 2026 + GRE Feb 2027 test). 16-week standard pace finishes ~early June 2027. Rationale: (a) MT1173 is prerequisite mastery for real-analysis multivariable arguments, so sequencing matters pedagogically; (b) MT1173 grade contributes to GPA which adcoms weight higher than external transcripted credentials — protect it. Registration ~late January 2027, $1,653 charged at signup. Rolling enrollment — verify Feb 15 start date open via netmath.illinois.edu in mid-January 2027.</li>
+      <li><strong>#2 BRAND-UPGRADE: Harvard Extension MATH E-23a + E-23b = $4,320 total</strong> — Harvard Extension transcript, full Ch 1-7 across two-semester sequence (Fall 2026 + Spring 2027). NO application required.</li>
+      <li><strong>#3 ELITE-SIGNAL: JHU EP EN.625.601 = $5,620</strong> — Johns Hopkins Whiting School graduate-level (600) Real Analysis. Strongest single-course signal for biostat (JHU Biostat #1 US News 2026). Special Student admission gates: bachelor's + WES ICAP credential eval (~4-7 wks) + TOEFL/IELTS waiver process. Start WES eval early June 2026 to enroll Fall 2026. Live synchronous Pacific evenings = late night/early morning Almaty.</li>
+      <li><strong>#5 LAST-RESORT: Athabasca MATH 370 = CAD $1,675</strong> — <strong>MSCHE accreditation ENDED March 31, 2025</strong> per official MSCHE record. Materially weakens for US biostat adcoms. Use only if UIUC NetMath window closed AND transcript needed within 6 months. Ch 1-6 full + partial Ch 7.</li>
+      <li><strong>DISQUALIFIED:</strong> LSE ME306 (Ch 1-4 only, in-person London), UoL MT3041 (discontinued), Stanford XM615 (grades 9-12 only), Stanford Non-Degree (MATH 205A not in catalog), UND MATH 431/432 ("on demand" only), UCLA/Berkeley Extension (no offering), Oregon State Ecampus (not offered to non-degree), IU MATH-M 413 (graduate-only IU-internal), OU UK M208 (Ch 2 coverage failure).</li>
+    </ul>
+    <strong>Measure theory self-study (Williams) NO LONGER REQUIRED at MSc entry</strong> per Cambridge MASS deep research: MASS measure-theory-light track exists. MT2116 covers Rudin Ch 1-3 lite via Bryant; MT1174 covers multivariate. <strong>Grade target across all options: A or A+ only — B or below dampens signal regardless of brand. Name Rudin/Royden/Pugh in SoP.</strong>
+  </div>
+  <div class="lock-item">
+    <strong>8. UK = funded-only backup — REVISED 2026-05-25</strong>. NEW DOMINANT PATH: <strong>LSE MSc Statistics (Research) + ESRC 1+3</strong> OR <strong>LSE MSc Data Science + ESRC 1+3</strong>. ESRC 1+3 funds full overseas fees + £23,805/yr stipend + 1 year MSc + 3 years LSE PhD jointly, all-nationality eligible (UKRI 30% cap), deadline 14 Jan of cycle. <strong>LSE 9-month taught MSc Statistics NOT ESRC 1+3 eligible</strong> — must commit to 12-month Research variant at application (LSE student-visa rule). Cambridge MASt: <strong>CONTINGENT on Sep 2027 enquiry response (NOT primary apply)</strong> — base rate 20% (FOI-verified, MASS stream specifically), realistic applicant probability <strong>3-10%</strong>, no documented UoL EMFSS→MASS precedent in 10 years, no MASt interview, Cambridge refuses pre-app suitability advice. <strong>Send enquiry email to partiii-admissions@maths.cam.ac.uk September 2027</strong> (template: phd-pipeline/artifacts/cambridge-mass-enquiry-email-2027.md) — only commit £85 + 40-60 hrs application labor if response is neutral-encouraging. <strong>Causal Inference module (Zhao) at MASS is direct narrative anchor for ML4H paper.</strong> Oxford MSc Stat Sci + Clarendon + W-H (eligible) apply 2027-28 (2026-27 closed). Earned Settlement May 2025 White Paper proposes 10-yr ILR. UK Graduate Route reducing to 18 months for Master's from Jan 2027.
+  </div>
+  <div class="lock-item">
+    <strong>9. Euro MSc 4-app primary backup</strong> — TU Dortmund + Bremen + Helsinki + LMU. Hasselt + KU Leuven as backup options. NOT UZH (no KZ scholarship), Karolinska (SISGP excludes KZ), Utrecht (UES discontinued), Leiden (TWV blocks).
+  </div>
+  <div class="lock-item">
+    <strong>10. US MS hedges = Iowa + Vanderbilt only</strong> — all others dropped (NIH T32/T15 federal restriction closes them to non-US citizens).
+  </div>
+  <div class="lock-item">
+    <strong>11. US bridge positions</strong> — Dana-Farber + MD Anderson + MSK + Harvard HCP + 2–3 cold-email RAs. NIH IRTA / NCI / Mayo PREP / JHU PREP all CLOSED to KZ.
+  </div>
+  <div class="lock-item">
+    <strong>12. Bolashak BANNED</strong> — return-to-KZ conflict with stay-in-West trajectory.
+  </div>
+  <div class="lock-item">
+    <strong>13. Fulbright KZ = disqualified for Fall 2028</strong> — requires 2 yrs post-BSc work experience.
+  </div>
+  <div class="lock-item">
+    <strong>14. Biotech equity ceiling DEFLATED</strong> — phantom for biostat PhDs (zero CSOs at biotech exits 2015–2025). Multimillion via stable Sr Director + investing ($5–10M base), $20M+ requires CRO entrepreneurship.
+  </div>
+  <div class="lock-item">
+    <strong>15. Vanderbilt biostat downgraded</strong> — 0 VP+ alumni in pharma/biotech, 0 biotech exits, 0 T1–T10 academic placements. Apply only if methodology fit is exceptional.
+  </div>
+  <div class="lock-item">
+    <strong>16. Mid-tier US stats MSc + TA tier added (2026-05-17)</strong> — Iowa State / Penn State / Texas A&M / NC State + UW Biostat MS Thesis as Tier 4 funded-MSc category between Stanford KH and European fallback. Joint admit prob 40-60% across 4-6 apps. US transcript directly calibrated; possible same-institution PhD conversion. See `msc-backup-reframed-2026.md` Addendum 2026-05-17.
+  </div>
+  <div class="lock-item">
+    <strong>17. JHU WES/ECE hard gate (2026-05-17)</strong> — JHU Biostat will NOT review applications until WES or ECE Course-by-Course Credential Evaluation completed for ALL prior schools. Start WES/ECE by September 2027 for Dec 2027 deadlines. 2-3 month processing buffer required.
+  </div>
+  <div class="lock-item">
+    <strong>18. Predoc empty for biostat (2026-05-17 transcript finding)</strong> — Zero predoc cases in 22 dossiers at top-5 biostat. Predoc is the econ feeder, not biostat. Existing `predoc-pre-phd-calendar-2026.md` content applies to dropped econ-secondary path. For biostat-primary lock, predoc planning is wasted effort except as low-priority optionality.
+  </div>
+  <div class="lock-item">
+    <strong>19. Jan 21, 2026 KZ immigrant-visa pause + PM-602-0194 contested (2026-05-24)</strong> — DOS Public Notice 14 Jan 2026: "Effective January 21, 2026, the Department of State paused all visa issuances to immigrant visa applicants who are nationals of [75 countries including] Kazakhstan." <strong>Affects consular processing only</strong> — AOS (I-485 from inside US on F-1/H-1B) NOT directly halted. PM-602-0194 USCIS adjudicative hold may apply to KZ for I-485 — <strong>contested across law firms</strong>: memory #5 says KZ NOT on PP-10998 39-country list; career-exits report says contested. <strong>Verify with immigration counsel before NIW or EB-1A filing.</strong> F-1 student visas at Almaty UNAFFECTED (different visa class). Operational implication: AOS path inside US remains viable; consular processing in Almaty blocked indefinitely.
+  </div>
+  <div class="lock-item">
+    <strong>20. EB-1A primary, NIW backup — STRATEGIC PIVOT (2026-05-24)</strong> — FY2025 approval rates: <strong>EB-1A 66.9% &gt; NIW 55.2%</strong>. NIW Q4 FY2025 collapsed to 35.7%, recovering to ~44% Q1-Q2 FY2026 (Manifest Law citing USCIS quarterly). Plan to 45-55% NIW with downside risk, NOT 35.7%. For biostat PhD with h-index 8-12+, EB-1A becomes realistic <strong>Y4-Y6 post-PhD</strong> — file EB-1A primary + NIW concurrent backup. Reverses prior NIW-primary strategy in `project_phd_strategy_load_bearing.md`. Filing window Y4-Y5 per memory #4 unchanged.
+  </div>
+  <div class="lock-item">
+    <strong>21. $400-500K HHI target VERIFIED reachable via biostat industry (2026-05-24)</strong> — Pfizer Director Biostatistics: Glassdoor 50th $256,820 base / 75th $337K / 90th $425K + 30% bonus + RSU = <strong>$350-500K all-in at year 10-15</strong>. Pfizer's own posted Senior Director job verbatim: "annual base salary for this position ranges from $274,000.00 to $426,800.00... bonus target of 30.0%". Stage-2 levers (independent biostat consulting + DSMB advisory) push past $500K plausibly by age 40. <strong>Target reachable via biostat industry employer-disclosed grounding, not extrapolation.</strong>
+  </div>
+  <div class="lock-item">
+    <strong>22. NO documented LSE Statistics PhD → US R1 biostat TT placement 2020-2025 (2026-05-24)</strong> — Career-exits deep research found zero documented placements from LSE Stats PhD into US R1 biostatistics tenure-track positions in past 5 cohorts. Cambridge Stats Lab + Oxford DPhil Stats place ~1-2/yr to US R1 stats but rarely to biostat. <strong>UK PhD path effectively closes US R1 biostat TT door.</strong> Regret-minimization: LSE MSc → US biostat PhD direct application path dominates LSE MSc → LSE PhD → US biostat TT path. If accepting ESRC 1+3 funded MSc, plan to drop out of PhD bridge at end of MSc Year 1 (apply US biostat PhDs Dec 2027 with MSc-Year-1 letters + ML4H paper). Treat ESRC 1+3 PhD slot as fallback, not commitment.
+  </div>
+  <div class="lock-item">
+    <strong>23. GRE prep plan locked — vocab-as-background + Jan intensive + Feb 2027 test (2026-05-25)</strong>. Diagnostic untimed POWERPREP 2026-05-25: V 15/27 raw (~152-154 untimed), Q 21/27 raw (~161-163 untimed). Timed without prep: V ~145-150, Q ~154-159. Quant gap = format familiarity (NOT content); Verbal gap = vocabulary (Anki-resistant learner). <strong>Plan:</strong> Jun-Oct 2026 background 5-7 hr/wk (Norman Lewis <em>Word Power Made Easy</em> primary + GregMat $5/mo + higher-register reading habit: NOT NYT/Atlantic/Economist but New Yorker/TLS/Aeon/19th-century fiction); Nov pause for UoL exams; Dec calibration via timed POWERPREP Plus 1; Jan 2027 intensive 20-25 hr/wk; Feb 2027 test. Realistic ceiling V 155-158 / Q 165-168 / AW 4.0-4.5 — saturates T11-T25 biostat expectations. <strong>Per-programme GRE policy verification action Sep 2027</strong>: GRE has NOT followed SAT reinstatement trend; most T11-T25 biostat optional/waived. If ≥80% waived at apply time, SKIP test entirely. Full plan: <span class="mono">phd-pipeline/artifacts/gre-prep-plan-2026-2027.md</span>. <strong>Submission decision rule:</strong> submit only if score ≥ programme median admit; below-median submission actively weakens.
+  </div>
+
+  <h3 style="margin-top: 32px;">Anti-flags (DO NOT chase)</h3>
+  <ul>
+    <li>Pure causal-LLM thesis</li>
+    <li>100%-focus AI safety as PRIMARY thesis framing (admit risk to biostat depts). Note: technical alignment as ONE THESIS DIRECTION among multiple is open; only "primary framing" is anti-flagged.</li>
+    <li>sciML / physics / general-ML</li>
+    <li>Brand-building over profile-building</li>
+    <li>KZ as long-term destination (excluded)</li>
+    <li>Direct-econ PhD (closed without advanced micro/macro)</li>
+    <li>CS PhD top-10 (closed without ICML/NeurIPS pubs)</li>
+    <li>Math finance PhD (requires measure theory + stochastic calc)</li>
+  </ul>
+</section>
+
+</main>
+
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    const today = new Date('2026-05-25');
+    const dayOfWeek = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    document.getElementById('week-date').textContent =
+      'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
+      ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
+      ' · Current week tasks';
+
+    const weekTasks = [
+      {id: 'wk-may25-1', text: 'Order Norman Lewis "Word Power Made Easy" + Manhattan 5lb GRE Quant', meta: 'Primary GRE prep texts. ~$35 total via Amazon Almaty. Norman Lewis = roots/prefixes/suffixes for vocab decoding (~30-40 hr over 4 months). Manhattan 5lb = Quant question bank for January 2027 intensive. Plan: Norman Lewis 30 min/day × 5 days from June 1.'},
+      {id: 'wk-may25-2', text: 'Set up GregMat $5/month 2-week free trial', meta: 'gregmat.com — daily 5-word lessons with sentence context. Commit to 15 min/day × 5 days for 2 weeks. CONTINUE only if retention is materially better than prior SAT Anki attempt. SKIP Anki entirely per memory #92.'},
+      {id: 'wk-may25-3', text: 'Switch reading habit: drop NYT/Atlantic/Economist (register too low); add New Yorker / TLS / Aeon / 19th-century fiction', meta: 'NYT/Atlantic register confirmed too low for GRE Verbal vocab per memory #91. Higher-register: bookmark newyorker.com long-form essays, the-tls.co.uk, lrb.co.uk, aeon.co. Start a 19th-c fiction book (Henry James "Portrait of a Lady" or Conrad "Heart of Darkness"). 30 min × 2-3 days/wk + active vocab lookup notebook.'},
+      {id: 'wk-may25-4', text: 'Wasserman All of Statistics — Day F1: Ch 1-3 SKIM (Probability + RVs + Expectation)', meta: 'Foundations Phase Day F1 per PRE_PROJECT_READING.md. ST1215 already covers most; focus on E[Y|X], law of total expectation, law of total variance — load-bearing for causal inference. 8-10 hrs. Write 1-page synthesis to biotech-research-AI/02_literature_review/notes/day_1_synthesis.md.'},
+      {id: 'wk-may25-5', text: 'Wasserman Day F2: Ch 4-5 (Inequalities + Convergence)', meta: 'Markov / Chebyshev / Jensen; convergence in probability / distribution; LLN; CLT. Convergence-rate notation ($O_p$, $o_p$) is what Chernozhukov leans on. 8-10 hrs. Synthesis note.'},
+      {id: 'wk-may25-6', text: 'biotech-research-AI: continue Bug #2 (bootstrap SE) implementation', meta: 'Engineering task. Walk through DEVIATIONS.md, current SE formula construction, locate bootstrap slot-in. Aim for first working draft this week; reconcile with Wasserman Ch 8 (Bootstrap) next week (Day F4).'},
+      {id: 'wk-may25-7', text: 'Order Anthony & Harvey "Linear Algebra: Concepts and Methods" + plan MT1173 prep schedule', meta: 'MT1173 Algebra exam November 2026 (UoL October-November session). Reputation: unusually hard (15-25% failure rates). Allocate 3-4 months focused prep starting July 1 (25-35 hr/wk during that phase). Order textbook now to have it ready.'},
+      {id: 'wk-may25-8', text: 'Follow up KBTU SAM / NU / KazNU / UoL Enquiry Hub if no response by 28 May', meta: 'Enquiries sent ~10 days ago. If no reply by Thursday 28 May, send polite follow-up. NOTE: real analysis path is now LOCKED to UIUC NetMath MATH 447 Feb 2027 per memory #99 — these enquiry responses are now context-gathering, not gating decisions.'},
+      {id: 'wk-may25-9', text: 'Verify UIUC NetMath MATH 447 enrollment cycle for Feb 2027 start (no action yet, just bookmark)', meta: 'Visit netmath.illinois.edu/college/math-447 — confirm rolling enrollment, Feb 15 2027 start window will open ~late January 2027. Bookmark page; set reminder for Jan 10, 2027 to register. $1,653 charged at signup.'},
+      {id: 'wk-may25-10', text: 'KBTU spring finals — wrap up', meta: 'Final week of KBTU spring semester. Make sure all coursework submitted, all exams sat. Verify grades will be available by next week so GPA picture is current for application planning.'},
+    ];
+    const ul = document.getElementById('week-tasks');
+    ul.innerHTML = '';
+    weekTasks.forEach(t => {
+      const row = document.createElement('div');
+      row.className = 'checkbox-row';
+      row.dataset.taskId = t.id;
+      row.innerHTML = `
+        <input type="checkbox">
+        <div class="task-content">
+          <div>${t.text}</div>
+          <div class="task-meta">${t.meta}</div>
+        </div>
+      `;
+      ul.appendChild(row);
+    });
+    // Re-bind checkbox states for newly added rows
+    loadCheckboxes();
+  }
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
+</script>
+
+</body>
+</html>

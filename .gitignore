@@ -1,0 +1,59 @@
+# --- ONLY dashboard.html is published ---
+# Everything else stays local (edit via Claude Code session).
+# To re-include a file, remove its line below AND `git add` it explicitly.
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# All planning artifacts — local only
+biotech-research-AI/
+phd-pipeline/
+doc-reading/
+_archive/
+AUDIT_INDEX.md
+DASHBOARD.md
+README.md
+
+# Jekyll-specific (we removed Jekyll; using .nojekyll instead)
+_config.yml
+_site/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+.env
+.env.local
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+
+# R artifacts
+.Rhistory
+.RData
+.Rproj.user/
+*.Rcheck/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Build / cache
+node_modules/
+.cache/
+dist/
+build/
+
+# Claude Code local
+.claude/
+
+# Logs
+*.log
