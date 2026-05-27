@@ -15,6 +15,7 @@ _archive/
 AUDIT_INDEX.md
 DASHBOARD.md
 README.md
+kozha-funding-tracker.md
 
 # Jekyll-specific (we removed Jekyll; using .nojekyll instead)
 _config.yml
