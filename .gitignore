@@ -17,6 +17,7 @@ DASHBOARD.md
 README.md
 kozha-funding-tracker.md
 ope-foundation-reading.md
+next-session-brief.md
 
 # Jekyll-specific (we removed Jekyll; using .nojekyll instead)
 _config.yml
