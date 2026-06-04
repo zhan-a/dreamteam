@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dreamteam Dashboard — Apex Stats Pivot (OPE)</title>
+<title>Dreamteam Dashboard — Apex Stats · Conformal-Causal Line</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -445,7 +445,7 @@
 
   <h3>Critical execution insight</h3>
   <div class="alert">
-    <strong>Modal outcome is sub-apex (~75-85% probability).</strong> The 3-cycle campaign buys you the apex tail (~15-25%) but most likely lands T6-T15 US Stats or Cambridge/Oxford. Accept Cambridge/Oxford if it lands — UK 4-yr PhD + apex-adjacent alumni + UK→US relocation via post-PhD job is acceptable. Highest-leverage near-term milestone: <strong>Option α arXiv preprint by Oct 2027</strong> (DR-OPE with ML-estimated logging policy) for Cycle 1 PhD apps.
+    <strong>Modal outcome is sub-apex (~75-85% probability).</strong> The 3-cycle campaign buys you the apex tail (~15-25%) but most likely lands T6-T15 US Stats or Cambridge/Oxford. Accept Cambridge/Oxford/ETH if it lands. Highest-leverage near-term milestones (post 3-OPE-kills pivot, per <code>OPERATIVE-project-spec.md</code>): (1) <strong>Real analysis self-study Jun-Aug 2026</strong> (Abbott → Rudin Ch 1-3) — Lever 1, dominant. (2) <strong>Conformal Phase 0 reproduction</strong> of Gibbs-Cherian-Candès (arXiv:2305.12616) + cold-email entry to Hore (CMU/Ramdas) / Gibbs (Berkeley/Tibshirani) — secondary letter channel. (3) <strong>Primary letter channel mapping</strong> (KBTU/UoL faculty + REU + SIEPR-Athey eligibility) — still unmapped, arguably highest-EV.
   </div>
 
   <h3>Apply portfolio at a glance (per cycle)</h3>
@@ -499,7 +499,7 @@
   <p class="tab-subtitle" id="week-date">Current week tasks. Tasks roll automatically based on date.</p>
 
   <div class="alert info" id="week-alert">
-    Today is 2026-06-02. Post-apex-pivot week (2026-05-27). Focus this week: Wasserman Phase 1 continues + lit scan for estimated-logging-policy OPE variance correction (load-bearing — if scooped, pivot to Option β) + drop biotech-research-AI work (archived).
+    Today is 2026-06-04. Post-3-OPE-kills pivot to <code>OPERATIVE-project-spec.md</code> (multi-year conformal line via postdoc layer). Focus this week: clone + reproduce Gibbs-Cherian-Candès anchor paper (Phase 0 Wk 1-2), start Lever 1 real-analysis self-study (Abbott Ch 1-2), Kozha paperwork stays Fri 15-18.
   </div>
 
   <div class="card">
@@ -509,153 +509,213 @@
     </div>
   </div>
 
-  <h3>Lookahead — Next 6 weeks (post-apex-pivot)</h3>
+  <h3>Lookahead — Summer 2026 (Phase 0 + Lever 1 + MT1173 ramp)</h3>
   <details>
-    <summary>Week of Jun 2–8, 2026 — Lit scan + Wasserman Phase 1 continues</summary>
-    <div class="checkbox-row" data-task-id="apex-jun2-1">
+    <summary>Week of Jun 1–7, 2026 — Step 0 verification done; clone repo + Lever 1 starts</summary>
+    <div class="checkbox-row" data-task-id="ops-jun1-1">
       <input type="checkbox">
       <div class="task-content">
-        <div>Lit scan: estimated-logging-policy OPE variance correction (Google Scholar + arXiv stat.ME 2024-2026). Has any 2026 paper solved this? If scooped → pivot to Option β.</div>
-        <div class="task-meta">Load-bearing for project commitment. 4-6 hrs. Output: 1-page note listing 5-10 most relevant papers + verdict on whether the gap is still open.</div>
+        <div>Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduits, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore anchor)</div>
+        <div class="task-meta">Per Step 0 verification w9qh053sx. ~1 hr.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jun2-2">
+    <div class="checkbox-row" data-task-id="ops-jun1-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Wasserman Day F3 (Ch 6-7 Inference framework + Empirical CDF)</div>
-        <div class="task-meta">~8-10 hrs. Estimator definitions, bias/variance/MSE, consistency. Foundation for Phase 2 OPE reading.</div>
+        <div>Clone conditional-conformal repo via HTTPS; reproduce experiments/SyntheticData.ipynb</div>
+        <div class="task-meta"><code>git clone https://github.com/jjcherian/conditional-conformal.git; cd conditional-conformal; git checkout release; jupyter notebook experiments/SyntheticData.ipynb</code>. Budget 1 day for dep drift. Target numerical-agreement with paper Fig 1.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jun2-3">
+    <div class="checkbox-row" data-task-id="ops-jun1-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Wasserman Day F4 (Ch 8 Bootstrap) — work ALL exercises</div>
-        <div class="task-meta">~8-10 hrs. The most load-bearing chapter in Phase 1; foundation for OPE confidence-interval work.</div>
+        <div>Lever 1 (real analysis) self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers)</div>
+        <div class="task-meta">15-20 hr/wk through summer. Pen-and-paper proofs. Goal: Ch 1-3 by end of Aug. Protects MATH 447 A-grade Feb 2027.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun1-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Kozha paperwork block (Fri 15:00-18:00) — continue existing pipeline</div>
+        <div class="task-meta">36-funder tracker; 12 hr/mo steady-state. Compute-infra credit stack (AWS, DigitalOcean, HF, Anthropic, OpenAI) if not yet sent.</div>
       </div>
     </div>
   </details>
   <details>
-    <summary>Week of Jun 9–15, 2026 — Wasserman F5-F6 + start Hernán-Robins</summary>
-    <div class="checkbox-row" data-task-id="apex-jun9-1">
+    <summary>Week of Jun 8–14, 2026 — Phase 0 ramp (Angelopoulos tutorial) + Lever 1 Ch 2</summary>
+    <div class="checkbox-row" data-task-id="ops-jun8-1">
       <input type="checkbox">
       <div class="task-content">
-        <div>Wasserman Day F5 (Ch 9 Parametric inference + MLE) — 4-5 exercises</div>
-        <div class="task-meta">MLE, Fisher info, asymptotic normality. Regularity conditions = foundation for Chernozhukov 2018 DML.</div>
+        <div>Conformal ramp: Angelopoulos &amp; Bates "Gentle Introduction to Conformal Prediction" (arXiv:2107.07511) — read fully + work the toy code</div>
+        <div class="task-meta">~10 hr. Establishes vocabulary; you can skim earlier conformal papers after this.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jun9-2">
+    <div class="checkbox-row" data-task-id="ops-jun8-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Wasserman Day F6 (Ch 10 Hypothesis testing) — 4-5 exercises from Ch 10; skim Ch 11 Bayesian</div>
-        <div class="task-meta">Wald, LRT, p-values. Multiple testing.</div>
+        <div>Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616) — full read with notes</div>
+        <div class="task-meta">~8 hr. Identify the conditional-coverage construction, the weighted-conformal mechanic, the data they use.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jun9-3">
+    <div class="checkbox-row" data-task-id="ops-jun8-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Hernán-Robins Ch 1-2 (definition of causal effect, RCTs)</div>
-        <div class="task-meta">~3-4 hrs. Start of Phase 2 in parallel with last Wasserman day.</div>
-      </div>
-    </div>
-  </details>
-  <details>
-    <summary>Week of Jun 16–22, 2026 — Wasserman Ch 13 + ISL Ch 2-3</summary>
-    <div class="checkbox-row" data-task-id="apex-jun16-1">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>Wasserman Day F7 (Ch 13 Linear + Logistic Regression) — 4-5 exercises. SKIP Ch 12 (Decision Theory).</div>
-      </div>
-    </div>
-    <div class="checkbox-row" data-task-id="apex-jun16-2">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>ISL Day F8 (Ch 2 Statistical Learning + Ch 3 Linear Reg) — read only</div>
-      </div>
-    </div>
-    <div class="checkbox-row" data-task-id="apex-jun16-3">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>Hernán-Robins Ch 3-4 (observational studies, effect modification)</div>
+        <div>Abbott Ch 2 (Sequences and Series) — proofs + selected exercises</div>
       </div>
     </div>
   </details>
   <details>
-    <summary>Week of Jun 23–29, 2026 — ISL F9-F11 + Hernán-Robins Ch 12-14</summary>
-    <div class="checkbox-row" data-task-id="apex-jun23-1">
+    <summary>Week of Jun 15–21, 2026 — Phase 0 reproduction (full) + Lever 1 Ch 3</summary>
+    <div class="checkbox-row" data-task-id="ops-jun15-1">
       <input type="checkbox">
       <div class="task-content">
-        <div>ISL Day F9 (Ch 4 Classification: Logistic + LDA + KNN) — 3-4 logistic exercises</div>
+        <div>Full reproduction of paper's UCI Communities&amp;Crime experiment</div>
+        <div class="task-meta">~12-15 hr. Numerical agreement on the marginal-coverage + conditional-coverage tables. Document any deltas.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jun23-2">
+    <div class="checkbox-row" data-task-id="ops-jun15-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>ISL Day F10 (Ch 5 Resampling: CV + Bootstrap) — work ALL exercises. Most relevant for OPE cross-fitting.</div>
+        <div>Abbott Ch 3 (Topology of R) — connectivity, compactness</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jun23-3">
+    <div class="checkbox-row" data-task-id="ops-jun15-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Hernán-Robins Ch 12-14 (IPW, MSM, g-formula) — load-bearing for OPE</div>
-        <div class="task-meta">~6-7 hrs. IPW IS the OPE estimator in single-period form. g-formula extends to sequential.</div>
-      </div>
-    </div>
-  </details>
-  <details>
-    <summary>Week of Jun 30–Jul 6, 2026 — ISL F11-F12 + Bang-Robins + Kennedy 2023</summary>
-    <div class="checkbox-row" data-task-id="apex-jun30-1">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>ISL Day F11 (Ch 8 Trees, RF, Boosting) — 3-4 exercises</div>
-      </div>
-    </div>
-    <div class="checkbox-row" data-task-id="apex-jun30-2">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>ISL Day F12 (Ch 10 Deep Learning basics) — read only, intuition</div>
-      </div>
-    </div>
-    <div class="checkbox-row" data-task-id="apex-jun30-3">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>Bang-Robins 2005 (AIPW founding paper) — derive Eq. 4-6 on paper</div>
-        <div class="task-meta">~2.5 hrs. AIPW IS the doubly-robust estimator; OPE-DR is the sequential generalization.</div>
-      </div>
-    </div>
-    <div class="checkbox-row" data-task-id="apex-jun30-4">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>Kennedy 2023 review (arXiv:2203.06469) — start first pass. 60-page review.</div>
-        <div class="task-meta">VERIFY arXiv ID before printing. Single best on-ramp for DR-learner + DML + EIF foundations needed for Option α.</div>
+        <div>Primary letter channel mapping — START</div>
+        <div class="task-meta">~3-4 hr concentrated. List KBTU + UoL faculty who could write a math/research letter; check SIEPR-Athey predoc + REU programs accepting KZ citizens. Output: 1-page memo with named candidates + actions.</div>
       </div>
     </div>
   </details>
   <details>
-    <summary>Week of Jul 7–13, 2026 — Chernozhukov DML + start Kallus-Uehara OPE</summary>
-    <div class="checkbox-row" data-task-id="apex-jul7-1">
+    <summary>Week of Jun 22–28, 2026 — Phase 0 extension v1 (conditional-coverage sweep) + Lever 1 Ch 4</summary>
+    <div class="checkbox-row" data-task-id="ops-jun22-1">
       <input type="checkbox">
       <div class="task-content">
-        <div>Chernozhukov et al 2018 DML §1, 2, 3, 5 — orthogonality + cross-fitting argument</div>
+        <div>Empirical extension v1: conditional/stratified-coverage sweep the paper doesn't fully show</div>
+        <div class="task-meta">~15-20 hr. Stratify by covariate bins; report coverage gap; plot. This is the contribution that turns reproduction into a bait-artifact.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jul7-2">
+    <div class="checkbox-row" data-task-id="ops-jun22-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Kennedy 2020 DR-learner (arXiv:2004.14497) — Theorem 1 every step; trace Eq. 8</div>
+        <div>Abbott Ch 4 (Functional Limits and Continuity) — pen-and-paper proofs</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jul7-3">
+    <div class="checkbox-row" data-task-id="ops-jun22-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Kallus-Uehara Double-RL OPE paper — derive importance-sampling moment</div>
-        <div class="task-meta">Foundation for cold-email to Kallus in Sep-Oct 2026 with Option α 1-page proposal.</div>
+        <div>~10-15 hr ML upskill / product / income block (per Kaggle, freelance, or apex tech intern apps)</div>
+        <div class="task-meta">Time-boxed. Don't bloat past 15 hr/wk; that's the §9-fork hedge cap.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="apex-jul7-4">
+  </details>
+  <details>
+    <summary>Week of Jun 29–Jul 5, 2026 — Phase 0 extension v2 (base-learner ablation) + Lever 1 Ch 5</summary>
+    <div class="checkbox-row" data-task-id="ops-jun29-1">
       <input type="checkbox">
       <div class="task-content">
-        <div>MT1173 Algebra prep ramps from Jul 7 (Anthony &amp; Harvey Ch 1-6 over 3 weeks)</div>
-        <div class="task-meta">Nov 2026 exam. Allocate 25-35 hr/wk from Jul through Oct.</div>
+        <div>Empirical extension v2: base-learner ablation (RF vs GBM vs MLP) + propensity/overlap stress-test</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Read Hore-Barber RLCP (arXiv:2310.07850) + Hore's 2026 papers (arXiv:2602.06267, arXiv:2605.21627) — Hore-specific anchor prep</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Abbott Ch 5 (Derivatives) + start Ch 6</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jul 6–12, 2026 — Phase 0 polish, repo public, cold-email drafts</summary>
+    <div class="checkbox-row" data-task-id="ops-jul6-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Polish repo: README with one-command run, pinned env, numbers vs paper</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Draft Hore cold-email (anchor on RLCP + your conditional-coverage sweep)</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Draft Gibbs cold-email (anchor on 2305.12616, frame around Tibshirani-endorsable output)</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Abbott Ch 6 (Sequences and Series of Functions) — uniform convergence</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jul 13–19, 2026 — Send cold emails + MT1173 prep RAMPS</summary>
+    <div class="checkbox-row" data-task-id="ops-jul13-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>SEND Hore cold-email (primary)</div>
+        <div class="task-meta">rhore@andrew.cmu.edu. Link to public repo. ~150 words. Specific technical question. Remote+unpaid frame.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul13-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>SEND Gibbs cold-email (secondary)</div>
+        <div class="task-meta">igibbs@berkeley.edu. Anchor on 2305.12616. Note Tibshirani.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul13-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>MT1173 prep starts Jul 14 — Anthony &amp; Harvey Ch 1-3 over 3 weeks (15-25 hr/wk ramping)</div>
+        <div class="task-meta">Nov 2026 UoL exam. <strong>Phase 0 deep-work block shrinks from here</strong> — sustained outreach + extensions only.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul13-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Abbott Ch 7 (Riemann Integral) + finish Ch 8 (Additional Topics)</div>
+        <div class="task-meta">Lever 1 drops to ~10-12 hr/wk as MT1173 ramps. Stays above project though.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jul 20–Aug 31, 2026 — MT1173 deep-work + sustained outreach + ML upskill block</summary>
+    <div class="checkbox-row" data-task-id="ops-jul20-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>MT1173 weeks: Anthony &amp; Harvey Ch 4-9 + UoL past papers. 25-35 hr/wk.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Outreach follow-ups (3-week cadence): respond to any Hore/Gibbs reply with concrete next step</div>
+        <div class="task-meta">If no reply by Aug 5, send to Cherian-alternative or backfill from RA database.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>10-15 hr/wk income/ML-upskill block</div>
+        <div class="task-meta">Apex tech intern applications open Aug-Oct 2026 — start CV/résumé prep. Freelance ML if available through network. One Kaggle competition max.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Lever 1 maintenance: Abbott review + start Rudin Ch 1 in mid-Aug</div>
+        <div class="task-meta">Goal by Sep 1: Abbott done, Rudin Ch 1 underway. Bridges to MATH 447 (Feb 2027).</div>
       </div>
     </div>
   </details>
@@ -664,7 +724,7 @@
 <!-- SCHEDULE TAB -->
 <section class="tab" id="schedule">
   <h2>Schedule</h2>
-  <p class="tab-subtitle">Recurring weekly template + summer 2026 week-by-week plan + Fall 2026 / Spring 2027 outlook. Sleep 23:00–07:00. Gym Tue/Thu/Sat 15:00–18:00 (incl. shower). Last revised 2026-05-27 — APEX PIVOT (Project #1 archived; Option α / DR-OPE replaces).</p>
+  <p class="tab-subtitle">Recurring weekly template + summer 2026 week-by-week plan + Fall 2026 / Spring 2027 outlook. Sleep 23:00–07:00. Gym Tue/Thu/Sat 15:00–18:00 (incl. shower). Last revised 2026-06-04 — post-3-OPE-kills pivot to <code>OPERATIVE-project-spec.md</code> (multi-year conformal-causal line via postdoc layer; Option α DR-OPE killed by adversarial verification + Step 0).</p>
 
   <h3>Recurring Weekly Template</h3>
   <table>
@@ -681,8 +741,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>07:00–08:30</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Wake · Morning routine · Breakfast · Light reading (Hernán–Robins, papers in queue)</td></tr>
-      <tr><td><strong>08:30–12:30</strong></td><td colspan="7" style="text-align: center;"><strong>Deep work block</strong> — research (Option α / DR-OPE), real analysis, reading</td></tr>
+      <tr><td><strong>07:00–08:30</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Wake · Morning routine · Breakfast · Light reading (Abbott / Phase 0 papers / higher-register essay)</td></tr>
+      <tr><td><strong>08:30–12:30</strong></td><td colspan="7" style="text-align: center;"><strong>Deep work block</strong> — real analysis (Abbott→Rudin, Lever 1) + Phase 0 reproduction + Phase 2 reading</td></tr>
       <tr><td><strong>12:30–13:30</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Lunch · Walk · Decompress</td></tr>
       <tr><td><strong>13:30–15:00</strong></td><td colspan="7" style="text-align: center;">Second work block — KBTU coursework (in semester) / admin / email replies / lighter coding</td></tr>
       <tr>
@@ -734,35 +794,37 @@
     <strong>Pair with spaced repetition:</strong> reading alone is a slow, uneven way to cover the GRE word list in 9 months. Reading gives depth + contextual feel; GregMat (free Vocab Mountain + YouTube during background phase) gives coverage. The two together converge faster than either alone.
   </p>
 
-  <h3>Summer 2026 Week-by-Week Plan (Jun 2 → Aug 31) — REVISED 2026-05-27 for apex pivot</h3>
+  <h3>Summer 2026 Week-by-Week Plan (Jun 1 → Aug 31) — REVISED 2026-06-04 per OPERATIVE pivot</h3>
   <table>
     <thead>
       <tr>
         <th style="width: 130px;">Week</th>
-        <th>Primary focus</th>
-        <th>Specific deliverables</th>
-        <th>Cold-email batch</th>
+        <th>Phase 0 / Lever 1 focus</th>
+        <th>Deliverables</th>
+        <th>Hours by block (Phase0 / Lever1 / MT1173 / Income / Paperwork)</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>Jun 2–8</strong></td><td>Lit scan (project commitment gate) + Wasserman F3-F4</td><td><strong>Lit scan: estimated-logging-policy OPE variance correction</strong> (4-6 hrs, output 1-pg note + project go/no-go). Wasserman Ch 6-7 (Inference framework + Empirical CDF). Wasserman Ch 8 (Bootstrap, ALL exercises).</td><td>—</td></tr>
-      <tr><td><strong>Jun 9–15</strong></td><td>Wasserman F5-F6 + Hernán-Robins start</td><td>Wasserman Ch 9 (MLE, 4-5 exercises) + Ch 10 (Hypothesis Testing, 4-5 exercises). Hernán-Robins Ch 1-2 (causal effect def, RCTs).</td><td>—</td></tr>
-      <tr><td><strong>Jun 16–22</strong></td><td>Wasserman F7 + ISL F8 + Hernán-Robins Ch 3-4</td><td>Wasserman Ch 13 (Regression, 4-5 exercises). SKIP Ch 12. ISL Ch 2-3 (read only). Hernán-Robins Ch 3-4 (observational, effect modification).</td><td>—</td></tr>
-      <tr><td><strong>Jun 23–29</strong></td><td>ISL F9-F10 + Hernán-Robins Ch 12-14 (load-bearing for OPE)</td><td>ISL Ch 4 (Logistic — 3-4 exercises) + Ch 5 (CV + Bootstrap — ALL exercises). H-R Ch 12-14 (IPW + MSM + g-formula — IPW IS single-period OPE).</td><td>—</td></tr>
-      <tr><td><strong>Jun 30–Jul 6</strong></td><td>ISL F11-F12 + Bang-Robins + Kennedy 2023 review</td><td>ISL Ch 8 (Trees, RF, Boosting — 3-4 exercises) + Ch 10 (Deep Learning, intuition). Bang-Robins 2005 (AIPW; derive Eq. 4-6). Kennedy 2023 review (arXiv:2203.06469) start.</td><td>—</td></tr>
-      <tr><td><strong>Jul 7–13</strong></td><td>Chernozhukov DML + Kennedy 2020 + Kallus-Uehara OPE</td><td>Chernozhukov 2018 DML §1, 2, 3, 5. Kennedy 2020 DR-learner (Theorem 1 every step, trace Eq. 8). Kallus-Uehara Double-RL OPE (derive IS moment).</td><td>—</td></tr>
-      <tr><td><strong>Jul 14–20</strong></td><td>Shi et al. JRSS-B 2024 + Sutton-Barto Ch 5-7 + MT1173 ramp</td><td>Shi et al. 2024 (Policy Eval Temporal). Sutton-Barto Ch 5-7 (off-policy RL methods). <strong>MT1173 prep begins:</strong> Anthony & Harvey Ch 1-3 (~25 hr/wk).</td><td>—</td></tr>
-      <tr><td><strong>Jul 21–27</strong></td><td>Shen-Cai-Song JASA 2024 + Ahrens 2025 + Option α implementation start</td><td>Shen-Cai-Song 2024. Ahrens 2025 software-oriented intro. <strong>Implement baseline DR-OPE in Python</strong> using DoubleML/EconML to check yourself. MT1173 Ch 4-6.</td><td>—</td></tr>
-      <tr><td><strong>Jul 28–Aug 3</strong></td><td>Reproduce one published OPE result + Option α 1-page proposal draft</td><td>Reproduce Kallus or Cai or Shi result on small public CB benchmark. Draft 1-page proposal of estimated-logging-policy extension. MT1173 Ch 7-9.</td><td>—</td></tr>
-      <tr><td><strong>Aug 4–10</strong></td><td>Polish proposal + Foster-Syrgkanis + ATW 2019 + Nie-Wager 2021</td><td>Foster-Syrgkanis 2023 §1, 2, 4. Athey-Tibshirani-Wager 2019 §1, 2, 5 (causal forest). Nie-Wager 2021 (R-learner). Polish Option α proposal for Kallus cold-email.</td><td>—</td></tr>
-      <tr><td><strong>Aug 11–17</strong></td><td>Influence-function derivation start + MT1173 Ch 10-12</td><td>Begin deriving EIF for $V(\pi_e)$ under estimated $\pi_b$ on paper. MT1173 Ch 10-12 (linear transformations + eigenvalues).</td><td>—</td></tr>
-      <tr><td><strong>Aug 18–24</strong></td><td>Simulation pipeline v0.5 + MT1173 problem-sets</td><td>Begin simulation harness for OPE coverage comparison. MT1173 problem-set deep dive, mock UoL past papers.</td><td>—</td></tr>
-      <tr><td><strong>Aug 25–31</strong></td><td>Phase 2 reading done; project execution full-throttle Sep-onward; MT1173 weekly review</td><td>Phase 2 reading complete. Simulation pipeline v0.7. Begin packaging Option α 1-pg proposal + repo link for Kallus cold-email (target send Sep 15-22, 2026).</td><td>Prep Kallus email content</td></tr>
+      <tr><td><strong>Jun 1–7</strong></td><td>Step 0 reframes applied + clone repo + Abbott Ch 1</td><td>OPERATIVE-project-spec.md updated (drop Cherian, demote Hore/Gibbs, name PIs, add Hore RLCP anchor). Clone <code>conditional-conformal</code>, reproduce <code>SyntheticData.ipynb</code> to numerical agreement. Abbott Ch 1 (Real Numbers).</td><td>15 / 15 / 0 / 5 / 3</td></tr>
+      <tr><td><strong>Jun 8–14</strong></td><td>Conformal ramp + Gibbs-Cherian-Candès 2305.12616 full read + Abbott Ch 2</td><td>Angelopoulos-Bates intro tutorial (arXiv:2107.07511). 2305.12616 full read with notes. Abbott Ch 2 (Sequences and Series).</td><td>22 / 17 / 0 / 10 / 3</td></tr>
+      <tr><td><strong>Jun 15–21</strong></td><td>Phase 0 full reproduction (UCI C&amp;C experiment) + Abbott Ch 3 + Primary letter channel mapping START</td><td>Reproduce paper's UCI C&amp;C marginal+conditional coverage tables. Abbott Ch 3 (Topology of R). 1-pg memo: KBTU/UoL faculty + REU + SIEPR-Athey KZ-eligibility candidates.</td><td>22 / 17 / 0 / 10 / 3</td></tr>
+      <tr><td><strong>Jun 22–28</strong></td><td>Phase 0 extension v1 (conditional-coverage sweep) + Abbott Ch 4</td><td>Stratified coverage by covariate bins; plot coverage gap. Abbott Ch 4 (Functional Limits + Continuity).</td><td>22 / 17 / 0 / 12 / 3</td></tr>
+      <tr><td><strong>Jun 29–Jul 5</strong></td><td>Phase 0 extension v2 (base-learner ablation + overlap stress) + Hore-anchor prep + Abbott Ch 5</td><td>RF vs GBM vs MLP base-learner ablation. Read Hore-Barber RLCP (arXiv:2310.07850) + Hore 2026 papers (2602.06267, 2605.21627). Abbott Ch 5 (Derivatives).</td><td>22 / 15 / 0 / 12 / 3</td></tr>
+      <tr><td><strong>Jul 6–12</strong></td><td>Phase 0 polish + cold-email drafts + Abbott Ch 6</td><td>Repo polished (README, one-command run, pinned env). Hore cold-email draft (anchor on RLCP). Gibbs cold-email draft (anchor on 2305.12616). Abbott Ch 6 (Uniform Convergence).</td><td>18 / 15 / 0 / 12 / 3</td></tr>
+      <tr><td><strong>Jul 13–19</strong></td><td>SEND cold emails + MT1173 RAMPS + Abbott Ch 7</td><td>SEND Hore + Gibbs cold emails. <strong>MT1173 prep starts Jul 14</strong> — Anthony &amp; Harvey Ch 1-3 (15-25 hr/wk ramping). Abbott Ch 7 (Riemann Integral).</td><td>10 / 12 / 18 / 10 / 3</td></tr>
+      <tr><td><strong>Jul 20–26</strong></td><td>MT1173 Ch 4-6 + sustained outreach + Abbott Ch 8</td><td>MT1173: matrix inversion + determinants + sequences. Respond to any Hore/Gibbs reply (3-week cadence). Abbott Ch 8 (Additional Topics — finish).</td><td>5 / 10 / 25 / 10 / 3</td></tr>
+      <tr><td><strong>Jul 27–Aug 2</strong></td><td>MT1173 Ch 7-9 + outreach follow-up + start Rudin Ch 1</td><td>MT1173: vector spaces / subspaces / basis. Apex tech intern application research (Summer 2027 apps open Aug-Oct 2026). Rudin Ch 1 (Real and Complex Number Systems).</td><td>3 / 10 / 28 / 12 / 3</td></tr>
+      <tr><td><strong>Aug 3–9</strong></td><td>MT1173 Ch 10-12 + Rudin Ch 2 + intern app drafts</td><td>MT1173: linear transformations + eigenvalues. Rudin Ch 2 (Basic Topology). Intern résumé + CV polish; apex internship apps open Aug-Oct.</td><td>2 / 10 / 28 / 15 / 3</td></tr>
+      <tr><td><strong>Aug 10–16</strong></td><td>MT1173 deep practice + Rudin Ch 3</td><td>MT1173: practice across all topics; UoL past papers. Rudin Ch 3 (Numerical Sequences and Series).</td><td>2 / 8 / 32 / 12 / 3</td></tr>
+      <tr><td><strong>Aug 17–24</strong></td><td>MT1173 mock exams + Rudin Ch 4</td><td>MT1173: full mock exams under exam conditions. Rudin Ch 4 (Continuity).</td><td>2 / 8 / 35 / 10 / 3</td></tr>
+      <tr><td><strong>Aug 25–31</strong></td><td>MT1173 weak-area review + Lever 1 maintenance</td><td>MT1173: weakness areas from mocks. Rudin Ch 4 done, Ch 5 (Differentiation) start. <strong>Summer wrap. Lever 1 floor: Abbott complete, Rudin Ch 1-4 done.</strong></td><td>0 / 8 / 35 / 10 / 3</td></tr>
     </tbody>
   </table>
 
   <p style="color: var(--fg-dim); font-size: 13px; margin-top: 16px;">
-    <strong>Schedule notes (revised 2026-05-27 per apex pivot):</strong> Summer 2026 = Phase 1 + Phase 2 reading per <span class="mono">~/Documents/dreamteam/ope-foundation-reading.md</span> + Option α scoping + MT1173 prep ramping from July 14. Real analysis credentialing path unchanged: <strong>UIUC NetMath MATH 447 starting mid-February 2027</strong> (after MT1173 exam Nov 2026 + GRE test Feb 2027). Cold-email Kallus (Cornell, OPE primary) ~Sep 15-22, 2026 with Option α 1-page proposal + repo link. If Kallus doesn't engage in 3 wk → Cai (UCI) Oct-Nov. Biotech-research-AI / ML4H Aug 27 / Bug #2 / R_3 reframe / NHANES all ARCHIVED — no further work on Project #1.
+    <strong>Schedule notes (revised 2026-06-04 per OPERATIVE pivot):</strong> Summer 2026 = Phase 0 reproduction of Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616) + Lever 1 self-study (Abbott → Rudin) + MT1173 prep ramping from Jul 14 + Kozha paperwork (Fri 15-18) + income/intern-app block (10-15 hr/wk cap). Real analysis credentialing path: <strong>UIUC NetMath MATH 447 Feb 2027</strong> arrives with Abbott+Rudin Ch 1-4 already banked → guaranteed A target. Cold-email <strong>Hore</strong> (rhore@andrew.cmu.edu) + <strong>Gibbs</strong> (igibbs@berkeley.edu) Wk of Jul 13 with public repo link, NOT Kallus/Cai cold (those are lottery, post-artifact only). Option α / DR-OPE / Kallus-primary-outreach all KILLED 2026-06-02 by adversarial verification — see <code>STATE-OF-AFFAIRS-2026-06-03.md</code>.
+    <br><br>
+    <strong>The hours-by-block columns sum to ~50-60 hr/wk during peak Phase 0 weeks and ~55-65 hr/wk during MT1173 peak.</strong> Stays under your 60-72 hr/wk bandwidth ceiling.
   </p>
 
   <h3>Fall 2026 Outlook (Sep 1 – Dec 31)</h3>
@@ -1109,38 +1171,45 @@
 <!-- PROJECTS TAB -->
 <section class="tab" id="projects">
   <h2>Projects</h2>
-  <p class="tab-subtitle">Single research anchor post-2026-05-27 apex pivot: Option α (DR-OPE with estimated logging policy). Compounds across all 3 PhD apply cycles. Project #1 ARCHIVED to <code>_archive/biotech-research-AI/</code>.</p>
+  <p class="tab-subtitle">Current operative anchor: <code>OPERATIVE-project-spec.md</code> — multi-year conformal line via the postdoc layer. Phase 0 reproduction → Phase 1 contribution (post-MATH 447) → Phase 2 MSc dissertation. Project #1 (biotech-research-AI) + Option α (DR-OPE) BOTH archived; OPE neighborhood killed 3× per <code>STATE-OF-AFFAIRS-2026-06-03.md</code>.</p>
 
   <div class="card">
-    <h3>Project Option α — Doubly-Robust CIs for OPE with ML-Estimated Logging Policy</h3>
+    <h3>OPERATIVE Project — Multi-Year Conformal-Causal Line via Postdoc Layer</h3>
     <div class="pill-row">
-      <span class="pill accent">OPE methodology · NOT biostat-applied</span>
-      <span class="pill">Solo-feasible 4-7 months</span>
-      <span class="pill">arXiv by Oct 2027 → Cycle 1 PhD apps</span>
-      <span class="pill">Compounds across 3 cycles</span>
+      <span class="pill accent">Conformal-core → conformal-causal (bending in Phase 1)</span>
+      <span class="pill">Phase 0: 6-7 weeks (Jun-Jul 2026)</span>
+      <span class="pill">Multi-year: Phase 0 → Phase 1 → Phase 2 MSc</span>
+      <span class="pill">Secondary letter channel (Lever 1 = real analysis stays above)</span>
     </div>
-    <p class="small"><strong>Core question:</strong> When the behavior (logging) policy is unknown and itself ML-estimated, existing DR-OPE confidence intervals can undercover because the nuisance error in $\hat{\pi}_b(\cdot)$ contributes a non-vanishing variance term. Characterize the failure, derive an orthogonalized correction, prove a coverage statement under specific rate conditions on $\hat{\pi}_b$. Detail in memory file <code>project_dr_ope_alpha_2026-05-27.md</code>.</p>
+    <p class="small"><strong>Strategy:</strong> reproduce + empirically extend ONE recent paper of a reachable postdoc/senior-PhD in the apex conformal tree (Candès/Barber/Ramdas postdoc layer) → cold-email opens remote collaboration with that postdoc → 2+ years of sustained co-authored work → apex-PI-signed letter by Cycle 2/3 apply (2028-29). Phase 1 bends toward conformal-causal once math arrives (real analysis Feb 2027). Phase 2 becomes the MSc dissertation. Detail: <code>~/Documents/dreamteam/OPERATIVE-project-spec.md</code>. Verified Step 0 by workflow w9qh053sx (3 Jun 2026).</p>
 
-    <h4 style="margin-top: 16px;">Mentor outreach targets</h4>
+    <h4 style="margin-top: 16px;">Entry-layer targets (post Step 0 verification)</h4>
     <ul>
-      <li><strong>Primary: Nathan Kallus (Cornell Tech)</strong> — OPE methodology lead. Email Sep-Oct 2026 with 1-page extension proposal + repo link.</li>
-      <li><strong>Secondary: Hengrui Cai (UC Irvine)</strong> — causal × RL × LLM alignment; Thinking Machines funded. Email Oct-Nov 2026 if Kallus doesn't engage.</li>
-      <li><strong>Tertiary: Stuart Yadlowsky (Stanford)</strong> — grf author; RATE/AUTOC. Only if primary/secondary fail; only after preprint draft.</li>
+      <li><strong>Primary: Rohan Hore</strong> (CMU postdoc, Barber-trained → now with Ramdas) · <code>rhore@andrew.cmu.edu</code> verified · 2 first-author 2026 papers with Ramdas. Anchor cold-email on his OWN work — RLCP (<a href="https://arxiv.org/abs/2310.07850">arXiv:2310.07850</a>) + 2026 follow-ups (<a href="https://arxiv.org/abs/2602.06267">2602.06267</a>, <a href="https://arxiv.org/abs/2605.21627">2605.21627</a>). <strong>Best single bridge: one relationship reaches two apex labs (Barber Chicago + Ramdas CMU).</strong> Co-author conduit, NOT letter writer (the letter routes through Ramdas/Barber signature).</li>
+      <li><strong>Secondary: Isaac Gibbs</strong> (Berkeley postdoc, under <strong>Tibshirani</strong> — not Candès — corrected per Step 0) · <code>igibbs@berkeley.edu</code> verified · on faculty job market Spring 2026 (no public offer yet) · Anchor on Gibbs-Cherian-Candès JRSS-B 2025 (<a href="https://arxiv.org/abs/2305.12616">arXiv:2305.12616</a>). Letter routes through Tibshirani. Re-verify status Sep 2026 + Jan 2027.</li>
+      <li><strong>Dropped: John Cherian</strong> — defended Stanford 2025, now at OpenAI per <a href="https://candes.su.domains/people/">Candès lab people page</a>. Industry NDA + publication restrictions kill the sustained-collaboration mechanism.</li>
+      <li><strong>Lottery (only after Phase 0 artifact public): Ramdas / Barber direct.</strong> Do NOT cold-email apex PIs without the artifact in hand.</li>
     </ul>
 
-    <h4 style="margin-top: 16px;">Cycle-compounding milestones</h4>
-    <div class="checkbox-row" data-task-id="a-1"><input type="checkbox"><div class="task-content"><div>Lit scan Jun-Jul 2026: estimated-logging-policy OPE variance correction — has any 2026 paper solved this? If scooped → pivot to Option β.</div></div></div>
-    <div class="checkbox-row" data-task-id="a-2"><input type="checkbox"><div class="task-content"><div>Phase 1 reading complete (Wasserman + ISL + Hernán-Robins) by Aug 2026</div></div></div>
-    <div class="checkbox-row" data-task-id="a-3"><input type="checkbox"><div class="task-content"><div>Phase 2 reading complete (Kennedy 2023 review, Chernozhukov DML, Kennedy 2020 DR-learner, Kallus-Uehara OPE, Shi et al. JRSS-B 2024, Sutton-Barto Ch 5-7) by Sep 2026</div></div></div>
-    <div class="checkbox-row" data-task-id="a-4"><input type="checkbox"><div class="task-content"><div>Implement baseline DR-OPE in Python + reproduce one Kallus / Cai result · Aug-Oct 2026</div></div></div>
-    <div class="checkbox-row" data-task-id="a-5"><input type="checkbox"><div class="task-content"><div>1-page extension proposal draft + cold-email Kallus · Sep-Oct 2026</div></div></div>
-    <div class="checkbox-row" data-task-id="a-6"><input type="checkbox"><div class="task-content"><div>Derive influence function for $V(\pi_e)$ when $\pi_b$ estimated · Nov 2026-Feb 2027</div></div></div>
-    <div class="checkbox-row" data-task-id="a-7"><input type="checkbox"><div class="task-content"><div>Simulation pipeline v1: 3-5 contextual bandit settings, coverage comparison · Jan-Apr 2027</div></div></div>
-    <div class="checkbox-row" data-task-id="a-8"><input type="checkbox"><div class="task-content"><div>Coverage statement / theoretical result draft · Mar-Jun 2027</div></div></div>
-    <div class="checkbox-row" data-task-id="a-9"><input type="checkbox"><div class="task-content"><div><strong>arXiv preprint by Oct 2027 → Cycle 1 PhD apps (Dec 2027 deadlines)</strong></div></div></div>
-    <div class="checkbox-row" data-task-id="a-10"><input type="checkbox"><div class="task-content"><div>Submit to CLeaR 2027 or NeurIPS 2027 RL workshop</div></div></div>
-    <div class="checkbox-row" data-task-id="a-11"><input type="checkbox"><div class="task-content"><div>MSc dissertation (Oct 2028-Sep 2029) extends project: finite-horizon MDP OR policy learning under estimated $\pi_b$. Cambridge MASS / Oxford supervisor as second letter writer.</div></div></div>
-    <div class="checkbox-row" data-task-id="a-12"><input type="checkbox"><div class="task-content"><div>Journal version (JRSS-B or JASA target) post-MSc · Oct 2029-Aug 2030 · for Cycle 3 PhD apps</div></div></div>
+    <h4 style="margin-top: 16px;">Phase milestones</h4>
+    <div class="checkbox-row" data-task-id="ops-p0-1"><input type="checkbox"><div class="task-content"><div>Apply 4 reframes to OPERATIVE-project-spec.md per Step 0 (drop Cherian; demote Hore/Gibbs to co-author conduit; name Ramdas/Barber/Tibshirani as actual letter PIs; add Hore RLCP as Hore-specific anchor)</div></div></div>
+    <div class="checkbox-row" data-task-id="ops-p0-2"><input type="checkbox"><div class="task-content"><div><strong>Phase 0 Wk 1-2:</strong> Conformal ramp (Angelopoulos tutorial) + reproduce 2305.12616 headline result to numerical agreement</div></div></div>
+    <div class="checkbox-row" data-task-id="ops-p0-3"><input type="checkbox"><div class="task-content"><div><strong>Phase 0 Wk 3-6:</strong> Empirical extensions — conditional-coverage sweep + base-learner ablation + propensity/overlap stress-test. Clean public repo (README, one-command run, pinned env, your numbers vs theirs).</div></div></div>
+    <div class="checkbox-row" data-task-id="ops-p0-4"><input type="checkbox"><div class="task-content"><div><strong>Phase 0 Wk 7 (Jul 13-19):</strong> SEND Hore cold-email (anchor on RLCP) + Gibbs cold-email (anchor on 2305.12616). Sustain follow-ups 3-wk cadence.</div></div></div>
+    <div class="checkbox-row" data-task-id="ops-p1-1"><input type="checkbox"><div class="task-content"><div><strong>Phase 1 (2027, post-MATH 447):</strong> a modest methodological/empirical result co-developed with the postdoc, bending toward conformal-causal (conditional coverage → ITE/counterfactual). Aim for co-authored preprint. <strong>AVOID estimated-nuisances / DML kill-zone</strong> in the bend.</div></div></div>
+    <div class="checkbox-row" data-task-id="ops-p2-1"><input type="checkbox"><div class="task-content"><div><strong>Phase 2 (MSc 2028-29):</strong> the line becomes the MSc dissertation under a supervisor; apex letter written/signed at Cycle 2/3 PhD apply.</div></div></div>
+    <div class="checkbox-row" data-task-id="ops-rev-1"><input type="checkbox"><div class="task-content"><div>Re-verify Gibbs faculty status Sep 2026 and Jan 2027 (closing-window risk)</div></div></div>
+    <div class="checkbox-row" data-task-id="ops-rev-2"><input type="checkbox"><div class="task-content"><div>If Hore + Gibbs both don't engage by Aug 2026, backfill from RA database (<code>causal-ra-outreach-db.md</code>) — other Candès/Barber/Ramdas postdocs/senior-PhDs</div></div></div>
+  </div>
+
+  <div class="card">
+    <h3>Option α — DR-OPE with ML-Estimated Logging Policy: ARCHIVED 2026-06-02</h3>
+    <div class="pill-row">
+      <span class="pill" style="opacity: 0.6;">KILLED by adversarial verification</span>
+      <span class="pill" style="opacity: 0.6;">Premise inverted + integration paper exists (vdL+Kallus+Bibaut 2501.06926)</span>
+      <span class="pill" style="opacity: 0.6;">memory: project_dr_ope_alpha_2026-05-27.md</span>
+    </div>
+    <p class="small">Killed by workflow wasx5sj9h on 2026-06-02. Findings: motivating premise was technically inverted (Neyman orthogonality + cross-fitting makes π̂_b first-order error VANISH, not contribute); the integration paper already exists (van der Laan + Hubbard + Tran + Kallus + Bibaut, arXiv:2501.06926, Jan 2025) by the named primary cold-email target; Lee-Paik 2404.01830 already built the Wald CI for the contextual-bandit T=1 case. Bench-successor (conformal-causal-bench) also killed by workflow wqismdcuq on 2026-06-03. <strong>OPE / estimated-nuisance / DML neighborhood = 3-kill meta-pattern; do not re-enter solo.</strong></p>
   </div>
 
   <div class="card">
@@ -1150,7 +1219,7 @@
       <span class="pill" style="opacity: 0.6;">DR-learner + calibration on NHANES</span>
       <span class="pill" style="opacity: 0.6;">_archive/biotech-research-AI/</span>
     </div>
-    <p class="small">Multi-stage research project at <code>_archive/biotech-research-AI/</code>. 8 stages complete. Dropped per apex pivot: biomedical applications signal biostat to admissions committees + recruiters; Option α (OPE) is the apex-quant-relevant pivot. Code + methods preserved in archive; no further active work. Methodological learning (DR-learner machinery, bootstrap SE, calibration intuition) transfers directly to Option α.</p>
+    <p class="small">Multi-stage research project at <code>_archive/biotech-research-AI/</code>. 8 stages complete. Dropped per apex pivot: biomedical applications signal biostat to admissions committees + recruiters. Code + methods preserved in archive; no further active work.</p>
   </div>
 </section>
 
@@ -1600,10 +1669,19 @@
 <!-- LOCKS TAB -->
 <section class="tab" id="locks">
   <h2>Critical Locks — Do NOT Drift</h2>
-  <p class="tab-subtitle">24+ locked decisions. If you (or future-session Claude) drift from these, refer back here. Last updated 2026-05-27 — APEX PIVOT.</p>
+  <p class="tab-subtitle">25+ locked decisions. If you (or future-session Claude) drift from these, refer back here. Last updated 2026-06-04 — OPERATIVE pivot post 3-OPE-kills.</p>
 
   <div class="lock-item" style="border-left: 3px solid var(--urgent); padding-left: 12px; background: var(--urgent-soft);">
-    <strong>0. APEX PIVOT 2026-05-27 (CURRENT GOVERNING LOCK, SUPERSEDES Locks #1, #2, #3, #4, #5)</strong> — User explicitly re-opened lifestyle / field locks and elevated money-maximization as primary criterion. New positioning: <strong>STATS-PRIMARY with OPE specialization</strong> within causal inference. Multi-cycle 3-attempt apply campaign: Cycle 1 Fall 2027 (during BSc Year 4) → Fall 2028 PhD start; Cycle 2 Fall 2028 (during MSc) → Fall 2029; Cycle 3 Fall 2029 (post-MSc with dissertation) → Fall 2030. Cumulative apex US top-5 admit prob ~15-25%. <strong>UK MSc Stats Oct 2028-Sep 2029 as bridge</strong> (Cambridge MASS primary, Oxford MSc Stat Sci secondary; ETH MSc backup). <strong>Halt-condition admits (any of these stops the campaign): Cambridge Stats DPhil · Oxford Stats DPhil · ETH Zürich Stats PhD</strong> — all 4-yr programs, apex-adjacent alumni networks, insulated from US funding-cut + visa friction. Project #1 ARCHIVED → new Project = <strong>Option α (DR-OPE with estimated logging policy)</strong>. Biostat dropped as 50% co-equal → 3 programs only (Harvard Chan / JHU / UW as deep cushion). Cold-email Tier A reordered: Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy + ETH targets Maathuis / Peters / Bühlmann. Lifestyle target uncapped to $1M+ TC tail; ~75-85% probability of landing sub-apex outcome accepted. Full lock: <span class="mono">memory/user_apex_pivot_2026-05-27.md</span>.
+    <strong>0. OPERATIVE PIVOT 2026-06-04 (CURRENT GOVERNING PROJECT LOCK)</strong> — Project anchor is <code>OPERATIVE-project-spec.md</code>: multi-year conformal-causal line entered via the postdoc layer (Hore at CMU primary, Gibbs at Berkeley secondary; Ramdas/Barber/Tibshirani as actual letter-target PIs via postdoc-conduit + co-authored output). Phase 0 = reproduce + extend Gibbs-Cherian-Candès <strong>JRSS-B 2025 (arXiv:2305.12616)</strong> + Hore RLCP (arXiv:2310.07850). Phase 1 (2027 post-MATH 447): contribution co-developed with postdoc, bending toward conformal-causal — <strong>AVOID estimated-nuisance / DML kill-zone</strong>. Phase 2 (MSc 2028-29): line becomes dissertation. <strong>Lever 1 (real analysis) stays above this; never displace it.</strong> Verified by Step 0 workflow w9qh053sx (3 Jun 2026). Full spec: <code>OPERATIVE-project-spec.md</code>; framework: <code>memory/project_academic_strategy_framework_2026-06-02.md</code>.
+  </div>
+  <div class="lock-item" style="border-left: 3px solid var(--urgent); padding-left: 12px; background: var(--urgent-soft);">
+    <strong>0a. APEX PIVOT 2026-05-27 (STRATEGY LOCK — UNCHANGED)</strong> — Field stays STATS-PRIMARY with conformal-causal γ-intersection (revised from "OPE specialization" after 3 OPE kills). Multi-cycle 3-attempt apply: Cycle 1 Fall 2027 → Fall 2028 PhD start; Cycle 2 Fall 2028 → Fall 2029; Cycle 3 Fall 2029 → Fall 2030. Cumulative apex US top-5 admit prob ~15-25% (slightly optimistic per STATE-OF-AFFAIRS §6 — closer to 10-20%). UK MSc Stats Oct 2028-Sep 2029 bridge (Cambridge MASS primary, Oxford secondary, ETH backup). <strong>Halt-condition admits: Cambridge / Oxford / ETH Stats PhD.</strong> Biostat 3-program deep cushion (Harvard Chan / JHU / UW). Lifestyle target uncapped to $1M+ TC tail with ~75-85% sub-apex modal accepted. Cold-email Tier A NOW reordered: <strong>Hore + Gibbs first (per OPERATIVE), Kallus/Cai/Athey DROPPED from cold-email primary (3-OPE-kills + integration paper exists by named target).</strong> Full lock: <code>memory/user_apex_pivot_2026-05-27.md</code>.
+  </div>
+  <div class="lock-item" style="border-left: 3px solid var(--urgent); padding-left: 12px; background: var(--urgent-soft);">
+    <strong>0b. OPE NEIGHBORHOOD = 3-KILL META-PATTERN (do NOT re-enter solo)</strong> — Killed: Option α DR-OPE theory (2026-06-02, premise inverted + integration paper exists vdL+Kallus+Bibaut arXiv:2501.06926); OPE coverage benchmark (2026-06-03, redundant + textbook-predictable); benchmark-as-RA-collateral (targets are graduating PhDs who can't hire). <strong>DR-OPE + DML + estimated nuisances = the saturated corner; bait artifacts must be conformal-CORE not DML-flavored.</strong> Specific arXiv IDs to hard-avoid as project anchors: 2604.03772 (DML conformal counterfactual under runtime confounding, Barnatchez et al), 2510.26026 (Beyond the Horizon, CP×OPE bridge), 2206.06711 (COPP), 2304.02574 (MDP-OPE). See <code>memory/feedback_adversarial_verification.md</code> for the verification protocol.
+  </div>
+  <div class="lock-item" style="opacity: 0.55;">
+    <strong>1. HYBRID 50-50 stats + biostat (SUPERSEDED 2026-05-27 by Lock #0a APEX PIVOT)</strong> — biostat dropped as co-equal; stats-primary with conformal-causal γ specialization. Retained for reference only.
   </div>
   <div class="lock-item" style="opacity: 0.55;">
     <strong>1. HYBRID 50-50 stats + biostat (SUPERSEDED 2026-05-27 by Lock #0 APEX PIVOT)</strong> — biostat dropped as co-equal; stats-primary with OPE specialization. Retained for reference only.
@@ -1771,7 +1849,7 @@
 
   // Current week tasks
   function renderCurrentWeek() {
-    const today = new Date('2026-06-02');
+    const today = new Date('2026-06-04');
     const dayOfWeek = today.getDay();
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
@@ -1781,19 +1859,17 @@
     document.getElementById('week-date').textContent =
       'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
       ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
-      ' · Current week tasks · Post-apex-pivot';
+      ' · Phase 0 Wk 1 + Lever 1 starts';
 
     const weekTasks = [
-      {id: 'wk-apex-1', text: 'Lit scan: estimated-logging-policy OPE variance correction (load-bearing — project commitment depends on this)', meta: 'Search arXiv stat.ME + cs.LG + Google Scholar 2024-2026 for papers solving DR-OPE inference under ML-estimated logging policy. Output: 1-page note listing 5-10 most relevant papers + verdict. If gap is closed → pivot to Option β (calibration in OPE). 4-6 hrs.'},
-      {id: 'wk-apex-2', text: 'Wasserman Day F3 (Ch 6-7: Inference framework + Empirical CDF)', meta: 'Foundations Phase Day F3 per ope-foundation-reading.md. Estimator definitions, bias/variance/MSE, consistency. 8-10 hrs, no exercises.'},
-      {id: 'wk-apex-3', text: 'Wasserman Day F4 (Ch 8: Bootstrap) — MUST READ + work ALL exercises', meta: 'The most load-bearing chapter in Phase 1. Foundation for OPE confidence-interval work + Option α bootstrap construction. 8-10 hrs.'},
-      {id: 'wk-apex-4', text: 'Norman Lewis "Word Power Made Easy" — daily 30 min', meta: 'GRE Verbal prep continues. Already ordered/started. Roots/prefixes/suffixes for vocab decoding. ~30-40 hr total over the summer for retention.'},
-      {id: 'wk-apex-5', text: 'GregMat vocab daily 15 min (5 days/wk) — vocab in sentence context', meta: 'FREE path during background phase: Vocab Mountain tool (free on gregmat.com) + YouTube channel. Upgrade to GregMat Plus ($7.99/mo, current price; up from $5) only during Jun-Sep 2027 GRE intensive for structured daily quizzes — ~$32 total. Don\'t pay during the long Jun-Oct 2026 background phase.'},
-      {id: 'wk-apex-6', text: 'Higher-register reading habit — 30-40 min × 3 days', meta: 'Mon: LRB / NYRB / Harper\'s / TLS review-essay (rotate). Wed: literary-essay tradition (start Phillip Lopate, The Art of the Personal Essay — top anthology). Sat: science essayist for GRE science RC (Stephen Jay Gould top pick). Aeon DOWNGRADED (moderate register). Active vocab-lookup notebook.'},
-      {id: 'wk-apex-7', text: 'Hernán-Robins Ch 1-2 (definition of causal effect + RCTs) — start Phase 2 reading in parallel', meta: '~3-4 hrs. Free PDF at hsph.harvard.edu/miguel-hernan/causal-inference-book/. Foundational for OPE positioning (OPE = sequential causal inference).'},
-      {id: 'wk-apex-8', text: 'Update parental finance budget — add MSc cost (~$60-90K for 2028-2029)', meta: 'Cambridge MASS / Oxford MSc Stat Sci tuition (£30-50K overseas rate) + living (£15-20K Cambridge/London). Current user_finance_to_departure budget at $13-17K ignores this. Talk to parents about expanded ask before Cycle 1 MSc apps in Dec 2027.'},
-      {id: 'wk-apex-9', text: 'Verify Kennedy 2023 review arXiv ID (claimed 2203.06469) before formally citing in cold-email templates', meta: 'Single web fetch to arxiv.org/abs/2203.06469 — confirm title is "Semiparametric Doubly Robust Targeted Double Machine Learning: a Review" by Kennedy.'},
-      {id: 'wk-apex-10', text: 'Reading-habit + sleep + gym maintained per recurring schedule', meta: 'Sleep 23:00–07:00. Gym Tue/Thu/Sat 15:00–18:00. Recurring template in Schedule tab.'},
+      {id: 'wk-ops-1', text: 'Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduit, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore-specific anchor)', meta: 'Per Step 0 verification w9qh053sx (3 Jun 2026). ~1 hr. The spec\'s framing currently overstates what postdoc letters buy at top-5 Stats.'},
+      {id: 'wk-ops-2', text: 'Clone conditional-conformal repo via HTTPS + reproduce experiments/SyntheticData.ipynb', meta: 'git clone https://github.com/jjcherian/conditional-conformal.git ; cd conditional-conformal ; git checkout release ; jupyter notebook experiments/SyntheticData.ipynb. Pip install conditionalconformal already done. Budget 1 full day for dep drift. Target: numerical agreement with paper Fig 1 marginal coverage.'},
+      {id: 'wk-ops-3', text: 'Lever 1 self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers + Cauchy completeness)', meta: '15-20 hr/wk through summer. Pen-and-paper proofs only — no skimming. Goal: Abbott Ch 1-3 by end of Jun, Ch 1-8 by Aug 31. This is the #1 leverage; protects MATH 447 A-grade Feb 2027.'},
+      {id: 'wk-ops-4', text: 'Kozha paperwork block (Fri 15:00-18:00) — compute-infra credit stack', meta: 'AWS Research + DigitalOcean + HuggingFace + Anthropic + OpenAI + Google Cloud credits (if not yet sent per kozha-funding-tracker.md). ~3 hr this week. Steady-state ~12 hr/mo.'},
+      {id: 'wk-ops-5', text: 'Norman Lewis daily 30 min + GregMat free vocab + 1 higher-register essay (LRB/NYRB/Harper\'s/TLS) — GRE Verbal background', meta: 'Maintenance. Sep 2027 test. Free path through Oct 2026; paid GregMat ($7.99/mo) only for the Jun-Sep 2027 intensive.'},
+      {id: 'wk-ops-6', text: 'Income/ML-upskill block: ~10-15 hr/wk soft cap (per §9 fork resolution)', meta: 'Apex tech intern Summer 2027 application prep starts soon (apps Aug-Oct 2026). Freelance ML via network if available. ONE Kaggle competition max. NOT hackathon-bingo, NOT cold-startup-fundraising.'},
+      {id: 'wk-ops-7', text: 'Verify your KBTU class ranking (top-10%?) — gates ETH Excellence Scholarship eligibility', meta: 'If you fall outside top-10% of KBTU DS&BA cohort, ESOP (CHF 12K/sem + tuition waiver) is unrealistic for ETH MSc Stats Nov 2027 deadline. Email registrar or department for class-ranking data. ~30 min admin.'},
+      {id: 'wk-ops-8', text: 'Recurring schedule maintained: sleep 23:00-07:00, gym Tue/Thu/Sat 15:00-18:00, deep work block protected', meta: 'No project-anchor extras this week. Hit the basics first.'},
     ];
     const ul = document.getElementById('week-tasks');
     ul.innerHTML = '';
