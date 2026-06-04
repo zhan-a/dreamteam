@@ -892,48 +892,48 @@
 <!-- LITERATURE TAB -->
 <section class="tab" id="literature">
   <h2>Literature — Reading List + References</h2>
-  <p class="tab-subtitle">Citations referenced across Projects, Cold Email, and Critical Locks tabs. Revised 2026-05-27 per APEX PIVOT — OPE-positioned reading list. Sections: (1) Option α anchors, (2) OPE frontier, (3) cold-email faculty, (4) classical causal inference, (5) real-analysis foundations, (6) statistical inference foundations, (7) ML / statistical learning, (8) frontier 2024–2026 papers, (9) R/Python tooling.</p>
+  <p class="tab-subtitle">Citations referenced across Projects, Cold Email, and Critical Locks. Revised 2026-06-04 per OPERATIVE pivot — conformal-core anchors. Sections: (1) Phase 0 anchors (conformal-core), (2) conformal frontier (distribution-free inference + UQ), (3) cold-email faculty (Hore/Gibbs primary), (4) classical causal inference, (5) real-analysis foundations, (6) statistical inference foundations, (7) ML / statistical learning, (8) frontier 2024–2026 papers, (9) R/Python tooling.</p>
 
-  <h3>1. Option α anchors (DR-OPE with estimated logging policy)</h3>
+  <h3>1. Phase 0 anchors (conformal-core; reproduce + extend)</h3>
   <div class="card">
-    <p class="small"><strong>Essential before drafting the Option α 1-page proposal.</strong> These define the DR-learner / DML / OPE machinery the project extends.</p>
+    <p class="small"><strong>Essential before sending Hore/Gibbs cold-emails.</strong> These are the papers Phase 0 reproduces.</p>
     <ul>
-      <li><strong>Kennedy 2023 review (arXiv:2203.06469)</strong> — <em>"Semiparametric Doubly Robust Targeted Double Machine Learning: a Review"</em>. ~60-page review of DR estimation, EIF, cross-fitting, semiparametric efficiency. <strong>Single best on-ramp for Option α.</strong> VERIFY arXiv ID before formally citing.</li>
-      <li><strong>Kennedy 2020 (arXiv:2004.14497)</strong> — <em>"Towards Optimal Doubly Robust Estimation of Heterogeneous Causal Effects"</em>. Defines DR-learner; Theorem 1 + Eq. 8 (lower-order remainder) is the load-bearing math for Option α's analog under estimated $\pi_b$.</li>
-      <li><strong>Chernozhukov, Chetverikov, Demirer, Duflo, Hansen, Newey & Robins 2018</strong> — <em>"Double/Debiased Machine Learning for Treatment and Structural Parameters"</em>. Econometrics Journal 21(1):C1–C68. The DML framework; Neyman orthogonality + cross-fitting argument. §1, 2, 3, 5.</li>
-      <li><strong>Bang & Robins 2005</strong> — <em>"Doubly Robust Estimation in Missing Data and Causal Inference Models"</em>. Biometrics 61:962–973. The AIPW founding paper. Derive Eq. 4-6 on paper — AIPW is the static analog of OPE-DR.</li>
-      <li><strong>Nie & Wager 2021 (arXiv:1712.04912)</strong> — <em>"Quasi-oracle estimation of heterogeneous treatment effects"</em>. Biometrika 108(2):299–319. The R-learner; alternative target-parameter framework.</li>
-      <li><strong>Foster & Syrgkanis 2023 (arXiv:1901.09036)</strong> — <em>"Orthogonal Statistical Learning"</em>. Annals of Statistics 51(3):879–908. Formalizes when nuisance error affects downstream learning at higher than $n^{-1/2}$ rate. §1, 2, 4.</li>
-      <li><strong>Ahrens et al 2025 (arXiv:2504.08324)</strong> — <em>"An Introduction to Double/Debiased Machine Learning"</em>. Software-oriented review; useful for implementation phase. VERIFY arXiv ID.</li>
+      <li><strong>Gibbs, Cherian & Candès 2025 (arXiv:2305.12616)</strong> — <em>"Conformal Prediction With Conditional Guarantees"</em>. <strong>JRSS-B 87(4):1100-1126, DOI 10.1093/jrsssb/qkaf008.</strong> Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a> (pip-installable, release branch). <strong>The Phase 0 anchor for Gibbs outreach.</strong> Kill-zone clean: conditional coverage via covariate-shift reformulation, no DML / AIPW / estimated propensities.</li>
+      <li><strong>Hore & Barber RLCP (arXiv:2310.07850)</strong> — <em>"Conformal prediction with local weights"</em>. Repo: <a href="https://github.com/rohanhore/RLCP">github.com/rohanhore/RLCP</a>. <strong>The Phase 0 anchor for Hore outreach.</strong> Use this, NOT 2305.12616, when emailing Hore — anchor on his own work.</li>
+      <li><strong>Hore & Ramdas 2026 (arXiv:2602.06267)</strong> — <em>"Conformal changepoint localization"</em>. Recent Hore first-author paper with Ramdas. Reference in Hore cold-email as evidence of current line.</li>
+      <li><strong>Hore & Ramdas 2026 (arXiv:2605.21627)</strong> — <em>"Distribution-free root cause analysis"</em>. Second 2026 Hore+Ramdas paper.</li>
+      <li><strong>Angelopoulos & Bates 2022 (arXiv:2107.07511)</strong> — <em>"A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"</em>. Tutorial that establishes conformal vocabulary in ~50 pages. Read first in Phase 0 Wk 2.</li>
+      <li><strong>Lei & Candès 2021 (arXiv:2006.06138)</strong> — <em>"Conformal Inference of Counterfactuals and Individual Treatment Effects"</em>. JRSS-B 2021. Foundational conformal-causal paper. Referenced when Phase 1 bends toward causal.</li>
+      <li><strong>Hines, Dukes, Diaz-Ordaz, Vansteelandt 2022 (arXiv:2107.00681)</strong> — <em>"Demystifying Statistical Learning Based on Efficient Influence Functions"</em>. Pedagogical EIF derivation. For when math arrives (post MATH 447 Feb 2027) and Phase 1 bends to conformal-causal.</li>
     </ul>
   </div>
 
-  <h3>2. OPE frontier (Option α primary literature)</h3>
+  <h3>2. Conformal frontier (distribution-free inference + UQ for ML 2024-2026)</h3>
   <div class="card">
-    <p class="small">The OPE / policy-learning subfield Option α sits in. Read after Section 1 foundations.</p>
+    <p class="small">The broader conformal community Phase 0 sits in. Read after Phase 0 reproduction lands.</p>
     <ul>
-      <li><strong>Kallus & Uehara 2022</strong> — <em>"Efficiently Breaking the Curse of Horizon in Off-Policy Evaluation with Double Reinforcement Learning"</em>. Operations Research 70(6):3282-3302. <a href="https://doi.org/10.1287/opre.2021.2249">DOI 10.1287/opre.2021.2249</a> · <a href="https://arxiv.org/abs/1909.05850">arXiv:1909.05850</a>. Foundational OPE-DR with orthogonality. Derive importance-sampling moment on paper.</li>
-      <li><strong>Kallus & Uehara 2020+</strong> — <em>"Proximal Reinforcement Learning: Efficient Off-Policy Evaluation in POMDPs"</em> (arXiv:2110.15332). Extends proximal causal inference to RL.</li>
-      <li><strong>Luo, Yang, Shi, Yao, Ye, Zhu 2024</strong> — <em>"Policy Evaluation for Temporal and/or Spatial Dependent Experiments"</em>. JRSS-B 86(3):623-649. <a href="https://doi.org/10.1093/jrsssb/qkad136">DOI 10.1093/jrsssb/qkad136</a> · <a href="https://arxiv.org/abs/2202.10887">arXiv:2202.10887</a>. (Shi is 3rd author, not first — common citation key needs Luo et al.)</li>
-      <li><strong>Shen, Cai, Song 2024</strong> — <em>"Doubly Robust Interval Estimation for Optimal Policy Evaluation in Online Learning"</em>. JASA 119(548):2811-2821. <a href="https://doi.org/10.1080/01621459.2023.2279289">DOI 10.1080/01621459.2023.2279289</a> · <a href="https://arxiv.org/abs/2110.15501">arXiv:2110.15501</a>. (DREAM method.)</li>
-      <li><strong>Yadlowsky, Fleming, Shah, Brunskill & Wager 2023</strong> — <em>"Evaluating Treatment Prioritization Rules via Rank-Weighted Average Treatment Effects"</em>. JASA. RATE/AUTOC machinery in grf; policy-ranking framework.</li>
-      <li><strong>Chernozhukov, Newey, Quintas-Martinez, Syrgkanis (arXiv:2104.14737)</strong> — <em>"Automatic Debiased Machine Learning via Riesz Regression"</em>. Frontier "automatic" debiasing for general functionals. VERIFY arXiv ID.</li>
-      <li><strong>Sutton & Barto (2nd ed)</strong> — <em>Reinforcement Learning: An Introduction</em>. Free at incompleteideas.net/book/the-book-2nd.html. Ch 5-7 (Monte Carlo, TD, off-policy methods) for RL framing.</li>
+      <li><strong>Foygel Barber, Candès, Ramdas & Tibshirani 2023</strong> — <em>"Conformal prediction beyond exchangeability"</em>. Annals of Statistics 51(2):816–845. The highest-cited modern conformal paper.</li>
+      <li><strong>Angelopoulos, Barber & Bates 2025/2026</strong> — Cambridge UP textbook <em>"Conformal Prediction: A Gentle Introduction"</em> (arXiv:2411.11824). Field-forming reference.</li>
+      <li><strong>Tibshirani, Foygel Barber, Candès, Ramdas 2019</strong> — <em>"Conformal Prediction Under Covariate Shift"</em>. The weighted-conformal extension that 2305.12616 reformulates against.</li>
+      <li><strong>Gibbs, Cherian, Candès — conditional-guarantees line</strong> — multiple 2023-2025 papers. Section 1 anchor + extensions.</li>
+      <li><strong>Romano, Patterson, Candès 2019</strong> — <em>"Conformalized Quantile Regression"</em> (CQR). The score function used in most conformal-ITE work downstream.</li>
+      <li><strong>Lei & Candès 2021 + Jin, Ren, Candès 2023</strong> — conformal counterfactual + ITE sensitivity work. The bend-toward-causal Phase 1 entry point.</li>
+      <li><strong>Vovk, Gammerman & Shafer 2005</strong> — <em>Algorithmic Learning in a Random World</em>. Foundational textbook; COPA community.</li>
+      <li><strong>COPA proceedings (annual since 2012)</strong> — PMLR vols 60/91/105/128/152/179/204/230/266 (COPA 2025) and vol 329 (COPA 2026, Gothenburg). Dedicated conformal conference.</li>
     </ul>
   </div>
 
   <h3>3. Cold-email faculty's recent work (anchor papers for each)</h3>
   <div class="card">
-    <p class="small">One representative recent paper per cold-email Tier-A target. Read before drafting the email.</p>
+    <p class="small">Anchor paper(s) per target. <strong>Rule: anchor each email on the TARGET's own most recent work, not on their advisor's.</strong></p>
     <ul>
-      <li><strong>Nathan Kallus (Cornell Tech, PRIMARY)</strong> — Kallus-Uehara Double-RL OPE paper (Section 2 above) is the anchor.</li>
-      <li><strong>Hengrui Cai (UC Irvine, SECONDARY)</strong> — Recent causal × RL × LLM-alignment work; Thinking Machines Lab funded. Check 2025-2026 publications on her UCI page.</li>
-      <li><strong>Stefan Wager (Stanford GSB)</strong> — Wager-Athey 2018 (HTE forests) + recent policy-learning work. Cold via Stanford GSB contact form.</li>
-      <li><strong>Stuart Yadlowsky (Stanford)</strong> — RATE/AUTOC paper (Section 2) is the anchor. Verify current affiliation 2026.</li>
-      <li><strong>Susan Athey (Stanford GSB)</strong> — SIEPR Golub Capital Social Impact Lab predoc orbit; recent LLM+causal-evaluation papers.</li>
-      <li><strong>Edward Kennedy (CMU Statistics)</strong> — Kennedy 2023 review (Section 1) + Kennedy 2020 DR-learner. Reframe template from CATE-on-NHANES → OPE-with-estimated-logging-policy.</li>
-      <li><strong>Lihua Lei (Stanford Statistics, Tier B)</strong> — Lei & Candès 2021 conformal-counterfactual (anchor); recent conformal-OPE work as Option γ backup mentor.</li>
-      <li><strong>Hyunseung Kang (Wisconsin Stats, Tier B)</strong> — 2024 transfer-learning HTE paper. Methodology adjacency.</li>
+      <li><strong>Rohan Hore (CMU postdoc, PRIMARY)</strong> — Email <code>rhore@andrew.cmu.edu</code>. Anchor on RLCP (arXiv:2310.07850) + 2026 follow-ups (arXiv:2602.06267 conformal changepoint, arXiv:2605.21627 distribution-free root cause analysis). NOT on 2305.12616 (that's Gibbs's paper).</li>
+      <li><strong>Isaac Gibbs (Berkeley postdoc under Tibshirani, SECONDARY)</strong> — Email <code>igibbs@berkeley.edu</code>. Anchor on Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616). Verify status before send. Note: he's on faculty job market; if lands faculty Fall 2026, he becomes a direct PI target later.</li>
+      <li><strong>Lihua Lei (Stanford GSB, TIER B)</strong> — Lei & Candès 2021 conformal-counterfactual + recent conformal-causal work. Reach only with finished Phase 0 artifact.</li>
+      <li><strong>Ying Jin (Wharton jr PI, TIER B)</strong> — 2025 IMS Lawrence D. Brown Award. Sensitivity-conformal (arXiv:2111.12161) + conformal selection. Strong letter weight if engaged. Reach with artifact.</li>
+      <li><strong>Zhimei Ren (Wharton jr PI, TIER B)</strong> — Co-author of Jin-Ren-Candès sensitivity work.</li>
+      <li><strong>Tier C lottery — Ramdas / Barber / Tibshirani direct</strong> — apex letter writers, near-zero cold reply. ONLY reach via postdoc-conduit after Phase 0 + sustained collaboration.</li>
+      <li><strong>DROPPED from cold-email primary (per OPERATIVE pivot):</strong> Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy. OPE neighborhood killed 3× — these targets either co-authored the integration paper that killed Option α (vdL+Kallus+Bibaut 2501.06926) or are gatekept by saturated-niche dynamics.</li>
     </ul>
   </div>
 
@@ -996,41 +996,44 @@
     </ul>
   </div>
 
-  <h3>8. Frontier 2024–2026 papers worth tracking</h3>
+  <h3>8. Frontier 2024–2026 papers worth tracking (conformal-causal seam)</h3>
   <div class="card">
-    <p class="small">Recent ideas. Knowledge cutoff Jan 2026 limits coverage of late-2026 work; check arXiv stat.ME + cs.LG + cs.LG/RL quarterly for new ones. <strong>Best monitoring tools:</strong> Scholar Inbox (scholar-inbox.com); arXiv-sanity-lite (arxiv-sanity-lite.com); Causal Inference Newsletter (substack.com/@hilanthropy).</p>
+    <p class="small">Recent ideas at the conformal × causal intersection. Check arXiv stat.ME + stat.ML quarterly. <strong>Monitoring tools:</strong> Scholar Inbox (scholar-inbox.com); arXiv-sanity-lite (arxiv-sanity-lite.com); Vovk's COPA mailing list. <strong>The 2509.21660 systematic review (Sept 2025)</strong> is the field-survey reference for current conformal-ITE state — read but DO NOT cite as authority for novel claims (per Step 0: it says less than commonly cited).</p>
     <ul>
-      <li><strong>van der Laan, Bibaut, Luedtke 2024 (arXiv:2411.02771)</strong> — <em>"Doubly robust inference via calibration."</em> Calibrated DML for ATE; Option α generalizes from ATE to OPE.</li>
-      <li><strong>Sondhi & van der Laan 2024 (arXiv:2411.06342)</strong> — <em>"Stabilized IPW via Isotonic Calibration"</em>. IC-IPW.</li>
-      <li><strong>Bibaut, Petersen, Vlassis, Dimakopoulou & van der Laan 2024</strong> — Adaptive sequential experimentation + TMLE / off-policy evaluation. arXiv. Directly OPE-relevant.</li>
-      <li><strong>Curth & van der Schaar 2021 (arXiv:2101.10943)</strong> — <em>"Nonparametric Estimation of Heterogeneous Treatment Effects"</em>. AISTATS 2021. Plus 2024 follow-up on overlap.</li>
-      <li><strong>D'Amour, Ding, Feller, Lei & Sekhon 2021</strong> — <em>"Overlap in observational studies with high-dimensional covariates"</em>. JoE. Overlap diagnostics that transfer to OPE.</li>
-      <li><strong>Lei & Candès 2021</strong> — <em>"Conformal Inference of Counterfactuals and Individual Treatment Effects"</em>. JRSS-B. Backup if Option α gets scooped → Option γ pivot.</li>
-      <li><strong>Yadlowsky, Fleming, Shah, Brunskill & Wager 2023</strong> — <em>"Evaluating Treatment Prioritization Rules via Rank-Weighted ATE"</em>. JASA. RATE / AUTOC in grf; policy-ranking framework.</li>
-      <li><strong>Schölkopf, Locatello et al. 2021</strong> — <em>"Toward Causal Representation Learning"</em>. IEEE Proceedings 109(5).</li>
-      <li><strong>Cui, Tchetgen Tchetgen & Pu 2024</strong> — Proximal causal inference recent extensions. arXiv preprints.</li>
-      <li><strong>Lewis & Syrgkanis 2021 / 2024</strong> — Double-ML extensions for dynamic and longitudinal settings. EconML package.</li>
-      <li><strong>Gutman & Karavani 2025 (arXiv:2503.17290)</strong> — <em>"Calibration Strategies for Robust Causal Estimation."</em> Sample-splitting + calibration for IPW / DML.</li>
+      <li><strong>Memmesheimer, Heuveline, Hesser 2025 (arXiv:2509.21660)</strong> — Systematic review of conformal-ITE methods. Field state-of-play; identifies real open challenges (validity of weights, interval width, conditional adaptivity) — NOT infrastructure gaps.</li>
+      <li><strong>Bodik et al. 2025 (arXiv:2507.12581)</strong> — <em>"Cross-World"</em> — empirical bake-off of Lei-Candès Exact-Naïve + Inexact-Nested + Jonkers CMC + Alaa DR on synthetic + IHDP + Twins with coverage + width. <strong>R+Python code public.</strong> This is what the conformal-causal-bench plan was duplicating.</li>
+      <li><strong>Wang & Qiao 2026 AAAI (arXiv:2501.14933)</strong> — <em>"Conformal Inference of ITEs Using Conditional Density Estimates"</em>. Benchmarks WCP variants + CM-DR on IHDP + ACIC + NSLM. Recent empirical contribution.</li>
+      <li><strong>Alaa, Ahmad & van der Laan 2023 (arXiv:2308.14895)</strong> — <em>"Conformal Meta-learners for Predictive Inference of Individual Treatment Effects"</em>. NeurIPS 2023. DR/X/IPW conformal meta-learners.</li>
+      <li><strong>Jin, Ren & Candès 2023 (arXiv:2111.12161)</strong> — <em>"Sensitivity analysis of individual treatment effects: A robust conformal inference approach"</em>. PNAS 2023. Γ-sensitivity conformal-ITE.</li>
+      <li><strong>Yin, Shi, Wang & Blei 2024 (arXiv:2112.03493)</strong> — <em>"Conformal Sensitivity Analysis for Individual Treatment Effects"</em>. JASA 2024.</li>
+      <li><strong>Schröder & Feuerriegel 2024 (arXiv:2407.03094)</strong> — Continuous-treatment conformal causal prediction. LMU group; heavy implementation.</li>
+      <li><strong>Yang, Ren & Candès 2024 (arXiv:2404.11147)</strong> — <em>"Doubly robust conformal prediction with weak overlap"</em>. The DR-conformal-with-weak-overlap line.</li>
+      <li><strong>Barber, Candès, Ramdas & Tibshirani 2023 (AoS 51(2):816-845)</strong> — <em>"Conformal prediction beyond exchangeability"</em>. The foundational paper for non-exchangeable settings.</li>
+      <li><strong>Avoid as project anchor (kill-zone):</strong> arXiv:2604.03772 (Barnatchez DML-conformal counterfactual under runtime confounding — direct OPE-kill re-entry), arXiv:2510.26026 (CP × OPE bridge), arXiv:2206.06711 (COPP), arXiv:2304.02574 (MDP-OPE).</li>
     </ul>
   </div>
 
-  <h3>9. R / Python tooling</h3>
+  <h3>9. R / Python tooling (conformal-first)</h3>
   <div class="card">
     <ul>
-      <li><strong>grf</strong> (R) — Wager-Athey lab. github.com/grf-labs/grf. Causal forest implementation; comparator in Option α simulation.</li>
-      <li><strong>DoubleML</strong> (R + Python) — Chernozhukov-Hansen-Spindler. doubleml.org. DR-learner / DML implementations. <strong>Option α baseline.</strong></li>
-      <li><strong>EconML</strong> (Python) — Microsoft Research; Lewis-Syrgkanis. github.com/py-why/EconML. OPE / policy-learning utilities; relevant for Option α comparison.</li>
-      <li><strong>DoWhy</strong> (Python) — Microsoft Research. github.com/py-why/dowhy. Causal-inference pipeline framework.</li>
-      <li><strong>OBP (Open Bandit Pipeline, Python)</strong> — Saito et al. OPE benchmark library. github.com/st-tech/zr-obp. Likely Option α evaluation substrate.</li>
+      <li><strong>conditionalconformal</strong> (Python, pip) — Gibbs-Cherian-Candès canonical implementation. <code>pip install conditionalconformal</code>. Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a>. <strong>Phase 0 substrate.</strong></li>
+      <li><strong>crepes</strong> (Python) — Henrik Boström. <a href="https://github.com/henrikbostrom/crepes">github.com/henrikbostrom/crepes</a>. General-purpose conformal regression + classification.</li>
+      <li><strong>crepes-weighted</strong> (Python) — Predict-IDLab. Weighted-conformal extension. Useful for ITE later.</li>
+      <li><strong>MAPIE</strong> (Python) — Scikit-learn-API-compatible conformal library. Production-grade. <a href="https://github.com/scikit-learn-contrib/MAPIE">github.com/scikit-learn-contrib/MAPIE</a>.</li>
+      <li><strong>RLCP</strong> (R) — Hore-Barber, <a href="https://github.com/rohanhore/RLCP">github.com/rohanhore/RLCP</a>. Local conformal weights. Phase 0 Hore-specific anchor.</li>
+      <li><strong>cfcausal</strong> (R) — Lei-Candès original conformal-ITE implementation. <a href="https://github.com/lihualei71/cfcausal">github.com/lihualei71/cfcausal</a>.</li>
+      <li><strong>sensemakr / iv.sensemakr</strong> (R + Python ports) — Cinelli OVB sensitivity tooling. Not Phase 0 but useful Phase 1 bend if causal-sensitivity layer added.</li>
       <li><strong>causaldata</strong> (R) — datasets for causal-inference textbooks. Hernán-Robins datasets included.</li>
-      <li><strong>Wickham — <em>Advanced R</em></strong> 2nd ed (free at adv-r.hadley.nz). R fluency (only if Option α extension needs R rather than Python).</li>
+      <li><strong>Wickham — <em>Advanced R</em></strong> 2nd ed (free at adv-r.hadley.nz). R fluency for Hore's RLCP repo + cfcausal.</li>
     </ul>
   </div>
 
   <h3>How to use this list</h3>
   <div class="alert">
-    <strong>Recommended sequence for the next 6 months (per apex pivot):</strong><br>
-    (1) Section 1 — Wasserman + ISL + Hernán-Robins + Kennedy 2023 review by Aug 2026 (Phase 1 + Phase 2 start) · (2) Section 2 — Kallus-Uehara + Shi et al. 2024 + Shen-Cai-Song 2024 + Sutton-Barto Ch 5-7 by Sep 2026 · (3) Section 5 — Rudin Ch 1-7 starting Feb 2027 via UIUC NetMath MATH 447 · (4) Section 8 — pick 2-3 frontier papers per month to read seriously · (5) Section 3 — re-read recent paper of each Tier-A target before drafting their cold-email.
+    <strong>Recommended sequence for the next 6 months (per OPERATIVE pivot):</strong><br>
+    (1) Section 1 — Angelopoulos-Bates intro + Gibbs-Cherian-Candès 2305.12616 + Hore RLCP + Hore 2026 papers by mid-Jul 2026 (Phase 0 anchors) · (2) Section 5 — <strong>Abbott Ch 1-8 by end Aug 2026 (Lever 1, dominant);</strong> Rudin Ch 1-4 by Sep 2026 · (3) Section 4 — Hernán-Robins Ch 1-4 + 12-14 by Sep 2026 (foundation for Phase 1 bend) · (4) Section 8 — pick 2-3 frontier conformal-causal papers per month from Q3 2026 · (5) Section 6/7 — Casella-Berger + ISL as MATH 447 / measure theory prep references · (6) Section 3 — re-read TARGET'S OWN recent paper before drafting cold-email (NOT another author's paper from the same lab).
+    <br><br>
+    <strong>Hard avoids per OPE-kill meta-pattern:</strong> Section 8 lists specific arXiv IDs to NOT anchor projects on. Conformal frontier work is fine to READ; the kill is about choosing them as project anchors.
   </div>
 </section>
 
@@ -1348,54 +1351,67 @@
 <!-- COLD EMAIL TAB -->
 <section class="tab" id="email">
   <h2>Cold Email Pipeline</h2>
-  <p class="tab-subtitle">OPE-leaning advisor targets per 2026-05-27 apex pivot. Old biostat-leaning Tier A demoted; Kallus / Cai / Wager / Yadlowsky / Athey new primaries.</p>
+  <p class="tab-subtitle">Conformal-core entry-layer targets per 2026-06-04 OPERATIVE pivot (post 3-OPE-kills). Hore (CMU) primary, Gibbs (Berkeley) secondary; Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy DROPPED (OPE-kill meta-pattern). Apex PIs (Ramdas / Barber / Tibshirani) reached ONLY via postdoc-conduit after Phase 0 artifact public.</p>
 
   <div class="alert urgent">
-    <strong>APEX PIVOT 2026-05-27:</strong> Tier A reordered for OPE positioning. Email sequence: <strong>Sep-Oct 2026:</strong> Kallus first (with Option α 1-page proposal); if no response in 3 wk → Cai second. <strong>Oct-Nov 2026:</strong> Wager (via Stanford GSB form, not direct), Yadlowsky. <strong>Nov-Dec 2026:</strong> Athey via SIEPR predoc inquiry route. Kennedy stays as #6 (DR-learner foundational; useful even post-pivot). Old templates for Kennedy / Volfovsky / Wager can be partially reused with OPE-flavored substitution. Biostat-leaning Tier A (Murphy, Tchetgen Tchetgen, Cai-Harvard, Fan Li, Nabi, Han, Zeng) demoted to Tier C (only if all Tier A OPE outreach fails by Mar 2027).
+    <strong>OPERATIVE PIVOT 2026-06-04 — DROP the OPE primaries.</strong> Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy were Option α-positioned. After 3 OPE kills (Option α, OPE-bench, RA-collateral) the cold-email machinery rebuilds against the postdoc layer of the apex conformal tree.
+    <br><br>
+    <strong>New sequence:</strong> Phase 0 (Jun-Jul 2026) → Wk of Jul 13: SEND Hore (anchor on his RLCP arXiv:2310.07850) + SEND Gibbs (anchor on Gibbs-Cherian-Candès JRSS-B 2025 arXiv:2305.12616) AFTER repo public. Sustain follow-ups 3-week cadence. <strong>Do NOT cold-email Ramdas / Barber / Tibshirani / Candès directly</strong> — apex PI letters route through their postdoc/student via co-authored output, NOT cold email.
   </div>
 
-  <h3>Tier A — OPE methodology primaries (apex bridge)</h3>
+  <h3>Tier A — Conformal-core postdoc layer (current OPERATIVE primaries)</h3>
   <table>
     <thead>
       <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td>1</td><td><strong>Nathan Kallus</strong></td><td>Cornell Tech (Statistics + ORIE)</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td><strong>PRIMARY apex bridge.</strong> OPE / DR-RL / contextual bandits. Email Sep-Oct 2026 with Option α 1-pg proposal + repo · TEMPLATE NEEDED</td></tr>
-      <tr><td>2</td><td><strong>Hengrui Cai</strong></td><td>UC Irvine Statistics</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td>Causal × RL × LLM alignment · Thinking Machines Lab funded · smaller group, more accessible · Email Oct-Nov 2026 if Kallus no response · TEMPLATE NEEDED</td></tr>
-      <tr><td>3</td><td>Stefan Wager</td><td>Stanford GSB</td><td><input type="checkbox" data-task-id="email-3-r1"></td><td><input type="checkbox" data-task-id="email-3-resp"></td><td><input type="checkbox" data-task-id="email-3-r2"></td><td>grf / policy learning · use Stanford GSB contact form, NOT direct email · TEMPLATE EXISTS (reframe to OPE)</td></tr>
-      <tr><td>4</td><td><strong>Steve Yadlowsky</strong></td><td>Google DeepMind (Research Scientist)</td><td><input type="checkbox" data-task-id="email-4-r1"></td><td><input type="checkbox" data-task-id="email-4-resp"></td><td><input type="checkbox" data-task-id="email-4-r2"></td><td>grf RATE/AUTOC co-author (Stanford PhD; now DeepMind) · approach via DeepMind contact form / cold via Google Research email · only after preprint draft · TEMPLATE NEEDED</td></tr>
-      <tr><td>5</td><td>Susan Athey</td><td>Stanford GSB</td><td><input type="checkbox" data-task-id="email-5-r1"></td><td><input type="checkbox" data-task-id="email-5-resp"></td><td><input type="checkbox" data-task-id="email-5-r2"></td><td>Via SIEPR Golub Capital predoc orbit · verify KZ eligibility first · TEMPLATE NEEDED</td></tr>
-      <tr><td>6</td><td>Edward Kennedy</td><td>CMU Statistics</td><td><input type="checkbox" data-task-id="email-6-r1"></td><td><input type="checkbox" data-task-id="email-6-resp"></td><td><input type="checkbox" data-task-id="email-6-r2"></td><td>DR-learner anchor · stays in Tier A (foundational for Option α) · TEMPLATE EXISTS · reframe from CATE-on-NHANES to OPE-with-est-logging-pi</td></tr>
+      <tr><td>1</td><td><strong>Rohan Hore</strong></td><td>CMU postdoc · Stats &amp; Data Science · Barber-trained, with Ramdas</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td><strong>PRIMARY.</strong> Email: <code>rhore@andrew.cmu.edu</code> (verified). Anchor on RLCP (arXiv:2310.07850) + his 2026 papers (arXiv:2602.06267, arXiv:2605.21627) — NOT on Gibbs's paper. Send Wk of Jul 13 after Phase 0 repo public. Co-author conduit to Ramdas+Barber.</td></tr>
+      <tr><td>2</td><td><strong>Isaac Gibbs</strong></td><td>UC Berkeley postdoc · Stats · Tibshirani (NOT Candès — corrected)</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td>SECONDARY. Email: <code>igibbs@berkeley.edu</code> (verified). Anchor on 2305.12616 (he is lead author). Job-market closing-window risk; re-verify status Sep 2026 + Jan 2027. Co-author conduit to Tibshirani.</td></tr>
     </tbody>
   </table>
 
-  <h3 style="margin-top: 24px;">Tier A — Swiss apex-adjacent primaries (added 2026-05-27 for US-risk hedge)</h3>
-  <p class="tab-subtitle" style="margin-top:-8px;">ETH admission is advisor-first. Cold-email Sep-Oct 2026 in parallel with Kallus — same Option α 1-pg proposal + repo link. If any Swiss PI engages, ETH PhD becomes a halt-condition admit path (campaign stops).</p>
+  <h3 style="margin-top: 24px;">Tier B — strong letters, low cold-reply (approach with finished artifact)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">Reach only AFTER Phase 0 artifact public + a Hore/Gibbs conversation already started. These are jr-PI level — real letter weight if engaged.</p>
   <table>
     <thead>
       <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td>S1</td><td><strong>Marloes Maathuis</strong></td><td>ETH Zürich, D-MATH, Seminar for Statistics (SfS)</td><td><input type="checkbox" data-task-id="email-s1-r1"></td><td><input type="checkbox" data-task-id="email-s1-resp"></td><td><input type="checkbox" data-task-id="email-s1-r2"></td><td><strong>Closest OPE-positioned ETH PI.</strong> Causal inference + DAGs + ML. Full prof since 2016; supervises PhDs actively. Email Sep-Oct 2026 with Option α proposal. TEMPLATE NEEDED.</td></tr>
-      <tr><td>S2</td><td><strong>Jonas Peters</strong></td><td>ETH Zürich Statistics</td><td><input type="checkbox" data-task-id="email-s2-r1"></td><td><input type="checkbox" data-task-id="email-s2-resp"></td><td><input type="checkbox" data-task-id="email-s2-r2"></td><td>Causal discovery + ML invariance · strong group, well-funded RA culture · TEMPLATE NEEDED · verify ETH affiliation 2026</td></tr>
-      <tr><td>S3</td><td>Peter Bühlmann</td><td>ETH Zürich Statistics</td><td><input type="checkbox" data-task-id="email-s3-r1"></td><td><input type="checkbox" data-task-id="email-s3-resp"></td><td><input type="checkbox" data-task-id="email-s3-r2"></td><td>High-dim stats + recent causal work · senior, harder to access · approach after Maathuis/Peters · TEMPLATE NEEDED</td></tr>
+      <tr><td>3</td><td>Ying Jin</td><td>Wharton (Penn) Stats · jr PI</td><td><input type="checkbox" data-task-id="email-3-r1"></td><td><input type="checkbox" data-task-id="email-3-resp"></td><td><input type="checkbox" data-task-id="email-3-r2"></td><td>Email: <code>yjinstat@wharton.upenn.edu</code>. Anchor on her 2023 PNAS conformal-sensitivity (arXiv:2111.12161). 2025 IMS Lawrence D. Brown Award. Strong letter weight if engaged.</td></tr>
+      <tr><td>4</td><td>Zhimei Ren</td><td>Wharton (Penn) Stats · jr PI</td><td><input type="checkbox" data-task-id="email-4-r1"></td><td><input type="checkbox" data-task-id="email-4-resp"></td><td><input type="checkbox" data-task-id="email-4-r2"></td><td>Email: <code>zren@wharton.upenn.edu</code>. Co-author of conformal Γ-value sensitivity. Reach after reproducing 2111.12161 first.</td></tr>
+      <tr><td>5</td><td>Lihua Lei</td><td>Stanford GSB · jr PI · OIT group</td><td><input type="checkbox" data-task-id="email-5-r1"></td><td><input type="checkbox" data-task-id="email-5-resp"></td><td><input type="checkbox" data-task-id="email-5-r2"></td><td>Lei-Candès 2021 conformal-counterfactual + recent conformal-OPE work. Stanford GSB direct or contact form.</td></tr>
+      <tr><td>6</td><td>Yaniv Romano</td><td>Technion ECE · jr PI</td><td><input type="checkbox" data-task-id="email-6-r1"></td><td><input type="checkbox" data-task-id="email-6-resp"></td><td><input type="checkbox" data-task-id="email-6-r2"></td><td>Email: <code>yromano@technion.ac.il</code>. CQR author (the score function used in most conformal-ITE). Large code-centric group.</td></tr>
+      <tr><td>7</td><td>Stephen Bates</td><td>MIT Stats · jr PI</td><td><input type="checkbox" data-task-id="email-7-r1"></td><td><input type="checkbox" data-task-id="email-7-resp"></td><td><input type="checkbox" data-task-id="email-7-r2"></td><td>Email: <code>s_bates@mit.edu</code>. Conformal-core, Candès lineage. Reach with finished artifact only.</td></tr>
+      <tr><td>8</td><td>Matteo Sesia</td><td>USC Marshall · jr PI</td><td><input type="checkbox" data-task-id="email-8-r1"></td><td><input type="checkbox" data-task-id="email-8-resp"></td><td><input type="checkbox" data-task-id="email-8-r2"></td><td>Email: <code>sesia@marshall.usc.edu</code>. Conformal-core, Candès lineage. Smaller-lab tier.</td></tr>
     </tbody>
   </table>
 
-  <h3 style="margin-top: 24px;">Tier B — methodology adjacency (secondary)</h3>
+  <h3 style="margin-top: 24px;">Tier C — apex letter writers, NEVER cold (enter via postdoc tree only)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">Apex committee-defining letters but near-zero cold-reply. Reach via Hore (Barber+Ramdas conduit) or Gibbs (Tibshirani conduit) ONLY after sustained co-authored work. Cold emails here = noise.</p>
   <table>
     <thead>
       <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td>7</td><td>Lihua Lei</td><td>Stanford Statistics</td><td><input type="checkbox" data-task-id="email-7-r1"></td><td><input type="checkbox" data-task-id="email-7-resp"></td><td><input type="checkbox" data-task-id="email-7-r2"></td><td>Conformal-causal · backup if Option α gets scooped → pivot to Option γ · TEMPLATE NEEDED</td></tr>
-      <tr><td>8</td><td>Hyunseung Kang</td><td>UW-Madison Statistics</td><td><input type="checkbox" data-task-id="email-8-r1"></td><td><input type="checkbox" data-task-id="email-8-resp"></td><td><input type="checkbox" data-task-id="email-8-r2"></td><td>Methodology · transfer learning HTE · stays from prior list · TEMPLATE NEEDED</td></tr>
-      <tr><td>9</td><td>Alex Volfovsky</td><td>Duke Statistical Science</td><td><input type="checkbox" data-task-id="email-9-r1"></td><td><input type="checkbox" data-task-id="email-9-resp"></td><td><input type="checkbox" data-task-id="email-9-r2"></td><td>Stats-positioned but biostat-leaning topics; demoted from prior Tier A · TEMPLATE EXISTS</td></tr>
+      <tr><td>9</td><td>Aaditya Ramdas</td><td>CMU Stats &amp; ML · senior</td><td><input type="checkbox" data-task-id="email-9-r1"></td><td><input type="checkbox" data-task-id="email-9-resp"></td><td><input type="checkbox" data-task-id="email-9-r2"></td><td><strong>Reach via Hore conduit only.</strong> Apex letter writer. Hore is currently with him at CMU.</td></tr>
+      <tr><td>10</td><td>Rina Foygel Barber</td><td>UChicago Stats · senior</td><td><input type="checkbox" data-task-id="email-10-r1"></td><td><input type="checkbox" data-task-id="email-10-resp"></td><td><input type="checkbox" data-task-id="email-10-r2"></td><td><strong>Reach via Hore conduit only.</strong> Apex letter. Hore was her UChicago PhD student.</td></tr>
+      <tr><td>11</td><td>Ryan Tibshirani</td><td>Berkeley Stats · senior</td><td><input type="checkbox" data-task-id="email-11-r1"></td><td><input type="checkbox" data-task-id="email-11-resp"></td><td><input type="checkbox" data-task-id="email-11-r2"></td><td><strong>Reach via Gibbs conduit only.</strong> Apex letter. Gibbs is currently his Berkeley postdoc.</td></tr>
+      <tr><td>12</td><td>Emmanuel Candès</td><td>Stanford Stats · senior</td><td><input type="checkbox" data-task-id="email-12-r1"></td><td><input type="checkbox" data-task-id="email-12-resp"></td><td><input type="checkbox" data-task-id="email-12-r2"></td><td><strong>Reach via Lei/Jin conduit only.</strong> Apex letter. Conformal-causal field anchor.</td></tr>
     </tbody>
   </table>
 
-  <h3 style="margin-top: 24px;">Tier C — biostat-leaning fallback (only if Tier A/B fail by Mar 2027)</h3>
-  <p class="tab-subtitle" style="margin-top:-8px;">Prior Tier A (Murphy, Tchetgen Tchetgen, Tianxi Cai, Fan Li, Nabi, Han, Zeng) demoted 2026-05-27. Biostat-leaning topics don't bridge to apex quant; pursue only as fallback for biostat cushion programs (Harvard Chan / JHU / UW).</p>
+  <h3 style="margin-top: 24px;">DROPPED 2026-06-04 (OPE-kill meta-pattern)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">These were the Option α primaries. After 3 OPE kills the entry-layer machinery moved away from this neighborhood. Do not cold-email them as part of OPERATIVE plan.</p>
+  <ul style="font-size: 14px; color: var(--fg-dim);">
+    <li><strong>Nathan Kallus</strong> (Cornell) — co-authored the integration paper that killed Option α (arXiv:2501.06926). Cold-emailing him a CP×OPE proposal would propose his own published work back to him.</li>
+    <li><strong>Hengrui Cai</strong> (UCI) — OPE/RL adjacent; saturated subfield.</li>
+    <li><strong>Stefan Wager / Susan Athey</strong> (Stanford GSB) — apex but not entry-accessible; their letter-writer paths run through Lei/Jin postdoc layer.</li>
+    <li><strong>Steve Yadlowsky</strong> (Google DeepMind) — industry, not letter-bearing.</li>
+    <li><strong>Edward Kennedy</strong> (CMU Stats) — DR-learner anchor; CMU PhDs from his lab DON'T systematically place at top-5 Stats per phase-1 verification. Reach later if Phase 1 bend genuinely requires.</li>
+  </ul>
+
+  <h3 style="margin-top: 24px;">PREVIOUSLY DROPPED biostat-leaning (do not re-suggest)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">Demoted 2026-05-27 per apex pivot: Murphy, Tchetgen Tchetgen, Tianxi Cai, Fan Li, Nabi, Han, Zeng. Biostat-leaning topics don't bridge apex Stats letter orbit.</p>
 
   <h3 style="margin-top: 24px;">KAUST relationship-seed (added 2026-05-17 per Summer 2027 KAUST VSRP plan)</h3>
   <table>
