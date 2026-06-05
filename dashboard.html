@@ -282,6 +282,20 @@
   .alert.info { background: var(--info-soft); border-left-color: var(--info); }
   .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
   .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .xref {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .xref:hover { border-bottom-style: solid; background: var(--accent-soft); }
+  .xref-target {
+    scroll-margin-top: 16px;
+  }
+  .xref-target:target {
+    background: var(--warn-soft);
+    transition: background 1.2s;
+  }
   .lock-item {
     padding: 10px 14px;
     border-left: 3px solid var(--accent);
@@ -446,7 +460,7 @@
 
   <h3>Critical execution insight</h3>
   <div class="alert">
-    <strong>Modal outcome is sub-apex (~75-85% probability).</strong> The 3-cycle campaign buys you the apex tail (~15-25%) but most likely lands T6-T15 US Stats or Cambridge/Oxford. Accept Cambridge/Oxford/ETH if it lands. Highest-leverage near-term milestones (post 3-OPE-kills pivot, per <code>OPERATIVE-project-spec.md</code>): (1) <strong>Real analysis self-study Jun-Aug 2026</strong> (Abbott → Rudin Ch 1-3) — Lever 1, dominant. (2) <strong>Conformal Phase 0 reproduction</strong> of Gibbs-Cherian-Candès (arXiv:2305.12616) + cold-email entry to Hore (CMU/Ramdas) / Gibbs (Berkeley/Tibshirani) — secondary letter channel. (3) <strong>Primary letter channel mapping</strong> (KBTU/UoL faculty + REU + SIEPR-Athey eligibility) — still unmapped, arguably highest-EV.
+    <strong>Modal outcome is sub-apex (~75-85% probability).</strong> The 3-cycle campaign buys you the apex tail (~15-25%) but most likely lands T6-T15 US Stats or Cambridge/Oxford. Accept Cambridge/Oxford/ETH if it lands. Highest-leverage near-term milestones (post 3-OPE-kills pivot, per <code>OPERATIVE-project-spec.md</code>): (1) <strong>Real analysis self-study Jun-Aug 2026</strong> (<a href="#lit-abbott" class="xref">Abbott</a> → <a href="#lit-rudin" class="xref">Rudin</a> Ch 1-3) — Lever 1, dominant. (2) <strong>Conformal Phase 0 reproduction</strong> of <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès (arXiv:2305.12616)</a> + cold-email entry to <a href="#email-hore" class="xref">Hore (CMU/Ramdas)</a> / <a href="#email-gibbs" class="xref">Gibbs (Berkeley/Tibshirani)</a> — secondary letter channel. (3) <strong>Primary letter channel mapping</strong> (KBTU/UoL faculty + REU + SIEPR-Athey eligibility) — still unmapped, arguably highest-EV.
   </div>
 
   <h3>Apply portfolio at a glance (per cycle)</h3>
@@ -487,8 +501,8 @@
   <table>
     <thead><tr><th>Priority</th><th>Action</th><th>Deadline</th></tr></thead>
     <tbody>
-      <tr><td>1</td><td>Lever 1 self-study: Abbott Ch 1-8 by end Aug; Rudin Ch 1-4 by Sep — DOMINANT lever, protects MATH 447 A-grade Feb 2027</td><td><span class="deadline soon">By Aug-Sep 2026</span></td></tr>
-      <tr><td>2</td><td>Phase 0 conformal reproduction: clone <code>conditional-conformal</code>, reproduce SyntheticData + UCI C&amp;C, conditional-coverage extension v1 + base-learner ablation v2</td><td><span class="deadline soon">By Jul 12 2026</span></td></tr>
+      <tr><td>1</td><td>Lever 1 self-study: <a href="#lit-abbott" class="xref">Abbott</a> Ch 1-8 by end Aug; <a href="#lit-rudin" class="xref">Rudin</a> Ch 1-4 by Sep — DOMINANT lever, protects MATH 447 A-grade Feb 2027</td><td><span class="deadline soon">By Aug-Sep 2026</span></td></tr>
+      <tr><td>2</td><td>Phase 0 conformal reproduction: clone <code>conditional-conformal</code>, reproduce SyntheticData + UCI C&amp;C, conditional-coverage extension v1 + base-learner ablation v2 (anchor: <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a>)</td><td><span class="deadline soon">By Jul 12 2026</span></td></tr>
       <tr><td>3</td><td>Primary letter channel mapping: 1-pg memo of KBTU/UoL faculty + REU programs accepting KZ + SIEPR-Athey 2027 cycle eligibility</td><td><span class="deadline">By end Jun 2026</span></td></tr>
     </tbody>
   </table>
@@ -511,7 +525,7 @@
       <tr>
         <td><strong>1</strong></td>
         <td><strong>Real analysis — math transcript</strong></td>
-        <td>The single binding gate for apex Stats committees. Abbott Ch 1–8 self-study Jun–Aug → Rudin Ch 1–4 Sep → UIUC MATH 447 (Rudin Ch 1-7, A-grade) Feb–Jun 2027.</td>
+        <td>The single binding gate for apex Stats committees. <a href="#lit-abbott" class="xref">Abbott</a> Ch 1–8 self-study Jun–Aug → <a href="#lit-rudin" class="xref">Rudin</a> Ch 1–4 Sep → UIUC MATH 447 (Rudin Ch 1-7, A-grade) Feb–Jun 2027.</td>
         <td><span class="badge status-soon">20–25 hr/wk</span></td>
       </tr>
       <tr>
@@ -536,13 +550,13 @@
     <tbody>
       <tr>
         <td><strong>Jun–Aug 2026</strong><br><span class="deadline">NOW</span></td>
-        <td>Abbott self-study + Phase 0 conformal reproduction (Gibbs-Cherian-Candès arXiv:2305.12616) + 2 empirical extensions</td>
-        <td>Public GitHub repo; cold-email draft for Hore (CMU) + Gibbs (Berkeley)</td>
+        <td><a href="#lit-abbott" class="xref">Abbott</a> self-study + Phase 0 conformal reproduction (<a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès arXiv:2305.12616</a>) + 2 empirical extensions</td>
+        <td>Public GitHub repo; cold-email draft for <a href="#email-hore" class="xref">Hore (CMU)</a> + <a href="#email-gibbs" class="xref">Gibbs (Berkeley)</a></td>
         <td>—</td>
       </tr>
       <tr>
         <td><strong>Sep–Nov 2026</strong></td>
-        <td>MT1173 prep ramp + Rudin Ch 1–4 + Phase 0 polish + first cold-email send Jul-Aug; sustain replies</td>
+        <td>MT1173 prep ramp (<a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a>) + <a href="#lit-rudin" class="xref">Rudin</a> Ch 1–4 + Phase 0 polish + first cold-email send Jul-Aug; sustain replies</td>
         <td>MT1173 exam (Nov 2026) + start of postdoc relationship</td>
         <td><span class="badge status-soon">MT1173 Nov 2026</span></td>
       </tr>
@@ -554,7 +568,7 @@
       </tr>
       <tr>
         <td><strong>Feb–Jun 2027</strong></td>
-        <td><strong>UIUC NetMath MATH 447 (Rudin Ch 1–7, A-grade)</strong> + Phase 1 contribution work in parallel</td>
+        <td><strong>UIUC NetMath MATH 447 (<a href="#lit-rudin" class="xref">Rudin</a> Ch 1–7, A-grade)</strong> + Phase 1 contribution work in parallel</td>
         <td>Real analysis transcript line</td>
         <td><span class="badge tier-1">A-grade only — this is the gate</span></td>
       </tr>
@@ -610,7 +624,7 @@
       <tr>
         <td><strong>Phase 0 — On-ramp</strong></td>
         <td>now → early 2027</td>
-        <td>Reproduce + 1–2 empirical extensions of Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616). Public repo. Cold-email Hore + Gibbs.</td>
+        <td>Reproduce + 1–2 empirical extensions of <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616)</a>. Public repo. Cold-email <a href="#email-hore" class="xref">Hore</a> + <a href="#email-gibbs" class="xref">Gibbs</a>.</td>
         <td>None — code only</td>
         <td>Bait. Converts cold email → remote collaboration.</td>
       </tr>
@@ -686,7 +700,7 @@
   <p class="tab-subtitle" id="week-date">Current week tasks. Tasks roll automatically based on date.</p>
 
   <div class="alert info" id="week-alert">
-    Today is 2026-06-04. Post-3-OPE-kills pivot to <code>OPERATIVE-project-spec.md</code> (multi-year conformal line via postdoc layer). Focus this week: clone + reproduce Gibbs-Cherian-Candès anchor paper (Phase 0 Wk 1-2), start Lever 1 real-analysis self-study (Abbott Ch 1-2), Kozha paperwork stays Fri 15-18.
+    Post-3-OPE-kills pivot to <code>OPERATIVE-project-spec.md</code> (multi-year conformal line via postdoc layer). Focus this week: clone + reproduce <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès anchor paper</a> (Phase 0 Wk 1-2), start Lever 1 real-analysis self-study (<a href="#lit-abbott" class="xref">Abbott</a> Ch 1-2), Kozha paperwork stays Fri 15-18. <strong>Full week-by-week plan on <a href="#schedule">Schedule</a> tab; multi-year arc on <a href="#roadmap">Roadmap</a>.</strong>
   </div>
 
   <div class="card">
@@ -716,7 +730,7 @@
     <div class="checkbox-row" data-task-id="ops-jun1-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Lever 1 (real analysis) self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers)</div>
+        <div>Lever 1 (real analysis) self-study STARTS — <a href="#lit-abbott" class="xref">Abbott "Understanding Analysis"</a> Ch 1 (Real Numbers)</div>
         <div class="task-meta">15-20 hr/wk through summer. Pen-and-paper proofs. Goal: Ch 1-3 by end of Aug. Protects MATH 447 A-grade Feb 2027.</div>
       </div>
     </div>
@@ -733,21 +747,21 @@
     <div class="checkbox-row" data-task-id="ops-jun8-1">
       <input type="checkbox">
       <div class="task-content">
-        <div>Conformal ramp: Angelopoulos &amp; Bates "Gentle Introduction to Conformal Prediction" (arXiv:2107.07511) — read fully + work the toy code</div>
+        <div>Conformal ramp: <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos &amp; Bates "Gentle Introduction to Conformal Prediction" (arXiv:2107.07511)</a> — read fully + work the toy code</div>
         <div class="task-meta">~10 hr. Establishes vocabulary; you can skim earlier conformal papers after this.</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jun8-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616) — full read with notes</div>
+        <div><a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616)</a> — full read with notes</div>
         <div class="task-meta">~8 hr. Identify the conditional-coverage construction, the weighted-conformal mechanic, the data they use.</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jun8-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Abbott Ch 2 (Sequences and Series) — proofs + selected exercises</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 2 (Sequences and Series) — proofs + selected exercises</div>
       </div>
     </div>
   </details>
@@ -763,7 +777,7 @@
     <div class="checkbox-row" data-task-id="ops-jun15-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Abbott Ch 3 (Topology of R) — connectivity, compactness</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 3 (Topology of R) — connectivity, compactness</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jun15-3">
@@ -786,7 +800,7 @@
     <div class="checkbox-row" data-task-id="ops-jun22-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Abbott Ch 4 (Functional Limits and Continuity) — pen-and-paper proofs</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 4 (Functional Limits and Continuity) — pen-and-paper proofs</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jun22-3">
@@ -808,13 +822,13 @@
     <div class="checkbox-row" data-task-id="ops-jun29-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Read Hore-Barber RLCP (arXiv:2310.07850) + Hore's 2026 papers (arXiv:2602.06267, arXiv:2605.21627) — Hore-specific anchor prep</div>
+        <div>Read <a href="#lit-rlcp" class="xref">Hore-Barber RLCP (arXiv:2310.07850)</a> + Hore's 2026 papers (<a href="#lit-hore-2602" class="xref">arXiv:2602.06267</a>, <a href="#lit-hore-2605" class="xref">arXiv:2605.21627</a>) — <a href="#email-hore" class="xref">Hore</a>-specific anchor prep</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jun29-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Abbott Ch 5 (Derivatives) + start Ch 6</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 5 (Derivatives) + start Ch 6</div>
       </div>
     </div>
   </details>
@@ -829,19 +843,19 @@
     <div class="checkbox-row" data-task-id="ops-jul6-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>Draft Hore cold-email (anchor on RLCP + your conditional-coverage sweep)</div>
+        <div>Draft <a href="#email-hore" class="xref">Hore cold-email</a> (anchor on <a href="#lit-rlcp" class="xref">RLCP</a> + your conditional-coverage sweep)</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jul6-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>Draft Gibbs cold-email (anchor on 2305.12616, frame around Tibshirani-endorsable output)</div>
+        <div>Draft <a href="#email-gibbs" class="xref">Gibbs cold-email</a> (anchor on <a href="#lit-gcc-2305" class="xref">2305.12616</a>, frame around Tibshirani-endorsable output)</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jul6-4">
       <input type="checkbox">
       <div class="task-content">
-        <div>Abbott Ch 6 (Sequences and Series of Functions) — uniform convergence</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 6 (Sequences and Series of Functions) — uniform convergence</div>
       </div>
     </div>
   </details>
@@ -850,28 +864,28 @@
     <div class="checkbox-row" data-task-id="ops-jul13-1">
       <input type="checkbox">
       <div class="task-content">
-        <div>SEND Hore cold-email (primary)</div>
+        <div>SEND <a href="#email-hore" class="xref">Hore cold-email</a> (primary)</div>
         <div class="task-meta">rhore@andrew.cmu.edu. Link to public repo. ~150 words. Specific technical question. Remote+unpaid frame.</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jul13-2">
       <input type="checkbox">
       <div class="task-content">
-        <div>SEND Gibbs cold-email (secondary)</div>
-        <div class="task-meta">igibbs@berkeley.edu. Anchor on 2305.12616. Note Tibshirani.</div>
+        <div>SEND <a href="#email-gibbs" class="xref">Gibbs cold-email</a> (secondary)</div>
+        <div class="task-meta">igibbs@berkeley.edu. Anchor on <a href="#lit-gcc-2305" class="xref">2305.12616</a>. Note Tibshirani.</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jul13-3">
       <input type="checkbox">
       <div class="task-content">
-        <div>MT1173 prep starts Jul 14 — Anthony &amp; Harvey Ch 1-3 over 3 weeks (15-25 hr/wk ramping)</div>
+        <div>MT1173 prep starts Jul 14 — <a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1-3 over 3 weeks (15-25 hr/wk ramping)</div>
         <div class="task-meta">Nov 2026 UoL exam. <strong>Phase 0 deep-work block shrinks from here</strong> — sustained outreach + extensions only.</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jul13-4">
       <input type="checkbox">
       <div class="task-content">
-        <div>Abbott Ch 7 (Riemann Integral) + finish Ch 8 (Additional Topics)</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 7 (Riemann Integral) + finish Ch 8 (Additional Topics)</div>
         <div class="task-meta">Lever 1 drops to ~10-12 hr/wk as MT1173 ramps. Stays above project though.</div>
       </div>
     </div>
@@ -1000,107 +1014,107 @@
     <tbody>
       <tr><td><strong>Jun 1–7</strong><br><span class="badge status-progress">NOW</span></td>
         <td><strong>P0</strong> apply 4 reframes to OPERATIVE-spec; clone <code>conditional-conformal</code> repo; start <code>SyntheticData.ipynb</code></td>
-        <td><strong>P0</strong> finish SyntheticData reproduction → numerical agreement with paper Fig 1</td>
-        <td><strong>L1</strong> Abbott §1.1–1.3 + Ex 1.2.1–1.3.6 (real numbers, Q vs R, Axiom of Completeness)</td>
-        <td><strong>L1</strong> Abbott §1.4–1.5 + proofs (Cantor diagonalization, cardinality)</td>
+        <td><strong>P0</strong> finish SyntheticData reproduction → numerical agreement with <a href="#lit-gcc-2305" class="xref">GCC paper</a> Fig 1</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> §1.1–1.3 + Ex 1.2.1–1.3.6 (real numbers, Q vs R, Axiom of Completeness)</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> §1.4–1.5 + proofs (Cantor diagonalization, cardinality)</td>
         <td><strong>P0</strong> repo notes: numbers-vs-paper, commit + push</td>
-        <td>SyntheticData reproduction matches paper; Abbott Ch 1 done</td>
+        <td>SyntheticData reproduction matches paper; <a href="#lit-abbott" class="xref">Abbott</a> Ch 1 done</td>
       </tr>
       <tr><td><strong>Jun 8–14</strong></td>
-        <td><strong>P0</strong> Angelopoulos-Bates intro (arXiv:2107.07511) §1–3 + run toy code</td>
-        <td><strong>P0</strong> Angelopoulos-Bates §4–6 + finish toy code; vocab notes</td>
-        <td><strong>P0</strong> GCC 2305.12616 §1–3 (problem + method)</td>
-        <td><strong>P0</strong> GCC 2305.12616 §4–6 (theory + experiments) + read appendix</td>
-        <td><strong>L1</strong> Abbott Ch 2 §2.2–2.3 (sequences, limits)</td>
-        <td>Conformal vocab fluent; GCC fully read</td>
+        <td><strong>P0</strong> <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> §1–3 + run toy code</td>
+        <td><strong>P0</strong> <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates</a> §4–6 + finish toy code; vocab notes</td>
+        <td><strong>P0</strong> <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> §1–3 (problem + method)</td>
+        <td><strong>P0</strong> <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> §4–6 (theory + experiments) + read appendix</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 2 §2.2–2.3 (sequences, limits)</td>
+        <td>Conformal vocab fluent; <a href="#lit-gcc-2305" class="xref">GCC</a> fully read</td>
       </tr>
       <tr><td><strong>Jun 15–21</strong></td>
         <td><strong>P0</strong> UCI C&amp;C dataset load + start replication scaffolding</td>
         <td><strong>P0</strong> UCI C&amp;C marginal-coverage replication → match paper table</td>
         <td><strong>P0</strong> UCI C&amp;C conditional-coverage replication</td>
-        <td><strong>L1</strong> Abbott Ch 2 finish (§2.4–2.7 series); start Ch 3</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 2 finish (§2.4–2.7 series); start Ch 3</td>
         <td><strong>O</strong> Letter-channel memo: KBTU/UoL faculty + REU + SIEPR-Athey KZ-eligibility 1-pg</td>
         <td>UCI reproduction complete; letter-channel memo drafted</td>
       </tr>
       <tr><td><strong>Jun 22–28</strong></td>
         <td><strong>P0 ext v1</strong> code stratified-coverage sweep (covariate bins)</td>
         <td><strong>P0 ext v1</strong> generate sweep + plot coverage gap by stratum</td>
-        <td><strong>L1</strong> Abbott Ch 3 §3.2–3.3 (open/closed sets, topology of R)</td>
-        <td><strong>L1</strong> Abbott Ch 3 §3.4–3.5 (compactness, perfect sets)</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 3 §3.2–3.3 (open/closed sets, topology of R)</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 3 §3.4–3.5 (compactness, perfect sets)</td>
         <td><strong>P0 ext v1</strong> write-up + commit "extension-1.md"</td>
-        <td>Extension v1 done; Abbott Ch 3 done</td>
+        <td>Extension v1 done; <a href="#lit-abbott" class="xref">Abbott</a> Ch 3 done</td>
       </tr>
       <tr><td><strong>Jun 29–Jul 5</strong></td>
         <td><strong>P0 ext v2</strong> RF base learner ablation</td>
         <td><strong>P0 ext v2</strong> GBM + MLP base learners; comparison table</td>
-        <td><strong>P0</strong> read Hore RLCP (arXiv:2310.07850) cover-to-cover</td>
-        <td><strong>P0</strong> read Hore 2026 papers (arXiv:2602.06267 + 2605.21627); take Hore-anchor notes</td>
-        <td><strong>L1</strong> Abbott Ch 4 (Functional Limits + Continuity)</td>
-        <td>Extension v2 done; Hore-anchor papers fluent</td>
+        <td><strong>P0</strong> read <a href="#lit-rlcp" class="xref">Hore RLCP (arXiv:2310.07850)</a> cover-to-cover</td>
+        <td><strong>P0</strong> read Hore 2026 papers (<a href="#lit-hore-2602" class="xref">2602.06267</a> + <a href="#lit-hore-2605" class="xref">2605.21627</a>); take Hore-anchor notes</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 4 (Functional Limits + Continuity)</td>
+        <td>Extension v2 done; <a href="#email-hore" class="xref">Hore</a>-anchor papers fluent</td>
       </tr>
       <tr><td><strong>Jul 6–12</strong></td>
         <td><strong>P0</strong> repo polish — README rewrite, one-command run script</td>
         <td><strong>P0</strong> pin env (conda env file), CI smoke test, reproduce table embed</td>
-        <td><strong>O</strong> draft Hore cold-email (anchor on RLCP + your conditional-coverage sweep)</td>
-        <td><strong>O</strong> draft Gibbs cold-email (anchor on 2305.12616); refine both; specific technical Q</td>
-        <td><strong>L1</strong> Abbott Ch 5 (Derivatives) + start Ch 6 (Uniform Convergence)</td>
+        <td><strong>O</strong> draft <a href="#email-hore" class="xref">Hore cold-email</a> (anchor on <a href="#lit-rlcp" class="xref">RLCP</a> + your conditional-coverage sweep)</td>
+        <td><strong>O</strong> draft <a href="#email-gibbs" class="xref">Gibbs cold-email</a> (anchor on <a href="#lit-gcc-2305" class="xref">2305.12616</a>); refine both; specific technical Q</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 5 (Derivatives) + start Ch 6 (Uniform Convergence)</td>
         <td>Repo public + polished; 2 cold-emails drafted</td>
       </tr>
       <tr><td><strong>Jul 13–19</strong><br><span class="badge tier-2">SEND</span></td>
-        <td><strong>O</strong> <strong>SEND Hore cold-email</strong> (rhore@andrew.cmu.edu); SEND Gibbs cold-email (igibbs@berkeley.edu)</td>
-        <td><strong>MT</strong> Anthony &amp; Harvey Ch 1 (Matrices and Linear Equations)</td>
-        <td><strong>MT</strong> A&amp;H Ch 2 (Vector spaces — basics, span)</td>
-        <td><strong>MT</strong> A&amp;H Ch 3 (Linear independence, basis intro)</td>
-        <td><strong>L1</strong> Abbott Ch 6 (Uniform Convergence) finish</td>
+        <td><strong>O</strong> <strong>SEND <a href="#email-hore" class="xref">Hore cold-email</a></strong> (rhore@andrew.cmu.edu); SEND <a href="#email-gibbs" class="xref">Gibbs cold-email</a> (igibbs@berkeley.edu)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1 (Matrices and Linear Equations)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 2 (Vector spaces — basics, span)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 3 (Linear independence, basis intro)</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 6 (Uniform Convergence) finish</td>
         <td>Cold-emails OUT; MT1173 prep ramping</td>
       </tr>
       <tr><td><strong>Jul 20–26</strong></td>
-        <td><strong>MT</strong> A&amp;H Ch 4 (Determinants)</td>
-        <td><strong>MT</strong> A&amp;H Ch 5 (Matrix inversion methods)</td>
-        <td><strong>MT</strong> A&amp;H Ch 6 (Eigenvalues intro) + 30 problems</td>
-        <td><strong>L1</strong> Abbott Ch 7 (Riemann Integral)</td>
-        <td><strong>O</strong> outreach reply triage (3-wk cadence); if no Hore/Gibbs reply by Aug 5 → plan backfill</td>
-        <td>A&amp;H Ch 4–6 done; outreach triage rhythm set</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 4 (Determinants)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 5 (Matrix inversion methods)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 6 (Eigenvalues intro) + 30 problems</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 7 (Riemann Integral)</td>
+        <td><strong>O</strong> outreach reply triage (3-wk cadence); if no <a href="#email-hore" class="xref">Hore</a>/<a href="#email-gibbs" class="xref">Gibbs</a> reply by Aug 5 → plan backfill</td>
+        <td><a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 4–6 done; outreach triage rhythm set</td>
       </tr>
       <tr><td><strong>Jul 27–Aug 2</strong></td>
-        <td><strong>MT</strong> A&amp;H Ch 7 (Vector spaces — formal)</td>
-        <td><strong>MT</strong> A&amp;H Ch 8 (Subspaces, sums)</td>
-        <td><strong>MT</strong> A&amp;H Ch 9 (Linear independence, basis — formal)</td>
-        <td><strong>L1</strong> Abbott Ch 8 (Additional Topics — selected)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 7 (Vector spaces — formal)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 8 (Subspaces, sums)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 9 (Linear independence, basis — formal)</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 8 (Additional Topics — selected)</td>
         <td><strong>O</strong> intern-app research (apex tech summer 2027 apps open Aug–Oct)</td>
-        <td>A&amp;H Ch 7–9 done; Abbott COMPLETE</td>
+        <td><a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 7–9 done; <a href="#lit-abbott" class="xref">Abbott</a> COMPLETE</td>
       </tr>
       <tr><td><strong>Aug 3–9</strong></td>
-        <td><strong>MT</strong> A&amp;H Ch 10 (Linear transformations)</td>
-        <td><strong>MT</strong> A&amp;H Ch 11 (Eigenvalues + diagonalization)</td>
-        <td><strong>MT</strong> A&amp;H Ch 12 (Inner products) + 40 problems</td>
-        <td><strong>L1</strong> Rudin Ch 1 (Real &amp; complex number systems)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 10 (Linear transformations)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 11 (Eigenvalues + diagonalization)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 12 (Inner products) + 40 problems</td>
+        <td><strong>L1</strong> <a href="#lit-rudin" class="xref">Rudin</a> Ch 1 (Real &amp; complex number systems)</td>
         <td><strong>O</strong> intern résumé + CV polish; first 2 intern apps drafted</td>
-        <td>A&amp;H Ch 10–12 done; Rudin started</td>
+        <td><a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 10–12 done; <a href="#lit-rudin" class="xref">Rudin</a> started</td>
       </tr>
       <tr><td><strong>Aug 10–16</strong></td>
         <td><strong>MT</strong> practice — sequences + matrices recap (chosen weak areas)</td>
         <td><strong>MT</strong> practice — vector spaces + linear maps</td>
         <td><strong>MT</strong> UoL past paper #1 (timed)</td>
         <td><strong>MT</strong> UoL past paper #1 review + UoL past paper #2 start</td>
-        <td><strong>L1</strong> Rudin Ch 2 (Basic Topology)</td>
-        <td>2 past papers done; Rudin Ch 2 done</td>
+        <td><strong>L1</strong> <a href="#lit-rudin" class="xref">Rudin</a> Ch 2 (Basic Topology)</td>
+        <td>2 past papers done; <a href="#lit-rudin" class="xref">Rudin</a> Ch 2 done</td>
       </tr>
       <tr><td><strong>Aug 17–24</strong></td>
         <td><strong>MT</strong> UoL past paper #2 finish + review</td>
         <td><strong>MT</strong> Full mock exam #1 (3 hr, exam conditions)</td>
         <td><strong>MT</strong> Mock #1 review + targeted weakness drill</td>
-        <td><strong>L1</strong> Rudin Ch 3 (Numerical Sequences and Series)</td>
+        <td><strong>L1</strong> <a href="#lit-rudin" class="xref">Rudin</a> Ch 3 (Numerical Sequences and Series)</td>
         <td><strong>MT</strong> UoL past paper #3</td>
-        <td>1 mock + 2 past papers; Rudin Ch 3 done</td>
+        <td>1 mock + 2 past papers; <a href="#lit-rudin" class="xref">Rudin</a> Ch 3 done</td>
       </tr>
       <tr><td><strong>Aug 25–31</strong></td>
         <td><strong>MT</strong> Mock exam #2</td>
         <td><strong>MT</strong> Mock #2 review</td>
         <td><strong>MT</strong> weak-area drill (whatever mocks expose)</td>
-        <td><strong>L1</strong> Rudin Ch 4 (Continuity)</td>
+        <td><strong>L1</strong> <a href="#lit-rudin" class="xref">Rudin</a> Ch 4 (Continuity)</td>
         <td><strong>MT</strong> UoL past paper #4</td>
-        <td><strong>Summer wrap.</strong> Abbott DONE · Rudin Ch 1–4 DONE · MT1173 ~70% ready</td>
+        <td><strong>Summer wrap.</strong> <a href="#lit-abbott" class="xref">Abbott</a> DONE · <a href="#lit-rudin" class="xref">Rudin</a> Ch 1–4 DONE · MT1173 ~70% ready</td>
       </tr>
       <tr style="background: var(--bg-3);"><td colspan="7" style="text-align: center; color: var(--fg-dim); font-style: italic;">— Fall 2026 begins. UoL Year 3 semester starts. Morning deep-work block compresses around classes. —</td></tr>
       <tr><td><strong>Sep 1–7</strong></td>
@@ -1278,20 +1292,20 @@
       <tr>
         <td><strong>Summer 2026</strong><br>(now → Aug 31)<br><span class="badge status-progress">CURRENT</span></td>
         <td>
-          <strong>Lever 1 (Abbott Ch 1-8)</strong> — Understanding Analysis, full coverage by end Aug.<br>
-          <strong>Phase 0 conformal anchors</strong> — Angelopoulos-Bates intro (arXiv:2107.07511), Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616), Hore RLCP (arXiv:2310.07850), Hore 2026 papers (arXiv:2602.06267 + 2605.21627).<br>
+          <strong>Lever 1 (<a href="#lit-abbott" class="xref">Abbott</a> Ch 1-8)</strong> — Understanding Analysis, full coverage by end Aug.<br>
+          <strong>Phase 0 conformal anchors</strong> — <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a>, <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès JRSS-B 2025</a>, <a href="#lit-rlcp" class="xref">Hore RLCP</a>, Hore 2026 papers (<a href="#lit-hore-2602" class="xref">arXiv:2602.06267</a> + <a href="#lit-hore-2605" class="xref">arXiv:2605.21627</a>).<br>
           <strong>Higher-register reading habit</strong> — LRB/NYRB/Lopate/Gould for GRE vocab background (3 sessions/wk, 30-40 min).
         </td>
         <td>
-          Anthony &amp; Harvey <em>Linear Algebra</em> (MT1173 prep starting mid-Jul).<br>
-          <em>Avoid:</em> Wasserman, Hernán-Robins, Casella-Berger — premature, not load-bearing.
+          <a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> <em>Linear Algebra</em> (MT1173 prep starting mid-Jul).<br>
+          <em>Avoid:</em> <a href="#lit-wasserman" class="xref">Wasserman</a>, <a href="#lit-hernan-robins" class="xref">Hernán-Robins</a>, <a href="#lit-casella-berger" class="xref">Casella-Berger</a> — premature, not load-bearing.
         </td>
       </tr>
       <tr>
         <td><strong>Fall 2026</strong><br>(Sep → Dec)</td>
         <td>
-          <strong>Anthony &amp; Harvey Ch 1-12</strong> — MT1173 Nov 2026 exam prep, primary load.<br>
-          <strong>Rudin Ch 1-4</strong> — Baby Rudin start, paced for MATH 447 readiness (Feb 2027).<br>
+          <strong><a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1-12</strong> — MT1173 Nov 2026 exam prep, primary load.<br>
+          <strong><a href="#lit-rudin" class="xref">Rudin</a> Ch 1-4</strong> — Baby Rudin start, paced for MATH 447 readiness (Feb 2027).<br>
           UoL Year 3 coursework (MT2116, ST2133, ST2134, MT3042).
         </td>
         <td>Higher-register reading continues (background). Phase 0 papers consulted as outreach replies arrive.</td>
@@ -1299,8 +1313,8 @@
       <tr>
         <td><strong>Spring 2027</strong><br>(Jan → Jun)</td>
         <td>
-          <strong>Rudin Ch 1-7 in full</strong> — UIUC NetMath MATH 447 coursework. A-grade target. THE GATE.<br>
-          Phase 1 (OPERATIVE) ramp — conformal-causal bend papers as math arrives (Lei-Candès 2021, Jin-Ren-Candès 2023, Foygel Barber et al 2023 AoS).
+          <strong><a href="#lit-rudin" class="xref">Rudin</a> Ch 1-7 in full</strong> — UIUC NetMath MATH 447 coursework. A-grade target. THE GATE.<br>
+          Phase 1 (OPERATIVE) ramp — conformal-causal bend papers as math arrives (<a href="#lit-lei-candes-2021" class="xref">Lei-Candès 2021</a>, <a href="#lit-jin-ren-candes-2023" class="xref">Jin-Ren-Candès 2023</a>, <a href="#lit-foygel-barber-2023" class="xref">Foygel Barber et al 2023 AoS</a>).
         </td>
         <td>Pugh (Rudin pairing if stuck). Tao Analysis I/II as alternative exposition.</td>
       </tr>
@@ -1361,13 +1375,13 @@
   <div class="card">
     <p class="small"><strong>Essential before sending Hore/Gibbs cold-emails.</strong> These are the papers Phase 0 reproduces.</p>
     <ul>
-      <li><strong>Gibbs, Cherian & Candès 2025 (arXiv:2305.12616)</strong> — <em>"Conformal Prediction With Conditional Guarantees"</em>. <strong>JRSS-B 87(4):1100-1126, DOI 10.1093/jrsssb/qkaf008.</strong> Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a> (pip-installable, release branch). <strong>The Phase 0 anchor for Gibbs outreach.</strong> Kill-zone clean: conditional coverage via covariate-shift reformulation, no DML / AIPW / estimated propensities.</li>
-      <li><strong>Hore & Barber RLCP (arXiv:2310.07850)</strong> — <em>"Conformal prediction with local weights"</em>. Repo: <a href="https://github.com/rohanhore/RLCP">github.com/rohanhore/RLCP</a>. <strong>The Phase 0 anchor for Hore outreach.</strong> Use this, NOT 2305.12616, when emailing Hore — anchor on his own work.</li>
-      <li><strong>Hore & Ramdas 2026 (arXiv:2602.06267)</strong> — <em>"Conformal changepoint localization"</em>. Recent Hore first-author paper with Ramdas. Reference in Hore cold-email as evidence of current line.</li>
-      <li><strong>Hore & Ramdas 2026 (arXiv:2605.21627)</strong> — <em>"Distribution-free root cause analysis"</em>. Second 2026 Hore+Ramdas paper.</li>
-      <li><strong>Angelopoulos & Bates 2022 (arXiv:2107.07511)</strong> — <em>"A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"</em>. Tutorial that establishes conformal vocabulary in ~50 pages. Read first in Phase 0 Wk 2.</li>
-      <li><strong>Lei & Candès 2021 (arXiv:2006.06138)</strong> — <em>"Conformal Inference of Counterfactuals and Individual Treatment Effects"</em>. JRSS-B 2021. Foundational conformal-causal paper. Referenced when Phase 1 bends toward causal.</li>
-      <li><strong>Hines, Dukes, Diaz-Ordaz, Vansteelandt 2022 (arXiv:2107.00681)</strong> — <em>"Demystifying Statistical Learning Based on Efficient Influence Functions"</em>. Pedagogical EIF derivation. For when math arrives (post MATH 447 Feb 2027) and Phase 1 bends to conformal-causal.</li>
+      <li id="lit-gcc-2305" class="xref-target"><strong>Gibbs, Cherian &amp; Candès 2025 (arXiv:2305.12616)</strong> — <em>"Conformal Prediction With Conditional Guarantees"</em>. <strong>JRSS-B 87(4):1100-1126, DOI 10.1093/jrsssb/qkaf008.</strong> Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a> (pip-installable, release branch). <strong>The Phase 0 anchor for Gibbs outreach.</strong> Kill-zone clean: conditional coverage via covariate-shift reformulation, no DML / AIPW / estimated propensities.</li>
+      <li id="lit-rlcp" class="xref-target"><strong>Hore &amp; Barber RLCP (arXiv:2310.07850)</strong> — <em>"Conformal prediction with local weights"</em>. Repo: <a href="https://github.com/rohanhore/RLCP">github.com/rohanhore/RLCP</a>. <strong>The Phase 0 anchor for Hore outreach.</strong> Use this, NOT 2305.12616, when emailing Hore — anchor on his own work.</li>
+      <li id="lit-hore-2602" class="xref-target"><strong>Hore &amp; Ramdas 2026 (arXiv:2602.06267)</strong> — <em>"Conformal changepoint localization"</em>. Recent Hore first-author paper with Ramdas. Reference in Hore cold-email as evidence of current line.</li>
+      <li id="lit-hore-2605" class="xref-target"><strong>Hore &amp; Ramdas 2026 (arXiv:2605.21627)</strong> — <em>"Distribution-free root cause analysis"</em>. Second 2026 Hore+Ramdas paper.</li>
+      <li id="lit-angelopoulos-intro" class="xref-target"><strong>Angelopoulos &amp; Bates 2022 (arXiv:2107.07511)</strong> — <em>"A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"</em>. Tutorial that establishes conformal vocabulary in ~50 pages. Read first in Phase 0 Wk 2.</li>
+      <li id="lit-lei-candes-2021" class="xref-target"><strong>Lei &amp; Candès 2021 (arXiv:2006.06138)</strong> — <em>"Conformal Inference of Counterfactuals and Individual Treatment Effects"</em>. JRSS-B 2021. Foundational conformal-causal paper. Referenced when Phase 1 bends toward causal.</li>
+      <li id="lit-hines-eif" class="xref-target"><strong>Hines, Dukes, Diaz-Ordaz, Vansteelandt 2022 (arXiv:2107.00681)</strong> — <em>"Demystifying Statistical Learning Based on Efficient Influence Functions"</em>. Pedagogical EIF derivation. For when math arrives (post MATH 447 Feb 2027) and Phase 1 bends to conformal-causal.</li>
     </ul>
   </div>
 
@@ -1375,13 +1389,13 @@
   <div class="card">
     <p class="small">The broader conformal community Phase 0 sits in. Read after Phase 0 reproduction lands.</p>
     <ul>
-      <li><strong>Foygel Barber, Candès, Ramdas & Tibshirani 2023</strong> — <em>"Conformal prediction beyond exchangeability"</em>. Annals of Statistics 51(2):816–845. The highest-cited modern conformal paper.</li>
-      <li><strong>Angelopoulos, Barber & Bates 2025/2026</strong> — Cambridge UP textbook <em>"Conformal Prediction: A Gentle Introduction"</em> (arXiv:2411.11824). Field-forming reference.</li>
-      <li><strong>Tibshirani, Foygel Barber, Candès, Ramdas 2019</strong> — <em>"Conformal Prediction Under Covariate Shift"</em>. The weighted-conformal extension that 2305.12616 reformulates against.</li>
+      <li id="lit-foygel-barber-2023" class="xref-target"><strong>Foygel Barber, Candès, Ramdas &amp; Tibshirani 2023</strong> — <em>"Conformal prediction beyond exchangeability"</em>. Annals of Statistics 51(2):816–845. The highest-cited modern conformal paper.</li>
+      <li id="lit-angelopoulos-textbook" class="xref-target"><strong>Angelopoulos, Barber &amp; Bates 2025/2026</strong> — Cambridge UP textbook <em>"Conformal Prediction: A Gentle Introduction"</em> (arXiv:2411.11824). Field-forming reference.</li>
+      <li id="lit-tibshirani-covshift" class="xref-target"><strong>Tibshirani, Foygel Barber, Candès, Ramdas 2019</strong> — <em>"Conformal Prediction Under Covariate Shift"</em>. The weighted-conformal extension that 2305.12616 reformulates against.</li>
       <li><strong>Gibbs, Cherian, Candès — conditional-guarantees line</strong> — multiple 2023-2025 papers. Section 1 anchor + extensions.</li>
-      <li><strong>Romano, Patterson, Candès 2019</strong> — <em>"Conformalized Quantile Regression"</em> (CQR). The score function used in most conformal-ITE work downstream.</li>
-      <li><strong>Lei & Candès 2021 + Jin, Ren, Candès 2023</strong> — conformal counterfactual + ITE sensitivity work. The bend-toward-causal Phase 1 entry point.</li>
-      <li><strong>Vovk, Gammerman & Shafer 2005</strong> — <em>Algorithmic Learning in a Random World</em>. Foundational textbook; COPA community.</li>
+      <li id="lit-cqr" class="xref-target"><strong>Romano, Patterson, Candès 2019</strong> — <em>"Conformalized Quantile Regression"</em> (CQR). The score function used in most conformal-ITE work downstream.</li>
+      <li id="lit-jin-ren-candes-2023" class="xref-target"><strong>Lei &amp; Candès 2021 + Jin, Ren, Candès 2023</strong> — conformal counterfactual + ITE sensitivity work. The bend-toward-causal Phase 1 entry point.</li>
+      <li id="lit-vovk" class="xref-target"><strong>Vovk, Gammerman &amp; Shafer 2005</strong> — <em>Algorithmic Learning in a Random World</em>. Foundational textbook; COPA community.</li>
       <li><strong>COPA proceedings (annual since 2012)</strong> — PMLR vols 60/91/105/128/152/179/204/230/266 (COPA 2025) and vol 329 (COPA 2026, Gothenburg). Dedicated conformal conference.</li>
     </ul>
   </div>
@@ -1404,9 +1418,9 @@
   <div class="card">
     <p class="small">REFERENCE shelf — not active summer 2026 reading. Hernán-Robins Ch 1-4 + 12 will be pulled when Phase 1 bends toward conformal-causal (post-MATH 447, 2027). Until then these are background texts to consult if needed, not a reading queue.</p>
     <ul>
-      <li><strong>Hernán & Robins 2024</strong> — <em>Causal Inference: What If</em>. Free at hsph.harvard.edu/miguel-hernan/causal-inference-book/. Modern standard for biostat causal inference. Parts I (Ch 1-10) + II (Ch 11-17) + III (Ch 18-25). Cite explicitly in SoP.</li>
-      <li><strong>Imbens & Rubin 2015</strong> — <em>Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction</em>. Cambridge. Potential-outcomes framework canonical text.</li>
-      <li><strong>Pearl 2009</strong> — <em>Causality: Models, Reasoning, and Inference</em>. 2nd ed. Cambridge. The do-calculus reference.</li>
+      <li id="lit-hernan-robins" class="xref-target"><strong>Hernán &amp; Robins 2024</strong> — <em>Causal Inference: What If</em>. Free at hsph.harvard.edu/miguel-hernan/causal-inference-book/. Modern standard for biostat causal inference. Parts I (Ch 1-10) + II (Ch 11-17) + III (Ch 18-25). Cite explicitly in SoP.</li>
+      <li id="lit-imbens-rubin" class="xref-target"><strong>Imbens &amp; Rubin 2015</strong> — <em>Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction</em>. Cambridge. Potential-outcomes framework canonical text.</li>
+      <li id="lit-pearl" class="xref-target"><strong>Pearl 2009</strong> — <em>Causality: Models, Reasoning, and Inference</em>. 2nd ed. Cambridge. The do-calculus reference.</li>
       <li><strong>Pearl, Glymour & Jewell 2016</strong> — <em>Causal Inference in Statistics: A Primer</em>. Wiley. Light entry to Pearl's framework; ~150 pages.</li>
       <li><strong>VanderWeele 2015</strong> — <em>Explanation in Causal Inference: Methods for Mediation and Interaction</em>. Oxford. Standard mediation analysis reference.</li>
       <li><strong>Rosenbaum 2002, 2010</strong> — <em>Observational Studies</em> (2002) and <em>Design of Observational Studies</em> (2010). Matching + sensitivity analysis canonical.</li>
@@ -1416,14 +1430,16 @@
 
   <h3>5. Real analysis + math foundations (Math Gate prep)</h3>
   <div class="card">
-    <p class="small">For the real-analysis credential path (Athabasca / NU / KazNU / self-study). <strong>Rudin Ch 1-7 is the Math Gate target.</strong> Pugh and Tao are accessible alternatives. Davidson & Donsig is the Athabasca MATH 370 textbook. Russian / Soviet rigorous texts (Zorich, Fichtenholz, Kolmogorov-Fomin, Natanson) apply if you enroll at NU or KazNU.</p>
+    <p class="small"><strong>Lever 1 self-study path (Summer 2026 → MATH 447 Feb 2027):</strong> Abbott (bridge) → Rudin (UIUC coursework). For MT1173 algebra prep (Nov 2026 exam): Anthony &amp; Harvey. Pugh and Tao are accessible alternatives to Rudin if stuck. Davidson &amp; Donsig is the Athabasca MATH 370 textbook (Athabasca DEPRIORITIZED — accreditation lost Mar 2025). Russian / Soviet rigorous texts (Zorich, Fichtenholz, Kolmogorov-Fomin, Natanson) apply if you enroll at NU or KazNU.</p>
     <ul>
-      <li><strong>Rudin 1976</strong> — <em>Principles of Mathematical Analysis</em>, 3rd ed. McGraw-Hill. "Baby Rudin." Ch 1-7 are the Math Gate target; Ch 11 is Lebesgue intro. <strong>Name explicitly in SoP per memory correction #37.</strong></li>
-      <li><strong>Royden 2010</strong> — <em>Real Analysis</em>, 4th ed. (with Fitzpatrick). Lebesgue measure + integration; Ch 1-5 is the measure-theoretic target.</li>
-      <li><strong>Pugh 2015</strong> — <em>Real Mathematical Analysis</em>, 2nd ed. Springer. More expository than Rudin; same content. Pugh + Rudin together is the standard pairing.</li>
-      <li><strong>Tao 2016</strong> — <em>Analysis I</em> + <em>Analysis II</em>, 4th ed. Springer / Hindustan Book Agency. Free PDFs on Tao's blog. Constructive build-up from naturals.</li>
-      <li><strong>Bartle & Sherbert 2011</strong> — <em>Introduction to Real Analysis</em>, 4th ed. Wiley. UIUC NetMath MATH 444 textbook.</li>
-      <li><strong>Davidson & Donsig 2010</strong> — <em>Real Analysis and Applications: Theory in Practice</em>. Springer. Athabasca MATH 370 textbook. Proof-based; covers Rudin Ch 1-7 equivalent.</li>
+      <li id="lit-abbott" class="xref-target"><strong>Abbott 2015</strong> — <em>Understanding Analysis</em>, 2nd ed. Springer. <strong>The Lever 1 summer 2026 self-study text.</strong> Ch 1-8 by end Aug 2026 is the floor. Gentler bridge into Rudin: same content arc with more proofs spelled out and exercises that build intuition before rigor. Each chapter teaches WHY the careful definitions matter via a "discussion" → "main results" → "epilogue" structure. Pen-and-paper proofs are the practice mode.</li>
+      <li id="lit-anthony-harvey" class="xref-target"><strong>Anthony &amp; Harvey 2012</strong> — <em>Linear Algebra: Concepts and Methods</em>. Cambridge. <strong>The UoL MT1173 Algebra primary text</strong> (Nov 2026 exam). Ch 1-12 cover matrices, vector spaces, linear maps, eigenvalues, inner products. UoL past papers are the second half of prep. Prep starts mid-Jul 2026 at 15-25 hr/wk, ramps to 30-35 hr/wk by Oct.</li>
+      <li id="lit-rudin" class="xref-target"><strong>Rudin 1976</strong> — <em>Principles of Mathematical Analysis</em>, 3rd ed. McGraw-Hill. "Baby Rudin." <strong>Ch 1-7 are the Math Gate target</strong> — UIUC NetMath MATH 447 (Feb-Jun 2027) covers Ch 1-7; A-grade is the gate for the apex tail. Ch 11 is Lebesgue intro (not needed for MATH 447). Name explicitly in SoP. Self-study Ch 1-4 in fall 2026 before MATH 447 starts.</li>
+      <li id="lit-royden" class="xref-target"><strong>Royden 2010</strong> — <em>Real Analysis</em>, 4th ed. (with Fitzpatrick). Lebesgue measure + integration; Ch 1-5 is the measure-theoretic target. PhD Y1 reference, NOT pre-PhD.</li>
+      <li id="lit-pugh" class="xref-target"><strong>Pugh 2015</strong> — <em>Real Mathematical Analysis</em>, 2nd ed. Springer. More expository than Rudin; same content. Pugh + Rudin together is the standard pairing — use as second-opinion when Rudin's compression bites.</li>
+      <li id="lit-tao" class="xref-target"><strong>Tao 2016</strong> — <em>Analysis I</em> + <em>Analysis II</em>, 4th ed. Springer / Hindustan Book Agency. Free PDFs on Tao's blog. Constructive build-up from naturals. Use as third-opinion alternative to Rudin.</li>
+      <li id="lit-bartle" class="xref-target"><strong>Bartle &amp; Sherbert 2011</strong> — <em>Introduction to Real Analysis</em>, 4th ed. Wiley. UIUC NetMath MATH 444 textbook (NOT 447 — 444 is the calc-style intro, 447 uses Rudin).</li>
+      <li><strong>Davidson &amp; Donsig 2010</strong> — <em>Real Analysis and Applications: Theory in Practice</em>. Springer. Athabasca MATH 370 textbook. Proof-based; covers Rudin Ch 1-7 equivalent. <strong>Athabasca deprioritized</strong> — MSCHE accreditation lost Mar 2025.</li>
       <li><strong>Zorich</strong> — <em>Mathematical Analysis</em> Vol I + II. Springer. Russian/Soviet rigorous standard (used at MGU mech-mat). If KazNU offers this textbook → strong signal.</li>
       <li><strong>Fichtenholz</strong> — <em>Курс дифференциального и интегрального исчисления</em>, 3 vols. Russian classic. Used at top Russian math departments.</li>
       <li><strong>Kolmogorov & Fomin</strong> — <em>Элементы теории функций и функционального анализа</em>. Russian classic for measure theory + functional analysis (= Royden + Folland equivalent).</li>
@@ -1435,13 +1451,13 @@
   <div class="card">
     <p class="small">For first-year PhD course preparation and SoP technical depth signal.</p>
     <ul>
-      <li><strong>Casella & Berger 2002</strong> — <em>Statistical Inference</em>, 2nd ed. Duxbury. Standard first-year PhD reference for math stats.</li>
-      <li><strong>Lehmann & Casella 1998</strong> — <em>Theory of Point Estimation</em>, 2nd ed. Springer. Advanced point estimation.</li>
-      <li><strong>Lehmann & Romano 2005</strong> — <em>Testing Statistical Hypotheses</em>, 3rd ed. Springer. The hypothesis-testing canonical text.</li>
-      <li><strong>van der Vaart 1998</strong> — <em>Asymptotic Statistics</em>. Cambridge. Standard reference for asymptotic theory; critical for understanding semi-parametric efficiency in DR-learner work.</li>
-      <li><strong>Wasserman 2004</strong> — <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer. Compact reference; useful as a complement to Casella-Berger.</li>
+      <li id="lit-casella-berger" class="xref-target"><strong>Casella &amp; Berger 2002</strong> — <em>Statistical Inference</em>, 2nd ed. Duxbury. Standard first-year PhD reference for math stats.</li>
+      <li id="lit-lehmann-casella" class="xref-target"><strong>Lehmann &amp; Casella 1998</strong> — <em>Theory of Point Estimation</em>, 2nd ed. Springer. Advanced point estimation.</li>
+      <li id="lit-lehmann-romano" class="xref-target"><strong>Lehmann &amp; Romano 2005</strong> — <em>Testing Statistical Hypotheses</em>, 3rd ed. Springer. The hypothesis-testing canonical text.</li>
+      <li id="lit-vdv-asymptotic" class="xref-target"><strong>van der Vaart 1998</strong> — <em>Asymptotic Statistics</em>. Cambridge. Standard reference for asymptotic theory; critical for understanding semi-parametric efficiency in DR-learner work.</li>
+      <li id="lit-wasserman" class="xref-target"><strong>Wasserman 2004</strong> — <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer. Compact reference; useful as a complement to Casella-Berger.</li>
       <li><strong>Wasserman 2006</strong> — <em>All of Nonparametric Statistics</em>. Springer. Nonparametric methods.</li>
-      <li><strong>Bickel & Doksum 2015</strong> — <em>Mathematical Statistics: Basic Ideas and Selected Topics</em>, Vol I + II, 2nd ed. CRC. Alternative to Casella-Berger at higher rigor.</li>
+      <li id="lit-bickel-doksum" class="xref-target"><strong>Bickel &amp; Doksum 2015</strong> — <em>Mathematical Statistics: Basic Ideas and Selected Topics</em>, Vol I + II, 2nd ed. CRC. Alternative to Casella-Berger at higher rigor.</li>
     </ul>
   </div>
 
@@ -1449,11 +1465,11 @@
   <div class="card">
     <p class="small">For breadth + R/Python implementation literacy.</p>
     <ul>
-      <li><strong>Hastie, Tibshirani & Friedman 2009</strong> — <em>The Elements of Statistical Learning</em>, 2nd ed. Springer. Free at hastie.su.domains/ElemStatLearn/. The standard ML reference.</li>
-      <li><strong>James, Witten, Hastie & Tibshirani 2023</strong> — <em>An Introduction to Statistical Learning</em>, 2nd ed. R/Python. Free at statlearning.com. Lighter ISL companion to ESL.</li>
-      <li><strong>Murphy 2022</strong> — <em>Probabilistic Machine Learning: An Introduction</em>. MIT Press. Free at probml.github.io/pml-book/. Modern probabilistic-ML textbook.</li>
+      <li id="lit-esl" class="xref-target"><strong>Hastie, Tibshirani &amp; Friedman 2009</strong> — <em>The Elements of Statistical Learning</em>, 2nd ed. Springer. Free at hastie.su.domains/ElemStatLearn/. The standard ML reference.</li>
+      <li id="lit-isl" class="xref-target"><strong>James, Witten, Hastie &amp; Tibshirani 2023</strong> — <em>An Introduction to Statistical Learning</em>, 2nd ed. R/Python. Free at statlearning.com. Lighter ISL companion to ESL.</li>
+      <li id="lit-murphy" class="xref-target"><strong>Murphy 2022</strong> — <em>Probabilistic Machine Learning: An Introduction</em>. MIT Press. Free at probml.github.io/pml-book/. Modern probabilistic-ML textbook.</li>
       <li><strong>Murphy 2023</strong> — <em>Probabilistic Machine Learning: Advanced Topics</em>. MIT Press. Vol 2 of the above. Covers more theoretical material.</li>
-      <li><strong>Wainwright 2019</strong> — <em>High-Dimensional Statistics: A Non-Asymptotic Viewpoint</em>. Cambridge. The rigorous high-dim ref.</li>
+      <li id="lit-wainwright" class="xref-target"><strong>Wainwright 2019</strong> — <em>High-Dimensional Statistics: A Non-Asymptotic Viewpoint</em>. Cambridge. The rigorous high-dim ref.</li>
       <li><strong>Bühlmann & van de Geer 2011</strong> — <em>Statistics for High-Dimensional Data: Methods, Theory and Applications</em>. Springer. Companion to Wainwright.</li>
       <li><strong>Goodfellow, Bengio & Courville 2016</strong> — <em>Deep Learning</em>. MIT Press. Free at deeplearningbook.org. Background for neural-network-based causal methods.</li>
     </ul>
@@ -1494,7 +1510,7 @@
   <h3>How to use this list</h3>
   <div class="alert">
     <strong>Recommended sequence for summer 2026 (per OPERATIVE pivot):</strong><br>
-    (1) Section 1 — Angelopoulos-Bates intro + Gibbs-Cherian-Candès 2305.12616 + Hore RLCP + Hore 2026 papers by mid-Jul 2026 (Phase 0 anchors). · (2) Section 5 — <strong>Abbott Ch 1-8 by end Aug 2026 (Lever 1, DOMINANT);</strong> Rudin Ch 1-4 by Sep 2026. · (3) Section 3 — re-read TARGET'S OWN recent paper before drafting cold-email (NOT another author's paper from the same lab). · (4) Section 8 — pick 2-3 frontier conformal-causal papers per month from Q3 2026 to track the field.
+    (1) Section 1 — <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> + <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès 2305.12616</a> + <a href="#lit-rlcp" class="xref">Hore RLCP</a> + Hore 2026 papers (<a href="#lit-hore-2602" class="xref">2602.06267</a>, <a href="#lit-hore-2605" class="xref">2605.21627</a>) by mid-Jul 2026 (Phase 0 anchors). · (2) Section 5 — <strong><a href="#lit-abbott" class="xref">Abbott</a> Ch 1-8 by end Aug 2026 (Lever 1, DOMINANT);</strong> <a href="#lit-rudin" class="xref">Rudin</a> Ch 1-4 by Sep 2026. · (3) Section 3 — re-read TARGET'S OWN recent paper before drafting cold-email (NOT another author's paper from the same lab). · (4) Section 8 — pick 2-3 frontier conformal-causal papers per month from Q3 2026 to track the field.
     <br><br>
     <strong>Sections 4, 6, 7 (Hernán-Robins, Casella-Berger, ESL/ISL, Wasserman) are REFERENCES,</strong> NOT active reading for summer 2026. Phase 0 doesn't need DR/MLE/semiparametric theory. Phase 1 bend toward conformal-causal in 2027 will pull from Section 4 (H-R Ch 1-4 + 12) THEN — premature now. Section 6 reading lives inside MATH 447 (Feb 2027) and MSc coursework (2028-29).
     <br><br>
@@ -1830,8 +1846,8 @@
       <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td>1</td><td><strong>Rohan Hore</strong></td><td>CMU postdoc · Stats &amp; Data Science · Barber-trained, with Ramdas</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td><strong>PRIMARY.</strong> Email: <code>rhore@andrew.cmu.edu</code> (verified). Anchor on RLCP (arXiv:2310.07850) + his 2026 papers (arXiv:2602.06267, arXiv:2605.21627) — NOT on Gibbs's paper. Send Wk of Jul 13 after Phase 0 repo public. Co-author conduit to Ramdas+Barber.</td></tr>
-      <tr><td>2</td><td><strong>Isaac Gibbs</strong></td><td>UC Berkeley postdoc · Stats · Tibshirani (NOT Candès — corrected)</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td>SECONDARY. Email: <code>igibbs@berkeley.edu</code> (verified). Anchor on 2305.12616 (he is lead author). Job-market closing-window risk; re-verify status Sep 2026 + Jan 2027. Co-author conduit to Tibshirani.</td></tr>
+      <tr id="email-hore" class="xref-target"><td>1</td><td><strong>Rohan Hore</strong></td><td>CMU postdoc · Stats &amp; Data Science · Barber-trained, with Ramdas</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td><strong>PRIMARY.</strong> Email: <code>rhore@andrew.cmu.edu</code> (verified). Anchor on <a href="#lit-rlcp">RLCP</a> + his 2026 papers (<a href="#lit-hore-2602">arXiv:2602.06267</a>, <a href="#lit-hore-2605">arXiv:2605.21627</a>) — NOT on Gibbs's paper. Send Wk of Jul 13 after Phase 0 repo public. Co-author conduit to Ramdas+Barber.</td></tr>
+      <tr id="email-gibbs" class="xref-target"><td>2</td><td><strong>Isaac Gibbs</strong></td><td>UC Berkeley postdoc · Stats · Tibshirani (NOT Candès — corrected)</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td>SECONDARY. Email: <code>igibbs@berkeley.edu</code> (verified). Anchor on <a href="#lit-gcc-2305">2305.12616</a> (he is lead author). Job-market closing-window risk; re-verify status Sep 2026 + Jan 2027. Co-author conduit to Tibshirani.</td></tr>
     </tbody>
   </table>
 
@@ -2261,14 +2277,52 @@
   // Tab navigation
   const tabs = document.querySelectorAll('aside nav button');
   const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
   tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabs.forEach(b => b.classList.remove('active'));
-      sections.forEach(s => s.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    });
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
 
   // Theme toggle
   const themeBtn = document.getElementById('theme-toggle');
