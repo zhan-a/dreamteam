@@ -1274,9 +1274,50 @@
 <!-- LITERATURE TAB -->
 <section class="tab" id="literature">
   <h2>Literature — Reading List + References</h2>
-  <p class="tab-subtitle">Citations referenced across Projects, Cold Email, and Critical Locks. Revised 2026-06-04 per OPERATIVE pivot — conformal-core anchors. Sections: (0) <strong>reading roadmap by timeline</strong>, (1) Phase 0 anchors (conformal-core), (2) conformal frontier, (3) cold-email faculty (Hore/Gibbs primary), (4) classical causal inference REFERENCE, (5) real-analysis foundations, (6) statistical inference foundations REFERENCE, (7) ML / statistical learning REFERENCE, (8) frontier 2024–2026 papers, (9) R/Python tooling.</p>
+  <p class="tab-subtitle">Citations referenced across Projects, Cold Email, and Critical Locks. Revised 2026-06-05 per OPERATIVE pivot. Sections: (TOP) <strong>active textbooks</strong>, (0) reading roadmap by timeline, (1) Phase 0 paper anchors, (2) conformal frontier papers, (3) cold-email faculty, (4-7) reference textbooks (causal / real analysis / stats / ML), (8) frontier papers, (9) tooling.</p>
 
-  <h3>0. Reading roadmap by timeline (what to read WHEN)</h3>
+  <div class="alert ok">
+    <strong>📖 ACTIVE TEXTBOOKS — what you're actually reading right now (the whole load)</strong><br>
+    Just TWO textbooks active in 2026. Everything else in §§4–7 is reference shelf for 2027+ MSc/PhD coursework. Don't sunk-cost-read them.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 110px;">Textbook</th>
+        <th style="width: 100px;">When</th>
+        <th>Role</th>
+        <th style="width: 130px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><a href="#lit-abbott" class="xref">Abbott</a></strong><br><em style="color:var(--fg-dim); font-size:12px;">Understanding Analysis</em></td>
+        <td><strong>Jun → Aug 2026</strong></td>
+        <td><strong>Lever 1 — DOMINANT.</strong> Real-analysis self-study, Ch 1–8 by end Aug. Bridges into Rudin. Pen-and-paper proofs are the practice mode.</td>
+        <td><span class="badge status-progress">ACTIVE NOW</span></td>
+      </tr>
+      <tr>
+        <td><strong><a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a></strong><br><em style="color:var(--fg-dim); font-size:12px;">Linear Algebra</em></td>
+        <td><strong>mid-Jul → Nov 2026</strong></td>
+        <td><strong>UoL MT1173 exam prep.</strong> Ch 1–12 + past papers + mocks. Ramps 15-25 hr/wk from Jul 14, peaks 30-35 hr/wk Oct.</td>
+        <td><span class="badge status-soon">STARTS JUL 14</span></td>
+      </tr>
+      <tr>
+        <td><strong><a href="#lit-rudin" class="xref">Rudin</a></strong><br><em style="color:var(--fg-dim); font-size:12px;">Principles of Mathematical Analysis</em></td>
+        <td><strong>Sep 2026 → Jun 2027</strong></td>
+        <td>Picks up after Abbott. Self-study Ch 1–4 in fall, then UIUC MATH 447 covers Ch 1–7 as coursework Feb–Jun 2027. A-grade is THE GATE.</td>
+        <td><span class="badge status-pending">FALL 2026</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>That's it for 2026.</strong> No conformal textbook needed (Phase 0 = 5 short papers + code reproduction, not textbook study — see §1). No stats foundations textbook needed (Wasserman/Casella-Berger/Hernán-Robins are 2027+ references). No ML textbook needed (ESL/Murphy are PhD-coursework references). The two-textbook footprint is right-sized for your binding constraint = Lever 1 + MT1173 + Phase 0 all in parallel.<br>
+    <strong>Why so light?</strong> Apex Stats committees gate on real-analysis transcript + calibrated letter, NOT self-studied textbook count. See <a href="#lit-roadmap" class="xref">§0 Reading roadmap</a> for the full phase-by-phase breakdown.
+  </p>
+
+  <h3 id="lit-roadmap">0. Reading roadmap by timeline (what to read WHEN)</h3>
   <div class="alert info">
     <strong>Read this first.</strong> Apex Stats committees gate on <strong>transcript credentials (real analysis grade) + research letter</strong> — NOT on self-studied textbook count. Active reading is short; reference shelf is long. Don't sunk-cost-read books that aren't load-bearing for the current phase.
   </div>
@@ -1371,7 +1412,7 @@
     <strong>The §0–§9 sections below are organized by topic, not timeline.</strong> Use this §0 to know <em>when</em> to consult them.
   </p>
 
-  <h3>1. Phase 0 anchors (conformal-core; reproduce + extend)</h3>
+  <h3>1. Phase 0 paper anchors (conformal-core; reproduce + extend) <span class="badge status-progress" style="font-size: 11px;">ACTIVE — 5 papers</span></h3>
   <div class="card">
     <p class="small"><strong>Essential before sending Hore/Gibbs cold-emails.</strong> These are the papers Phase 0 reproduces.</p>
     <ul>
@@ -1385,7 +1426,7 @@
     </ul>
   </div>
 
-  <h3>2. Conformal frontier (distribution-free inference + UQ for ML 2024-2026)</h3>
+  <h3>2. Conformal frontier papers (distribution-free inference + UQ 2024-26) <span class="badge status-pending" style="font-size: 11px;">REFERENCE — read AFTER Phase 0</span></h3>
   <div class="card">
     <p class="small">The broader conformal community Phase 0 sits in. Read after Phase 0 reproduction lands.</p>
     <ul>
@@ -1414,7 +1455,7 @@
     </ul>
   </div>
 
-  <h3>4. Classical causal inference (Hernán-Robins-Pearl-Imbens foundation)</h3>
+  <h3>4. Classical causal inference textbooks <span class="badge status-pending" style="font-size: 11px;">REFERENCE — 2027+</span></h3>
   <div class="card">
     <p class="small">REFERENCE shelf — not active summer 2026 reading. Hernán-Robins Ch 1-4 + 12 will be pulled when Phase 1 bends toward conformal-causal (post-MATH 447, 2027). Until then these are background texts to consult if needed, not a reading queue.</p>
     <ul>
@@ -1428,7 +1469,7 @@
     </ul>
   </div>
 
-  <h3>5. Real analysis + math foundations (Math Gate prep)</h3>
+  <h3>5. Real analysis + math foundations textbooks <span class="badge status-progress" style="font-size: 11px;">ABBOTT + A&amp;H + RUDIN ACTIVE</span></h3>
   <div class="card">
     <p class="small"><strong>Lever 1 self-study path (Summer 2026 → MATH 447 Feb 2027):</strong> Abbott (bridge) → Rudin (UIUC coursework). For MT1173 algebra prep (Nov 2026 exam): Anthony &amp; Harvey. Pugh and Tao are accessible alternatives to Rudin if stuck. Davidson &amp; Donsig is the Athabasca MATH 370 textbook (Athabasca DEPRIORITIZED — accreditation lost Mar 2025). Russian / Soviet rigorous texts (Zorich, Fichtenholz, Kolmogorov-Fomin, Natanson) apply if you enroll at NU or KazNU.</p>
     <ul>
@@ -1447,7 +1488,7 @@
     </ul>
   </div>
 
-  <h3>6. Statistical inference foundations (theory of estimation + testing)</h3>
+  <h3>6. Statistical inference foundations textbooks <span class="badge status-pending" style="font-size: 11px;">REFERENCE — MSc/PhD coursework</span></h3>
   <div class="card">
     <p class="small">For first-year PhD course preparation and SoP technical depth signal.</p>
     <ul>
@@ -1461,7 +1502,7 @@
     </ul>
   </div>
 
-  <h3>7. ML / statistical learning (modern methods)</h3>
+  <h3>7. ML / statistical learning textbooks <span class="badge status-pending" style="font-size: 11px;">REFERENCE — PhD coursework</span></h3>
   <div class="card">
     <p class="small">For breadth + R/Python implementation literacy.</p>
     <ul>
