@@ -707,8 +707,8 @@
   <h2>Tasks</h2>
   <p class="tab-subtitle" id="week-date">Current week tasks. Tasks roll automatically based on date.</p>
 
-  <div class="alert info" id="week-alert">
-    Post-3-OPE-kills pivot to <code>OPERATIVE-project-spec.md</code> (multi-year conformal line via postdoc layer). Focus this week: clone + reproduce <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès anchor paper</a> (Phase 0 Wk 1-2), start Lever 1 real-analysis self-study (<a href="#lit-abbott" class="xref">Abbott</a> Ch 1-2), Kozha paperwork stays Fri 15-18. <strong>Full week-by-week plan on <a href="#schedule">Schedule</a> tab; multi-year arc on <a href="#roadmap">Roadmap</a>.</strong>
+  <div class="alert urgent" id="week-alert">
+    <strong>Phase 0 reproduction protocol REVISED 2026-06-08</strong> per workflow w3hf3q31f. <strong>Strict cold-implementation rule:</strong> reference repo <code>jjcherian/conditional-conformal</code> is FORBIDDEN this week. Focus = (a) <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> Mon-Tue (vocabulary), (b) <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> 3-pass read Wed-Thu (Pass 3 = math line-by-line + hand-derive pinball-QR duality on paper), (c) write <code>paper-sheet.md</code> closed-paper one-pager FROM MEMORY by Fri, (d) <a href="#lit-abbott" class="xref">Abbott</a> Ch 2 §2.2-2.3, (e) Kozha Fri 15-18. <strong>Full protocol + anti-patterns on <a href="#schedule">Schedule</a> tab; multi-year arc on <a href="#roadmap">Roadmap</a>.</strong>
   </div>
 
   <div class="card">
@@ -720,7 +720,7 @@
 
   <h3>Lookahead — Summer 2026 (Phase 0 + Lever 1 + MT1173 ramp)</h3>
   <details>
-    <summary>Week of Jun 1–7, 2026 — Step 0 verification done; clone repo + Lever 1 starts</summary>
+    <summary>Week of Jun 1–7, 2026 — Phase 1 RESET (per 2026-06-08 protocol revision)</summary>
     <div class="checkbox-row" data-task-id="ops-jun1-1">
       <input type="checkbox">
       <div class="task-content">
@@ -728,120 +728,178 @@
         <div class="task-meta">Per Step 0 verification w9qh053sx. ~1 hr.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="ops-jun1-2">
+    <div class="checkbox-row" data-task-id="ops-jun1-2-RESET">
       <input type="checkbox">
       <div class="task-content">
-        <div>Clone conditional-conformal repo via HTTPS; reproduce experiments/SyntheticData.ipynb</div>
-        <div class="task-meta"><code>git clone https://github.com/jjcherian/conditional-conformal.git; cd conditional-conformal; git checkout release; jupyter notebook experiments/SyntheticData.ipynb</code>. Budget 1 day for dep drift. Target numerical-agreement with paper Fig 1.</div>
+        <div><strong>RECONCILIATION:</strong> if you cloned <code>jjcherian/conditional-conformal</code> last week, decide: strict reset (delete clone, no view for 2 wks) OR acknowledged slip (don't reopen until Wk 5 per new protocol). Document decision in <code>RESET-DECISION.md</code> for honesty.</div>
+        <div class="task-meta">Per Phase 0 reproduction protocol on Schedule tab. The reference repo is FORBIDDEN until Wk 5 (Jun 29). The original "reproduce SyntheticData.ipynb" task in this week was against the new discipline rule.</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jun1-3">
       <input type="checkbox">
       <div class="task-content">
         <div>Lever 1 (real analysis) self-study STARTS — <a href="#lit-abbott" class="xref">Abbott "Understanding Analysis"</a> Ch 1 (Real Numbers)</div>
-        <div class="task-meta">15-20 hr/wk through summer. Pen-and-paper proofs. Goal: Ch 1-3 by end of Aug. Protects MATH 447 A-grade Feb 2027.</div>
+        <div class="task-meta">20-25 hr/wk through summer per apex-peer calibration. Pen-and-paper proofs + 45-min no-premature-consultation rule + cold-reproduction protocol. Goal: Ch 1-8 by end of Aug.</div>
       </div>
     </div>
     <div class="checkbox-row" data-task-id="ops-jun1-4">
       <input type="checkbox">
       <div class="task-content">
         <div>Kozha paperwork block (Fri 15:00-18:00) — continue existing pipeline</div>
-        <div class="task-meta">36-funder tracker; 12 hr/mo steady-state. Compute-infra credit stack (AWS, DigitalOcean, HF, Anthropic, OpenAI) if not yet sent.</div>
+        <div class="task-meta">36-funder tracker; 12 hr/mo steady-state.</div>
       </div>
     </div>
   </details>
   <details>
-    <summary>Week of Jun 8–14, 2026 — Phase 0 ramp (Angelopoulos tutorial) + Lever 1 Ch 2</summary>
-    <div class="checkbox-row" data-task-id="ops-jun8-1">
+    <summary>Week of Jun 8–14, 2026 — PHASE 1 + 2 (paper-first, NO ref repo)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun8-1-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div>Conformal ramp: <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos &amp; Bates "Gentle Introduction to Conformal Prediction" (arXiv:2107.07511)</a> — read fully + work the toy code</div>
-        <div class="task-meta">~10 hr. Establishes vocabulary; you can skim earlier conformal papers after this.</div>
+        <div><strong>Mon-Tue:</strong> <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos &amp; Bates intro (arXiv:2107.07511)</a> — vocabulary build. Read fully + work toy code. NO reference to jjcherian repo.</div>
+        <div class="task-meta">~10 hr. Apply discipline rule even on tutorial: predict every theorem before reading proof; predict every cell output before running.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="ops-jun8-2">
+    <div class="checkbox-row" data-task-id="ops-jun8-2-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div><a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616)</a> — full read with notes</div>
-        <div class="task-meta">~8 hr. Identify the conditional-coverage construction, the weighted-conformal mechanic, the data they use.</div>
+        <div><strong>Wed-Thu:</strong> <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> 3-pass read (Keshav protocol)</div>
+        <div class="task-meta">Pass 1 (5-10min skim, 5 Cs). Pass 2 (1hr careful + figures, predict each step). Pass 3 (4-8hr math line-by-line, rederive coverage theorem on paper, hand-derive pinball-QR duality). Photograph derivations into <code>derivations/</code>.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="ops-jun8-3">
+    <div class="checkbox-row" data-task-id="ops-jun8-3-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 2 (Sequences and Series) — proofs + selected exercises</div>
+        <div><strong>Fri:</strong> Write <code>paper-sheet.md</code> closed-paper one-pager FROM MEMORY (problem, finite-dim theorem, key proof step, imputed test point eta_{n+1} trick, headline number). Code vanilla split conformal + CQR on synthetic data (Poisson + Gaussian outliers, n=2000/1000/500, 200 trials), verify marginal cov ≈ 0.9.</div>
+        <div class="task-meta">~150 LoC, 1 notebook. ZERO LINES from jjcherian.</div>
       </div>
     </div>
-  </details>
-  <details>
-    <summary>Week of Jun 15–21, 2026 — Phase 0 reproduction (full) + Lever 1 Ch 3</summary>
-    <div class="checkbox-row" data-task-id="ops-jun15-1">
+    <div class="checkbox-row" data-task-id="ops-jun8-4-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div>Full reproduction of paper's UCI Communities&amp;Crime experiment</div>
-        <div class="task-meta">~12-15 hr. Numerical agreement on the marginal-coverage + conditional-coverage tables. Document any deltas.</div>
+        <div>GATE: state Theorem 1 in one sentence paper-closed; state which proof step breaks if exchangeability is dropped. If FAIL → Wk 1 extends, do not proceed to Wk 2.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="ops-jun15-2">
+    <div class="checkbox-row" data-task-id="ops-jun8-5-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 3 (Topology of R) — connectivity, compactness</div>
-      </div>
-    </div>
-    <div class="checkbox-row" data-task-id="ops-jun15-3">
-      <input type="checkbox">
-      <div class="task-content">
-        <div>Primary letter channel mapping — START</div>
-        <div class="task-meta">~3-4 hr concentrated. List KBTU + UoL faculty who could write a math/research letter; check SIEPR-Athey predoc + REU programs accepting KZ citizens. Output: 1-page memo with named candidates + actions.</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 2 §2.2-2.3 (sequences, limits)</div>
       </div>
     </div>
   </details>
   <details>
-    <summary>Week of Jun 22–28, 2026 — Phase 0 extension v1 (conditional-coverage sweep) + Lever 1 Ch 4</summary>
-    <div class="checkbox-row" data-task-id="ops-jun22-1">
+    <summary>Week of Jun 15–21, 2026 — PHASE 3 HARD GO/NO-GO GATE (cold reimplementation)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun15-1-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div>Empirical extension v1: conditional/stratified-coverage sweep the paper doesn't fully show</div>
-        <div class="task-meta">~15-20 hr. Stratify by covariate bins; report coverage gap; plot. This is the contribution that turns reproduction into a bait-artifact.</div>
+        <div>Spec your <code>your_condconf.py</code>: eta variable length n_calib+1 (imputed test point trick), Phi-orthogonality constraint (eta^T Phi == 0), pinball bounds (quantile-1 ≤ eta ≤ quantile), maximize sum(eta * scores)</div>
+        <div class="task-meta">Decide YOUR directory structure — must NOT mirror jjcherian (use e.g. <code>coverage/conditional/</code>). Every function docstring written BEFORE body, referencing paper equation it implements.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="ops-jun22-2">
+    <div class="checkbox-row" data-task-id="ops-jun15-2-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 4 (Functional Limits and Continuity) — pen-and-paper proofs</div>
+        <div>Implement <code>setup_cvx_problem_v1</code> with <code>phi_fn_groups = indicator_matrix(x, disc=[0, 0.5, ..., 5])</code>. Group-conditional coverage test on 10 disjoint groups across 200 trials.</div>
+        <div class="task-meta">Allowed: numpy, scipy, cvxpy, sklearn, quantile-forest. FORBIDDEN: mapie, crepes, nonconformist, jjcherian/conditional-conformal.</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="ops-jun22-3">
+    <div class="checkbox-row" data-task-id="ops-jun15-3-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div>~10-15 hr ML upskill / product / income block (per Kaggle, freelance, or apex tech intern apps)</div>
-        <div class="task-meta">Time-boxed. Don't bloat past 15 hr/wk; that's the §9-fork hedge cap.</div>
+        <div><strong>HARD GATE:</strong> group cov ≥ 0.85 on each of 10 groups WITHOUT consulting jjcherian. Max 90 min consulting condconf.py:713 PERMITTED only AFTER your cold version runs end-to-end (even if numbers wrong). Commit <code>cold_reimplementation/your_condconf.py</code> BEFORE any commit referencing original repo.</div>
+        <div class="task-meta">If FAIL → STOP, do NOT paper over with copy-paste. Remediate Koenker quantile-regression Ch.3 + Boyd Convex Optimization Ch.5 for 1-2 weeks, then resume.</div>
       </div>
     </div>
-  </details>
-  <details>
-    <summary>Week of Jun 29–Jul 5, 2026 — Phase 0 extension v2 (base-learner ablation) + Lever 1 Ch 5</summary>
-    <div class="checkbox-row" data-task-id="ops-jun29-1">
+    <div class="checkbox-row" data-task-id="ops-jun15-4-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div>Empirical extension v2: base-learner ablation (RF vs GBM vs MLP) + propensity/overlap stress-test</div>
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 2 §2.4-2.7 (series); start Ch 3</div>
       </div>
     </div>
-    <div class="checkbox-row" data-task-id="ops-jun29-2">
+    <div class="checkbox-row" data-task-id="ops-jun15-5-NEW">
       <input type="checkbox">
       <div class="task-content">
-        <div>Read <a href="#lit-rlcp" class="xref">Hore-Barber RLCP (arXiv:2310.07850)</a> + Hore's 2026 papers (<a href="#lit-hore-2602" class="xref">arXiv:2602.06267</a>, <a href="#lit-hore-2605" class="xref">arXiv:2605.21627</a>) — <a href="#email-hore" class="xref">Hore</a>-specific anchor prep</div>
-      </div>
-    </div>
-    <div class="checkbox-row" data-task-id="ops-jun29-3">
-      <input type="checkbox">
-      <div class="task-content">
-        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 5 (Derivatives) + start Ch 6</div>
+        <div>Letter-channel memo (KBTU + UoL faculty + REU + SIEPR-Athey KZ-eligibility 1-pg)</div>
+        <div class="task-meta">~3-4 hr concentrated. Output: 1-page memo with named candidates + actions.</div>
       </div>
     </div>
   </details>
   <details>
-    <summary>Week of Jul 6–12, 2026 — Phase 0 polish, repo public, cold-email drafts</summary>
+    <summary>Week of Jun 22–28, 2026 — PHASE 3-4 (shifts + RKHS + sanity)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun22-1-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Add <code>phi_fn_shifts</code> (Gaussian density basis: norm.pdf(x, loc=L_i, scale=sigma_i) stacked) to your_condconf.py</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun22-2-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Add RKHS penalty (0.5*C*||L^T eta||^2 with Cholesky factor of RBF kernel matrix, gamma=12.5, lambda=0.005 to match paper defaults)</div>
+        <div class="task-meta">DO NOT install MOSEK — OSQP/HiGHS fallback is identical for reproduction.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun22-3-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Phase 4 sanity: overfit one batch (n_calib=10) verifying LP/QP solves exactly. Predict plot shape BEFORE running (expected coverage curve, hyperparameter sensitivity, what breaks the method). Reproduce cqrDataComparison_shifts.pdf + agnostic.pdf within ±0.02 of paper's coverage numbers.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun22-4-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 3 §3.2-3.5 (topology, compactness, perfect sets)</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jun 29–Jul 5, 2026 — PHASE 5 GATE (open ref repo + discrepancy log)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun29-1-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>NOW open <code>jjcherian/conditional-conformal</code>.</strong> Swap data loader to UCI Communities &amp; Crime (n=650/650/694, alpha=0.1, 200 trials). Run their <code>experiments/run_comparison.py</code> + your version on identical seed.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-2-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Diff outputs. Log every >0.02 coverage gap in <code>discrepancy-log.md</code> with: (paper number, my number, diff, root cause — hyperparameter? base-learner seed? OSQP-vs-MOSEK numerical differences? Cholesky factor scaling? imputed-test-point indexing?)</div>
+        <div class="task-meta">This file IS the cold-email artifact ('here are the 7 non-obvious implementation details that matter and are not in the manuscript').</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-3-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>HARD GATE:</strong> NO extension code until baseline matches within ±0.02 on at least one C&amp;C headline number. Tag commit <code>baseline-reproduced</code> when match. discrepancy-log.md ≥ 5 entries.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-4-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Read <a href="#lit-rlcp" class="xref">Hore-Barber RLCP (arXiv:2310.07850)</a> + Hore's 2026 papers (<a href="#lit-hore-2602" class="xref">arXiv:2602.06267</a>, <a href="#lit-hore-2605" class="xref">arXiv:2605.21627</a>) — for <a href="#email-hore" class="xref">Hore</a> cold-email anchor prep</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-5-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="#lit-abbott" class="xref">Abbott</a> Ch 4 (Functional Limits + Continuity)</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jul 6–12, 2026 — PHASE 6 EXTENSION 1 (stratified coverage sweep)</summary>
+    <div class="checkbox-row" data-task-id="ops-jul6-NEW-0">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Pre-register Extension 1 hypothesis in <code>extension1_hypothesis.md</code> BEFORE running. What do you expect to see and why?</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-NEW-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Extension 1: stratified coverage sweep on a variable paper does NOT use — racePctBlack quartiles OR population quartiles. Alpha sweep [0.05, 0.2]. Generate one figure + one-paragraph commentary framed as "when does the finite-dim guarantee bind tightly vs. loosely?"</div>
+        <div class="task-meta">Figure must show non-trivial result (not just flat 0.9 line — differential undercoverage on a subgroup, or differential length, or binding-vs-non-binding regime).</div>
+      </div>
+    </div>
     <div class="checkbox-row" data-task-id="ops-jul6-1">
       <input type="checkbox">
       <div class="task-content">
@@ -1003,6 +1061,41 @@
     <strong>Pair with spaced repetition:</strong> reading alone is a slow, uneven way to cover the GRE word list in 9 months. Reading gives depth + contextual feel; GregMat (free Vocab Mountain + YouTube during background phase) gives coverage. The two together converge faster than either alone.
   </p>
 
+  <h3>Phase 0 reproduction protocol (LOCKED 2026-06-08 — applies to <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a>)</h3>
+  <div class="alert urgent">
+    <strong>COLD → WARM → HOT hybrid.</strong> Lead with paper-first re-implementation of the 3 key functions (<code>setup_cvx_problem</code> at condconf.py:713, <code>CondConf.predict</code> at line 271, <code>CondConf.estimate_coverage</code> at line 357). Reference repo (<code>jjcherian/conditional-conformal</code>) is FORBIDDEN during Weeks 1-2; permitted ONLY at Phase 5 (numeric reconciliation, Week 4-5). Git-timestamp evidence is the audit trail — your <code>cold_reimplementation/your_condconf.py</code> must be committed BEFORE any commit referencing <code>replication_using_authors_code/</code>. This is the hardest-to-fake credential the artifact carries; converts it from "undergrad followed a tutorial" → "undergrad actually built the QP solver."
+  </div>
+  <table>
+    <thead><tr><th style="width: 220px;">Phase</th><th>What</th><th style="width: 90px;">Time</th><th style="width: 80px;">Ref repo OK?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Three-pass read</strong> (Keshav)</td><td>Pass 1 (5-10 min) skim → 5 Cs. Pass 2 (1hr) careful + figures. Pass 3 (4-8hr) math line-by-line, rederive coverage theorem, hand-derive pinball-QR duality. <strong>GATE:</strong> <code>paper-sheet.md</code> closed-paper one-pager from memory.</td><td>Wk 1 (15-20 hr)</td><td>❌</td></tr>
+      <tr><td><strong>2. Spec before code</strong> (Karpathy)</td><td>Pseudocode + tensor shapes for the 3 contribution functions. Decide YOUR directory structure (must NOT mirror jjcherian). <strong>GATE:</strong> <code>spec.md</code> with each pseudocode block referencing the paper equation it implements.</td><td>Wk 1-2 (3-4 days)</td><td>❌</td></tr>
+      <tr><td><strong>3. COLD reimplement</strong> (Rush Annotated style)</td><td>Code from YOUR spec only. Allowed: numpy, scipy, cvxpy, sklearn, quantile-forest. FORBIDDEN: mapie, crepes, nonconformist, AND jjcherian/conditional-conformal. <strong>GATE:</strong> <code>cold_reimplementation/your_condconf.py</code> committed BEFORE any commit touching original repo.</td><td>Wks 2-3 (30-40 hr)</td><td>❌</td></tr>
+      <tr><td><strong>4. Sanity-first runs</strong> (Karpathy)</td><td>Overfit one batch (n_calib=10). Predict plot shape BEFORE running. Reproduce cqrDataComparison_groups.pdf within ±0.02 across 200 trials. <strong>Notebooks BANNED as primary artifact</strong> — convert to .py within 48h.</td><td>Wk 3-4 (1 wk)</td><td>❌</td></tr>
+      <tr><td><strong>5. Numeric diff + discrepancy log</strong></td><td>ONLY NOW open jjcherian/conditional-conformal. Run their <code>experiments/synthetic_trial.py</code> + <code>experiments/run_comparison.py</code> on identical seed. Diff outputs. Log every >0.02 gap in <code>discrepancy-log.md</code> with root cause. Tag commit <code>baseline-reproduced</code> when one headline number matches. <strong>This file IS the cold-email artifact.</strong></td><td>Wk 4-5 (10-20 hr)</td><td>✅ for 3 contribution functions only</td></tr>
+      <tr><td><strong>6. Extensions + REPORT.md</strong></td><td>Ext 1: stratified coverage on unused variable (racePctBlack quartiles / population quartiles), alpha sweep [0.05, 0.2], framed as "when does finite-dim guarantee bind?" Ext 2: base-learner ablation (OLS→XGB→qforest→MLP, Phi constant), framed as "are CondConf gains orthogonal to base-model expressivity?" Pre-register hypothesis BEFORE running. REPORT.md in MLRC format.</td><td>Wks 5-6 (30-40 hr)</td><td>✅</td></tr>
+    </tbody>
+  </table>
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>Realism adjustment:</strong> ~50% of paths through this plan hit a Week-2 duality cliff and slip 1-3 weeks. Realistic time-to-artifact = <strong>8-10 weeks, not 6</strong>. Slipping past Week 6 is normal; slipping past Week 10 is failure. Compound funnel: P(artifact ships ~ 40-55%) × P(Cherian/Hore reply | ships ~ 15-25%) × P(sustained engagement | reply ~ 30-50%) × P(LoR-generating relationship | engagement ~ 20-40%) = <strong>~1-5% per attempt</strong>; multi-cycle apex campaign brings cumulative to ~15-25% per OPERATIVE plan.<br>
+    <strong>Week-2 hard go/no-go</strong>: if you cannot reproduce group coverage on synthetic data WITHOUT consulting jjcherian by end of Week 2 → STOP. Remediate Koenker quantile-regression Ch.3 + Boyd Convex Optimization Ch.5 for 1-2 weeks. Resume Week 2. Do NOT paper over with copy-paste — that ends the OPERATIVE plan.
+  </p>
+
+  <h3>Phase 0 anti-patterns (8 traps to avoid — read each Friday)</h3>
+  <table>
+    <thead><tr><th style="width: 70px;">#</th><th>Trap</th><th>Defense</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Read-code-first (recognition memory)</td><td>5-7 day blackout: only PDF + blank .py + pen-and-paper on screen. Browser-history honesty check — if your tab history shows jjcherian repo before <code>your_condconf.py</code> first commit, you failed.</td></tr>
+      <tr><td>2</td><td>Copy-paste with renames (fake comprehension)</td><td>Ban repo's directory structure. Your layout must NOT mirror theirs. Every function docstring written BEFORE the body, stating which paper equation it implements. No equation reference → delete and re-derive.</td></tr>
+      <tr><td>3</td><td>Notebook-runs-clean = understanding</td><td>Before any plot cell, write down on paper: (i) expected shape, (ii) which 2 hyperparameters move it most, (iii) which assumption violation breaks it. Convert all notebooks to scripts within 48h so out-of-order execution can't mask hidden state bugs.</td></tr>
+      <tr><td>4</td><td>Skip-the-proofs</td><td>This is a THEOREM paper — algorithm mechanically derived from finite-dim characterization theorem. Hand-derive main coverage theorem TWICE on paper — once with paper open, once 24h later closed. One-sentence test: "which step breaks if I drop exchangeability?"</td></tr>
+      <tr><td>5</td><td>Extensions-before-baseline-match</td><td>HARD GATE end of Week 4: reproduction must match at least one paper number within ±0.02 on group-conditional coverage (averaged 200 trials). No match → cut extensions, not baseline diagnosis. Otherwise extension delta confounds method-effect with your-silent-bug.</td></tr>
+      <tr><td>6</td><td>Figure-as-mechanism</td><td>Coverage plots all look like near-diagonal lines. Recognizing SHAPE ≠ understanding MECHANISM. For each cqrDataComparison_*.pdf write down: (a) what the null-method curve looks like, (b) which curve is load-bearing, (c) what would have to be true about CondConf for the load-bearing curve to look this way.</td></tr>
+      <tr><td>7</td><td>Ambition creep</td><td>WILDSExperiments.ipynb is explicitly out of Phase 0 scope. Two extensions, both pre-registered. Any third idea goes in <code>phase1-ideas.md</code>, not the repo.</td></tr>
+      <tr><td>8</td><td>Input/output ratio drift</td><td>End-of-session log: input-minutes (reading/scrolling/running others' code) vs output-minutes (deriving/writing-before-checking/predicting-before-observing). Target 1:1, ideally 1:1.5 output-heavy. Any >70% input day triggers 45-min mandatory output before any input next session.</td></tr>
+    </tbody>
+  </table>
+
   <h3>Self-study discipline rules (apply to <a href="#lit-abbott" class="xref">Abbott</a> / <a href="#lit-rudin" class="xref">Rudin</a> / <a href="#lit-axler" class="xref">Axler</a> / Phase 0 reading)</h3>
   <div class="alert urgent">
     <strong>Read at top of every Friday paperwork block + before every deep-work session.</strong> Without this, self-study captures 10-30% of formal-course signal. With this, 70-80%. Locked 2026-06-05 post-diagnostic.
@@ -1050,69 +1143,65 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>Jun 1–7</strong><br><span class="badge status-progress">NOW</span></td>
-        <td><strong>P0</strong> apply 4 reframes to OPERATIVE-spec; clone <code>conditional-conformal</code> repo; start <code>SyntheticData.ipynb</code></td>
-        <td><strong>P0</strong> finish SyntheticData reproduction → numerical agreement with <a href="#lit-gcc-2305" class="xref">GCC paper</a> Fig 1</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> §1.1–1.3 + Ex 1.2.1–1.3.6 (real numbers, Q vs R, Axiom of Completeness)</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> §1.4–1.5 + proofs (Cantor diagonalization, cardinality)</td>
-        <td><strong>P0</strong> repo notes: numbers-vs-paper, commit + push</td>
-        <td>SyntheticData reproduction matches paper; <a href="#lit-abbott" class="xref">Abbott</a> Ch 1 done</td>
+      <tr><td><strong>Jun 1–7</strong><br><span class="badge status-soon">PHASE 1 RESET</span></td>
+        <td colspan="5" style="background: var(--warn-soft);"><strong>RECONCILIATION (per 2026-06-08 protocol revision):</strong> the original Wk 1 plan said "clone repo + start SyntheticData.ipynb" — this is now <strong>against the discipline rule</strong> (touches reference repo before <code>your_condconf.py</code> exists). If you only inspected directory structure, treat it as acknowledged slip and DO NOT REOPEN any file until Week 5. If you already started reading <code>condconf.py</code> line by line, strict reset = delete local clone + don't look for 2 weeks. Be ruthlessly honest. <strong>Real load this week was:</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 1 + applying 4 reframes to OPERATIVE-spec.</td>
+        <td><a href="#lit-abbott" class="xref">Abbott</a> Ch 1 done; OPERATIVE-spec reframes applied; clone-or-not decision made</td>
       </tr>
-      <tr><td><strong>Jun 8–14</strong></td>
-        <td><strong>P0</strong> <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> §1–3 + run toy code</td>
+      <tr><td><strong>Jun 8–14</strong><br><span class="badge status-progress">NOW · PHASE 1 + 2</span></td>
+        <td><strong>P0</strong> <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> §1–3 + run toy code (NO reference to jjcherian repo)</td>
         <td><strong>P0</strong> <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates</a> §4–6 + finish toy code; vocab notes</td>
-        <td><strong>P0</strong> <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> §1–3 (problem + method)</td>
-        <td><strong>P0</strong> <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> §4–6 (theory + experiments) + read appendix</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 2 §2.2–2.3 (sequences, limits)</td>
-        <td>Conformal vocab fluent; <a href="#lit-gcc-2305" class="xref">GCC</a> fully read</td>
+        <td><strong>P0</strong> <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> Pass 1 (skim, 5 Cs) + Pass 2 (careful read, figures)</td>
+        <td><strong>P0</strong> <a href="#lit-gcc-2305" class="xref">GCC 2305.12616</a> Pass 3 (math line-by-line, rederive coverage theorem, hand-derive pinball-QR duality on paper)</td>
+        <td><strong>P0</strong> Write <code>paper-sheet.md</code> closed-paper one-pager FROM MEMORY (problem, finite-dim theorem, key proof step, imputed test point eta_{n+1} trick, headline number). Vanilla split conformal + CQR on synthetic data (n=2000/1000/500, 200 trials), marginal cov ≈ 0.9. <strong>ZERO LINES from jjcherian.</strong></td>
+        <td><strong>GATE:</strong> state Theorem 1 in one sentence paper-closed; state which proof step breaks if exchangeability dropped. Hand-derived pinball-QR duality photographed into <code>derivations/</code>. ~150 LoC + 1 notebook. If gate fails → Wk 1 extends.</td>
       </tr>
-      <tr><td><strong>Jun 15–21</strong></td>
-        <td><strong>P0</strong> UCI C&amp;C dataset load + start replication scaffolding</td>
-        <td><strong>P0</strong> UCI C&amp;C marginal-coverage replication → match paper table</td>
-        <td><strong>P0</strong> UCI C&amp;C conditional-coverage replication</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 2 finish (§2.4–2.7 series); start Ch 3</td>
-        <td><strong>O</strong> Letter-channel memo: KBTU/UoL faculty + REU + SIEPR-Athey KZ-eligibility 1-pg</td>
-        <td>UCI reproduction complete; letter-channel memo drafted</td>
+      <tr><td><strong>Jun 15–21</strong><br><span class="badge tier-1">LOAD-BEARING HARD GATE</span></td>
+        <td><strong>P0 Phase 3</strong> Spec your <code>your_condconf.py</code> — eta variable length n_calib+1 (imputed test point trick), Phi-orthogonality constraint, pinball bounds</td>
+        <td><strong>P0 Phase 3</strong> Implement <code>setup_cvx_problem_v1</code> with <code>phi_fn_groups = indicator_matrix(x, disc=[0, 0.5, ..., 5])</code></td>
+        <td><strong>P0 Phase 3</strong> Group-conditional coverage test on 10 disjoint groups across 200 trials</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 2 §2.4–2.7 (series); start Ch 3</td>
+        <td><strong>O</strong> Letter-channel memo (KBTU/UoL faculty + REU + SIEPR-Athey KZ-eligibility 1-pg) + Wk-2 gate retrospective</td>
+        <td><strong>HARD GO/NO-GO:</strong> group cov ≥ 0.85 on each of 10 groups WITHOUT consulting jjcherian (max 90 min consulting condconf.py:713 PERMITTED only AFTER cold version runs end-to-end). Commit <code>cold_reimplementation/your_condconf.py</code> BEFORE any commit referencing original repo. If fails → STOP, remediate Koenker Ch.3 + Boyd Ch.5 for 1-2 weeks.</td>
       </tr>
       <tr><td><strong>Jun 22–28</strong></td>
-        <td><strong>P0 ext v1</strong> code stratified-coverage sweep (covariate bins)</td>
-        <td><strong>P0 ext v1</strong> generate sweep + plot coverage gap by stratum</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 3 §3.2–3.3 (open/closed sets, topology of R)</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 3 §3.4–3.5 (compactness, perfect sets)</td>
-        <td><strong>P0 ext v1</strong> write-up + commit "extension-1.md"</td>
-        <td>Extension v1 done; <a href="#lit-abbott" class="xref">Abbott</a> Ch 3 done</td>
+        <td><strong>P0 Phase 3</strong> Add <code>phi_fn_shifts</code> (Gaussian density basis: norm.pdf stacked)</td>
+        <td><strong>P0 Phase 3</strong> Add RKHS penalty (0.5*C*||L^T eta||^2 with Cholesky factor of RBF kernel, gamma=12.5, lambda=0.005)</td>
+        <td><strong>P0 Phase 4</strong> Overfit one batch (n_calib=10), verify LP/QP solves exactly; predict plot shape BEFORE running</td>
+        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 3 §3.2–3.5 (topology, compactness, perfect sets)</td>
+        <td><strong>P0 Phase 4</strong> Reproduce cqrDataComparison_shifts.pdf + agnostic.pdf within ±0.02 of paper. Port crossval.py:runCV. <strong>DO NOT install MOSEK</strong> — OSQP/HiGHS identical for reproduction.</td>
+        <td>Side-by-side reproduction of 2 synthetic figures committed with caption "matches paper within MC error (σ≈0.07)"</td>
       </tr>
-      <tr><td><strong>Jun 29–Jul 5</strong></td>
-        <td><strong>P0 ext v2</strong> RF base learner ablation</td>
-        <td><strong>P0 ext v2</strong> GBM + MLP base learners; comparison table</td>
-        <td><strong>P0</strong> read <a href="#lit-rlcp" class="xref">Hore RLCP (arXiv:2310.07850)</a> cover-to-cover</td>
-        <td><strong>P0</strong> read Hore 2026 papers (<a href="#lit-hore-2602" class="xref">2602.06267</a> + <a href="#lit-hore-2605" class="xref">2605.21627</a>); take Hore-anchor notes</td>
+      <tr><td><strong>Jun 29–Jul 5</strong><br><span class="badge tier-2">PHASE 5 GATE</span></td>
+        <td><strong>P0 Phase 5</strong> Swap data loader to UCI Communities &amp; Crime (n=650/650/694, alpha=0.1, 200 trials). NOW open jjcherian/conditional-conformal.</td>
+        <td><strong>P0 Phase 5</strong> Run their <code>experiments/run_comparison.py</code> + your version on identical seed</td>
+        <td><strong>P0 Phase 5</strong> Diff outputs; log every >0.02 gap in <code>discrepancy-log.md</code> with root cause (hyperparameter / seed / numerical solver / imputed-test-point indexing)</td>
         <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 4 (Functional Limits + Continuity)</td>
-        <td>Extension v2 done; <a href="#email-hore" class="xref">Hore</a>-anchor papers fluent</td>
+        <td><strong>P0</strong> read <a href="#lit-rlcp" class="xref">Hore RLCP (arXiv:2310.07850)</a> + Hore 2026 papers (<a href="#lit-hore-2602" class="xref">2602.06267</a>, <a href="#lit-hore-2605" class="xref">2605.21627</a>) — for cold-email anchor prep</td>
+        <td><strong>HARD GATE:</strong> NO extension code until baseline matches within ±0.02 on at least one C&amp;C headline number. Tag commit <code>baseline-reproduced</code> when match. discrepancy-log.md ≥ 5 entries. If no match → cut extensions, extend reconciliation.</td>
       </tr>
-      <tr><td><strong>Jul 6–12</strong></td>
-        <td><strong>P0</strong> repo polish — README rewrite, one-command run script</td>
-        <td><strong>P0</strong> pin env (conda env file), CI smoke test, reproduce table embed</td>
-        <td><strong>O</strong> draft <a href="#email-hore" class="xref">Hore cold-email</a> (anchor on <a href="#lit-rlcp" class="xref">RLCP</a> + your conditional-coverage sweep)</td>
-        <td><strong>O</strong> draft <a href="#email-gibbs" class="xref">Gibbs cold-email</a> (anchor on <a href="#lit-gcc-2305" class="xref">2305.12616</a>); refine both; specific technical Q</td>
+      <tr><td><strong>Jul 6–12</strong><br><span class="badge status-soon">EXTENSION 1</span></td>
+        <td><strong>P0 Phase 6</strong> Pre-register Ext 1 hypothesis in <code>extension1_hypothesis.md</code> BEFORE running</td>
+        <td><strong>P0 Phase 6</strong> Run CondConf on C&amp;C with Phi on variable paper does NOT use — racePctBlack quartiles OR population quartiles</td>
+        <td><strong>P0 Phase 6</strong> Alpha sweep [0.05, 0.2]; generate one figure + paragraph commentary framed as "when does finite-dim guarantee bind tightly vs loosely?"</td>
         <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 5 (Derivatives) + start Ch 6 (Uniform Convergence)</td>
-        <td>Repo public + polished; 2 cold-emails drafted</td>
+        <td><strong>O</strong> Draft <a href="#email-hore" class="xref">Hore cold-email</a> (200 words, subject "7 implementation details from reproducing CPCG"); draft <a href="#email-gibbs" class="xref">Gibbs cold-email</a></td>
+        <td>Ext 1 figure shows non-trivial result (not flat 0.9 line). Pre-registered hypothesis file committed BEFORE figure-generating script.</td>
       </tr>
-      <tr><td><strong>Jul 13–19</strong><br><span class="badge tier-2">SEND</span></td>
-        <td><strong>O</strong> <strong>SEND <a href="#email-hore" class="xref">Hore cold-email</a></strong> (rhore@andrew.cmu.edu); SEND <a href="#email-gibbs" class="xref">Gibbs cold-email</a> (igibbs@berkeley.edu)</td>
-        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1 (Matrices and Linear Equations)</td>
-        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 2 (Vector spaces — basics, span)</td>
-        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 3 (Linear independence, basis intro)</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 6 (Uniform Convergence) finish</td>
-        <td>Cold-emails OUT; MT1173 prep ramping</td>
+      <tr><td><strong>Jul 13–19</strong><br><span class="badge tier-1">EXT 2 + REPORT.md (NOT cold-email yet)</span></td>
+        <td><strong>P0 Phase 6</strong> Pre-register Ext 2 hypothesis. Base-learner ablation: OLS → quantile-forest → XGBoost → MLP, Phi held constant</td>
+        <td><strong>P0 Phase 6</strong> Table: marginal cov / max group-conditional cov gap / mean prediction-set length per base learner</td>
+        <td><strong>P0 Phase 6</strong> Write REPORT.md in MLRC format (Reproducibility Summary / Methodology / Results / What was easy / What was difficult / Communication with authors / Pineau-checklist appendix)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1 (Matrices) — MT1173 prep begins (15-25 hr/wk ramping)</td>
+        <td><strong>P0 Phase 6</strong> Polish repo to PwC 5-item compliance (Dockerfile + requirements.txt pinned + <code>make reproduce</code> regenerates figures + saved model checkpoints + results table). README leads with 2x3 side-by-side reproduction grid + 2 extension findings</td>
+        <td><strong>Repo passes 10-second-scroll PwC test.</strong> REPORT.md complete. ONLY NOW is cold-email eligible to send. <strong>Send to Cherian FIRST</strong> (Stanford PhD under Candès, runs the repo issues page = natural inbound channel), then Hore. Gibbs lower-probability cold. DO NOT email Candès directly — status mismatch.</td>
       </tr>
-      <tr><td><strong>Jul 20–26</strong></td>
+      <tr><td><strong>Jul 20–26</strong><br><span class="badge status-soon">SLIP BUFFER / SEND</span></td>
+        <td><strong>P0 buffer</strong> if Phase 0 slipped past Jul 19 (50% likely per realism adjustment): finish REPORT.md + polish; OR if shipped, <strong>SEND Cherian cold-email</strong> first (jjcherian via repo issues channel)</td>
+        <td><strong>P0</strong> Send Hore cold-email Tue (rhore@andrew.cmu.edu) IF artifact shipped; otherwise more buffer</td>
         <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 4 (Determinants)</td>
-        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 5 (Matrix inversion methods)</td>
-        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 6 (Eigenvalues intro) + 30 problems</td>
-        <td><strong>L1</strong> <a href="#lit-abbott" class="xref">Abbott</a> Ch 7 (Riemann Integral)</td>
-        <td><strong>O</strong> outreach reply triage (3-wk cadence); if no <a href="#email-hore" class="xref">Hore</a>/<a href="#email-gibbs" class="xref">Gibbs</a> reply by Aug 5 → plan backfill</td>
-        <td><a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 4–6 done; outreach triage rhythm set</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 5 (Matrix inversion)</td>
+        <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 6 (Eigenvalues intro)</td>
+        <td>Phase 0 artifact SHIPPED OR explicit buffer decision (cut Ext 2? push to Aug?). Cold-emails sent IF shipped.</td>
       </tr>
       <tr><td><strong>Jul 27–Aug 2</strong></td>
         <td><strong>MT</strong> <a href="#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 7 (Vector spaces — formal)</td>
@@ -1155,13 +1244,13 @@
         <td><strong>Summer wrap.</strong> <a href="#lit-abbott" class="xref">Abbott</a> DONE · <a href="#lit-rudin" class="xref">Rudin</a> Ch 1–4 DONE · MT1173 ~70% ready</td>
       </tr>
       <tr style="background: var(--bg-3);"><td colspan="7" style="text-align: center; color: var(--fg-dim); font-style: italic;">— Fall 2026 begins. UoL Year 3 semester starts. Morning deep-work block compresses around classes. —</td></tr>
-      <tr><td><strong>Sep 1–7</strong></td>
+      <tr><td><strong>Sep 1–7</strong><br><span class="badge status-pending">AXLER STARTS</span></td>
         <td><strong>MT</strong> Mock exam #3</td>
         <td><strong>UoL</strong> Year 3 classes start; MT1173 review evenings</td>
         <td><strong>MT</strong> Mock #3 review + UoL coursework</td>
-        <td><strong>UoL</strong> + <strong>L1</strong> Rudin Ch 5 (Differentiation) start</td>
+        <td><strong>L1b</strong> <a href="#lit-axler" class="xref">Axler</a> Ch 1.A (R^n and C^n) — apply discipline rule (45-min no-consult; cold-prove every result)</td>
         <td><strong>MT</strong> past paper #5</td>
-        <td>UoL Y3 launched; MT1173 mock cadence stable</td>
+        <td>UoL Y3 launched; Axler self-study begins; MT1173 mock cadence stable</td>
       </tr>
       <tr><td><strong>Sep 8–14</strong></td>
         <td><strong>UoL</strong> + <strong>MT</strong> Mock exam #4</td>
@@ -1175,33 +1264,33 @@
         <td><strong>UoL</strong> classes</td>
         <td><strong>MT</strong> targeted weakness drill</td>
         <td><strong>UoL</strong> coursework</td>
-        <td><strong>MT</strong> past paper #7</td>
+        <td><strong>L1b</strong> <a href="#lit-axler" class="xref">Axler</a> Ch 1.B-1.C (vector spaces, subspaces) — cold-prove every proposition</td>
         <td><strong>UoL</strong> + outreach maintenance</td>
-        <td>UoL rhythm + MT1173 holding</td>
+        <td>UoL rhythm + MT1173 holding + Axler Ch 1 done</td>
       </tr>
       <tr><td><strong>Sep 22–28</strong></td>
         <td><strong>MT</strong> Mock exam #5</td>
         <td><strong>UoL</strong> classes</td>
         <td><strong>MT</strong> Mock #5 review</td>
-        <td><strong>UoL</strong> coursework</td>
+        <td><strong>L1b</strong> <a href="#lit-axler" class="xref">Axler</a> Ch 2.A (span + linear independence)</td>
         <td><strong>MT</strong> past paper #8</td>
-        <td>5 mocks done</td>
+        <td>5 mocks done; Axler Ch 2.A done</td>
       </tr>
       <tr><td><strong>Sep 29–Oct 5</strong></td>
         <td><strong>MT</strong> intensive drill — proofs week</td>
         <td><strong>UoL</strong> classes</td>
         <td><strong>MT</strong> intensive drill — computation week</td>
-        <td><strong>UoL</strong> coursework</td>
+        <td><strong>L1b</strong> <a href="#lit-axler" class="xref">Axler</a> Ch 2.B-2.C (bases, dimension)</td>
         <td><strong>MT</strong> mixed timed sets</td>
-        <td>MT1173 final-month ramp begins</td>
+        <td>MT1173 final-month ramp begins; Axler Ch 2 done</td>
       </tr>
       <tr><td><strong>Oct 6–12</strong></td>
         <td><strong>MT</strong> Mock exam #6</td>
         <td><strong>UoL</strong> classes</td>
         <td><strong>MT</strong> Mock #6 review + drill</td>
-        <td><strong>UoL</strong> coursework</td>
+        <td><strong>L1b</strong> <a href="#lit-axler" class="xref">Axler</a> Ch 3.A (linear maps) — light slot only; MT1173 dominates</td>
         <td><strong>MT</strong> past paper #9</td>
-        <td>—</td>
+        <td>Axler Ch 3.A done — Axler PAUSES through MT1173 exam (resume mid-Nov)</td>
       </tr>
       <tr><td><strong>Oct 13–19</strong></td>
         <td><strong>MT</strong> Mock exam #7</td>
@@ -1231,9 +1320,9 @@
         <td>Recovery / rest</td>
         <td>Recovery; light Rudin reading</td>
         <td><strong>L1</strong> Rudin Ch 6 (Riemann-Stieltjes) start</td>
-        <td><strong>L1</strong> Rudin Ch 6 continue + UoL classes resume</td>
+        <td><strong>L1b</strong> <a href="#lit-axler" class="xref">Axler</a> Ch 3.B-3.C resume (linear maps + matrices) + UoL classes resume</td>
         <td><strong>O</strong> outreach maintenance + UIUC MATH 447 enrollment prep</td>
-        <td>Post-exam recovery; pivot to Rudin Ch 5–7 fall finish</td>
+        <td>Post-exam recovery; Axler resumes Ch 3; Rudin Ch 5-7 fall finish</td>
       </tr>
     </tbody>
   </table>
@@ -2158,10 +2247,30 @@
   <p class="tab-subtitle">Conformal-core entry-layer targets per 2026-06-04 OPERATIVE pivot (post 3-OPE-kills). Hore (CMU) primary, Gibbs (Berkeley) secondary; Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy DROPPED (OPE-kill meta-pattern). Apex PIs (Ramdas / Barber / Tibshirani) reached ONLY via postdoc-conduit after Phase 0 artifact public.</p>
 
   <div class="alert urgent">
-    <strong>OPERATIVE PIVOT 2026-06-04 — DROP the OPE primaries.</strong> Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy were Option α-positioned. After 3 OPE kills (Option α, OPE-bench, RA-collateral) the cold-email machinery rebuilds against the postdoc layer of the apex conformal tree.
+    <strong>OPERATIVE PIVOT 2026-06-04 — DROP the OPE primaries.</strong> Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy were Option α-positioned. After 3 OPE kills the cold-email machinery rebuilds against the postdoc layer of the apex conformal tree.
     <br><br>
-    <strong>New sequence:</strong> Phase 0 (Jun-Jul 2026) → Wk of Jul 13: SEND Hore (anchor on his RLCP arXiv:2310.07850) + SEND Gibbs (anchor on Gibbs-Cherian-Candès JRSS-B 2025 arXiv:2305.12616) AFTER repo public. Sustain follow-ups 3-week cadence. <strong>Do NOT cold-email Ramdas / Barber / Tibshirani / Candès directly</strong> — apex PI letters route through their postdoc/student via co-authored output, NOT cold email.
+    <strong>REVISED 2026-06-08 SEND ORDER (per workflow w3hf3q31f):</strong> SEND ORDER = <strong>Cherian FIRST</strong> (Stanford PhD under Candès, runs the jjcherian/conditional-conformal issues page = natural inbound channel) → then <strong>Hore</strong> (anchor on his RLCP arXiv:2310.07850) → then <strong>Gibbs</strong> (lower-probability cold-engagement; anchor on 2305.12616 he lead-authored). Do NOT email Candès directly in Phase 0 — status mismatch. Sustain follow-ups 3-week cadence. Apex PI letters route through their postdoc/student via co-authored output, NOT cold email.
   </div>
+
+  <h3>Cold-email artifact rubric (10 components — repo must clear this before any send)</h3>
+  <div class="alert">
+    <strong>If a postdoc opens your repo and cannot identify components 1-2 in 10 seconds of scrolling, the email gets archived. Non-negotiable floor.</strong>
+  </div>
+  <table>
+    <thead><tr><th style="width: 60px;">#</th><th>Component</th><th>What</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>PwC 5-item compliance</strong></td><td>Dockerfile + <code>requirements.txt</code> pinned · <code>make reproduce</code> regenerates every figure into <code>figures/</code> · saved base-learner checkpoints in <code>models/</code> · <code>results/</code> table-of-numbers regeneratable. The 10-second-scroll gate.</td></tr>
+      <tr><td>2</td><td><strong>Side-by-side figure reproduction</strong></td><td>README opens with 2x3 grid: your reproduced cqrDataComparison_{groups,shifts,agnostic}.pdf left, paper's right, for synthetic + Communities&amp;Crime. Caption: "matches paper within MC error (n_trials=200, σ ≈ 0.07)".</td></tr>
+      <tr><td>3</td><td><strong>Cold-reimplementation provenance</strong></td><td>Commit <code>cold_reimplementation/your_condconf.py</code> with git timestamp BEFORE any commit touching <code>replication_using_authors_code/</code>. Git log is the hardest-to-fake credential. Converts artifact from "undergrad followed a tutorial" to "undergrad actually built the QP solver".</td></tr>
+      <tr><td>4</td><td><strong>REPORT.md in MLRC format</strong></td><td>Reproducibility Summary / Methodology / Results / <strong>What was easy / What was difficult</strong> (the 5-15 non-obvious implementation details — imputed-test-point eta_{n+1} dimension trick, Cholesky factor for RKHS penalty, OSQP-vs-MOSEK numerical differences) / Communication with authors / Pineau-checklist appendix.</td></tr>
+      <tr><td>5</td><td><strong>One notebook with duality derivation as inline markdown</strong></td><td>Pinball-QR dual + Phi-orthogonality + imputed test point, derived in LaTeX cells alongside cvxpy code implementing each constraint. README's "click here first" link.</td></tr>
+      <tr><td>6</td><td><strong>Extension 1 framed as research question</strong></td><td>NOT "I ran condconf on more groups" but "when does the finite-dim guarantee bind tightly vs. loosely?" One figure: coverage curves on C&amp;C stratified by racePctBlack OR population quartiles, alpha sweep [0.05, 0.2]. One paragraph identifying binding/non-binding regime.</td></tr>
+      <tr><td>7</td><td><strong>Extension 2 framed as research question</strong></td><td>NOT "I tried XGBoost" but "are CondConf's gains orthogonal to base-model expressivity?" Table: OLS / quantile-forest / XGBoost / MLP base regressor, Phi held constant. One-sentence declarative finding.</td></tr>
+      <tr><td>8</td><td><strong>The email itself — 200 words, 3 paragraphs, NO ask</strong></td><td><strong>P1:</strong> "I reproduced your JRSS-B 2025 paper from scratch over 6 weeks; [repo link]." <strong>P2:</strong> "Extension [X] surfaced [specific non-obvious finding, 1 sentence, must be true]." <strong>P3:</strong> "I'm applying for stats PhD Fall 2028; open to a 20-min call about [specific open question raised by your extension]?" NO letter request. NO admissions mention. <strong>Subject:</strong> "7 implementation details from reproducing CPCG (your 2025 JRSS-B paper)" — opens at much higher rate than generic interest emails.</td></tr>
+      <tr><td>9</td><td><strong>Targeting</strong></td><td>Lead with Cherian (Stanford PhD under Candès, runs repo issues = natural inbound) and Hore (CMU postdoc, Barber/Ramdas orbit). Gibbs lower-probability cold. Do NOT email Candès directly in Phase 0.</td></tr>
+      <tr><td>10</td><td><strong>Timing discipline</strong></td><td>Do NOT email before Wk 6 deliverable shipped. Minimum credible artifact = baseline match + one non-obvious empirical extension finding. Sending earlier collapses your single shot — they remember names and the second email reads as "still hasn't shipped".</td></tr>
+    </tbody>
+  </table>
 
   <h3>Tier A — Conformal-core postdoc layer (current OPERATIVE primaries)</h3>
   <table>
@@ -2169,8 +2278,9 @@
       <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr id="email-hore" class="xref-target"><td>1</td><td><strong>Rohan Hore</strong></td><td>CMU postdoc · Stats &amp; Data Science · Barber-trained, with Ramdas</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td><strong>PRIMARY.</strong> Email: <code>rhore@andrew.cmu.edu</code> (verified). Anchor on <a href="#lit-rlcp">RLCP</a> + his 2026 papers (<a href="#lit-hore-2602">arXiv:2602.06267</a>, <a href="#lit-hore-2605">arXiv:2605.21627</a>) — NOT on Gibbs's paper. Send Wk of Jul 13 after Phase 0 repo public. Co-author conduit to Ramdas+Barber.</td></tr>
-      <tr id="email-gibbs" class="xref-target"><td>2</td><td><strong>Isaac Gibbs</strong></td><td>UC Berkeley postdoc · Stats · Tibshirani (NOT Candès — corrected)</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td>SECONDARY. Email: <code>igibbs@berkeley.edu</code> (verified). Anchor on <a href="#lit-gcc-2305">2305.12616</a> (he is lead author). Job-market closing-window risk; re-verify status Sep 2026 + Jan 2027. Co-author conduit to Tibshirani.</td></tr>
+      <tr id="email-cherian" class="xref-target"><td>0</td><td><strong>John Cherian</strong></td><td>Stanford PhD under Candès · runs jjcherian/conditional-conformal repo issues page</td><td><input type="checkbox" data-task-id="email-0-r1"></td><td><input type="checkbox" data-task-id="email-0-resp"></td><td><input type="checkbox" data-task-id="email-0-r2"></td><td><strong>SEND FIRST (revised 2026-06-08).</strong> Natural inbound channel — he runs the repo issues page so reproduction-based emails fit his expected inbox. Anchor on <a href="#lit-gcc-2305">GCC 2305.12616</a> + your discrepancy-log findings. Verify current placement per OPERATIVE Step-0 (might be at OpenAI/elsewhere now). Co-author conduit to Candès.</td></tr>
+      <tr id="email-hore" class="xref-target"><td>1</td><td><strong>Rohan Hore</strong></td><td>CMU postdoc · Stats &amp; Data Science · Barber-trained, with Ramdas</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td><strong>SEND SECOND.</strong> Email: <code>rhore@andrew.cmu.edu</code> (verified). Anchor on <a href="#lit-rlcp">RLCP</a> + his 2026 papers (<a href="#lit-hore-2602">arXiv:2602.06267</a>, <a href="#lit-hore-2605">arXiv:2605.21627</a>) — NOT on Gibbs's paper. Send Wk of Jul 13 after Phase 0 repo public. Co-author conduit to Ramdas+Barber.</td></tr>
+      <tr id="email-gibbs" class="xref-target"><td>2</td><td><strong>Isaac Gibbs</strong></td><td>UC Berkeley postdoc · Stats · Tibshirani (NOT Candès — corrected)</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td><strong>SEND THIRD (lower-probability cold-engagement per workflow).</strong> Email: <code>igibbs@berkeley.edu</code> (verified). Anchor on <a href="#lit-gcc-2305">2305.12616</a> (he is lead author). Job-market closing-window risk; re-verify status Sep 2026 + Jan 2027. Co-author conduit to Tibshirani.</td></tr>
     </tbody>
   </table>
 
