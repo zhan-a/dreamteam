@@ -19,6 +19,21 @@ kozha-funding-tracker.md
 ope-foundation-reading.md
 next-session-brief.md
 
+# Added 2026-06-08 after accidental push of OPERATIVE-project-spec.md
+OPERATIVE-project-spec.md
+STATE-OF-AFFAIRS-*.md
+conformal-causal-project-*.md
+cinelli-sensitivity-project-spec.md
+causal-ra-outreach-db.md
+causal-ra-outreach-db.csv
+situation-report-*.md
+us-msc-stats-funding-*.md
+quant-qr-backgrounds/
+ope-benchmark-scoping.md
+*-project-spec.md
+*-scoping.md
+*-database.md
+
 # Jekyll-specific (we removed Jekyll; using .nojekyll instead)
 _config.yml
 _site/
