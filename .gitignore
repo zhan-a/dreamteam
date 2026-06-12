@@ -34,6 +34,13 @@ ope-benchmark-scoping.md
 *-scoping.md
 *-database.md
 
+# Added 2026-06-11 — new session artifacts (prevent accidental public push)
+*-research/
+canada-msc-research/
+msc-bridge-research/
+conditional-conformal/
+transcript*.md
+
 # Jekyll-specific (we removed Jekyll; using .nojekyll instead)
 _config.yml
 _site/
