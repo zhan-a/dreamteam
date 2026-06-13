@@ -41,6 +41,7 @@ msc-bridge-research/
 conditional-conformal/
 transcript*.md
 reu-data.json
+dashboard-source.html
 gen_opportunities.py
 build_site.py
 *.py

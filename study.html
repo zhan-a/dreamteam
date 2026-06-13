@@ -383,6 +383,7 @@
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+h2[id],h3[id]{scroll-margin-top:130px}
 .dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
 .dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
 .site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
@@ -392,10 +393,24 @@ body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
 .site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
 .site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
 @media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+/* === calendar === */
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
+.cal-filter.off{opacity:.38}
+.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
+.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
+.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.cal-item{font-weight:600}
+.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
+.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
+.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
+.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
+.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
+.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="cur">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="cur">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
 <div class="site-subnav"><div class="lbl">Study</div><a href="#stu-1-literature-reading-list-references" class="">Literature — Reading List + References</a><a href="#lit-roadmap" class="h3">0. Reading roadmap by timeline (what to read WHEN)</a><a href="#stu-3-1-phase-0-paper-anchors-conformal-core-repro" class="h3">1. Phase 0 paper anchors (conformal-core; reproduce + extend</a><a href="#stu-4-2-conformal-frontier-papers-distribution-fre" class="h3">2. Conformal frontier papers (distribution-free inference + </a><a href="#stu-5-3-cold-email-faculty-s-recent-work-anchor-pa" class="h3">3. Cold-email faculty's recent work (anchor papers for each)</a><a href="#stu-6-4-classical-causal-inference-textbooks-refer" class="h3">4. Classical causal inference textbooks REFERENCE — 2027+</a><a href="#stu-7-5-real-analysis-math-foundations-textbooks-a" class="h3">5. Real analysis + math foundations textbooks ABBOTT + A&amp</a><a href="#stu-8-6-statistical-inference-foundations-textbook" class="h3">6. Statistical inference foundations textbooks REFERENCE — M</a><a href="#stu-9-7-ml-statistical-learning-textbooks-referenc" class="h3">7. ML / statistical learning textbooks REFERENCE — PhD cours</a><a href="#stu-10-8-frontier-2024-2026-papers-worth-tracking-c" class="h3">8. Frontier 2024–2026 papers worth tracking (conformal-causa</a><a href="#stu-11-9-r-python-tooling-conformal-first" class="h3">9. R / Python tooling (conformal-first)</a><a href="#stu-12-10-character-self-engineering-reading-revise" class="h3">10. Character / self-engineering reading REVISED 2026-06-08 </a><a href="#stu-13-how-to-use-this-list" class="h3">How to use this list</a><a href="#stu-14-gre-prep-june-2026-september-2027" class="">GRE Prep — June 2026 → September 2027</a><a href="#stu-15-diagnostic-baseline-untimed-powerprep-2026-0" class="h3">Diagnostic baseline (UNTIMED POWERPREP, 2026-05-25)</a><a href="#stu-16-score-targets-revised-2026-05-26" class="h3">Score targets (REVISED 2026-05-26)</a><a href="#stu-17-per-programme-operative-status-final-classif" class="h3">Per-programme operative status (FINAL classification per 18t</a><a href="#stu-18-phase-1-background-june-october-2026-5-7-hr-" class="h3">Phase 1 — Background (June–October 2026, ~5-7 hr/wk)</a><a href="#stu-19-phase-2-uol-exam-pause-november-2026" class="h3">Phase 2 — UoL exam pause (November 2026)</a><a href="#stu-20-phase-3-december-2026-calibration-3-hrs" class="h3">Phase 3 — December 2026 calibration (~3 hrs)</a><a href="#stu-21-phase-4-jan-jun-2027-gre-suspended-revised-2" class="h3">Phase 4 — Jan-Jun 2027 GRE SUSPENDED (REVISED 2026-05-26)</a><a href="#stu-22-phase-5-jul-aug-2027-intensive-25-35-hr-tota" class="h3">Phase 5 — Jul-Aug 2027 Intensive (~25-35 hr total, NEW timin</a><a href="#stu-23-phase-6-september-2027-test-retake-buffer" class="h3">Phase 6 — September 2027 test + retake buffer</a><a href="#stu-24-contingent-strategy-if-sep-2027-underperform" class="h3">Contingent strategy if Sep 2027 underperforms (Q ≤ 162)</a><a href="#stu-25-vocabulary-strategy-detail-the-long-pole" class="h3">Vocabulary strategy detail (the long pole)</a><a href="#stu-26-per-programme-gre-policy-verification-autumn" class="h3">Per-programme GRE policy verification (Autumn 2027 action)</a><a href="#stu-27-submission-decision-rule-per-programme-dec-2" class="h3">Submission decision rule (per programme, Dec 2027 applicatio</a><a href="#stu-28-key-resources-ranked-by-roi" class="h3">Key resources (ranked by ROI)</a><a href="#stu-29-total-budget" class="h3">Total budget</a></div>
@@ -1232,15 +1247,10 @@ body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
   loadCheckboxes();
 
 
-// per-page sidebar: highlight section in view
-(function(){
-  const links=[...document.querySelectorAll('.site-subnav a')];
-  if(!links.length)return;
-  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
-  const ids=Object.keys(map);
-  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
-    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-})();
+(function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
+ const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);if(document.getElementById(id))map[id]=a;});
+ const ids=Object.keys(map);function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<170)cur=id;}links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+ window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();
+
 </script>
 </body></html>

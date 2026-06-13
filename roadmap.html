@@ -383,6 +383,7 @@
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+h2[id],h3[id]{scroll-margin-top:130px}
 .dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
 .dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
 .site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
@@ -392,10 +393,24 @@ body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
 .site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
 .site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
 @media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+/* === calendar === */
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
+.cal-filter.off{opacity:.38}
+.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
+.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
+.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.cal-item{font-weight:600}
+.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
+.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
+.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
+.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
+.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
+.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="cur">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="cur">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
 <div class="site-subnav"><div class="lbl">Roadmap</div><a href="#roa-1-roadmap-the-multi-year-map" class="">Roadmap — the multi-year map</a><a href="#roa-2-1-destination" class="h3">1. Destination</a><a href="#roa-3-2-the-three-levers-in-priority-order" class="h3">2. The three levers (in priority order)</a><a href="#roa-4-3-the-multi-year-timeline" class="h3">3. The multi-year timeline</a><a href="#roa-5-4-the-project-arc-phases-0-1-2" class="h3">4. The project arc (Phases 0 → 1 → 2)</a><a href="#roa-6-5-key-gates-deadlines-calendar-checkpoints" class="h3">5. Key gates &amp; deadlines (calendar checkpoints)</a><a href="#roa-7-6-halt-conditions-when-to-stop-the-campaign" class="h3">6. Halt conditions (when to stop the campaign)</a><a href="#roa-8-7-kill-zone-what-not-to-do-verified-by-3-adv" class="h3">7. Kill-zone (what NOT to do — verified by 3 adversarial kil</a><a href="#roa-9-8-income-hedge-the-9-fork-settled" class="h3">8. Income hedge (the §9 fork — settled)</a><a href="#roa-10-9-what-you-actually-do-this-week-pointer" class="h3">9. What you actually do this week (pointer)</a><a href="#roa-11-schedule" class="">Schedule</a><a href="#roa-12-recurring-weekly-template" class="h3">Recurring Weekly Template</a><a href="#roa-13-higher-register-reading-habit-gre-vocab-back" class="h3">Higher-register reading habit (GRE vocab background, Jun–Oct</a><a href="#roa-14-phase-0-reproduction-protocol-locked-2026-06" class="h3">Phase 0 reproduction protocol (LOCKED 2026-06-08 — applies t</a><a href="#roa-15-phase-0-anti-patterns-8-traps-to-avoid-read-" class="h3">Phase 0 anti-patterns (8 traps to avoid — read each Friday)</a><a href="#roa-16-self-study-discipline-rules-apply-to-abbott-" class="h3">Self-study discipline rules (apply to Abbott / Rudin / Axler</a><a href="#roa-17-90-day-intervention-markers-jun-1-aug-31-202" class="h3">90-day intervention markers (Jun 1 → Aug 31 2026)</a><a href="#roa-18-granular-week-by-week-plan-jun-1-nov-8-2026-" class="h3">Granular week-by-week plan (Jun 1 → Nov 8, 2026) — Mon–Fri A</a><a href="#roa-19-fall-2026-outlook-sep-1-dec-31" class="h3">Fall 2026 Outlook (Sep 1 – Dec 31)</a><a href="#roa-20-spring-2027-outlook-jan-1-may-31" class="h3">Spring 2027 Outlook (Jan 1 – May 31)</a><a href="#roa-21-summer-2027-outlook-jun-8-sep-7-gre-intensiv" class="h3">Summer 2027 Outlook (Jun 8 – Sep 7) — GRE intensive window</a></div>
@@ -1228,15 +1243,10 @@ body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
   loadCheckboxes();
 
 
-// per-page sidebar: highlight section in view
-(function(){
-  const links=[...document.querySelectorAll('.site-subnav a')];
-  if(!links.length)return;
-  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
-  const ids=Object.keys(map);
-  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
-    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-})();
+(function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
+ const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);if(document.getElementById(id))map[id]=a;});
+ const ids=Object.keys(map);function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<170)cur=id;}links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+ window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();
+
 </script>
 </body></html>

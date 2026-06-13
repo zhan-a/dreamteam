@@ -383,6 +383,7 @@
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+h2[id],h3[id]{scroll-margin-top:130px}
 .dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
 .dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
 .site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
@@ -392,10 +393,24 @@ body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
 .site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
 .site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
 @media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+/* === calendar === */
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
+.cal-filter.off{opacity:.38}
+.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
+.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
+.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.cal-item{font-weight:600}
+.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
+.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
+.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
+.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
+.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
+.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="cur">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="cur">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
 <div class="site-subnav"><div class="lbl">Outreach</div><a href="#out-1-cold-email-pipeline" class="">Cold Email Pipeline</a><a href="#out-2-cold-email-artifact-rubric-10-components-rep" class="h3">Cold-email artifact rubric (10 components — repo must clear </a><a href="#out-3-tier-a-conformal-core-postdoc-layer-current-" class="h3">Tier A — Conformal-core postdoc layer (current OPERATIVE pri</a><a href="#out-4-tier-b-strong-letters-low-cold-reply-approac" class="h3">Tier B — strong letters, low cold-reply (approach with finis</a><a href="#out-5-tier-c-apex-letter-writers-never-cold-enter-" class="h3">Tier C — apex letter writers, NEVER cold (enter via postdoc </a><a href="#out-6-dropped-2026-06-04-ope-kill-meta-pattern" class="h3">DROPPED 2026-06-04 (OPE-kill meta-pattern)</a><a href="#out-7-previously-dropped-biostat-leaning-do-not-re" class="h3">PREVIOUSLY DROPPED biostat-leaning (do not re-suggest)</a><a href="#out-8-kaust-relationship-seed-added-2026-05-17-per" class="h3">KAUST relationship-seed (added 2026-05-17 per Summer 2027 KA</a><a href="#out-9-kz-origin-recommender-map-added-2026-05-17-p" class="h3">KZ-origin recommender map (added 2026-05-17 per memory corre</a><a href="#out-10-verification-emails-sep-oct-2026" class="">Verification Emails (Sep–Oct 2026)</a></div>
@@ -754,15 +769,10 @@ body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
   loadCheckboxes();
 
 
-// per-page sidebar: highlight section in view
-(function(){
-  const links=[...document.querySelectorAll('.site-subnav a')];
-  if(!links.length)return;
-  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
-  const ids=Object.keys(map);
-  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
-    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-})();
+(function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
+ const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);if(document.getElementById(id))map[id]=a;});
+ const ids=Object.keys(map);function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<170)cur=id;}links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+ window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();
+
 </script>
 </body></html>
