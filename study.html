@@ -1,0 +1,1246 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — Study</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --bg-2: #ffffff;
+    --bg-3: #f4f4f2;
+    --bg-soft: #f8f7f3;
+    --border: #e6e4df;
+    --border-strong: #d5d2cb;
+    --fg: #1c1c19;
+    --fg-dim: #5f5d57;
+    --fg-dimmer: #8a877f;
+    --accent: #2954c8;
+    --accent-2: #7c3aed;
+    --accent-soft: #eaf0ff;
+    --ok: #1f8a4d;
+    --ok-soft: #e8f5ed;
+    --warn: #b06a00;
+    --warn-soft: #fbf2e1;
+    --urgent: #c8302a;
+    --urgent-soft: #fbeae8;
+    --info: #0d7e8c;
+    --info-soft: #e6f4f6;
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-md: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  }
+  body.dark {
+    --bg: #0f1216;
+    --bg-2: #161a21;
+    --bg-3: #1d232c;
+    --bg-soft: #181d25;
+    --border: #2a313d;
+    --border-strong: #3a414d;
+    --fg: #e3e8ef;
+    --fg-dim: #8a94a5;
+    --fg-dimmer: #5a6374;
+    --accent: #6ab0ff;
+    --accent-2: #a78bfa;
+    --accent-soft: #1a2940;
+    --ok: #62d17a;
+    --ok-soft: #15301d;
+    --warn: #f7b04a;
+    --warn-soft: #2b210d;
+    --urgent: #ff6961;
+    --urgent-soft: #2c1715;
+    --info: #4dc4d1;
+    --info-soft: #122a2d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 18px;
+    margin: 0 24px 4px 24px;
+    font-weight: 600;
+  }
+  aside .subtitle {
+    margin: 0 24px 24px 24px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  aside nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-family: var(--sans);
+    font-size: 14px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  aside nav button:hover {
+    background: var(--bg-3);
+    color: var(--fg);
+  }
+  aside nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  aside .footer {
+    margin: 32px 24px 16px 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-dimmer);
+  }
+  aside .footer button {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  aside .footer button:hover {
+    background: var(--border);
+  }
+  main {
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 12px 0;
+    font-weight: 600;
+  }
+  .tab-subtitle {
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .stat .value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .stat .value.small { font-size: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-3);
+    font-weight: 600;
+    color: var(--fg-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-soft); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.tier-1 { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.tier-2 { background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-3 { background: var(--info-soft); color: var(--info); }
+  .badge.tier-4 { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-pending { background: var(--bg-3); color: var(--fg-dim); }
+  .badge.status-progress { background: var(--info-soft); color: var(--info); }
+  .badge.status-done { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-blocked { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.status-soon { background: var(--warn-soft); color: var(--warn); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checkbox-row:last-child { border-bottom: none; }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .checkbox-row .task-content { flex: 1; }
+  .checkbox-row .task-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .checkbox-row.done .task-content > div:first-child {
+    text-decoration: line-through;
+    color: var(--fg-dim);
+  }
+  .deadline { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .deadline.past { color: var(--urgent); }
+  .deadline.soon { color: var(--warn); }
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .alert {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .alert.info { background: var(--info-soft); border-left-color: var(--info); }
+  .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+  .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .xref {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .xref:hover { border-bottom-style: solid; background: var(--accent-soft); }
+  .xref-target {
+    scroll-margin-top: 16px;
+  }
+  .xref-target:target {
+    background: var(--warn-soft);
+    transition: background 1.2s;
+  }
+  .lock-item {
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-2);
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+  }
+  .lock-item strong { color: var(--accent); }
+  .month-group {
+    margin-bottom: 24px;
+  }
+  .month-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pill {
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+  details summary:hover { color: var(--accent); }
+  details[open] summary { margin-bottom: 12px; }
+  .small { font-size: 12px; color: var(--fg-dim); }
+  .mono { font-family: var(--mono); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .reset-btn {
+    background: var(--urgent-soft);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .kozha-filter {
+    background: var(--bg-3);
+    color: var(--fg-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .kozha-filter:hover { background: var(--bg-soft); }
+  .kozha-filter.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  #kozha-table th[data-sort-key]:hover { background: var(--bg-soft); }
+  @media (max-width: 768px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; }
+    main { padding: 16px; }
+  }
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="cur">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Study</div><a href="#stu-1-literature-reading-list-references" class="">Literature — Reading List + References</a><a href="#lit-roadmap" class="h3">0. Reading roadmap by timeline (what to read WHEN)</a><a href="#stu-3-1-phase-0-paper-anchors-conformal-core-repro" class="h3">1. Phase 0 paper anchors (conformal-core; reproduce + extend</a><a href="#stu-4-2-conformal-frontier-papers-distribution-fre" class="h3">2. Conformal frontier papers (distribution-free inference + </a><a href="#stu-5-3-cold-email-faculty-s-recent-work-anchor-pa" class="h3">3. Cold-email faculty's recent work (anchor papers for each)</a><a href="#stu-6-4-classical-causal-inference-textbooks-refer" class="h3">4. Classical causal inference textbooks REFERENCE — 2027+</a><a href="#stu-7-5-real-analysis-math-foundations-textbooks-a" class="h3">5. Real analysis + math foundations textbooks ABBOTT + A&amp</a><a href="#stu-8-6-statistical-inference-foundations-textbook" class="h3">6. Statistical inference foundations textbooks REFERENCE — M</a><a href="#stu-9-7-ml-statistical-learning-textbooks-referenc" class="h3">7. ML / statistical learning textbooks REFERENCE — PhD cours</a><a href="#stu-10-8-frontier-2024-2026-papers-worth-tracking-c" class="h3">8. Frontier 2024–2026 papers worth tracking (conformal-causa</a><a href="#stu-11-9-r-python-tooling-conformal-first" class="h3">9. R / Python tooling (conformal-first)</a><a href="#stu-12-10-character-self-engineering-reading-revise" class="h3">10. Character / self-engineering reading REVISED 2026-06-08 </a><a href="#stu-13-how-to-use-this-list" class="h3">How to use this list</a><a href="#stu-14-gre-prep-june-2026-september-2027" class="">GRE Prep — June 2026 → September 2027</a><a href="#stu-15-diagnostic-baseline-untimed-powerprep-2026-0" class="h3">Diagnostic baseline (UNTIMED POWERPREP, 2026-05-25)</a><a href="#stu-16-score-targets-revised-2026-05-26" class="h3">Score targets (REVISED 2026-05-26)</a><a href="#stu-17-per-programme-operative-status-final-classif" class="h3">Per-programme operative status (FINAL classification per 18t</a><a href="#stu-18-phase-1-background-june-october-2026-5-7-hr-" class="h3">Phase 1 — Background (June–October 2026, ~5-7 hr/wk)</a><a href="#stu-19-phase-2-uol-exam-pause-november-2026" class="h3">Phase 2 — UoL exam pause (November 2026)</a><a href="#stu-20-phase-3-december-2026-calibration-3-hrs" class="h3">Phase 3 — December 2026 calibration (~3 hrs)</a><a href="#stu-21-phase-4-jan-jun-2027-gre-suspended-revised-2" class="h3">Phase 4 — Jan-Jun 2027 GRE SUSPENDED (REVISED 2026-05-26)</a><a href="#stu-22-phase-5-jul-aug-2027-intensive-25-35-hr-tota" class="h3">Phase 5 — Jul-Aug 2027 Intensive (~25-35 hr total, NEW timin</a><a href="#stu-23-phase-6-september-2027-test-retake-buffer" class="h3">Phase 6 — September 2027 test + retake buffer</a><a href="#stu-24-contingent-strategy-if-sep-2027-underperform" class="h3">Contingent strategy if Sep 2027 underperforms (Q ≤ 162)</a><a href="#stu-25-vocabulary-strategy-detail-the-long-pole" class="h3">Vocabulary strategy detail (the long pole)</a><a href="#stu-26-per-programme-gre-policy-verification-autumn" class="h3">Per-programme GRE policy verification (Autumn 2027 action)</a><a href="#stu-27-submission-decision-rule-per-programme-dec-2" class="h3">Submission decision rule (per programme, Dec 2027 applicatio</a><a href="#stu-28-key-resources-ranked-by-roi" class="h3">Key resources (ranked by ROI)</a><a href="#stu-29-total-budget" class="h3">Total budget</a></div>
+<div class="site-main"><section class="page-section" id="literature">
+
+  <h2 id="stu-1-literature-reading-list-references">Literature — Reading List + References</h2>
+  <p class="tab-subtitle">Citations referenced across Projects, Cold Email, and Critical Locks. Revised 2026-06-08. Sections: (TOP) <strong>active textbooks</strong>, (0) reading roadmap by timeline, (1) Phase 0 paper anchors, (2) conformal frontier papers, (3) cold-email faculty, (4-7) reference textbooks (causal / real analysis / stats / ML), (8) frontier papers, (9) tooling, <strong>(10) character / self-engineering</strong> (light-reading slot only, NEW 2026-06-08).</p>
+
+  <div class="alert ok">
+    <strong>📖 ACTIVE TEXTBOOKS — what you're actually reading right now (the whole load)</strong><br>
+    FOUR textbooks active across 2026-27 (added Axler 2026-06-05 per apex-peer LA-gap). Everything else in §§4-7 is reference shelf for 2027+ MSc/PhD coursework. Don't sunk-cost-read them.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 110px;">Textbook</th>
+        <th style="width: 100px;">When</th>
+        <th>Role</th>
+        <th style="width: 130px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><a href="#lit-abbott" class="xref">Abbott</a></strong><br><em style="color:var(--fg-dim); font-size:12px;">Understanding Analysis</em></td>
+        <td><strong>Jun → Aug 2026</strong></td>
+        <td><strong>Lever 1a — DOMINANT.</strong> Real-analysis self-study, Ch 1–8 by end Aug. Bridges into Rudin. Pen-and-paper proofs are the practice mode. <strong>Apply 45-min no-premature-consultation rule</strong> per Schedule discipline card.</td>
+        <td><span class="badge status-progress">ACTIVE NOW</span></td>
+      </tr>
+      <tr>
+        <td><strong><a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a></strong><br><em style="color:var(--fg-dim); font-size:12px;">Linear Algebra (computational)</em></td>
+        <td><strong>mid-Jul → Nov 2026</strong></td>
+        <td><strong>UoL MT1173 exam prep</strong> (computational LA — not theoretical). Ch 1–12 + past papers + mocks. Ramps 15-25 hr/wk from Jul 14, peaks 30-35 hr/wk Oct.</td>
+        <td><span class="badge status-soon">STARTS JUL 14</span></td>
+      </tr>
+      <tr>
+        <td><strong><a href="#lit-rudin" class="xref">Rudin</a></strong><br><em style="color:var(--fg-dim); font-size:12px;">Principles of Mathematical Analysis</em></td>
+        <td><strong>Sep 2026 → Jun 2027</strong></td>
+        <td><strong>Lever 1a continued.</strong> Self-study Ch 1–4 in fall, then UIUC MATH 447 covers Ch 1–7 as coursework Feb–Jun 2027. A-grade is THE GATE.</td>
+        <td><span class="badge status-pending">FALL 2026</span></td>
+      </tr>
+      <tr>
+        <td><strong><a href="#lit-axler" class="xref">Axler</a></strong><br><em style="color:var(--fg-dim); font-size:12px;">Linear Algebra Done Right (theoretical)</em></td>
+        <td><strong>Jun 13 2026 → Summer 2027</strong></td>
+        <td><strong>Lever 1b — closes the apex-peer LA gap.</strong> MT1173 is computational; Axler is proof-based LA your MIT/Harvard/Stanford apex-peer competitors have on transcript. Self-study replaces $1,653 MATH 416. <strong>Earlier start Jun 13 2026</strong> (revised 2026-06-08 after tutoring withdrawal freed weekend slots): Ch 1 by end Jul; Ch 2 light Sep-Oct; pause through MT1173 exam; resume Ch 3 post-exam Nov 8; Ch 4-5 alongside MATH 447 Jan-Jun 2027; Ch 6-8 Summer 2027. <strong>~5-6 hr/wk via Sat morning + Sun morning slots</strong> through summer (does NOT displace Abbott Mon-Fri morning deep). <strong>Discipline rule mandatory</strong> — without it, captures only 10-30% of MATH 416 signal.</td>
+        <td><span class="badge status-progress">STARTS SAT JUN 13</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>That's it for 2026.</strong> No conformal textbook needed (Phase 0 = 5 short papers + code reproduction, not textbook study — see §1). No stats foundations textbook needed (Wasserman/Casella-Berger/Hernán-Robins are 2027+ references). No ML textbook needed (ESL/Murphy are PhD-coursework references). The two-textbook footprint is right-sized for your binding constraint = Lever 1 + MT1173 + Phase 0 all in parallel.<br>
+    <strong>Why so light?</strong> Apex Stats committees gate on real-analysis transcript + calibrated letter, NOT self-studied textbook count. See <a href="#lit-roadmap" class="xref">§0 Reading roadmap</a> for the full phase-by-phase breakdown.
+  </p>
+
+  <h3 id="lit-roadmap">0. Reading roadmap by timeline (what to read WHEN)</h3>
+  <div class="alert info">
+    <strong>Read this first.</strong> Apex Stats committees gate on <strong>transcript credentials (real analysis grade) + research letter</strong> — NOT on self-studied textbook count. Active reading is short; reference shelf is long. Don't sunk-cost-read books that aren't load-bearing for the current phase.
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 170px;">Phase / Window</th>
+        <th>ACTIVE reading (the load)</th>
+        <th>Reference / on-demand only</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Summer 2026</strong><br>(now → Aug 31)<br><span class="badge status-progress">CURRENT</span></td>
+        <td>
+          <strong>Lever 1a (<a href="#lit-abbott" class="xref">Abbott</a> Ch 1-8)</strong> — Understanding Analysis, full coverage by end Aug. ~20-25 hr/wk Mon-Fri morning deep.<br>
+          <strong>Lever 1b (<a href="#lit-axler" class="xref">Axler</a> Ch 1-2)</strong> — proof-based LA, starts Sat Jun 13 2026 (revised 2026-06-08 after tutoring withdrawal). ~5-6 hr/wk via Sat morning + Sun morning. Ch 1 by end Jul.<br>
+          <strong>Phase 0 conformal anchors</strong> — <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a>, <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès JRSS-B 2025</a>, <a href="#lit-rlcp" class="xref">Hore RLCP</a>, Hore 2026 papers (<a href="#lit-hore-2602" class="xref">arXiv:2602.06267</a> + <a href="#lit-hore-2605" class="xref">arXiv:2605.21627</a>).<br>
+          <strong>Higher-register reading habit</strong> — LRB/NYRB/Lopate/Gould for GRE vocab background (3 sessions/wk, 30-40 min).
+        </td>
+        <td>
+          <a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> <em>Linear Algebra</em> (MT1173 prep starting mid-Jul).<br>
+          <em>Avoid:</em> <a href="#lit-wasserman" class="xref">Wasserman</a>, <a href="#lit-hernan-robins" class="xref">Hernán-Robins</a>, <a href="#lit-casella-berger" class="xref">Casella-Berger</a> — premature, not load-bearing.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Fall 2026</strong><br>(Sep → Dec)</td>
+        <td>
+          <strong><a href="#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1-12</strong> — MT1173 Nov 2026 exam prep, primary load.<br>
+          <strong><a href="#lit-rudin" class="xref">Rudin</a> Ch 1-4</strong> — Baby Rudin start, paced for MATH 447 readiness (Feb 2027).<br>
+          UoL Year 3 coursework (MT2116, ST2133, ST2134, MT3042).
+        </td>
+        <td>Higher-register reading continues (background). Phase 0 papers consulted as outreach replies arrive.</td>
+      </tr>
+      <tr>
+        <td><strong>Spring 2027</strong><br>(Jan → Jun)</td>
+        <td>
+          <strong><a href="#lit-rudin" class="xref">Rudin</a> Ch 1-7 in full</strong> — UIUC NetMath MATH 447 coursework. A-grade target. THE GATE.<br>
+          Phase 1 (OPERATIVE) ramp — conformal-causal bend papers as math arrives (<a href="#lit-lei-candes-2021" class="xref">Lei-Candès 2021</a>, <a href="#lit-jin-ren-candes-2023" class="xref">Jin-Ren-Candès 2023</a>, <a href="#lit-foygel-barber-2023" class="xref">Foygel Barber et al 2023 AoS</a>).
+        </td>
+        <td>Pugh (Rudin pairing if stuck). Tao Analysis I/II as alternative exposition.</td>
+      </tr>
+      <tr>
+        <td><strong>Summer 2027</strong><br>(Jun → Sep)</td>
+        <td>
+          <strong>GRE intensive</strong> — Manhattan 5lb, Norman Lewis, POWERPREP. Suspend most other reading Jul-Aug.<br>
+          <strong>Billingsley or Durrett</strong> — light intro chapters (measure-theoretic probability) AFTER Rudin Ch 1-7 banked.<br>
+          Phase 1 preprint drafting with postdoc.
+        </td>
+        <td>
+          Casella-Berger Ch 1-6 light reference for SoP technical-depth signal.<br>
+          Hernán-Robins Ch 1-4 + 12-17 if Phase 1 bends explicitly to causal.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Fall 2027</strong><br>(Sep → Dec)</td>
+        <td>
+          <strong>Application prep</strong> dominates — SoP, transcripts, GRE retake decision, recommenders.<br>
+          Phase 1 preprint polished + co-author conversations.
+        </td>
+        <td>Reading minimized to apps + ongoing research. No new textbooks.</td>
+      </tr>
+      <tr>
+        <td><strong>2028 BSc finish</strong><br>(Jan → Sep)</td>
+        <td>
+          UoL Year 3 finals (May 2028).<br>
+          Cycle 1 decisions Jan-May 2028; halt or proceed.<br>
+          Light prep for MSc start (Cambridge MASS / Oxford / ETH).
+        </td>
+        <td>Recovery period; reading minimized.</td>
+      </tr>
+      <tr>
+        <td><strong>MSc 2028-29</strong><br>(Oct → Sep)</td>
+        <td>
+          <strong>Coursework dictates</strong> — likely Casella-Berger full, Lehmann-Romano, measure-theoretic probability (Billingsley/Durrett full), Hernán-Robins for Phase 2 dissertation bend.<br>
+          <strong>Selected Tsiatis chapters</strong> if dissertation needs EIF derivation.<br>
+          Conformal-causal frontier papers continuous.
+        </td>
+        <td>Boyd-Vandenberghe convex opt; ESL/Murphy as ML breadth references.</td>
+      </tr>
+      <tr>
+        <td><strong>PhD Y1+</strong><br>(2030+)</td>
+        <td>
+          van der Vaart <em>Asymptotic Statistics</em>; van der Vaart-Wellner <em>Empirical Processes</em>; Wainwright <em>High-Dim Stats</em>; Tsiatis <em>Semiparametric Theory</em>; Boyd-Vandenberghe; subject-specific frontier reading per advisor.
+        </td>
+        <td>Murphy Vol 2; Pearl <em>Causality</em>; Imbens-Rubin.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>What NOT to read prematurely:</strong> Tsiatis 2006, vdV Asymptotic Stats, Lehmann-Romano, Wainwright, vdV-Wellner, Murphy Vol 2, Pearl's <em>Causality</em> (heavy DAG reference) — all PhD-coursework or post-real-analysis. Reading them now produces low retention with high opportunity cost.<br>
+    <strong>What's load-bearing for apex Stats admit:</strong> Rudin Ch 1-7 + A-grade transcript line + a calibrated research letter. Self-studied stats foundations are not.<br>
+    <strong>The §0–§9 sections below are organized by topic, not timeline.</strong> Use this §0 to know <em>when</em> to consult them.
+  </p>
+
+  <h3 id="stu-3-1-phase-0-paper-anchors-conformal-core-repro">1. Phase 0 paper anchors (conformal-core; reproduce + extend) <span class="badge status-progress" style="font-size: 11px;">ACTIVE — 5 papers</span></h3>
+  <div class="card">
+    <p class="small"><strong>Essential before sending Hore/Gibbs cold-emails.</strong> These are the papers Phase 0 reproduces.</p>
+    <ul>
+      <li id="lit-gcc-2305" class="xref-target"><strong>Gibbs, Cherian &amp; Candès 2025 (arXiv:2305.12616)</strong> — <em>"Conformal Prediction With Conditional Guarantees"</em>. <strong>JRSS-B 87(4):1100-1126, DOI 10.1093/jrsssb/qkaf008.</strong> Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a> (pip-installable, release branch). <strong>The Phase 0 anchor for Gibbs outreach.</strong> Kill-zone clean: conditional coverage via covariate-shift reformulation, no DML / AIPW / estimated propensities.</li>
+      <li id="lit-rlcp" class="xref-target"><strong>Hore &amp; Barber RLCP (arXiv:2310.07850)</strong> — <em>"Conformal prediction with local weights"</em>. Repo: <a href="https://github.com/rohanhore/RLCP">github.com/rohanhore/RLCP</a>. <strong>The Phase 0 anchor for Hore outreach.</strong> Use this, NOT 2305.12616, when emailing Hore — anchor on his own work.</li>
+      <li id="lit-hore-2602" class="xref-target"><strong>Hore &amp; Ramdas 2026 (arXiv:2602.06267)</strong> — <em>"Conformal changepoint localization"</em>. Recent Hore first-author paper with Ramdas. Reference in Hore cold-email as evidence of current line.</li>
+      <li id="lit-hore-2605" class="xref-target"><strong>Hore &amp; Ramdas 2026 (arXiv:2605.21627)</strong> — <em>"Distribution-free root cause analysis"</em>. Second 2026 Hore+Ramdas paper.</li>
+      <li id="lit-angelopoulos-intro" class="xref-target"><strong>Angelopoulos &amp; Bates 2022 (arXiv:2107.07511)</strong> — <em>"A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"</em>. Tutorial that establishes conformal vocabulary in ~50 pages. Read first in Phase 0 Wk 2.</li>
+      <li id="lit-lei-candes-2021" class="xref-target"><strong>Lei &amp; Candès 2021 (arXiv:2006.06138)</strong> — <em>"Conformal Inference of Counterfactuals and Individual Treatment Effects"</em>. JRSS-B 2021. Foundational conformal-causal paper. Referenced when Phase 1 bends toward causal.</li>
+      <li id="lit-hines-eif" class="xref-target"><strong>Hines, Dukes, Diaz-Ordaz, Vansteelandt 2022 (arXiv:2107.00681)</strong> — <em>"Demystifying Statistical Learning Based on Efficient Influence Functions"</em>. Pedagogical EIF derivation. For when math arrives (post MATH 447 Feb 2027) and Phase 1 bends to conformal-causal.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-4-2-conformal-frontier-papers-distribution-fre">2. Conformal frontier papers (distribution-free inference + UQ 2024-26) <span class="badge status-pending" style="font-size: 11px;">REFERENCE — read AFTER Phase 0</span></h3>
+  <div class="card">
+    <p class="small">The broader conformal community Phase 0 sits in. Read after Phase 0 reproduction lands.</p>
+    <ul>
+      <li id="lit-foygel-barber-2023" class="xref-target"><strong>Foygel Barber, Candès, Ramdas &amp; Tibshirani 2023</strong> — <em>"Conformal prediction beyond exchangeability"</em>. Annals of Statistics 51(2):816–845. The highest-cited modern conformal paper.</li>
+      <li id="lit-angelopoulos-textbook" class="xref-target"><strong>Angelopoulos, Barber &amp; Bates 2025/2026</strong> — Cambridge UP textbook <em>"Conformal Prediction: A Gentle Introduction"</em> (arXiv:2411.11824). Field-forming reference.</li>
+      <li id="lit-tibshirani-covshift" class="xref-target"><strong>Tibshirani, Foygel Barber, Candès, Ramdas 2019</strong> — <em>"Conformal Prediction Under Covariate Shift"</em>. The weighted-conformal extension that 2305.12616 reformulates against.</li>
+      <li><strong>Gibbs, Cherian, Candès — conditional-guarantees line</strong> — multiple 2023-2025 papers. Section 1 anchor + extensions.</li>
+      <li id="lit-cqr" class="xref-target"><strong>Romano, Patterson, Candès 2019</strong> — <em>"Conformalized Quantile Regression"</em> (CQR). The score function used in most conformal-ITE work downstream.</li>
+      <li id="lit-jin-ren-candes-2023" class="xref-target"><strong>Lei &amp; Candès 2021 + Jin, Ren, Candès 2023</strong> — conformal counterfactual + ITE sensitivity work. The bend-toward-causal Phase 1 entry point.</li>
+      <li id="lit-vovk" class="xref-target"><strong>Vovk, Gammerman &amp; Shafer 2005</strong> — <em>Algorithmic Learning in a Random World</em>. Foundational textbook; COPA community.</li>
+      <li><strong>COPA proceedings (annual since 2012)</strong> — PMLR vols 60/91/105/128/152/179/204/230/266 (COPA 2025) and vol 329 (COPA 2026, Gothenburg). Dedicated conformal conference.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-5-3-cold-email-faculty-s-recent-work-anchor-pa">3. Cold-email faculty's recent work (anchor papers for each)</h3>
+  <div class="card">
+    <p class="small">Anchor paper(s) per target. <strong>Rule: anchor each email on the TARGET's own most recent work, not on their advisor's.</strong></p>
+    <ul>
+      <li><strong>Rohan Hore (CMU postdoc, PRIMARY)</strong> — Email <code>rhore@andrew.cmu.edu</code>. Anchor on RLCP (arXiv:2310.07850) + 2026 follow-ups (arXiv:2602.06267 conformal changepoint, arXiv:2605.21627 distribution-free root cause analysis). NOT on 2305.12616 (that's Gibbs's paper).</li>
+      <li><strong>Isaac Gibbs (Berkeley postdoc under Tibshirani, SECONDARY)</strong> — Email <code>igibbs@berkeley.edu</code>. Anchor on Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616). Verify status before send. Note: he's on faculty job market; if lands faculty Fall 2026, he becomes a direct PI target later.</li>
+      <li><strong>Lihua Lei (Stanford GSB, TIER B)</strong> — Lei & Candès 2021 conformal-counterfactual + recent conformal-causal work. Reach only with finished Phase 0 artifact.</li>
+      <li><strong>Ying Jin (Wharton jr PI, TIER B)</strong> — 2025 IMS Lawrence D. Brown Award. Sensitivity-conformal (arXiv:2111.12161) + conformal selection. Strong letter weight if engaged. Reach with artifact.</li>
+      <li><strong>Zhimei Ren (Wharton jr PI, TIER B)</strong> — Co-author of Jin-Ren-Candès sensitivity work.</li>
+      <li><strong>Tier C lottery — Ramdas / Barber / Tibshirani direct</strong> — apex letter writers, near-zero cold reply. ONLY reach via postdoc-conduit after Phase 0 + sustained collaboration.</li>
+      <li><strong>DROPPED from cold-email primary (per OPERATIVE pivot):</strong> Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy. OPE neighborhood killed 3× — these targets either co-authored the integration paper that killed Option α (vdL+Kallus+Bibaut 2501.06926) or are gatekept by saturated-niche dynamics.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-6-4-classical-causal-inference-textbooks-refer">4. Classical causal inference textbooks <span class="badge status-pending" style="font-size: 11px;">REFERENCE — 2027+</span></h3>
+  <div class="card">
+    <p class="small">REFERENCE shelf — not active summer 2026 reading. Hernán-Robins Ch 1-4 + 12 will be pulled when Phase 1 bends toward conformal-causal (post-MATH 447, 2027). Until then these are background texts to consult if needed, not a reading queue.</p>
+    <ul>
+      <li id="lit-hernan-robins" class="xref-target"><strong>Hernán &amp; Robins 2024</strong> — <em>Causal Inference: What If</em>. Free at hsph.harvard.edu/miguel-hernan/causal-inference-book/. Modern standard for biostat causal inference. Parts I (Ch 1-10) + II (Ch 11-17) + III (Ch 18-25). Cite explicitly in SoP.</li>
+      <li id="lit-imbens-rubin" class="xref-target"><strong>Imbens &amp; Rubin 2015</strong> — <em>Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction</em>. Cambridge. Potential-outcomes framework canonical text.</li>
+      <li id="lit-pearl" class="xref-target"><strong>Pearl 2009</strong> — <em>Causality: Models, Reasoning, and Inference</em>. 2nd ed. Cambridge. The do-calculus reference.</li>
+      <li><strong>Pearl, Glymour & Jewell 2016</strong> — <em>Causal Inference in Statistics: A Primer</em>. Wiley. Light entry to Pearl's framework; ~150 pages.</li>
+      <li><strong>VanderWeele 2015</strong> — <em>Explanation in Causal Inference: Methods for Mediation and Interaction</em>. Oxford. Standard mediation analysis reference.</li>
+      <li><strong>Rosenbaum 2002, 2010</strong> — <em>Observational Studies</em> (2002) and <em>Design of Observational Studies</em> (2010). Matching + sensitivity analysis canonical.</li>
+      <li><strong>Robins, Hernán & Brumback 2000</strong> — <em>"Marginal structural models and causal inference in epidemiology"</em>. Epidemiology 11(5):550–560. The MSM founding paper.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-7-5-real-analysis-math-foundations-textbooks-a">5. Real analysis + math foundations textbooks <span class="badge status-progress" style="font-size: 11px;">ABBOTT + A&amp;H + RUDIN ACTIVE</span></h3>
+  <div class="card">
+    <p class="small"><strong>Lever 1 self-study path (Summer 2026 → MATH 447 Feb 2027):</strong> Abbott (bridge) → Rudin (UIUC coursework). For MT1173 algebra prep (Nov 2026 exam): Anthony &amp; Harvey. Pugh and Tao are accessible alternatives to Rudin if stuck. Davidson &amp; Donsig is the Athabasca MATH 370 textbook (Athabasca DEPRIORITIZED — accreditation lost Mar 2025). Russian / Soviet rigorous texts (Zorich, Fichtenholz, Kolmogorov-Fomin, Natanson) apply if you enroll at NU or KazNU.</p>
+    <ul>
+      <li id="lit-abbott" class="xref-target"><strong>Abbott 2015</strong> — <em>Understanding Analysis</em>, 2nd ed. Springer. <strong>The Lever 1 summer 2026 self-study text.</strong> Ch 1-8 by end Aug 2026 is the floor. Gentler bridge into Rudin: same content arc with more proofs spelled out and exercises that build intuition before rigor. Each chapter teaches WHY the careful definitions matter via a "discussion" → "main results" → "epilogue" structure. Pen-and-paper proofs are the practice mode.</li>
+      <li id="lit-anthony-harvey" class="xref-target"><strong>Anthony &amp; Harvey 2012</strong> — <em>Linear Algebra: Concepts and Methods</em>. Cambridge. <strong>The UoL MT1173 Algebra primary text</strong> (Nov 2026 exam). Ch 1-12 cover matrices, vector spaces, linear maps, eigenvalues, inner products. UoL past papers are the second half of prep. Prep starts mid-Jul 2026 at 15-25 hr/wk, ramps to 30-35 hr/wk by Oct.</li>
+      <li id="lit-rudin" class="xref-target"><strong>Rudin 1976</strong> — <em>Principles of Mathematical Analysis</em>, 3rd ed. McGraw-Hill. "Baby Rudin." <strong>Ch 1-7 are the Math Gate target</strong> — UIUC NetMath MATH 447 (Feb-Jun 2027) covers Ch 1-7; A-grade is the gate for the apex tail. Ch 11 is Lebesgue intro (not needed for MATH 447). Name explicitly in SoP. Self-study Ch 1-4 in fall 2026 before MATH 447 starts.</li>
+      <li id="lit-axler" class="xref-target"><strong>Axler 2024</strong> — <em>Linear Algebra Done Right</em>, 4th ed. Springer (free PDF). <strong>Lever 1b — proof-based linear algebra self-study, Sep 2026 onward.</strong> MT1173 covers computational LA (matrices, Cramer's rule, eigenvalues operationally) but NOT proof-based finite-dim vector spaces / linear maps / spectral theorem — apex Stats committees + Cambridge MASt MASS expect this at entry. Axler's anti-determinant approach forces structural thinking. <strong>Target:</strong> Ch 1-3 (vector spaces, finite-dim, linear maps) light parallel Sep-Dec 2026; Ch 4-5 (polynomials, eigenvalues) Jan-Jun 2027 alongside MATH 447; Ch 6-8 (inner product spaces, operators) Summer 2027 if bandwidth. <strong>Discipline:</strong> apply the 45-min no-premature-consultation rule + cold-reproduction protocol per Schedule "Self-study discipline" card. <strong>Self-study replaces formal UIUC MATH 416 ($1,653 saved)</strong> per 2026-06-05 cost-benefit decision; for SOP credibility, build a public artifact (GitHub repo with chapter writeups OR Stack Exchange profile answering LA questions). Mention with specificity in SOP: "Self-studied Axler Ch 1-5; can articulate finite-dim spectral theorem and its applications to PCA." Marginal-but-non-trivial signal lift; ~70-80% of MATH 416 signal value at $0 cost IF discipline rule actually applied.</li>
+      <li id="lit-friedberg" class="xref-target"><strong>Friedberg, Insel &amp; Spence 2018</strong> — <em>Linear Algebra</em>, 5th ed. Pearson. Slightly gentler alternative to Axler with more worked examples; equally accepted as proof-based LA reference. Use as second-opinion if Axler proofs feel too compressed.</li>
+      <li id="lit-royden" class="xref-target"><strong>Royden 2010</strong> — <em>Real Analysis</em>, 4th ed. (with Fitzpatrick). Lebesgue measure + integration; Ch 1-5 is the measure-theoretic target. PhD Y1 reference, NOT pre-PhD.</li>
+      <li id="lit-pugh" class="xref-target"><strong>Pugh 2015</strong> — <em>Real Mathematical Analysis</em>, 2nd ed. Springer. More expository than Rudin; same content. Pugh + Rudin together is the standard pairing — use as second-opinion when Rudin's compression bites.</li>
+      <li id="lit-tao" class="xref-target"><strong>Tao 2016</strong> — <em>Analysis I</em> + <em>Analysis II</em>, 4th ed. Springer / Hindustan Book Agency. Free PDFs on Tao's blog. Constructive build-up from naturals. Use as third-opinion alternative to Rudin.</li>
+      <li id="lit-bartle" class="xref-target"><strong>Bartle &amp; Sherbert 2011</strong> — <em>Introduction to Real Analysis</em>, 4th ed. Wiley. UIUC NetMath MATH 444 textbook (NOT 447 — 444 is the calc-style intro, 447 uses Rudin).</li>
+      <li><strong>Davidson &amp; Donsig 2010</strong> — <em>Real Analysis and Applications: Theory in Practice</em>. Springer. Athabasca MATH 370 textbook. Proof-based; covers Rudin Ch 1-7 equivalent. <strong>Athabasca deprioritized</strong> — MSCHE accreditation lost Mar 2025.</li>
+      <li><strong>Zorich</strong> — <em>Mathematical Analysis</em> Vol I + II. Springer. Russian/Soviet rigorous standard (used at MGU mech-mat). If KazNU offers this textbook → strong signal.</li>
+      <li><strong>Fichtenholz</strong> — <em>Курс дифференциального и интегрального исчисления</em>, 3 vols. Russian classic. Used at top Russian math departments.</li>
+      <li><strong>Kolmogorov & Fomin</strong> — <em>Элементы теории функций и функционального анализа</em>. Russian classic for measure theory + functional analysis (= Royden + Folland equivalent).</li>
+      <li><strong>Natanson</strong> — <em>Theory of Functions of a Real Variable</em>. Russian measure-theoretic reference.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-8-6-statistical-inference-foundations-textbook">6. Statistical inference foundations textbooks <span class="badge status-pending" style="font-size: 11px;">REFERENCE — MSc/PhD coursework</span></h3>
+  <div class="card">
+    <p class="small">For first-year PhD course preparation and SoP technical depth signal.</p>
+    <ul>
+      <li id="lit-casella-berger" class="xref-target"><strong>Casella &amp; Berger 2002</strong> — <em>Statistical Inference</em>, 2nd ed. Duxbury. Standard first-year PhD reference for math stats.</li>
+      <li id="lit-lehmann-casella" class="xref-target"><strong>Lehmann &amp; Casella 1998</strong> — <em>Theory of Point Estimation</em>, 2nd ed. Springer. Advanced point estimation.</li>
+      <li id="lit-lehmann-romano" class="xref-target"><strong>Lehmann &amp; Romano 2005</strong> — <em>Testing Statistical Hypotheses</em>, 3rd ed. Springer. The hypothesis-testing canonical text.</li>
+      <li id="lit-vdv-asymptotic" class="xref-target"><strong>van der Vaart 1998</strong> — <em>Asymptotic Statistics</em>. Cambridge. Standard reference for asymptotic theory; critical for understanding semi-parametric efficiency in DR-learner work.</li>
+      <li id="lit-wasserman" class="xref-target"><strong>Wasserman 2004</strong> — <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer. Compact reference; useful as a complement to Casella-Berger.</li>
+      <li><strong>Wasserman 2006</strong> — <em>All of Nonparametric Statistics</em>. Springer. Nonparametric methods.</li>
+      <li id="lit-bickel-doksum" class="xref-target"><strong>Bickel &amp; Doksum 2015</strong> — <em>Mathematical Statistics: Basic Ideas and Selected Topics</em>, Vol I + II, 2nd ed. CRC. Alternative to Casella-Berger at higher rigor.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-9-7-ml-statistical-learning-textbooks-referenc">7. ML / statistical learning textbooks <span class="badge status-pending" style="font-size: 11px;">REFERENCE — PhD coursework</span></h3>
+  <div class="card">
+    <p class="small">For breadth + R/Python implementation literacy.</p>
+    <ul>
+      <li id="lit-esl" class="xref-target"><strong>Hastie, Tibshirani &amp; Friedman 2009</strong> — <em>The Elements of Statistical Learning</em>, 2nd ed. Springer. Free at hastie.su.domains/ElemStatLearn/. The standard ML reference.</li>
+      <li id="lit-isl" class="xref-target"><strong>James, Witten, Hastie &amp; Tibshirani 2023</strong> — <em>An Introduction to Statistical Learning</em>, 2nd ed. R/Python. Free at statlearning.com. Lighter ISL companion to ESL.</li>
+      <li id="lit-murphy" class="xref-target"><strong>Murphy 2022</strong> — <em>Probabilistic Machine Learning: An Introduction</em>. MIT Press. Free at probml.github.io/pml-book/. Modern probabilistic-ML textbook.</li>
+      <li><strong>Murphy 2023</strong> — <em>Probabilistic Machine Learning: Advanced Topics</em>. MIT Press. Vol 2 of the above. Covers more theoretical material.</li>
+      <li id="lit-wainwright" class="xref-target"><strong>Wainwright 2019</strong> — <em>High-Dimensional Statistics: A Non-Asymptotic Viewpoint</em>. Cambridge. The rigorous high-dim ref.</li>
+      <li><strong>Bühlmann & van de Geer 2011</strong> — <em>Statistics for High-Dimensional Data: Methods, Theory and Applications</em>. Springer. Companion to Wainwright.</li>
+      <li><strong>Goodfellow, Bengio & Courville 2016</strong> — <em>Deep Learning</em>. MIT Press. Free at deeplearningbook.org. Background for neural-network-based causal methods.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-10-8-frontier-2024-2026-papers-worth-tracking-c">8. Frontier 2024–2026 papers worth tracking (conformal-causal seam)</h3>
+  <div class="card">
+    <p class="small">Recent ideas at the conformal × causal intersection. Check arXiv stat.ME + stat.ML quarterly. <strong>Monitoring tools:</strong> Scholar Inbox (scholar-inbox.com); arXiv-sanity-lite (arxiv-sanity-lite.com); Vovk's COPA mailing list. <strong>The 2509.21660 systematic review (Sept 2025)</strong> is the field-survey reference for current conformal-ITE state — read but DO NOT cite as authority for novel claims (per Step 0: it says less than commonly cited).</p>
+    <ul>
+      <li><strong>Memmesheimer, Heuveline, Hesser 2025 (arXiv:2509.21660)</strong> — Systematic review of conformal-ITE methods. Field state-of-play; identifies real open challenges (validity of weights, interval width, conditional adaptivity) — NOT infrastructure gaps.</li>
+      <li><strong>Bodik et al. 2025 (arXiv:2507.12581)</strong> — <em>"Cross-World"</em> — empirical bake-off of Lei-Candès Exact-Naïve + Inexact-Nested + Jonkers CMC + Alaa DR on synthetic + IHDP + Twins with coverage + width. <strong>R+Python code public.</strong> This is what the conformal-causal-bench plan was duplicating.</li>
+      <li><strong>Wang & Qiao 2026 AAAI (arXiv:2501.14933)</strong> — <em>"Conformal Inference of ITEs Using Conditional Density Estimates"</em>. Benchmarks WCP variants + CM-DR on IHDP + ACIC + NSLM. Recent empirical contribution.</li>
+      <li><strong>Alaa, Ahmad & van der Laan 2023 (arXiv:2308.14895)</strong> — <em>"Conformal Meta-learners for Predictive Inference of Individual Treatment Effects"</em>. NeurIPS 2023. DR/X/IPW conformal meta-learners.</li>
+      <li><strong>Jin, Ren & Candès 2023 (arXiv:2111.12161)</strong> — <em>"Sensitivity analysis of individual treatment effects: A robust conformal inference approach"</em>. PNAS 2023. Γ-sensitivity conformal-ITE.</li>
+      <li><strong>Yin, Shi, Wang & Blei 2024 (arXiv:2112.03493)</strong> — <em>"Conformal Sensitivity Analysis for Individual Treatment Effects"</em>. JASA 2024.</li>
+      <li><strong>Schröder & Feuerriegel 2024 (arXiv:2407.03094)</strong> — Continuous-treatment conformal causal prediction. LMU group; heavy implementation.</li>
+      <li><strong>Yang, Ren & Candès 2024 (arXiv:2404.11147)</strong> — <em>"Doubly robust conformal prediction with weak overlap"</em>. The DR-conformal-with-weak-overlap line.</li>
+      <li><strong>Barber, Candès, Ramdas & Tibshirani 2023 (AoS 51(2):816-845)</strong> — <em>"Conformal prediction beyond exchangeability"</em>. The foundational paper for non-exchangeable settings.</li>
+      <li><strong>Avoid as project anchor (kill-zone):</strong> arXiv:2604.03772 (Barnatchez DML-conformal counterfactual under runtime confounding — direct OPE-kill re-entry), arXiv:2510.26026 (CP × OPE bridge), arXiv:2206.06711 (COPP), arXiv:2304.02574 (MDP-OPE).</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-11-9-r-python-tooling-conformal-first">9. R / Python tooling (conformal-first)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>conditionalconformal</strong> (Python, pip) — Gibbs-Cherian-Candès canonical implementation. <code>pip install conditionalconformal</code>. Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a>. <strong>Phase 0 substrate.</strong></li>
+      <li><strong>crepes</strong> (Python) — Henrik Boström. <a href="https://github.com/henrikbostrom/crepes">github.com/henrikbostrom/crepes</a>. General-purpose conformal regression + classification.</li>
+      <li><strong>crepes-weighted</strong> (Python) — Predict-IDLab. Weighted-conformal extension. Useful for ITE later.</li>
+      <li><strong>MAPIE</strong> (Python) — Scikit-learn-API-compatible conformal library. Production-grade. <a href="https://github.com/scikit-learn-contrib/MAPIE">github.com/scikit-learn-contrib/MAPIE</a>.</li>
+      <li><strong>RLCP</strong> (R) — Hore-Barber, <a href="https://github.com/rohanhore/RLCP">github.com/rohanhore/RLCP</a>. Local conformal weights. Phase 0 Hore-specific anchor.</li>
+      <li><strong>cfcausal</strong> (R) — Lei-Candès original conformal-ITE implementation. <a href="https://github.com/lihualei71/cfcausal">github.com/lihualei71/cfcausal</a>.</li>
+      <li><strong>sensemakr / iv.sensemakr</strong> (R + Python ports) — Cinelli OVB sensitivity tooling. Not Phase 0 but useful Phase 1 bend if causal-sensitivity layer added.</li>
+      <li><strong>causaldata</strong> (R) — datasets for causal-inference textbooks. Hernán-Robins datasets included.</li>
+      <li><strong>Wickham — <em>Advanced R</em></strong> 2nd ed (free at adv-r.hadley.nz). R fluency for Hore's RLCP repo + cfcausal.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-12-10-character-self-engineering-reading-revise">10. Character / self-engineering reading <span class="badge status-progress" style="font-size: 11px;">REVISED 2026-06-08 — Stoic-anchored, verified canon</span></h3>
+  <div class="alert info">
+    <strong>Revised 2026-06-08 per workflow wa2ce5u92.</strong> Verified each entry against academic-philosopher Stoic scholarship (Hadot, A.A. Long, Graver, Sellars). User flagged guru-grift as failure mode (Rich Dad Poor Dad as example) + identified stress tolerance + ambitiousness + discipline as gap-closing targets + said Stoicism feels closest to ideal. Result: tiered structure — Primary Stoic sources (Tier 1) + scholarly studies (Tier 2) + modern accessible legit (Tier 3) + non-Stoic legit kept with caveats (Tier 4) + explicit Kill list. Holiday DOWNGRADED to "gateway only, not a Stoic source." Dweck REMOVED (replication crisis). Newport Deep Work + Aurelius Hays survive as priority reads. Stockdale + A.A. Long swapped in for the Turkey trip slot.
+  </div>
+
+  <h4>Reading order phases (12-18 month sequence)</h4>
+  <table>
+    <thead><tr><th style="width: 160px;">Phase</th><th>Active reads</th><th>Goal</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Phase 1 (Turkey + Jun-Aug 2026)</strong></td><td>Stockdale (30pp PDF) → Hays Meditations → A.A. Long How to Be Free → Atomic Habits → Sellars Lessons + Newport Deep Work + Inwood VSI (back home)</td><td>Install operational Stoic core + behavior-engineering tactics</td></tr>
+      <tr><td><strong>Phase 2 (Sep 2026 - Feb 2027)</strong></td><td>Hard's complete Epictetus Discourses + Hadot Inner Citadel (alongside 2nd-pass Hays) + Davie Seneca Dialogues + Robertson Roman Emperor + Pigliucci How to Be a Stoic</td><td>Read primary corpus in earnest with scholarly companion</td></tr>
+      <tr><td><strong>Phase 3 (Mar 2027 - Dec 2027)</strong></td><td>Graver-Long Seneca Letters (one per morning, ongoing) + Graver Stoicism and Emotion + Farnsworth Practicing Stoic (desk reference) + Sherman Stoic Wisdom + Stoic Warriors</td><td>Install Seneca as daily-rhythm text for rest of PhD trajectory</td></tr>
+      <tr><td><strong>Phase 4 (Jan 2028+)</strong></td><td>Long-Sedley Hellenistic Philosophers (reference) + A.A. Long Epictetus monograph + Becker A New Stoicism + Sellars Marcus Aurelius (Routledge 2021)</td><td>Reference + depth at PhD/MSc study rhythm</td></tr>
+    </tbody>
+  </table>
+
+  <h4>TIER 1 — Stoic primary sources <span class="badge status-progress" style="font-size: 11px;">PRIORITY</span></h4>
+  <div class="card">
+    <ul>
+      <li id="lit-stockdale" class="xref-target"><strong>Vice Admiral James Stockdale, <em>Courage Under Fire: Testing Epictetus's Doctrines in a Laboratory of Human Behavior</em></strong> (Hoover Press 1993, ~30pp essay, free PDF via US Naval Academy). <strong>READ FIRST — on the plane to Turkey.</strong> Stanford MA Philosophy under Philip Rhinelander. Stockdale carried the Enchiridion into the Hanoi Hilton; tortured, leg-broken, kept Stoic discipline through 7+ years as senior POW. Standard reading at the USNA ethics curriculum; cited by Nancy Sherman. Highest-leverage SHORT read for stress tolerance specifically — frames everything that follows.</li>
+      <li id="lit-aurelius" class="xref-target"><strong>Marcus Aurelius, <em>Meditations</em></strong> — translations: <strong>Gregory Hays (Modern Library 2002)</strong> for first read + Turkey trip (Hays is UVA classicist, Harvard PhD, NOT a popularizer). Second-pass companion: Martin Hammond (Penguin 2006, intro Diskin Clay) — more faithful to logos/hegemonikon/prohairesis technical vocabulary. <strong>AVOID:</strong> George Long 1862 (Victorian; the free-online version Holiday-tier sites quote), Farquharson 1944 (Edwardian-stilted). Read 1-2 books per morning; ~6 months at that rhythm. Mark Books 2/4/5/7/8 for stress tolerance; 6/10 for sustainable ambition; 2.1/5.1/8.12 for discipline.</li>
+      <li id="lit-epictetus" class="xref-target"><strong>Epictetus, <em>Discourses + Fragments + Handbook</em></strong> — best edition: <strong>Robin Hard, intro Christopher Gill (Oxford World's Classics 2014)</strong>, complete English Epictetus, replacing 1925 Oldfather Loeb. <strong>AVOID:</strong> Higginson 1865, Elizabeth Carter 1758 (Christianized Victorian/18c framings; the versions saturating motivational Twitter). Read Enchiridion in one sitting first, then Discourses Book 1, then 2, then 3+4. Discourses are lecture notes — dip, don't binge. Mark 1.1, 3.12, 4.4 (askesis); 1.18, 2.5, 4.1 (dichotomy of control); 1.2, 4.10, Ench. 1, 8, 33 (sustainable ambition).</li>
+      <li id="lit-long-how-to-be-free" class="xref-target"><strong>A.A. Long, <em>How to Be Free: An Ancient Guide to the Stoic Life</em></strong> (Princeton 2018, ~170pp). <strong>SWAP THIS IN for Holiday on Turkey trip.</strong> A.A. Long is the foremost living anglophone Stoic scholar (UC Berkeley Classics emeritus, co-editor of Long-Sedley); this is his short Enchiridion translation + commentary. Cleanest credential-to-page ratio in the entire reading list. ~5×7" Princeton hardcover — Turkey-trip-suitable.</li>
+      <li id="lit-seneca-letters" class="xref-target"><strong>Seneca, <em>Letters on Ethics (Epistulae Morales)</em></strong> — LIFETIME edition: <strong>Graver &amp; Long (Chicago 2015, ~600pp, ~$45-65 hardcover)</strong> — first complete English translation in nearly a century, replacing Gummere 1917-25 Loeb. Travel paperback: <strong>Robin Campbell (Penguin Classics 1969, ~$11, selection of ~40 letters)</strong>. <strong>AVOID:</strong> free public-domain Gummere (dated diction). Read <strong>ONE LETTER PER MORNING</strong>, not multiple per sitting — designed exactly for this rhythm. Phase 3 (Mar 2027 onward). Priority letters: 1 (time discipline), 2-7 (early Stoic mind discipline), 18 (poverty exercise), 28 (travel doesn't fix you), 41 (the daimon), 56 (noise/concentration — pairs with Newport Deep Work), 71 (highest good), 76, 78, 99.</li>
+      <li id="lit-seneca-dialogues" class="xref-target"><strong>Seneca, <em>Dialogues and Essays (On the Shortness of Life, On Tranquility, On the Happy Life)</em></strong> — <strong>John Davie, intro Tobias Reinhardt (Oxford World's Classics 2007, ~$12, ~270pp)</strong>. Reinhardt's intro is the strongest short essay-introduction to Stoicism in any popular edition. <em>On the Shortness of Life</em> = entire Stoic essay on time-as-only-real-bankruptcy. <em>On Tranquility of Mind</em> = Stoic CBT manual for stress tolerance. <em>On the Happy Life</em> = sustainable ambition (rebuts crude hedonism + crude asceticism). STRONG candidate to displace Holiday from Turkey pack. Pocket alternative: Costa Penguin Great Ideas <em>On the Shortness of Life</em> (~100pp, $8).</li>
+    </ul>
+  </div>
+
+  <h4>TIER 2 — Scholarly Stoic studies <span class="badge status-pending" style="font-size: 11px;">REFERENCE — Phase 2+</span></h4>
+  <div class="card">
+    <ul>
+      <li id="lit-hadot-inner-citadel" class="xref-target"><strong>Pierre Hadot, <em>The Inner Citadel: The Meditations of Marcus Aurelius</em></strong> (Harvard UP 1998, tr. Michael Chase, ~340pp). Collège de France chair of History of Hellenistic and Roman Thought. The ONE scholarly book that should sit alongside the Hays translation. Reveals the Epictetan three-disciplines architecture (assent/desire/action) that organizes Meditations. Read ALONGSIDE 2nd-pass Hays. Influence on Foucault's late lectures acknowledged.</li>
+      <li id="lit-hadot-philosophy-way-of-life" class="xref-target"><strong>Pierre Hadot, <em>Philosophy as a Way of Life</em></strong> (Blackwell 1995, ed. Arnold Davidson). The "spiritual exercises" framework that the entire modern Stoic-revival (Sellars, Gill, Robertson, Pigliucci) is downstream of.</li>
+      <li id="lit-long-epictetus" class="xref-target"><strong>A.A. Long, <em>Epictetus: A Stoic and Socratic Guide to Life</em></strong> (Oxford UP 2002). Definitive English-language monograph on Epictetus; the bridge between bare Epictetus text and serious understanding.</li>
+      <li id="lit-graver-stoicism-emotion" class="xref-target"><strong>Margaret Graver, <em>Stoicism and Emotion</em></strong> (Chicago 2007, ~320pp). Aaron Lawrence Professor of Classics, Dartmouth. The single most rigorous book on what Stoics actually meant by pathē / eupatheiai / propatheiai. <strong>Critical for understanding what "Stoic emotional control" actually is</strong> — NOT repression of feeling (the Holiday/social-media misreading) but a cognitive theory of how judgements produce affect. Phase 3.</li>
+      <li id="lit-sellars-stoicism" class="xref-target"><strong>John Sellars, <em>Stoicism</em></strong> (Acumen 2006 / Routledge 2014). Reader in History of Philosophy, Royal Holloway. The right single-book academic-grade introduction. Covers logic / physics / ethics — gives the doctrinal map that Long, Graver, Hadot assume you have. Trade short version: <em>Lessons in Stoicism</em> (Allen Lane / Basic Books 2019, ~150pp) — one-evening trade.</li>
+      <li id="lit-inwood-vsi" class="xref-target"><strong>Brad Inwood, <em>Stoicism: A Very Short Introduction</em></strong> (Oxford UP 2018, ~150pp). William Lampson Professor of Philosophy and Classics, Yale. The 1-evening calibration read that establishes the historical/doctrinal baseline before any popularizer. Phase 1 backstop.</li>
+      <li id="lit-long-sedley" class="xref-target"><strong>A.A. Long &amp; D.N. Sedley, <em>The Hellenistic Philosophers Vol. 1</em></strong> (Cambridge UP 1987). Standard graduate reference for 38 years. Topical fragments of early Stoics (Zeno, Chrysippus, Cleanthes). Reference book to own for life — Phase 4, not Phase 1.</li>
+      <li id="lit-becker-new-stoicism" class="xref-target"><strong>Lawrence Becker, <em>A New Stoicism</em></strong> (Princeton 1998; rev. ed. 2017). INTENTIONALLY non-historical reconstruction: "what would Stoic ethics look like today if it had absorbed evolutionary biology and developmental psychology?" Read AFTER you understand historical Stoicism via Hadot/Long/Graver. Phase 4.</li>
+      <li id="lit-sherman-stoic-wisdom" class="xref-target"><strong>Nancy Sherman, <em>Stoic Wisdom</em> (Oxford 2021) + <em>Stoic Warriors</em> (Oxford 2005)</strong>. Georgetown University Professor of Philosophy; PhD Harvard; inaugural Distinguished Chair in Ethics, US Naval Academy 1997-99. The credentialed voice on Stoicism applied to extreme stress (combat, moral injury). Directly targets resilience with empirical grounding. Pair with Stockdale re-read.</li>
+    </ul>
+  </div>
+
+  <h4>TIER 3 — Modern accessible (legitimate, not guru-grift)</h4>
+  <div class="card">
+    <ul>
+      <li id="lit-robertson" class="xref-target"><strong>Donald Robertson, <em>How to Think Like a Roman Emperor</em></strong> (St. Martin's 2019, ~250pp) + <em>The Philosophy of Cognitive-Behavioural Therapy</em> (Routledge 2010/2019) + <em>Stoicism and the Art of Happiness</em> (2013). <strong>DIRECT HIT on stress tolerance + discipline.</strong> Robertson: MA Mental Philosophy (Aberdeen) + MA Psychoanalytic Studies (Sheffield) + advanced postgrad CBT diploma (King's London); accredited CBT psychotherapist ~20 years Harley Street practice; co-founded Modern Stoicism; founder Plato's Academy Centre Athens. Yale UP published his 2024 follow-up <em>Marcus Aurelius: The Stoic Emperor</em> — Yale UP doesn't print grift. The Beck/Ellis CBT-Stoicism lineage is documented (Ellis directly credited Epictetus); Robertson is operating on real intellectual lineage. Pair Robertson chapters with the Meditations book he is glossing. Phase 2.</li>
+      <li id="lit-pigliucci" class="xref-target"><strong>Massimo Pigliucci, <em>How to Be a Stoic</em></strong> (Basic Books 2017, ~280pp). K.D. Irani Professor of Philosophy, CCNY + CUNY Grad Center. THREE doctorates (genetics, biology, philosophy of science); AAAS Fellow; ~30K Google Scholar citations; co-teaches Stoicism seminars with John Sellars. Strongest formal credentials of any popular Stoic author writing today. Structured around Epictetus's three disciplines (Desire/Action/Assent). <strong>Caveat:</strong> Pigliucci secularizes Stoicism by stripping Logos/providence (BMCR + Berry in Philosophy Now), which weakens motivational structure for extreme stress.</li>
+      <li id="lit-sellars-lessons" class="xref-target"><strong>John Sellars, <em>Lessons in Stoicism</em></strong> (Allen Lane / Basic Books 2019, ~150pp). Sellars's accessible trade version — 1-evening 'set the baseline' read for calibrating against Holiday/Irvine. Use AFTER Holiday to see what Holiday strips out.</li>
+      <li id="lit-farnsworth" class="xref-target"><strong>Ward Farnsworth, <em>The Practicing Stoic: A Philosophical User's Manual</em></strong> (Godine 2018, ~270pp). Dean UT-Austin School of Law; JD Chicago; clerked for Anthony Kennedy + Richard Posner. Thematic anthology organized by topic (judgment, externals, emotion, adversity, virtue) with extensive quotations from Seneca/Marcus/Epictetus + Montaigne and Schopenhauer. Authenticity-by-citation rather than interpretation. <strong>Reference desk book.</strong></li>
+      <li id="lit-lebon" class="xref-target"><strong>Tim LeBon, <em>365 Ways to Be More Stoic</em></strong> (John Murray 2022). Senior CBT psychotherapist; Research Director of Modern Stoicism; co-founder collaborator with Robertson/Gill/Sellars. <strong>Substitute for Holiday's Daily Stoic</strong> if you want a 365-format daily book with Robertson-school authenticity.</li>
+      <li id="lit-modern-stoicism" class="xref-target"><strong>Modern Stoicism org / Stoic Week</strong> (modernstoicism.com, free). Founded by classicists (Gill, Exeter), philosophers (Sellars, Royal Holloway), CBT psychotherapists (Robertson, LeBon). Free 7-day structured protocol with pre/post psychometric measurement.</li>
+      <li id="lit-irvine" class="xref-target"><strong>William B. Irvine, <em>A Guide to the Good Life: The Ancient Art of Stoic Joy</em></strong> (Oxford UP 2008). UCLA PhD 1980; emeritus prof philosophy at Wright State. <strong>CAVEAT (BMCR 2009.09.28 + Robertson):</strong> Irvine substitutes tranquility for virtue as the supreme good ("sleight of hand"), reframes praemeditatio malorum as hedonic-adaptation hack rather than its actual function of rehearsing judgment. <strong>Read AFTER Robertson/Pigliucci so you can spot the modernization</strong> — it's a critical exercise, not a foundational text.</li>
+    </ul>
+  </div>
+
+  <h4>TIER 4 — Non-Stoic LEGIT (kept with verified caveats)</h4>
+  <div class="card">
+    <ul>
+      <li id="lit-deep-work" class="xref-target"><strong>Cal Newport, <em>Deep Work</em></strong> (Grand Central 2016) <span class="badge status-progress" style="font-size: 11px;">PRIORITY</span> + <em>So Good They Can't Ignore You</em> (2012) + <em>Digital Minimalism</em> (Portfolio 2019, one-pass). Newport: full Georgetown CS professor, MIT PhD under Nancy Lynch, 65+ peer-reviewed publications. <strong>Cleanest academic credentials in the whole §10 list.</strong> Draws on real attention-residue + switching-cost literature (Sophie Leroy, Mark/Gudith/Klocke). Pair Deep Work with Seneca Letter 56 (noise) + Letter 7 (crowds). <em>So Good They Can't Ignore You</em> career-capital-over-passion argument maps onto multi-year apex-bait line — arguably more important than Deep Work for early-career.</li>
+      <li id="lit-atomic-habits" class="xref-target"><strong>James Clear, <em>Atomic Habits</em></strong> (Avery 2018, ~300pp) <span class="badge status-pending" style="font-size: 11px;">GATEWAY — single-pass only</span>. BA biomechanics, MBA Ohio State; no PhD; no peer-reviewed habit research. Tactical content (habit stacking, environment design, 2-min rule, identity-based habits) is genuinely actionable. <strong>NOT science.</strong> Synthesis of Fogg / Wood / Duhigg / Gollwitzer (some upstream willpower/ego-depletion work failed replication). Critics flag anecdote-heavy, cherry-picked evidence. <strong>Verdict:</strong> read ONCE on the plane, extract the four-laws checklist, never re-read. Upstream substitute for academic rigor: Wendy Wood, <em>Good Habits Bad Habits</em> (2019).</li>
+      <li id="lit-peak" class="xref-target"><strong>Anders Ericsson &amp; Robert Pool, <em>Peak</em></strong> (Houghton Mifflin Harcourt 2016) <span class="badge status-pending" style="font-size: 11px;">WITH CAVEATS</span>. K. Anders Ericsson (1947-2020) was Conradi Eminent Scholar at FSU — principal academic source of deliberate-practice (Ericsson/Krampe/Tesch-Römer 1993). Popularization BY the primary researcher. <strong>CAVEATS:</strong> (1) Ericsson explicitly disowned Gladwell's 10,000-hour framing — do NOT confuse Peak with Outliers. (2) Macnamara/Hambrick/Oswald 2014 meta-analysis: deliberate practice explains ~26% variance in games, ~21% music, ~4% education, &lt;1% professions. (3) 2019 Royal Society Open Science replication of 1993 violinist study cut variance explained 48% → 26%. <strong>USE:</strong> as operating protocol for math/real-analysis/conformal-core grind. NOT as character-formation or stress-tolerance source.</li>
+      <li id="lit-kahneman" class="xref-target"><strong>Daniel Kahneman, <em>Thinking, Fast and Slow</em></strong> (Farrar Straus Giroux 2011) <span class="badge status-pending" style="font-size: 11px;">SELECTIVE READ</span>. Nobel laureate Economics 2002, Princeton emeritus. <strong>SURVIVES strongly:</strong> heuristics-and-biases (anchoring, availability, representativeness), prospect theory + loss aversion, framing, endowment effect, dual-process metaphor. <strong>FAILS replication:</strong> Ch.4 social-priming (Bargh elderly-walking, Williams-Bargh warm-coffee, Vohs money-priming) — Kahneman publicly conceded 2017 "a train wreck"; ego depletion (Hagger et al. 2016 RRR failed). <strong>ACTION:</strong> Skip/skim Ch.4 specifically; read Parts I, II, IV, V carefully. Pair with Stuart Ritchie's <em>Science Fictions</em> (2020) as replication-crisis primer. <strong>As future statistician, the cautionary methodological lesson (Nobel laureate failing to apply his own statistical caveats) may be MORE valuable than the content.</strong></li>
+    </ul>
+  </div>
+
+  <h4>KILL LIST — do NOT buy <span class="badge tier-1" style="font-size: 11px;">guru-grift / replication-failed / Stoicism-distortion</span></h4>
+  <div class="alert urgent">
+    <strong>Verified guru-grift / replication-failed / Stoicism-distortion. DO NOT BUY.</strong> Page-budget better spent on Tier 1-3 above.
+  </div>
+  <table>
+    <thead><tr><th>Name</th><th>Why killed</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Ryan Holiday secondary catalog:</strong> Daily Stoic / Discipline Is Destiny / Stillness Is the Key / Ego Is the Enemy / Right Thing Right Now</td><td>Same 365-quote-curation template across SKUs. Marginal value extracted after Obstacle Is the Way (one book). Pigliucci: "too shallow." Williams (Guardian): "stoicism in a Magimix." Strips Stoic justice/cosmopolitanism/physics; keeps endurance-grit residue compatible with productivity-influencer audience. <strong>Halo concern: publicly Holiday-coded reads as LinkedIn-influencer in top-5 Stats departments.</strong> Keep Obstacle in §10 as "gateway only" — DO NOT add the others.</td></tr>
+      <tr><td><strong>Carol Dweck, <em>Mindset</em></strong></td><td>Dweck is a real Stanford professor — credentials are not the issue. <strong>Replication crisis is the issue.</strong> Sisk 2018 Psych Science meta-analysis: overall effect size r≈0.08 (trivial). Li &amp; Bates 2019 pre-registered: failed. Bahnik &amp; Vranka 2017 (n&gt;5,000): growth mindset NEGATIVELY associated with scholastic-aptitude scores. Macnamara &amp; Burgoyne 2023 Psych Bulletin: 94% of growth-mindset interventions had confounds; authors with financial COI report ~2.5× larger effects. Yeager himself: "got spread way ahead of how ready the science is." <strong>Folk takeaway already in Stoicism.</strong> SKIP.</td></tr>
+      <tr><td><strong>Angela Duckworth, <em>Grit</em></strong></td><td>Effect sizes shrink under meta-analysis (Credé/Tynan/Harms 2017, r ≈ .18 — grit largely indistinguishable from conscientiousness). SKIP.</td></tr>
+      <tr><td><strong>Malcolm Gladwell, <em>Outliers</em> (10,000-hour rule)</strong></td><td>Ericsson himself disowned this framing as a mischaracterization. Read Peak instead if you want the source.</td></tr>
+      <tr><td><strong>Robin Sharma</strong> (Monk Who Sold His Ferrari, 5 AM Club)</td><td>Fictional "monk" framing; no scholarship; seminar-funnel; pseudo-Eastern eclectic mush.</td></tr>
+      <tr><td><strong>Tony Robbins</strong> (Awaken the Giant, Unlimited Power)</td><td>NLP-based; no academic credentials; seminar empire (Date with Destiny). Documented harm in BuzzFeed 2019 coverage.</td></tr>
+      <tr><td><strong>Jim Rohn</strong></td><td>MLM-adjacent motivational speaker (Herbalife/Amway lineage). Folk-aphorism level; zero scholarship.</td></tr>
+      <tr><td><strong>Brian Tracy</strong> (Eat That Frog, 21 Success Secrets)</td><td>Sales-trainer recycling 1970s self-help. No empirical or philosophical grounding.</td></tr>
+      <tr><td><strong>Tim Ferriss as Stoic source</strong> (4-Hour Workweek, Tools of Titans)</td><td>Platforms Holiday, appropriates Stoic vocabulary in interviews. Underlying content is lifestyle-design entrepreneurship.</td></tr>
+      <tr><td><strong>Robert Greene as Stoic source</strong> (48 Laws of Power, Mastery)</td><td>Machiavellian/cynical orientation — directly opposite to Stoic justice (dikaiosune) and oikeiosis. Cherry-picked anecdotes. Holiday's mentor; explains Holiday's marketing-shaped Stoicism.</td></tr>
+      <tr><td><strong>David Goggins</strong> (Can't Hurt Me, Never Finished)</td><td>Pain-tolerance-as-virtue is ANTI-Stoic. Stoics: virtue is sufficient for happiness, suffering is an indifferent. Goggins inverts: suffering as proof of worth. Use Stockdale instead for the actual extreme-stress Stoic case.</td></tr>
+      <tr><td><strong>Robert Kiyosaki, <em>Rich Dad Poor Dad</em></strong></td><td>User-correctly named as canonical example. "Rich Dad" likely fictional. Rich Dad Education seminars repeatedly investigated for fraud.</td></tr>
+      <tr><td><strong>Mark Manson</strong> (Subtle Art, Everything Is F*cked)</td><td>Pop existentialism with irreverent register. Cites philosophy thinly.</td></tr>
+      <tr><td><strong>Jordan Peterson</strong> (12 Rules, Beyond Order) for these goals</td><td>Real PhD (McGill) but books are Jungian-archetypal-religious eclectic synthesis, not Stoic. Politically polarized framing is a distraction from stress/ambition/discipline targets.</td></tr>
+      <tr><td><strong>Jonas Salzgeber</strong> (The Little Book of Stoicism)</td><td>Self-published blogger derivative of Pigliucci/Robertson/Holiday. Adds nothing; read upstream sources.</td></tr>
+      <tr><td><strong>Higginson 1865 / Elizabeth Carter 1758 Epictetus + George Long 1862 Marcus Aurelius</strong></td><td>Public-domain Victorian/18c translations saturating motivational social media. Use Hard (OWC 2014) for Epictetus + Hays (Modern Library 2002) for Aurelius instead.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="stu-13-how-to-use-this-list">How to use this list</h3>
+  <div class="alert">
+    <strong>Recommended sequence for summer 2026 (per OPERATIVE pivot):</strong><br>
+    (1) Section 1 — <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> + <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès 2305.12616</a> + <a href="#lit-rlcp" class="xref">Hore RLCP</a> + Hore 2026 papers (<a href="#lit-hore-2602" class="xref">2602.06267</a>, <a href="#lit-hore-2605" class="xref">2605.21627</a>) by mid-Jul 2026 (Phase 0 anchors). · (2) Section 5 — <strong><a href="#lit-abbott" class="xref">Abbott</a> Ch 1-8 by end Aug 2026 (Lever 1, DOMINANT);</strong> <a href="#lit-rudin" class="xref">Rudin</a> Ch 1-4 by Sep 2026. · (3) Section 3 — re-read TARGET'S OWN recent paper before drafting cold-email (NOT another author's paper from the same lab). · (4) Section 8 — pick 2-3 frontier conformal-causal papers per month from Q3 2026 to track the field.
+    <br><br>
+    <strong>Sections 4, 6, 7 (Hernán-Robins, Casella-Berger, ESL/ISL, Wasserman) are REFERENCES,</strong> NOT active reading for summer 2026. Phase 0 doesn't need DR/MLE/semiparametric theory. Phase 1 bend toward conformal-causal in 2027 will pull from Section 4 (H-R Ch 1-4 + 12) THEN — premature now. Section 6 reading lives inside MATH 447 (Feb 2027) and MSc coursework (2028-29).
+    <br><br>
+    <strong>Hard avoids per OPE-kill meta-pattern:</strong> Section 8 lists specific arXiv IDs to NOT anchor projects on. Conformal frontier work is fine to READ; the kill is about choosing them as project anchors.
+  </div>
+
+</section>
+<section class="page-section" id="gre">
+
+  <h2 id="stu-14-gre-prep-june-2026-september-2027">GRE Prep — June 2026 → September 2027</h2>
+  <p class="tab-subtitle">REVISED 2026-05-26 after GRE operative-status deep research. <strong>GRE is MANDATORY</strong> — 5 of 7 lifestyle-compatible biostat primaries require it (UCLA, Vanderbilt, Yale, Brown, UF). Target test date: <strong>September 2027</strong>. Targets: Q ≥ 167, V ≥ 155, AW ≥ 4.0. Prep budget ~100-120 hr total (NOT 200). Full plan: <span class="mono">phd-pipeline/artifacts/gre-prep-plan-2026-2027.md</span>.</p>
+
+  <h3 id="stu-15-diagnostic-baseline-untimed-powerprep-2026-0">Diagnostic baseline (UNTIMED POWERPREP, 2026-05-25)</h3>
+  <table>
+    <thead><tr><th>Section</th><th>Raw</th><th>% correct</th><th>Untimed scaled est.</th><th>Timed est. without prep</th></tr></thead>
+    <tbody>
+      <tr><td>Verbal (Sec 2 + Sec 4)</td><td>15/27</td><td>55.6%</td><td>~152-154</td><td>~145-150</td></tr>
+      <tr><td>Quant (Sec 3 + Sec 5)</td><td>21/27</td><td>77.8%</td><td>~161-163</td><td>~154-159</td></tr>
+      <tr><td>Analytical Writing</td><td>N/A</td><td>N/A</td><td>not graded untimed</td><td>~3.5-4.0 untrained</td></tr>
+    </tbody>
+  </table>
+
+  <div class="lock-item">
+    <strong>Diagnosis (user-confirmed):</strong>
+    <ul>
+      <li><strong>Quant:</strong> NOT a content gap. Format familiarity + speed only. User finished untimed Quant in under 2 hrs, scored 91.7% on Sec 3. ~50-80 hrs of GRE-format practice needed.</li>
+      <li><strong>Verbal:</strong> Vocabulary is the bottleneck. "Knew only 1-2 of 4-6 options" on Text Completion / Sentence Equivalence. NOT a Reading Comp / inferential logic gap.</li>
+      <li><strong>AW:</strong> Standard low-time-investment section. Tackle in January batch.</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-16-score-targets-revised-2026-05-26">Score targets (REVISED 2026-05-26)</h3>
+  <div class="lock-item">
+    <strong>Final targets: V ≥ 155, Q ≥ 167, AW ≥ 4.0.</strong> Q≥167 (up from 165) required by UChicago Stats Q≥90th (~169) and Wharton Stats top-10% (~169). UF Biostat V+Q≥300 cleared at Q167+V155=322. Vanderbilt 70th-pct floor (Q≥158) saturated. UCLA/Brown/Yale Biostat have no published quant thresholds — Q167 treated as competitive baseline.
+  </div>
+
+  <h3 id="stu-17-per-programme-operative-status-final-classif">Per-programme operative status (FINAL classification per 18th deep-research)</h3>
+  <p class="tab-subtitle">Four operative classes: (a) Optional + not operative · (b) Optional + materially considered if submitted · (c) Effectively crucial / required · (d) Not accepted / not considered</p>
+  <table>
+    <thead><tr><th>Programme</th><th>Class</th><th>Submission rule</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">US Biostat T1-T10 (reach tier)</td></tr>
+      <tr><td>Harvard Biostat</td><td>(a)</td><td>Don't submit unless Q ≥ 168</td></tr>
+      <tr><td>JHU Biostat</td><td>(d)</td><td><strong>DO NOT submit</strong> — "will not be used as a metric"</td></tr>
+      <tr><td>UW Biostat</td><td>(b)</td><td>Submit if Q ≥ 167 + one-line explanation</td></tr>
+      <tr><td>Michigan Biostat</td><td>(d)</td><td><strong>DO NOT submit</strong> — "does not review"</td></tr>
+      <tr><td>UNC Biostat</td><td>(a)</td><td>Don't submit — "neither required nor typically recommended"</td></tr>
+      <tr><td>UPenn Biostat</td><td>(d)</td><td><strong>DO NOT submit</strong> — explicit: "Please DO NOT include GPA and/or GRE information"</td></tr>
+      <tr><td>Columbia Biostat</td><td>(b)</td><td>Submit if Q ≥ 167 + one-line explanation</td></tr>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">US Biostat T11-T25 (PRIMARY lifestyle-compatible)</td></tr>
+      <tr><td><strong>Brown Biostat</strong></td><td>(c)</td><td><strong>ALWAYS SUBMIT</strong> — formally required</td></tr>
+      <tr><td><strong>UCLA Biostat</strong></td><td>(c)</td><td><strong>ALWAYS SUBMIT</strong> — formally required</td></tr>
+      <tr><td><strong>Vanderbilt Biostat</strong></td><td>(c)</td><td><strong>ALWAYS SUBMIT</strong> — required + 70th-pct floor (V≥155, Q≥158)</td></tr>
+      <tr><td><strong>Yale Biostat</strong></td><td>(c)</td><td><strong>ALWAYS SUBMIT</strong> — formally required</td></tr>
+      <tr><td><strong>UF Biostat</strong></td><td>(c)</td><td><strong>ALWAYS SUBMIT</strong> — required + V+Q ≥ 300 explicit</td></tr>
+      <tr><td>Duke Biostat</td><td>(a)</td><td>Don't submit — no penalty for non-submission</td></tr>
+      <tr><td>BU Biostat</td><td>(d)</td><td><strong>DO NOT submit</strong> — "will not be considered"</td></tr>
+      <tr><td>UMN Biostat</td><td>(a)</td><td>Don't submit</td></tr>
+      <tr><td>Emory Biostat</td><td>(b)</td><td>Submit if Q ≥ 167</td></tr>
+      <tr><td>Pitt Biostat</td><td>(b)</td><td>Submit if Q ≥ 167</td></tr>
+      <tr><td>Iowa Biostat</td><td>(a)</td><td>Don't submit</td></tr>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">US Stats PhDs (CO-PRIMARY per HYBRID lock 2026-05-26)</td></tr>
+      <tr><td>Stanford Stats PhD</td><td>(c)</td><td>ALWAYS SUBMIT — but Q170 effective floor (per ETS percentile compression); apply as long-reach</td></tr>
+      <tr><td>Berkeley Stats PhD</td><td>(d)</td><td><strong>DO NOT submit</strong> — "will not be accepted"</td></tr>
+      <tr><td>UW Stats PhD</td><td>(d)</td><td><strong>DO NOT submit</strong> — "not used at all"</td></tr>
+      <tr><td>UChicago Stats PhD</td><td>(c)</td><td>ALWAYS SUBMIT — Q ≥ 90th de facto (~169 modal admit); reach</td></tr>
+      <tr><td>Wharton Stats PhD</td><td>(c)</td><td>ALWAYS SUBMIT — top-10% admits</td></tr>
+      <tr><td>CMU Stats PhD (pure)</td><td>(a)</td><td>Optional — but Kennedy fit; submit if Q ≥ 167 for international calibration</td></tr>
+      <tr><td>CMU Stats joint (Stat/Public Policy, Stat/EPP, Stat/Neural Comp)</td><td>(c)</td><td>ALWAYS SUBMIT if applying to joint programmes</td></tr>
+      <tr><td>Harvard Stats PhD</td><td>(a)</td><td>Optional; submit only if Q ≥ 168</td></tr>
+      <tr><td>Michigan Stats PhD</td><td>(a)</td><td>Optional, "minor and supporting role"; submit if Q ≥ 167</td></tr>
+      <tr><td>Princeton ORFE</td><td>(a)</td><td>Optional Fall 2025/26; <strong>re-verify Sept 2026 for Fall 2028</strong>; submit if Q ≥ 167</td></tr>
+      <tr><td>NC State Stats PhD</td><td>(a)</td><td>Optional; submit if Q ≥ 167 for international calibration</td></tr>
+      <tr><td>Cornell Stats PhD</td><td>(d)</td><td>DO NOT submit — "not required or reviewed"</td></tr>
+      <tr><td>Cornell ORIE PhD</td><td>(c)</td><td>ALWAYS SUBMIT — "strongly encouraged"</td></tr>
+      <tr><td>Columbia Stats PhD</td><td>(b)</td><td>Submit if Q ≥ 167</td></tr>
+      <tr><td>Duke Stats PhD</td><td>(b)</td><td>Submit if Q ≥ 167 (Volfovsky fit)</td></tr>
+      <tr><td><strong>NYU Stern Statistics PhD</strong></td><td>(c)</td><td><strong>HARD REQUIRED, no waivers</strong>; apply only if Q ≥ 165</td></tr>
+      <tr><td><strong>MIT IDSS-SES + IDPS</strong></td><td>(b)</td><td>Submit if Q ≥ 165 (published floor); Rakhlin/Rigollet/Uhler fit</td></tr>
+      <tr><td><strong>Stanford GSB OIT (Wager/Athey/Spiess)</strong></td><td>(c)</td><td>ALWAYS SUBMIT — required; 1-3 admits/yr; business-school SOP framing</td></tr>
+      <tr><td><strong>Yale Statistics &amp; Data Science</strong></td><td>(b)</td><td>Submit if Q ≥ 167; only Yale stats PhD entry</td></tr>
+      <tr><td>Texas A&amp;M Stats</td><td>(a)</td><td>Optional; real analysis preferred — UIUC MATH 447 substitutes; submit if Q ≥ 167</td></tr>
+      <tr><td>Iowa State Stats</td><td>(b)</td><td>Department says "beneficial to submit"; published Q ≥ 163, V ≥ 148, AW ≥ 3</td></tr>
+      <tr><td>Penn State Eberly Stats</td><td>(a)</td><td>"Applications without GRE given full consideration" — explicit not-considered framing; submit if Q ≥ 167</td></tr>
+      <tr><td>MIT EECS (backup stats-track)</td><td>(d)</td><td>DO NOT submit — "not used regardless of citizenship"</td></tr>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">Stanford Knight-Hennessy eligible</td></tr>
+      <tr><td>Stanford MS Statistics</td><td>(c)</td><td>ALWAYS SUBMIT — required by Stats programme</td></tr>
+      <tr><td>Stanford MS Biomedical Data Science</td><td>(d)</td><td>DO NOT submit — "will not be considered if submitted"</td></tr>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">UK MSc programmes</td></tr>
+      <tr><td>Cambridge MASt / Oxford / LSE / Imperial / Warwick / UCL MSc</td><td>(a)</td><td>NOT required at entry; useful for downstream US PhD apps per Cambridge FAQ</td></tr>
+    </tbody>
+  </table>
+
+  <div class="lock-item">
+    <strong>Summary (REVISED 2026-05-26 after stats deep research):</strong>
+    <ul>
+      <li><strong>Biostat side:</strong> ~71% of locked targets require GRE (5/7 lifestyle-compatible primaries)</li>
+      <li><strong>Stats side:</strong> ~29% require GRE (6/21 stats PhDs in scope) — more flexible, but top-tier (Stanford/UChicago/Wharton/Cornell ORIE/NYU Stern/Stanford GSB OIT) all require</li>
+      <li><strong>Net across hybrid portfolio:</strong> GRE prep is MANDATORY at moderate intensity; ~18 of 21 stats programmes will see your score (only Berkeley Stats / UW Stats / Cornell Stats are class (d) not-accepted)</li>
+    </ul>
+  </div>
+
+  <div class="alert">
+    <strong>Stanford Stats Q170 ceiling correction (2026-05-26):</strong> Stanford Stats published "Q94% admit avg" predates current 2021-2024 ETS percentile compression. Under current tables, Q170 = 91-92nd percentile. So Stanford Stats admits effectively require Q169-170 (near-perfect Quant). Your projected ceiling Q165-168 places below median — apply as long-reach, not target. Same constraint at UChicago Stats (Q≥90th = Q169 modal admit).
+    <br><br>
+    <strong>NYU Stern Stats:</strong> HARD REQUIRED, no waivers. Apply only if Q ≥ 165 confirmed at Sep 2027 test.
+    <br><br>
+    <strong>MIT has NO standalone Statistics PhD.</strong> Entry door = MIT IDSS-SES doctoral program (~6 PhDs/yr) with IDPS stats add-on. Rakhlin/Rigollet/Uhler/Wornell faculty. Published floors: V157(150 non-native)/Q165/AW4.0.
+    <br><br>
+    <strong>Princeton ORFE:</strong> policy is announced cycle-by-cycle. Currently (a) optional for Fall 2025/26; re-verify September 2026 for Fall 2028 status.
+  </div>
+
+  <h3 id="stu-18-phase-1-background-june-october-2026-5-7-hr-">Phase 1 — Background (June–October 2026, ~5-7 hr/wk)</h3>
+  <div class="lock-item">
+    <strong>Daily / weekly routine:</strong>
+    <ul>
+      <li><strong>Norman Lewis <em>Word Power Made Easy</em></strong> (PRIMARY) — 30 min × 5 days/wk. Roots/prefixes/suffixes. Teaches DECODING not memorization. ~30-40 hr total over phase. <strong>Highest-leverage approach for Anki-resistant learners.</strong></li>
+      <li><strong>GregMat — FREE path first</strong> (SECONDARY) — Vocab Mountain (free tool on gregmat.com) + YouTube channel during Jun-Oct 2026 background phase. Upgrade to <strong>GregMat Plus ($7.99/mo, current price)</strong> only during Jun-Sep 2027 intensive if structured daily quizzes needed (~$32 total for 3-4 mo).</li>
+      <li><strong>Higher-register reading habit</strong> — 30 min × 2-3 days/wk. <strong>NOT NYT/Atlantic/Economist</strong> (register too low per user feedback). Use: <strong>New Yorker long-form / TLS / LRB or NYRB / Foreign Affairs / Aeon.co / 19th-century fiction (Henry James, Wharton, Conrad, Eliot)</strong>. Active lookup of unknown words → personal notebook.</li>
+      <li><strong>Active vocab lookup from project papers</strong> — embedded in Phase 0 reading (Gibbs-Cherian-Candès 2305.12616 + Hore RLCP + Angelopoulos intro) + higher-register essay habit. Context-anchored vocab sticks ~10x better than isolated.</li>
+      <li><strong>Quant maintenance</strong> — 15 min × 1 day/wk. One Manhattan Quantitative Comparison problem set per week. Maintains GRE-format familiarity without diluting foundations / project work.</li>
+    </ul>
+    <strong>SKIP:</strong> Anki (user's known failure mode from SAT), Magoosh Vocab Builder app (isolated cards), Quizlet decks, NYT-tier passive reading.
+  </div>
+
+  <h3 id="stu-19-phase-2-uol-exam-pause-november-2026">Phase 2 — UoL exam pause (November 2026)</h3>
+  <div class="lock-item">
+    <strong>0 hr/wk on GRE. Full suspension.</strong> UoL Linear Algebra exam + ML4H Aug 27 / CDSM submission take precedence. GPA push from 5th semester onwards is higher-weight signal than GRE per memory #94. Reading habit can continue if energy permits but no formal study.
+  </div>
+
+  <h3 id="stu-20-phase-3-december-2026-calibration-3-hrs">Phase 3 — December 2026 calibration (~3 hrs)</h3>
+  <div class="lock-item">
+    <strong>Take POWERPREP Plus Test 1 (TIMED, $39.95 from ETS).</strong> Real scaled scores + pacing diagnostic (where you ran out of time vs guess vs accuracy degrade). Review by section: pinpoint 3-5 weakest Quant question types and 3-5 weakest Verbal question types. Adjust January plan based on actual gap.
+  </div>
+
+  <h3 id="stu-21-phase-4-jan-jun-2027-gre-suspended-revised-2">Phase 4 — Jan-Jun 2027 GRE SUSPENDED (REVISED 2026-05-26)</h3>
+  <div class="lock-item">
+    GRE prep paused. Active commitments take all bandwidth:
+    <ul>
+      <li><strong>UIUC NetMath MATH 447</strong> Feb-Jun 2027 (16 weeks, ~10-15 hr/wk, A-grade target)</li>
+      <li><strong>UoL Year 3 coursework</strong> (MT2116 Abstract Maths, ST2133 Distribution Theory, ST2134 Statistical Inference, MT3042 Optimisation)</li>
+      <li><strong>UoL Year 3 finals</strong> May/June 2027 — protect GPA</li>
+      <li>Option α (DR-OPE) project execution + cold-email follow-ups</li>
+    </ul>
+    Light vocab maintenance OK (~1-2 hr/wk Norman Lewis review). No formal Quant or AW study.
+  </div>
+
+  <h3 id="stu-22-phase-5-jul-aug-2027-intensive-25-35-hr-tota">Phase 5 — Jul-Aug 2027 Intensive (~25-35 hr total, NEW timing)</h3>
+  <table>
+    <thead><tr><th>Week</th><th>Quant</th><th>Verbal + AW</th><th>Full timed practice</th></tr></thead>
+    <tbody>
+      <tr><td>Wk 1 (early Jul)</td><td>Manhattan 5lb Quant content review + diagnostic — 8 hr</td><td>Vocab refresh (Norman Lewis weakness sections) — 3 hr</td><td>—</td></tr>
+      <tr><td>Wk 2</td><td>100 problem set + 1 timed Quant section — 8 hr</td><td>RC practice + Text Completion — 4 hr</td><td>POWERPREP Plus Test 2 — 4 hr</td></tr>
+      <tr><td>Wk 3</td><td>Question-type weakness drill — 6 hr</td><td>2 timed Verbal sections — 4 hr</td><td>—</td></tr>
+      <tr><td>Wk 4 (late Jul)</td><td>1 timed Quant section — 4 hr</td><td>3 AW essays (mix Issue + Argument) — 3 hr</td><td>Manhattan PT 1 — 4 hr</td></tr>
+      <tr><td>Wk 5 (early Aug)</td><td>Targeted weakness + speed — 5 hr</td><td>3-4 AW essays + ScoreItNow! calibration — 4 hr</td><td>—</td></tr>
+      <tr><td>Wk 6</td><td>Mixed full-section practice — 5 hr</td><td>Final RC + Verbal review — 3 hr</td><td>Manhattan PT 2 — 4 hr</td></tr>
+      <tr><td>Wk 7 (late Aug)</td><td>Light review + nerves management — 3 hr</td><td>Final vocab review — 2 hr</td><td>Mock test in test conditions — 4 hr</td></tr>
+      <tr><td>Wk 8 (early Sep)</td><td>Test prep + rest — 2 hr</td><td>Light reading day before — 1 hr</td><td><strong>TEST DAY (early-mid Sep 2027)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="stu-23-phase-6-september-2027-test-retake-buffer">Phase 6 — September 2027 test + retake buffer</h3>
+  <div class="lock-item">
+    <strong>Test date:</strong> early-mid September 2027. Book Almaty test center <strong>late July 2027</strong> (~6 weeks ahead). Saturday morning slots fill fastest. V/Q scores released immediately; AW + official report 8-10 days later.
+    <br><br>
+    <strong>Retake if ANY:</strong> Quant &lt; 162 (below class-(c) thresholds); Verbal &lt; 150 (below Vanderbilt 70th-pct); AW &lt; 3.5.<br>
+    <strong>Don't retake if:</strong> Quant ≥ 167 AND Verbal ≥ 155 AND AW ≥ 4.0 (saturates all class-(c) thresholds).<br>
+    <strong>Retake windows:</strong> Late October 2027 (21+ day rule from Sep test); mid-November 2027 if first retake under threshold (last possible before Dec application deadlines).
+  </div>
+
+  <h3 id="stu-24-contingent-strategy-if-sep-2027-underperform">Contingent strategy if Sep 2027 underperforms (Q ≤ 162)</h3>
+  <div class="alert">
+    <strong>Tier-targeting INVERSION trigger:</strong> If September 2027 GRE Q ≤ 162 with no further improvement plateau, the apply list paradoxically pivots toward T1-T10 GRE-NOT-reviewed programmes (Harvard, JHU, Michigan, UNC, UPenn Biostat — all class (a)/(d)). These are the strongest research-fit biostat programmes AND they don't review GRE. T11-T25 lifestyle-compatible primary (UCLA/Vanderbilt/Yale/Brown/UF) becomes HARDER to clear because all five require GRE. Consider MSc bridge year (Dec 2028 cycle) for retake + re-strategize.
+  </div>
+
+  <h3 id="stu-25-vocabulary-strategy-detail-the-long-pole">Vocabulary strategy detail (the long pole)</h3>
+  <div class="alert">
+    <strong>Critical correction (2026-05-25):</strong> User confirmed NYT / Atlantic / Economist register is too low for GRE Verbal vocab gain. Modern journalism reads at ~10-11th grade Flesch ease; GRE Verbal tests one register higher.
+    <br><br>
+    <strong>GRE-frequent words rarely appearing in NYT-tier:</strong> abstemious, mendacious, loquacious, obstreperous, pellucid, recondite, vituperative, sanguine, specious, tendentious, perfidious, sycophantic, pusillanimous, fulsome.
+    <br><br>
+    <strong>Higher-register sources (use these instead):</strong> New Yorker long-form essays; TLS (Times Literary Supplement); LRB or NYRB; Foreign Affairs; Aeon.co; 19th-century fiction (Henry James, Edith Wharton, Joseph Conrad, T.S. Eliot — particularly <em>The Portrait of a Lady</em>, <em>The Age of Innocence</em>, <em>Heart of Darkness</em>).
+  </div>
+
+  <h3 id="stu-26-per-programme-gre-policy-verification-autumn">Per-programme GRE policy verification (Autumn 2027 action)</h3>
+  <div class="lock-item">
+    In Sep-Oct 2027, before final commitment to submit, verify GRE policy at each target programme's admissions page. <strong>Policies change annually.</strong> Decision rule at the gate:
+    <ul>
+      <li>≥70% require / strongly consider GRE → prep as planned, take Feb 2027 test, retake if needed</li>
+      <li>≥80% waived / not-accepted → reduce Jan intensity to 8-10 hr/wk, take Feb 2027 to keep optionality, submit selectively</li>
+      <li>100% waived → SKIP entirely; redirect 80+ hours to higher-leverage work (ML4H polish, cold-email pipeline, MT2175 self-study)</li>
+    </ul>
+  </div>
+
+  <h3 id="stu-27-submission-decision-rule-per-programme-dec-2">Submission decision rule (per programme, Dec 2027 application time)</h3>
+  <table>
+    <thead><tr><th>Your score vs programme median admit</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr><td>Above programme median admit</td><td><strong>Submit.</strong> Strengthens.</td></tr>
+      <tr><td>At programme median</td><td><strong>Submit.</strong> Marginal positive.</td></tr>
+      <tr><td>Below programme median</td><td><strong>Don't submit.</strong> Actively weakens (suggests optional choice was made because score wasn't strong).</td></tr>
+      <tr><td>No published median</td><td><strong>Submit if Q ≥ 162 AND V ≥ 150</strong> (default safe threshold).</td></tr>
+    </tbody>
+  </table>
+  <div class="lock-item">
+    <strong>T11-T25 biostat median admit ranges (rough, varies by programme):</strong> Quant 161-166; Verbal 156-160; AW 4.0-4.5. Your realistic ceiling (Q 165-168, V 155-158) puts you at or above median for most T11-T25 — submission strengthens.
+  </div>
+
+  <h3 id="stu-28-key-resources-ranked-by-roi">Key resources (ranked by ROI)</h3>
+  <table>
+    <thead><tr><th>Section</th><th>Primary resource</th><th>Cost</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Vocab</td><td>Norman Lewis <em>Word Power Made Easy</em></td><td>~$10</td><td>Roots-based decoding; highest leverage for Anki-resistant learners</td></tr>
+      <tr><td>Vocab</td><td>GregMat free (Vocab Mountain + YouTube); upgrade to Plus $7.99/mo only for Jun-Sep 2027 intensive</td><td>$0 background, ~$32 intensive</td><td>Free path first; paid daily quizzes only in final 3-4 mo if needed</td></tr>
+      <tr><td>Quant</td><td>Manhattan 5lb GRE Quant</td><td>~$25</td><td>~1800 problems organized by question type</td></tr>
+      <tr><td>Quant practice</td><td>POWERPREP Plus Tests 1, 2</td><td>$39.95 each</td><td>Real ETS scored practice; calibration + final practice</td></tr>
+      <tr><td>AW</td><td>ETS Issue + Argument prompt pool (free) + ScoreItNow! ($20)</td><td>$0 + $20-40</td><td>Pool is finite; official scaled rating for 1-2 essays</td></tr>
+      <tr><td>RC + Text Completion</td><td>Manhattan 5lb GRE Verbal</td><td>~$25</td><td>Companion to Quant 5lb</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="stu-29-total-budget">Total budget</h3>
+  <div class="lock-item">
+    <strong>Time:</strong> ~210-300 hours over 9 months (background 100-140 hr + January intensive 80-100 hr + retake buffer 30-60 hr if needed).<br>
+    <strong>Money:</strong> Norman Lewis $10 + GregMat ~$32 (4 mo intensive only at $7.99/mo; free during background phase) + Manhattan 5lb Quant $25 + Manhattan 5lb Verbal $25 + POWERPREP Plus ×2 $80 + ScoreItNow! ×2 $40 + test fee ~$220 = <strong>~$432 total.</strong> Retake adds $220 if needed.
+  </div>
+
+</section>
+</div>
+</div>
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return;
+    const today = new Date('2026-06-04');
+    const dayOfWeek = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    document.getElementById('week-date').textContent =
+      'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
+      ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
+      ' · Phase 0 Wk 1 + Lever 1 starts';
+
+    const weekTasks = [
+      {id: 'wk-ops-1', text: 'Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduit, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore-specific anchor)', meta: 'Per Step 0 verification w9qh053sx (3 Jun 2026). ~1 hr. The spec\'s framing currently overstates what postdoc letters buy at top-5 Stats.'},
+      {id: 'wk-ops-2', text: 'Clone conditional-conformal repo via HTTPS + reproduce experiments/SyntheticData.ipynb', meta: 'git clone https://github.com/jjcherian/conditional-conformal.git ; cd conditional-conformal ; git checkout release ; jupyter notebook experiments/SyntheticData.ipynb. Pip install conditionalconformal already done. Budget 1 full day for dep drift. Target: numerical agreement with paper Fig 1 marginal coverage.'},
+      {id: 'wk-ops-3', text: 'Lever 1 self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers + Cauchy completeness)', meta: '15-20 hr/wk through summer. Pen-and-paper proofs only — no skimming. Goal: Abbott Ch 1-3 by end of Jun, Ch 1-8 by Aug 31. This is the #1 leverage; protects MATH 447 A-grade Feb 2027.'},
+      {id: 'wk-ops-4', text: 'Kozha paperwork block (Fri 15:00-18:00) — compute-infra credit stack', meta: 'AWS Research + DigitalOcean + HuggingFace + Anthropic + OpenAI + Google Cloud credits (if not yet sent per kozha-funding-tracker.md). ~3 hr this week. Steady-state ~12 hr/mo.'},
+      {id: 'wk-ops-5', text: 'Norman Lewis daily 30 min + GregMat free vocab + 1 higher-register essay (LRB/NYRB/Harper\'s/TLS) — GRE Verbal background', meta: 'Maintenance. Sep 2027 test. Free path through Oct 2026; paid GregMat ($7.99/mo) only for the Jun-Sep 2027 intensive.'},
+      {id: 'wk-ops-6', text: 'Income/ML-upskill block: ~10-15 hr/wk soft cap (per §9 fork resolution)', meta: 'Apex tech intern Summer 2027 application prep starts soon (apps Aug-Oct 2026). Freelance ML via network if available. ONE Kaggle competition max. NOT hackathon-bingo, NOT cold-startup-fundraising.'},
+      {id: 'wk-ops-7', text: 'Verify your KBTU class ranking (top-10%?) — gates ETH Excellence Scholarship eligibility', meta: 'If you fall outside top-10% of KBTU DS&BA cohort, ESOP (CHF 12K/sem + tuition waiver) is unrealistic for ETH MSc Stats Nov 2027 deadline. Email registrar or department for class-ranking data. ~30 min admin.'},
+      {id: 'wk-ops-8', text: 'Recurring schedule maintained: sleep 23:00-07:00, gym Tue/Thu/Sat 15:00-18:00, deep work block protected', meta: 'No project-anchor extras this week. Hit the basics first.'},
+    ];
+    const ul = document.getElementById('week-tasks');
+    ul.innerHTML = '';
+    weekTasks.forEach(t => {
+      const row = document.createElement('div');
+      row.className = 'checkbox-row';
+      row.dataset.taskId = t.id;
+      row.innerHTML = `
+        <input type="checkbox">
+        <div class="task-content">
+          <div>${t.text}</div>
+          <div class="task-meta">${t.meta}</div>
+        </div>
+      `;
+      ul.appendChild(row);
+    });
+    // Re-bind checkbox states for newly added rows
+    loadCheckboxes();
+  }
+
+  // Kozha funding table: sort + filter
+  (function() {
+    const table = document.getElementById('kozha-table');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('th[data-sort-key]');
+    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
+    let sortState = { key: 'deadline', dir: 'asc' };
+
+    function applySort() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
+      rows.sort((a, b) => {
+        const av = a.dataset[sortState.key];
+        const bv = b.dataset[sortState.key];
+        let comp;
+        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
+        else comp = String(av).localeCompare(String(bv));
+        return sortState.dir === 'asc' ? comp : -comp;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      headers.forEach(th => {
+        const k = th.dataset.sortKey;
+        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
+        th.textContent = labels[k] + arrow;
+      });
+    }
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sortKey;
+        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = k; sortState.dir = 'asc'; }
+        applySort();
+      });
+    });
+
+    document.querySelectorAll('.kozha-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lead = btn.dataset.lead;
+        let visible = 0;
+        tbody.querySelectorAll('tr').forEach(row => {
+          const rowLead = row.dataset.lead;
+          let show;
+          if (lead === 'all') show = true;
+          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
+          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
+          else if (lead === 'Either') show = rowLead === 'Either';
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
+        if (allBtn) allBtn.textContent = 'All (38)';
+        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
+      });
+    });
+
+    applySort();
+  })();
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
+
+
+// per-page sidebar: highlight section in view
+(function(){
+  const links=[...document.querySelectorAll('.site-subnav a')];
+  if(!links.length)return;
+  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
+  const ids=Object.keys(map);
+  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
+    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body></html>

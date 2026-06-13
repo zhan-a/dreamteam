@@ -40,6 +40,11 @@ canada-msc-research/
 msc-bridge-research/
 conditional-conformal/
 transcript*.md
+reu-data.json
+gen_opportunities.py
+build_site.py
+*.py
+# (opportunities.html + the multi-page site files ARE published — see git add)
 
 # Jekyll-specific (we removed Jekyll; using .nojekyll instead)
 _config.yml

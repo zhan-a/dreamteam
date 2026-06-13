@@ -1,0 +1,768 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — Outreach</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --bg-2: #ffffff;
+    --bg-3: #f4f4f2;
+    --bg-soft: #f8f7f3;
+    --border: #e6e4df;
+    --border-strong: #d5d2cb;
+    --fg: #1c1c19;
+    --fg-dim: #5f5d57;
+    --fg-dimmer: #8a877f;
+    --accent: #2954c8;
+    --accent-2: #7c3aed;
+    --accent-soft: #eaf0ff;
+    --ok: #1f8a4d;
+    --ok-soft: #e8f5ed;
+    --warn: #b06a00;
+    --warn-soft: #fbf2e1;
+    --urgent: #c8302a;
+    --urgent-soft: #fbeae8;
+    --info: #0d7e8c;
+    --info-soft: #e6f4f6;
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-md: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  }
+  body.dark {
+    --bg: #0f1216;
+    --bg-2: #161a21;
+    --bg-3: #1d232c;
+    --bg-soft: #181d25;
+    --border: #2a313d;
+    --border-strong: #3a414d;
+    --fg: #e3e8ef;
+    --fg-dim: #8a94a5;
+    --fg-dimmer: #5a6374;
+    --accent: #6ab0ff;
+    --accent-2: #a78bfa;
+    --accent-soft: #1a2940;
+    --ok: #62d17a;
+    --ok-soft: #15301d;
+    --warn: #f7b04a;
+    --warn-soft: #2b210d;
+    --urgent: #ff6961;
+    --urgent-soft: #2c1715;
+    --info: #4dc4d1;
+    --info-soft: #122a2d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 18px;
+    margin: 0 24px 4px 24px;
+    font-weight: 600;
+  }
+  aside .subtitle {
+    margin: 0 24px 24px 24px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  aside nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-family: var(--sans);
+    font-size: 14px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  aside nav button:hover {
+    background: var(--bg-3);
+    color: var(--fg);
+  }
+  aside nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  aside .footer {
+    margin: 32px 24px 16px 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-dimmer);
+  }
+  aside .footer button {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  aside .footer button:hover {
+    background: var(--border);
+  }
+  main {
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 12px 0;
+    font-weight: 600;
+  }
+  .tab-subtitle {
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .stat .value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .stat .value.small { font-size: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-3);
+    font-weight: 600;
+    color: var(--fg-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-soft); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.tier-1 { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.tier-2 { background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-3 { background: var(--info-soft); color: var(--info); }
+  .badge.tier-4 { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-pending { background: var(--bg-3); color: var(--fg-dim); }
+  .badge.status-progress { background: var(--info-soft); color: var(--info); }
+  .badge.status-done { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-blocked { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.status-soon { background: var(--warn-soft); color: var(--warn); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checkbox-row:last-child { border-bottom: none; }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .checkbox-row .task-content { flex: 1; }
+  .checkbox-row .task-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .checkbox-row.done .task-content > div:first-child {
+    text-decoration: line-through;
+    color: var(--fg-dim);
+  }
+  .deadline { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .deadline.past { color: var(--urgent); }
+  .deadline.soon { color: var(--warn); }
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .alert {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .alert.info { background: var(--info-soft); border-left-color: var(--info); }
+  .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+  .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .xref {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .xref:hover { border-bottom-style: solid; background: var(--accent-soft); }
+  .xref-target {
+    scroll-margin-top: 16px;
+  }
+  .xref-target:target {
+    background: var(--warn-soft);
+    transition: background 1.2s;
+  }
+  .lock-item {
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-2);
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+  }
+  .lock-item strong { color: var(--accent); }
+  .month-group {
+    margin-bottom: 24px;
+  }
+  .month-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pill {
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+  details summary:hover { color: var(--accent); }
+  details[open] summary { margin-bottom: 12px; }
+  .small { font-size: 12px; color: var(--fg-dim); }
+  .mono { font-family: var(--mono); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .reset-btn {
+    background: var(--urgent-soft);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .kozha-filter {
+    background: var(--bg-3);
+    color: var(--fg-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .kozha-filter:hover { background: var(--bg-soft); }
+  .kozha-filter.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  #kozha-table th[data-sort-key]:hover { background: var(--bg-soft); }
+  @media (max-width: 768px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; }
+    main { padding: 16px; }
+  }
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="cur">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Outreach</div><a href="#out-1-cold-email-pipeline" class="">Cold Email Pipeline</a><a href="#out-2-cold-email-artifact-rubric-10-components-rep" class="h3">Cold-email artifact rubric (10 components — repo must clear </a><a href="#out-3-tier-a-conformal-core-postdoc-layer-current-" class="h3">Tier A — Conformal-core postdoc layer (current OPERATIVE pri</a><a href="#out-4-tier-b-strong-letters-low-cold-reply-approac" class="h3">Tier B — strong letters, low cold-reply (approach with finis</a><a href="#out-5-tier-c-apex-letter-writers-never-cold-enter-" class="h3">Tier C — apex letter writers, NEVER cold (enter via postdoc </a><a href="#out-6-dropped-2026-06-04-ope-kill-meta-pattern" class="h3">DROPPED 2026-06-04 (OPE-kill meta-pattern)</a><a href="#out-7-previously-dropped-biostat-leaning-do-not-re" class="h3">PREVIOUSLY DROPPED biostat-leaning (do not re-suggest)</a><a href="#out-8-kaust-relationship-seed-added-2026-05-17-per" class="h3">KAUST relationship-seed (added 2026-05-17 per Summer 2027 KA</a><a href="#out-9-kz-origin-recommender-map-added-2026-05-17-p" class="h3">KZ-origin recommender map (added 2026-05-17 per memory corre</a><a href="#out-10-verification-emails-sep-oct-2026" class="">Verification Emails (Sep–Oct 2026)</a></div>
+<div class="site-main"><section class="page-section" id="email">
+
+  <h2 id="out-1-cold-email-pipeline">Cold Email Pipeline</h2>
+  <p class="tab-subtitle">Conformal-core entry-layer targets per 2026-06-04 OPERATIVE pivot (post 3-OPE-kills). Hore (CMU) primary, Gibbs (Berkeley) secondary; Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy DROPPED (OPE-kill meta-pattern). Apex PIs (Ramdas / Barber / Tibshirani) reached ONLY via postdoc-conduit after Phase 0 artifact public.</p>
+
+  <div class="alert urgent">
+    <strong>OPERATIVE PIVOT 2026-06-04 — DROP the OPE primaries.</strong> Kallus / Cai / Wager / Yadlowsky / Athey / Kennedy were Option α-positioned. After 3 OPE kills the cold-email machinery rebuilds against the postdoc layer of the apex conformal tree.
+    <br><br>
+    <strong>REVISED 2026-06-08 SEND ORDER (per workflow w3hf3q31f):</strong> SEND ORDER = <strong>Cherian FIRST</strong> (Stanford PhD under Candès, runs the jjcherian/conditional-conformal issues page = natural inbound channel) → then <strong>Hore</strong> (anchor on his RLCP arXiv:2310.07850) → then <strong>Gibbs</strong> (lower-probability cold-engagement; anchor on 2305.12616 he lead-authored). Do NOT email Candès directly in Phase 0 — status mismatch. Sustain follow-ups 3-week cadence. Apex PI letters route through their postdoc/student via co-authored output, NOT cold email.
+  </div>
+
+  <h3 id="out-2-cold-email-artifact-rubric-10-components-rep">Cold-email artifact rubric (10 components — repo must clear this before any send)</h3>
+  <div class="alert">
+    <strong>If a postdoc opens your repo and cannot identify components 1-2 in 10 seconds of scrolling, the email gets archived. Non-negotiable floor.</strong>
+  </div>
+  <table>
+    <thead><tr><th style="width: 60px;">#</th><th>Component</th><th>What</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>PwC 5-item compliance</strong></td><td>Dockerfile + <code>requirements.txt</code> pinned · <code>make reproduce</code> regenerates every figure into <code>figures/</code> · saved base-learner checkpoints in <code>models/</code> · <code>results/</code> table-of-numbers regeneratable. The 10-second-scroll gate.</td></tr>
+      <tr><td>2</td><td><strong>Side-by-side figure reproduction</strong></td><td>README opens with 2x3 grid: your reproduced cqrDataComparison_{groups,shifts,agnostic}.pdf left, paper's right, for synthetic + Communities&amp;Crime. Caption: "matches paper within MC error (n_trials=200, σ ≈ 0.07)".</td></tr>
+      <tr><td>3</td><td><strong>Cold-reimplementation provenance</strong></td><td>Commit <code>cold_reimplementation/your_condconf.py</code> with git timestamp BEFORE any commit touching <code>replication_using_authors_code/</code>. Git log is the hardest-to-fake credential. Converts artifact from "undergrad followed a tutorial" to "undergrad actually built the QP solver".</td></tr>
+      <tr><td>4</td><td><strong>REPORT.md in MLRC format</strong></td><td>Reproducibility Summary / Methodology / Results / <strong>What was easy / What was difficult</strong> (the 5-15 non-obvious implementation details — imputed-test-point eta_{n+1} dimension trick, Cholesky factor for RKHS penalty, OSQP-vs-MOSEK numerical differences) / Communication with authors / Pineau-checklist appendix.</td></tr>
+      <tr><td>5</td><td><strong>One notebook with duality derivation as inline markdown</strong></td><td>Pinball-QR dual + Phi-orthogonality + imputed test point, derived in LaTeX cells alongside cvxpy code implementing each constraint. README's "click here first" link.</td></tr>
+      <tr><td>6</td><td><strong>Extension 1 framed as research question</strong></td><td>NOT "I ran condconf on more groups" but "when does the finite-dim guarantee bind tightly vs. loosely?" One figure: coverage curves on C&amp;C stratified by racePctBlack OR population quartiles, alpha sweep [0.05, 0.2]. One paragraph identifying binding/non-binding regime.</td></tr>
+      <tr><td>7</td><td><strong>Extension 2 framed as research question</strong></td><td>NOT "I tried XGBoost" but "are CondConf's gains orthogonal to base-model expressivity?" Table: OLS / quantile-forest / XGBoost / MLP base regressor, Phi held constant. One-sentence declarative finding.</td></tr>
+      <tr><td>8</td><td><strong>The email itself — 200 words, 3 paragraphs, NO ask</strong></td><td><strong>P1:</strong> "I reproduced your JRSS-B 2025 paper from scratch over 6 weeks; [repo link]." <strong>P2:</strong> "Extension [X] surfaced [specific non-obvious finding, 1 sentence, must be true]." <strong>P3:</strong> "I'm applying for stats PhD Fall 2028; open to a 20-min call about [specific open question raised by your extension]?" NO letter request. NO admissions mention. <strong>Subject:</strong> "7 implementation details from reproducing CPCG (your 2025 JRSS-B paper)" — opens at much higher rate than generic interest emails.</td></tr>
+      <tr><td>9</td><td><strong>Targeting</strong></td><td>Lead with Cherian (Stanford PhD under Candès, runs repo issues = natural inbound) and Hore (CMU postdoc, Barber/Ramdas orbit). Gibbs lower-probability cold. Do NOT email Candès directly in Phase 0.</td></tr>
+      <tr><td>10</td><td><strong>Timing discipline</strong></td><td>Do NOT email before Wk 6 deliverable shipped. Minimum credible artifact = baseline match + one non-obvious empirical extension finding. Sending earlier collapses your single shot — they remember names and the second email reads as "still hasn't shipped".</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="out-3-tier-a-conformal-core-postdoc-layer-current-">Tier A — Conformal-core postdoc layer (current OPERATIVE primaries)</h3>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr id="email-cherian" class="xref-target"><td>0</td><td><strong>John Cherian</strong></td><td>Stanford PhD under Candès · runs jjcherian/conditional-conformal repo issues page</td><td><input type="checkbox" data-task-id="email-0-r1"></td><td><input type="checkbox" data-task-id="email-0-resp"></td><td><input type="checkbox" data-task-id="email-0-r2"></td><td><strong>SEND FIRST (revised 2026-06-08).</strong> Natural inbound channel — he runs the repo issues page so reproduction-based emails fit his expected inbox. Anchor on <a href="study.html#lit-gcc-2305">GCC 2305.12616</a> + your discrepancy-log findings. Verify current placement per OPERATIVE Step-0 (might be at OpenAI/elsewhere now). Co-author conduit to Candès.</td></tr>
+      <tr id="email-hore" class="xref-target"><td>1</td><td><strong>Rohan Hore</strong></td><td>CMU postdoc · Stats &amp; Data Science · Barber-trained, with Ramdas</td><td><input type="checkbox" data-task-id="email-1-r1"></td><td><input type="checkbox" data-task-id="email-1-resp"></td><td><input type="checkbox" data-task-id="email-1-r2"></td><td><strong>SEND SECOND.</strong> Email: <code>rhore@andrew.cmu.edu</code> (verified). Anchor on <a href="study.html#lit-rlcp">RLCP</a> + his 2026 papers (<a href="study.html#lit-hore-2602">arXiv:2602.06267</a>, <a href="study.html#lit-hore-2605">arXiv:2605.21627</a>) — NOT on Gibbs's paper. Send Wk of Jul 13 after Phase 0 repo public. Co-author conduit to Ramdas+Barber.</td></tr>
+      <tr id="email-gibbs" class="xref-target"><td>2</td><td><strong>Isaac Gibbs</strong></td><td>UC Berkeley postdoc · Stats · Tibshirani (NOT Candès — corrected)</td><td><input type="checkbox" data-task-id="email-2-r1"></td><td><input type="checkbox" data-task-id="email-2-resp"></td><td><input type="checkbox" data-task-id="email-2-r2"></td><td><strong>SEND THIRD (lower-probability cold-engagement per workflow).</strong> Email: <code>igibbs@berkeley.edu</code> (verified). Anchor on <a href="study.html#lit-gcc-2305">2305.12616</a> (he is lead author). Job-market closing-window risk; re-verify status Sep 2026 + Jan 2027. Co-author conduit to Tibshirani.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 24px;" id="out-4-tier-b-strong-letters-low-cold-reply-approac">Tier B — strong letters, low cold-reply (approach with finished artifact)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">Reach only AFTER Phase 0 artifact public + a Hore/Gibbs conversation already started. These are jr-PI level — real letter weight if engaged.</p>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>3</td><td>Ying Jin</td><td>Wharton (Penn) Stats · jr PI</td><td><input type="checkbox" data-task-id="email-3-r1"></td><td><input type="checkbox" data-task-id="email-3-resp"></td><td><input type="checkbox" data-task-id="email-3-r2"></td><td>Email: <code>yjinstat@wharton.upenn.edu</code>. Anchor on her 2023 PNAS conformal-sensitivity (arXiv:2111.12161). 2025 IMS Lawrence D. Brown Award. Strong letter weight if engaged.</td></tr>
+      <tr><td>4</td><td>Zhimei Ren</td><td>Wharton (Penn) Stats · jr PI</td><td><input type="checkbox" data-task-id="email-4-r1"></td><td><input type="checkbox" data-task-id="email-4-resp"></td><td><input type="checkbox" data-task-id="email-4-r2"></td><td>Email: <code>zren@wharton.upenn.edu</code>. Co-author of conformal Γ-value sensitivity. Reach after reproducing 2111.12161 first.</td></tr>
+      <tr><td>5</td><td>Lihua Lei</td><td>Stanford GSB · jr PI · OIT group</td><td><input type="checkbox" data-task-id="email-5-r1"></td><td><input type="checkbox" data-task-id="email-5-resp"></td><td><input type="checkbox" data-task-id="email-5-r2"></td><td>Lei-Candès 2021 conformal-counterfactual + recent conformal-OPE work. Stanford GSB direct or contact form.</td></tr>
+      <tr><td>6</td><td>Yaniv Romano</td><td>Technion ECE · jr PI</td><td><input type="checkbox" data-task-id="email-6-r1"></td><td><input type="checkbox" data-task-id="email-6-resp"></td><td><input type="checkbox" data-task-id="email-6-r2"></td><td>Email: <code>yromano@technion.ac.il</code>. CQR author (the score function used in most conformal-ITE). Large code-centric group.</td></tr>
+      <tr><td>7</td><td>Stephen Bates</td><td>MIT Stats · jr PI</td><td><input type="checkbox" data-task-id="email-7-r1"></td><td><input type="checkbox" data-task-id="email-7-resp"></td><td><input type="checkbox" data-task-id="email-7-r2"></td><td>Email: <code>s_bates@mit.edu</code>. Conformal-core, Candès lineage. Reach with finished artifact only.</td></tr>
+      <tr><td>8</td><td>Matteo Sesia</td><td>USC Marshall · jr PI</td><td><input type="checkbox" data-task-id="email-8-r1"></td><td><input type="checkbox" data-task-id="email-8-resp"></td><td><input type="checkbox" data-task-id="email-8-r2"></td><td>Email: <code>sesia@marshall.usc.edu</code>. Conformal-core, Candès lineage. Smaller-lab tier.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 24px;" id="out-5-tier-c-apex-letter-writers-never-cold-enter-">Tier C — apex letter writers, NEVER cold (enter via postdoc tree only)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">Apex committee-defining letters but near-zero cold-reply. Reach via Hore (Barber+Ramdas conduit) or Gibbs (Tibshirani conduit) ONLY after sustained co-authored work. Cold emails here = noise.</p>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Advisor</th><th>Institution</th><th>Round 1 sent</th><th>Response?</th><th>Round 2 sent</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>9</td><td>Aaditya Ramdas</td><td>CMU Stats &amp; ML · senior</td><td><input type="checkbox" data-task-id="email-9-r1"></td><td><input type="checkbox" data-task-id="email-9-resp"></td><td><input type="checkbox" data-task-id="email-9-r2"></td><td><strong>Reach via Hore conduit only.</strong> Apex letter writer. Hore is currently with him at CMU.</td></tr>
+      <tr><td>10</td><td>Rina Foygel Barber</td><td>UChicago Stats · senior</td><td><input type="checkbox" data-task-id="email-10-r1"></td><td><input type="checkbox" data-task-id="email-10-resp"></td><td><input type="checkbox" data-task-id="email-10-r2"></td><td><strong>Reach via Hore conduit only.</strong> Apex letter. Hore was her UChicago PhD student.</td></tr>
+      <tr><td>11</td><td>Ryan Tibshirani</td><td>Berkeley Stats · senior</td><td><input type="checkbox" data-task-id="email-11-r1"></td><td><input type="checkbox" data-task-id="email-11-resp"></td><td><input type="checkbox" data-task-id="email-11-r2"></td><td><strong>Reach via Gibbs conduit only.</strong> Apex letter. Gibbs is currently his Berkeley postdoc.</td></tr>
+      <tr><td>12</td><td>Emmanuel Candès</td><td>Stanford Stats · senior</td><td><input type="checkbox" data-task-id="email-12-r1"></td><td><input type="checkbox" data-task-id="email-12-resp"></td><td><input type="checkbox" data-task-id="email-12-r2"></td><td><strong>Reach via Lei/Jin conduit only.</strong> Apex letter. Conformal-causal field anchor.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 24px;" id="out-6-dropped-2026-06-04-ope-kill-meta-pattern">DROPPED 2026-06-04 (OPE-kill meta-pattern)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">These were the Option α primaries. After 3 OPE kills the entry-layer machinery moved away from this neighborhood. Do not cold-email them as part of OPERATIVE plan.</p>
+  <ul style="font-size: 14px; color: var(--fg-dim);">
+    <li><strong>Nathan Kallus</strong> (Cornell) — co-authored the integration paper that killed Option α (arXiv:2501.06926). Cold-emailing him a CP×OPE proposal would propose his own published work back to him.</li>
+    <li><strong>Hengrui Cai</strong> (UCI) — OPE/RL adjacent; saturated subfield.</li>
+    <li><strong>Stefan Wager / Susan Athey</strong> (Stanford GSB) — apex but not entry-accessible; their letter-writer paths run through Lei/Jin postdoc layer.</li>
+    <li><strong>Steve Yadlowsky</strong> (Google DeepMind) — industry, not letter-bearing.</li>
+    <li><strong>Edward Kennedy</strong> (CMU Stats) — DR-learner anchor; CMU PhDs from his lab DON'T systematically place at top-5 Stats per phase-1 verification. Reach later if Phase 1 bend genuinely requires.</li>
+  </ul>
+
+  <h3 style="margin-top: 24px;" id="out-7-previously-dropped-biostat-leaning-do-not-re">PREVIOUSLY DROPPED biostat-leaning (do not re-suggest)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">Demoted 2026-05-27 per apex pivot: Murphy, Tchetgen Tchetgen, Tianxi Cai, Fan Li, Nabi, Han, Zeng. Biostat-leaning topics don't bridge apex Stats letter orbit.</p>
+
+  <h3 style="margin-top: 24px;" id="out-8-kaust-relationship-seed-added-2026-05-17-per">KAUST relationship-seed (added 2026-05-17 per Summer 2027 KAUST VSRP plan)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Faculty</th><th>Institution</th><th>Email sent</th><th>Response?</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>11</td><td>Paula Moraga</td><td>KAUST Statistics</td><td><input type="checkbox" data-task-id="email-11-r1"></td><td><input type="checkbox" data-task-id="email-11-resp"></td><td>Spatial epi · R-package developer · LMIC-mentoring track · best KAUST fit</td></tr>
+      <tr><td>12</td><td>Hernando Ombao</td><td>KAUST Statistics</td><td><input type="checkbox" data-task-id="email-12-r1"></td><td><input type="checkbox" data-task-id="email-12-resp"></td><td>Biostat / time series · documented international student mentorship</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 24px;" id="out-9-kz-origin-recommender-map-added-2026-05-17-p">KZ-origin recommender map (added 2026-05-17 per memory correction #29)</h3>
+  <p class="tab-subtitle">Highest-leverage KZ-origin recommender candidates. The third PhD-application LoR is the binding constraint — these are the realistic Western-credentialed letter writers in your network.</p>
+  <table>
+    <thead><tr><th>#</th><th>Faculty</th><th>Institution</th><th>PhD origin</th><th>Outreach sent</th><th>Response?</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>13</td><td>Zhenisbek Assylbekov</td><td>Purdue Fort Wayne (formerly NU 2017-2023)</td><td>Hiroshima 2008</td><td><input type="checkbox" data-task-id="email-13-r1"></td><td><input type="checkbox" data-task-id="email-13-resp"></td><td><strong>Single highest-leverage KZ-origin recommender.</strong> ML/NLP/stats · 238 citations · active. Substantive technical email re recent paper.</td></tr>
+      <tr><td>14</td><td>Rustem Takhanov</td><td>NU Math</td><td>—</td><td><input type="checkbox" data-task-id="email-14-r1"></td><td><input type="checkbox" data-task-id="email-14-resp"></td><td>ML / constraint satisfaction · 257 citations · 2025 <em>Machine Learning</em> journal paper anchor</td></tr>
+      <tr><td>15</td><td>Dongming Wei</td><td>NU Math</td><td>Michigan State (US PhD)</td><td><input type="checkbox" data-task-id="email-15-r1"></td><td><input type="checkbox" data-task-id="email-15-resp"></td><td>Western PhD = automatically legible to US adcoms · locally accessible</td></tr>
+      <tr><td>16</td><td>Tolga Etgü</td><td>NU Math (Chair)</td><td>UC Berkeley</td><td><input type="checkbox" data-task-id="email-16-r1"></td><td><input type="checkbox" data-task-id="email-16-resp"></td><td>US PhD · Chair so very busy · approach only after Wei/Takhanov</td></tr>
+      <tr><td>17</td><td>Durvudkhan Suragan</td><td>NU Math</td><td>—</td><td><input type="checkbox" data-task-id="email-17-r1"></td><td><input type="checkbox" data-task-id="email-17-resp"></td><td>Ferran Sunyer i Balaguer Prize 2018 · 2,310 Google Scholar citations</td></tr>
+    </tbody>
+  </table>
+
+</section>
+<section class="page-section" id="verify">
+
+  <h2 id="out-10-verification-emails-sep-oct-2026">Verification Emails (Sep–Oct 2026)</h2>
+  <p class="tab-subtitle">10 citizenship/eligibility verification questions to resolve before submitting MSc/bridge apps. Send these in fall 2026.</p>
+
+  <table>
+    <thead><tr><th>#</th><th>Recipient</th><th>Question</th><th>Sent</th><th>Response received</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="mono">biometrie@uni-bremen.de</td><td>Does Bremen MSc Medical Biometry accept applicants without biology/medical background? What bridge coursework required?</td><td><input type="checkbox" data-task-id="verify-1-sent"></td><td><input type="checkbox" data-task-id="verify-1-resp"></td></tr>
+      <tr><td>2</td><td class="mono">msc-data-science@statistik.tu-dortmund.de</td><td>Does TU Dortmund MSc Data Science require formal ADS course on transcript? Bridge courses available?</td><td><input type="checkbox" data-task-id="verify-2-sent"></td><td><input type="checkbox" data-task-id="verify-2-resp"></td></tr>
+      <tr><td>3</td><td class="mono">biostatistics@kth.se</td><td>Does Karolinska joint MSc require 90 ECTS in math/stats? How calculated for UoL EMFSS BSc DS&BA applicants?</td><td><input type="checkbox" data-task-id="verify-3-sent"></td><td><input type="checkbox" data-task-id="verify-3-resp"></td></tr>
+      <tr><td>4</td><td>Utrecht research master coordinator</td><td>Does DS&BA BSc qualify as "research-oriented" for MSBBSS admit framework?</td><td><input type="checkbox" data-task-id="verify-4-sent"></td><td><input type="checkbox" data-task-id="verify-4-resp"></td></tr>
+      <tr><td>5</td><td>Helsinki Math & Stats admissions</td><td>How does KZ GPA 3.5/4 convert to Finnish 5-scale? Eligible for 100% tuition waiver?</td><td><input type="checkbox" data-task-id="verify-5-sent"></td><td><input type="checkbox" data-task-id="verify-5-resp"></td></tr>
+      <tr><td>6</td><td>Basel MSc Epi admissions</td><td>Epi/public health background required? Bridge available for non-bio quant applicants?</td><td><input type="checkbox" data-task-id="verify-6-sent"></td><td><input type="checkbox" data-task-id="verify-6-resp"></td></tr>
+      <tr><td>7</td><td class="mono">james.alvarez@fredhutch.org</td><td>Is Fred Hutch Postbac Scholar Program open to international (KZ) applicants? Visa sponsorship?</td><td><input type="checkbox" data-task-id="verify-7-sent"></td><td><input type="checkbox" data-task-id="verify-7-resp"></td></tr>
+      <tr><td>8</td><td class="mono">bbps@broadinstitute.org</td><td>Is Broad BBPS overlay open to international applicants (separately from underlying CA I job)?</td><td><input type="checkbox" data-task-id="verify-8-sent"></td><td><input type="checkbox" data-task-id="verify-8-resp"></td></tr>
+      <tr><td>9</td><td>Penn Wharton Stats & DS admissions</td><td>Wharton Master's Bridge international eligibility? Funding for non-US/non-LPR students?</td><td><input type="checkbox" data-task-id="verify-9-sent"></td><td><input type="checkbox" data-task-id="verify-9-resp"></td></tr>
+      <tr><td>10</td><td>Duke DCRI faculty affairs</td><td>DCRI Predoctoral Biostatistics Fellowship international eligibility? Visa sponsorship?</td><td><input type="checkbox" data-task-id="verify-10-sent"></td><td><input type="checkbox" data-task-id="verify-10-resp"></td></tr>
+      <tr><td>11</td><td>MDACC postbac coordinator</td><td>Does KBTU qualify as partner institution for MD Anderson Postbac biostat track?</td><td><input type="checkbox" data-task-id="verify-11-sent"></td><td><input type="checkbox" data-task-id="verify-11-resp"></td></tr>
+      <tr><td>12</td><td>Astana Public Diplomacy Section</td><td>Is there a research-track Fulbright waiver for fresh BSc graduates (vs the 2-yr work-experience rule)?</td><td><input type="checkbox" data-task-id="verify-12-sent"></td><td><input type="checkbox" data-task-id="verify-12-resp"></td></tr>
+    </tbody>
+  </table>
+
+</section>
+</div>
+</div>
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return;
+    const today = new Date('2026-06-04');
+    const dayOfWeek = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    document.getElementById('week-date').textContent =
+      'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
+      ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
+      ' · Phase 0 Wk 1 + Lever 1 starts';
+
+    const weekTasks = [
+      {id: 'wk-ops-1', text: 'Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduit, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore-specific anchor)', meta: 'Per Step 0 verification w9qh053sx (3 Jun 2026). ~1 hr. The spec\'s framing currently overstates what postdoc letters buy at top-5 Stats.'},
+      {id: 'wk-ops-2', text: 'Clone conditional-conformal repo via HTTPS + reproduce experiments/SyntheticData.ipynb', meta: 'git clone https://github.com/jjcherian/conditional-conformal.git ; cd conditional-conformal ; git checkout release ; jupyter notebook experiments/SyntheticData.ipynb. Pip install conditionalconformal already done. Budget 1 full day for dep drift. Target: numerical agreement with paper Fig 1 marginal coverage.'},
+      {id: 'wk-ops-3', text: 'Lever 1 self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers + Cauchy completeness)', meta: '15-20 hr/wk through summer. Pen-and-paper proofs only — no skimming. Goal: Abbott Ch 1-3 by end of Jun, Ch 1-8 by Aug 31. This is the #1 leverage; protects MATH 447 A-grade Feb 2027.'},
+      {id: 'wk-ops-4', text: 'Kozha paperwork block (Fri 15:00-18:00) — compute-infra credit stack', meta: 'AWS Research + DigitalOcean + HuggingFace + Anthropic + OpenAI + Google Cloud credits (if not yet sent per kozha-funding-tracker.md). ~3 hr this week. Steady-state ~12 hr/mo.'},
+      {id: 'wk-ops-5', text: 'Norman Lewis daily 30 min + GregMat free vocab + 1 higher-register essay (LRB/NYRB/Harper\'s/TLS) — GRE Verbal background', meta: 'Maintenance. Sep 2027 test. Free path through Oct 2026; paid GregMat ($7.99/mo) only for the Jun-Sep 2027 intensive.'},
+      {id: 'wk-ops-6', text: 'Income/ML-upskill block: ~10-15 hr/wk soft cap (per §9 fork resolution)', meta: 'Apex tech intern Summer 2027 application prep starts soon (apps Aug-Oct 2026). Freelance ML via network if available. ONE Kaggle competition max. NOT hackathon-bingo, NOT cold-startup-fundraising.'},
+      {id: 'wk-ops-7', text: 'Verify your KBTU class ranking (top-10%?) — gates ETH Excellence Scholarship eligibility', meta: 'If you fall outside top-10% of KBTU DS&BA cohort, ESOP (CHF 12K/sem + tuition waiver) is unrealistic for ETH MSc Stats Nov 2027 deadline. Email registrar or department for class-ranking data. ~30 min admin.'},
+      {id: 'wk-ops-8', text: 'Recurring schedule maintained: sleep 23:00-07:00, gym Tue/Thu/Sat 15:00-18:00, deep work block protected', meta: 'No project-anchor extras this week. Hit the basics first.'},
+    ];
+    const ul = document.getElementById('week-tasks');
+    ul.innerHTML = '';
+    weekTasks.forEach(t => {
+      const row = document.createElement('div');
+      row.className = 'checkbox-row';
+      row.dataset.taskId = t.id;
+      row.innerHTML = `
+        <input type="checkbox">
+        <div class="task-content">
+          <div>${t.text}</div>
+          <div class="task-meta">${t.meta}</div>
+        </div>
+      `;
+      ul.appendChild(row);
+    });
+    // Re-bind checkbox states for newly added rows
+    loadCheckboxes();
+  }
+
+  // Kozha funding table: sort + filter
+  (function() {
+    const table = document.getElementById('kozha-table');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('th[data-sort-key]');
+    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
+    let sortState = { key: 'deadline', dir: 'asc' };
+
+    function applySort() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
+      rows.sort((a, b) => {
+        const av = a.dataset[sortState.key];
+        const bv = b.dataset[sortState.key];
+        let comp;
+        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
+        else comp = String(av).localeCompare(String(bv));
+        return sortState.dir === 'asc' ? comp : -comp;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      headers.forEach(th => {
+        const k = th.dataset.sortKey;
+        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
+        th.textContent = labels[k] + arrow;
+      });
+    }
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sortKey;
+        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = k; sortState.dir = 'asc'; }
+        applySort();
+      });
+    });
+
+    document.querySelectorAll('.kozha-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lead = btn.dataset.lead;
+        let visible = 0;
+        tbody.querySelectorAll('tr').forEach(row => {
+          const rowLead = row.dataset.lead;
+          let show;
+          if (lead === 'all') show = true;
+          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
+          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
+          else if (lead === 'Either') show = rowLead === 'Either';
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
+        if (allBtn) allBtn.textContent = 'All (38)';
+        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
+      });
+    });
+
+    applySort();
+  })();
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
+
+
+// per-page sidebar: highlight section in view
+(function(){
+  const links=[...document.querySelectorAll('.site-subnav a')];
+  if(!links.length)return;
+  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
+  const ids=Object.keys(map);
+  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
+    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body></html>

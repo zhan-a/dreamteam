@@ -1,0 +1,944 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — Tasks</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --bg-2: #ffffff;
+    --bg-3: #f4f4f2;
+    --bg-soft: #f8f7f3;
+    --border: #e6e4df;
+    --border-strong: #d5d2cb;
+    --fg: #1c1c19;
+    --fg-dim: #5f5d57;
+    --fg-dimmer: #8a877f;
+    --accent: #2954c8;
+    --accent-2: #7c3aed;
+    --accent-soft: #eaf0ff;
+    --ok: #1f8a4d;
+    --ok-soft: #e8f5ed;
+    --warn: #b06a00;
+    --warn-soft: #fbf2e1;
+    --urgent: #c8302a;
+    --urgent-soft: #fbeae8;
+    --info: #0d7e8c;
+    --info-soft: #e6f4f6;
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-md: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  }
+  body.dark {
+    --bg: #0f1216;
+    --bg-2: #161a21;
+    --bg-3: #1d232c;
+    --bg-soft: #181d25;
+    --border: #2a313d;
+    --border-strong: #3a414d;
+    --fg: #e3e8ef;
+    --fg-dim: #8a94a5;
+    --fg-dimmer: #5a6374;
+    --accent: #6ab0ff;
+    --accent-2: #a78bfa;
+    --accent-soft: #1a2940;
+    --ok: #62d17a;
+    --ok-soft: #15301d;
+    --warn: #f7b04a;
+    --warn-soft: #2b210d;
+    --urgent: #ff6961;
+    --urgent-soft: #2c1715;
+    --info: #4dc4d1;
+    --info-soft: #122a2d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 18px;
+    margin: 0 24px 4px 24px;
+    font-weight: 600;
+  }
+  aside .subtitle {
+    margin: 0 24px 24px 24px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  aside nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-family: var(--sans);
+    font-size: 14px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  aside nav button:hover {
+    background: var(--bg-3);
+    color: var(--fg);
+  }
+  aside nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  aside .footer {
+    margin: 32px 24px 16px 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-dimmer);
+  }
+  aside .footer button {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  aside .footer button:hover {
+    background: var(--border);
+  }
+  main {
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 12px 0;
+    font-weight: 600;
+  }
+  .tab-subtitle {
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .stat .value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .stat .value.small { font-size: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-3);
+    font-weight: 600;
+    color: var(--fg-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-soft); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.tier-1 { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.tier-2 { background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-3 { background: var(--info-soft); color: var(--info); }
+  .badge.tier-4 { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-pending { background: var(--bg-3); color: var(--fg-dim); }
+  .badge.status-progress { background: var(--info-soft); color: var(--info); }
+  .badge.status-done { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-blocked { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.status-soon { background: var(--warn-soft); color: var(--warn); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checkbox-row:last-child { border-bottom: none; }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .checkbox-row .task-content { flex: 1; }
+  .checkbox-row .task-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .checkbox-row.done .task-content > div:first-child {
+    text-decoration: line-through;
+    color: var(--fg-dim);
+  }
+  .deadline { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .deadline.past { color: var(--urgent); }
+  .deadline.soon { color: var(--warn); }
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .alert {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .alert.info { background: var(--info-soft); border-left-color: var(--info); }
+  .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+  .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .xref {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .xref:hover { border-bottom-style: solid; background: var(--accent-soft); }
+  .xref-target {
+    scroll-margin-top: 16px;
+  }
+  .xref-target:target {
+    background: var(--warn-soft);
+    transition: background 1.2s;
+  }
+  .lock-item {
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-2);
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+  }
+  .lock-item strong { color: var(--accent); }
+  .month-group {
+    margin-bottom: 24px;
+  }
+  .month-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pill {
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+  details summary:hover { color: var(--accent); }
+  details[open] summary { margin-bottom: 12px; }
+  .small { font-size: 12px; color: var(--fg-dim); }
+  .mono { font-family: var(--mono); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .reset-btn {
+    background: var(--urgent-soft);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .kozha-filter {
+    background: var(--bg-3);
+    color: var(--fg-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .kozha-filter:hover { background: var(--bg-soft); }
+  .kozha-filter.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  #kozha-table th[data-sort-key]:hover { background: var(--bg-soft); }
+  @media (max-width: 768px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; }
+    main { padding: 16px; }
+  }
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="cur">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Tasks</div><a href="#tas-1-tasks" class="">Tasks</a><a href="#current-week-heading" class="h3">Current week</a><a href="#tas-3-lookahead-summer-2026-phase-0-lever-1-mt1173" class="h3">Lookahead — Summer 2026 (Phase 0 + Lever 1 + MT1173 ramp)</a></div>
+<div class="site-main"><section class="page-section" id="week">
+
+  <h2 id="tas-1-tasks">Tasks</h2>
+  <p class="tab-subtitle" id="week-date">Current week tasks. Tasks roll automatically based on date.</p>
+
+  <div class="alert urgent" id="week-alert">
+    <strong>Phase 0 reproduction protocol REVISED 2026-06-08</strong> per workflow w3hf3q31f. <strong>Strict cold-implementation rule:</strong> reference repo <code>jjcherian/conditional-conformal</code> is FORBIDDEN this week. Focus = (a) <a href="study.html#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> Mon-Tue (vocabulary), (b) <a href="study.html#lit-gcc-2305" class="xref">GCC 2305.12616</a> 3-pass read Wed-Thu (Pass 3 = math line-by-line + hand-derive pinball-QR duality on paper), (c) write <code>paper-sheet.md</code> closed-paper one-pager FROM MEMORY by Fri, (d) <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 2 §2.2-2.3, (e) Kozha Fri 15-18. <strong>Full protocol + anti-patterns on <a href="roadmap.html#schedule">Schedule</a> tab; multi-year arc on <a href="roadmap.html#roadmap">Roadmap</a>.</strong>
+    <br><br>
+    <strong>🧳 Turkey trip light-reading pack (REVISED 2026-06-08 per workflow wa2ce5u92):</strong> <a href="study.html#lit-stockdale" class="xref">Stockdale Courage Under Fire</a> (30pp PDF on phone — READ FIRST on plane out) + <a href="study.html#lit-aurelius" class="xref">Marcus Aurelius Meditations</a> (Hays — morning slow read, 1-2 books/day) + <a href="study.html#lit-long-how-to-be-free" class="xref">A.A. Long, How to Be Free</a> (170pp Princeton — afternoon read, SWAPPED IN for Holiday after verification) + <a href="study.html#lit-atomic-habits" class="xref">Atomic Habits</a> (single-pass tactical extraction on plane back). <strong>Holiday DOWNGRADED</strong> to "gateway only, not Stoic source" per workflow — same time budget on A.A. Long materially more signal. Skip Newport/Ericsson/Pigliucci/Hadot for trip (too dense for vacation; start on return).
+  </div>
+
+  <div class="card">
+    <h3 id="current-week-heading">Current week</h3>
+    <div id="week-tasks">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <h3 id="tas-3-lookahead-summer-2026-phase-0-lever-1-mt1173">Lookahead — Summer 2026 (Phase 0 + Lever 1 + MT1173 ramp)</h3>
+  <details>
+    <summary>Week of Jun 1–7, 2026 — Phase 1 RESET (per 2026-06-08 protocol revision)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun1-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduits, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore anchor)</div>
+        <div class="task-meta">Per Step 0 verification w9qh053sx. ~1 hr.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun1-2-RESET">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>RECONCILIATION:</strong> if you cloned <code>jjcherian/conditional-conformal</code> last week, decide: strict reset (delete clone, no view for 2 wks) OR acknowledged slip (don't reopen until Wk 5 per new protocol). Document decision in <code>RESET-DECISION.md</code> for honesty.</div>
+        <div class="task-meta">Per Phase 0 reproduction protocol on Schedule tab. The reference repo is FORBIDDEN until Wk 5 (Jun 29). The original "reproduce SyntheticData.ipynb" task in this week was against the new discipline rule.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun1-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Lever 1 (real analysis) self-study STARTS — <a href="study.html#lit-abbott" class="xref">Abbott "Understanding Analysis"</a> Ch 1 (Real Numbers)</div>
+        <div class="task-meta">20-25 hr/wk through summer per apex-peer calibration. Pen-and-paper proofs + 45-min no-premature-consultation rule + cold-reproduction protocol. Goal: Ch 1-8 by end of Aug.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun1-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Kozha paperwork block (Fri 15:00-18:00) — continue existing pipeline</div>
+        <div class="task-meta">36-funder tracker; 12 hr/mo steady-state.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jun 8–14, 2026 — PHASE 1 + 2 (paper-first, NO ref repo)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun8-1-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>Mon-Tue:</strong> <a href="study.html#lit-angelopoulos-intro" class="xref">Angelopoulos &amp; Bates intro (arXiv:2107.07511)</a> — vocabulary build. Read fully + work toy code. NO reference to jjcherian repo.</div>
+        <div class="task-meta">~10 hr. Apply discipline rule even on tutorial: predict every theorem before reading proof; predict every cell output before running.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun8-2-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>Wed-Thu:</strong> <a href="study.html#lit-gcc-2305" class="xref">GCC 2305.12616</a> 3-pass read (Keshav protocol)</div>
+        <div class="task-meta">Pass 1 (5-10min skim, 5 Cs). Pass 2 (1hr careful + figures, predict each step). Pass 3 (4-8hr math line-by-line, rederive coverage theorem on paper, hand-derive pinball-QR duality). Photograph derivations into <code>derivations/</code>.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun8-3-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>Fri:</strong> Write <code>paper-sheet.md</code> closed-paper one-pager FROM MEMORY (problem, finite-dim theorem, key proof step, imputed test point eta_{n+1} trick, headline number). Code vanilla split conformal + CQR on synthetic data (Poisson + Gaussian outliers, n=2000/1000/500, 200 trials), verify marginal cov ≈ 0.9.</div>
+        <div class="task-meta">~150 LoC, 1 notebook. ZERO LINES from jjcherian.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun8-4-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>GATE: state Theorem 1 in one sentence paper-closed; state which proof step breaks if exchangeability is dropped. If FAIL → Wk 1 extends, do not proceed to Wk 2.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun8-5-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 2 §2.2-2.3 (sequences, limits)</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun8-6-NEW-AXLER">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>Sat-Sun (Jun 13-14): <a href="study.html#lit-axler" class="xref">Axler</a> Ch 1.A starts (R^n and C^n).</strong> Lever 1b begins — proof-based linear algebra. ~5-6 hr/wk via Sat morning + Sun morning slots.</div>
+        <div class="task-meta">Apply discipline rule rigorously — 45-min no-premature-consultation per exercise; cold-reproduce every proposition stated. Replaces the tutoring-withdrawal time slot. Earlier start (was Sep 1) per 2026-06-08 revision.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jun 15–21, 2026 — PHASE 3 HARD GO/NO-GO GATE (cold reimplementation)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun15-1-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Spec your <code>your_condconf.py</code>: eta variable length n_calib+1 (imputed test point trick), Phi-orthogonality constraint (eta^T Phi == 0), pinball bounds (quantile-1 ≤ eta ≤ quantile), maximize sum(eta * scores)</div>
+        <div class="task-meta">Decide YOUR directory structure — must NOT mirror jjcherian (use e.g. <code>coverage/conditional/</code>). Every function docstring written BEFORE body, referencing paper equation it implements.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun15-2-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Implement <code>setup_cvx_problem_v1</code> with <code>phi_fn_groups = indicator_matrix(x, disc=[0, 0.5, ..., 5])</code>. Group-conditional coverage test on 10 disjoint groups across 200 trials.</div>
+        <div class="task-meta">Allowed: numpy, scipy, cvxpy, sklearn, quantile-forest. FORBIDDEN: mapie, crepes, nonconformist, jjcherian/conditional-conformal.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun15-3-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>HARD GATE:</strong> group cov ≥ 0.85 on each of 10 groups WITHOUT consulting jjcherian. Max 90 min consulting condconf.py:713 PERMITTED only AFTER your cold version runs end-to-end (even if numbers wrong). Commit <code>cold_reimplementation/your_condconf.py</code> BEFORE any commit referencing original repo.</div>
+        <div class="task-meta">If FAIL → STOP, do NOT paper over with copy-paste. Remediate Koenker quantile-regression Ch.3 + Boyd Convex Optimization Ch.5 for 1-2 weeks, then resume.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun15-4-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 2 §2.4-2.7 (series); start Ch 3</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun15-5-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Letter-channel memo (KBTU + UoL faculty + REU + SIEPR-Athey KZ-eligibility 1-pg)</div>
+        <div class="task-meta">~3-4 hr concentrated. Output: 1-page memo with named candidates + actions.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jun 22–28, 2026 — PHASE 3-4 (shifts + RKHS + sanity)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun22-1-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Add <code>phi_fn_shifts</code> (Gaussian density basis: norm.pdf(x, loc=L_i, scale=sigma_i) stacked) to your_condconf.py</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun22-2-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Add RKHS penalty (0.5*C*||L^T eta||^2 with Cholesky factor of RBF kernel matrix, gamma=12.5, lambda=0.005 to match paper defaults)</div>
+        <div class="task-meta">DO NOT install MOSEK — OSQP/HiGHS fallback is identical for reproduction.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun22-3-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Phase 4 sanity: overfit one batch (n_calib=10) verifying LP/QP solves exactly. Predict plot shape BEFORE running (expected coverage curve, hyperparameter sensitivity, what breaks the method). Reproduce cqrDataComparison_shifts.pdf + agnostic.pdf within ±0.02 of paper's coverage numbers.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun22-4-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 3 §3.2-3.5 (topology, compactness, perfect sets)</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jun 29–Jul 5, 2026 — PHASE 5 GATE (open ref repo + discrepancy log)</summary>
+    <div class="checkbox-row" data-task-id="ops-jun29-1-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>NOW open <code>jjcherian/conditional-conformal</code>.</strong> Swap data loader to UCI Communities &amp; Crime (n=650/650/694, alpha=0.1, 200 trials). Run their <code>experiments/run_comparison.py</code> + your version on identical seed.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-2-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Diff outputs. Log every >0.02 coverage gap in <code>discrepancy-log.md</code> with: (paper number, my number, diff, root cause — hyperparameter? base-learner seed? OSQP-vs-MOSEK numerical differences? Cholesky factor scaling? imputed-test-point indexing?)</div>
+        <div class="task-meta">This file IS the cold-email artifact ('here are the 7 non-obvious implementation details that matter and are not in the manuscript').</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-3-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><strong>HARD GATE:</strong> NO extension code until baseline matches within ±0.02 on at least one C&amp;C headline number. Tag commit <code>baseline-reproduced</code> when match. discrepancy-log.md ≥ 5 entries.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-4-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Read <a href="study.html#lit-rlcp" class="xref">Hore-Barber RLCP (arXiv:2310.07850)</a> + Hore's 2026 papers (<a href="study.html#lit-hore-2602" class="xref">arXiv:2602.06267</a>, <a href="study.html#lit-hore-2605" class="xref">arXiv:2605.21627</a>) — for <a href="outreach.html#email-hore" class="xref">Hore</a> cold-email anchor prep</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jun29-5-NEW">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 4 (Functional Limits + Continuity)</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jul 6–12, 2026 — PHASE 6 EXTENSION 1 (stratified coverage sweep)</summary>
+    <div class="checkbox-row" data-task-id="ops-jul6-NEW-0">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Pre-register Extension 1 hypothesis in <code>extension1_hypothesis.md</code> BEFORE running. What do you expect to see and why?</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-NEW-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Extension 1: stratified coverage sweep on a variable paper does NOT use — racePctBlack quartiles OR population quartiles. Alpha sweep [0.05, 0.2]. Generate one figure + one-paragraph commentary framed as "when does the finite-dim guarantee bind tightly vs. loosely?"</div>
+        <div class="task-meta">Figure must show non-trivial result (not just flat 0.9 line — differential undercoverage on a subgroup, or differential length, or binding-vs-non-binding regime).</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Polish repo: README with one-command run, pinned env, numbers vs paper</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Draft <a href="outreach.html#email-hore" class="xref">Hore cold-email</a> (anchor on <a href="study.html#lit-rlcp" class="xref">RLCP</a> + your conditional-coverage sweep)</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Draft <a href="outreach.html#email-gibbs" class="xref">Gibbs cold-email</a> (anchor on <a href="study.html#lit-gcc-2305" class="xref">2305.12616</a>, frame around Tibshirani-endorsable output)</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul6-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 6 (Sequences and Series of Functions) — uniform convergence</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jul 13–19, 2026 — Send cold emails + MT1173 prep RAMPS</summary>
+    <div class="checkbox-row" data-task-id="ops-jul13-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>SEND <a href="outreach.html#email-hore" class="xref">Hore cold-email</a> (primary)</div>
+        <div class="task-meta">rhore@andrew.cmu.edu. Link to public repo. ~150 words. Specific technical question. Remote+unpaid frame.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul13-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>SEND <a href="outreach.html#email-gibbs" class="xref">Gibbs cold-email</a> (secondary)</div>
+        <div class="task-meta">igibbs@berkeley.edu. Anchor on <a href="study.html#lit-gcc-2305" class="xref">2305.12616</a>. Note Tibshirani.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul13-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>MT1173 prep starts Jul 14 — <a href="study.html#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1-3 over 3 weeks (15-25 hr/wk ramping)</div>
+        <div class="task-meta">Nov 2026 UoL exam. <strong>Phase 0 deep-work block shrinks from here</strong> — sustained outreach + extensions only.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul13-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div><a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 7 (Riemann Integral) + finish Ch 8 (Additional Topics)</div>
+        <div class="task-meta">Lever 1 drops to ~10-12 hr/wk as MT1173 ramps. Stays above project though.</div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>Week of Jul 20–Aug 31, 2026 — MT1173 deep-work + sustained outreach + ML/R upskill + driving-license block</summary>
+    <div class="checkbox-row" data-task-id="ops-jul20-1">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>MT1173 weeks: Anthony &amp; Harvey Ch 4-9 + UoL past papers. 25-35 hr/wk.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-2">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Outreach follow-ups (3-week cadence): respond to any Hore/Gibbs reply with concrete next step</div>
+        <div class="task-meta">If no reply by Aug 5, send to Cherian-alternative or backfill from RA database.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-3">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>ML upskill/income block — ≤10-15 hr/wk HARD CAP (yields to Lever 1 + Phase 0 if it creeps)</div>
+        <div class="task-meta"><strong>Track A — intern/CV (~6-8 hr/wk):</strong> polish 2 portfolio repos (Kozha/RESNA writeup + the Phase-0 conformal repo doubles as one) · refresh ML interview fundamentals (bias-variance, regularization, trees/boosting, basic NN) · shortlist + start apex tech-intern apps open Aug-Oct (filter for international/remote-eligible). <strong>Track B — income/Kaggle (~4-6 hr/wk):</strong> ONE time-boxed Kaggle comp (solid submission + short writeup, NOT a medal grind) · opportunistic freelance ML via network (don't bank on it). <strong>Deliverables by Sep 1:</strong> updated CV + 2 clean repos + 1 Kaggle submission + intern shortlist ready to submit Sep-Oct. <strong>Anti-patterns:</strong> no hackathon-bingo, no cold-startup-fundraising.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-5">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>R — CONDITIONAL/deferred, NOT a core summer task</div>
+        <div class="task-meta">Phase-0 anchor repo (<code>conditional-conformal</code>) is Python → no R needed now. Ramp R ONLY if the Hore route activates (his RLCP repo is R) or for <code>cfcausal</code> in Phase 1. If triggered: ~6-10 hr light path = Wickham <em>R for Data Science</em> (tidyverse basics) → read the target repo's R in-context. Else defer to Phase 1 (2027). Baseline R already comes via ST2195.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-6">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>🚗 Driving license — 4-wk theory brush-off (evenings) + autodrome weekends</div>
+        <div class="task-meta">Placed AFTER the Phase-0 cold-email crunch (deep-work shrinks from Jul 19). <strong>Theory ~Jul 21-Aug 17, evenings ~30-45 min/day:</strong> Wk1 rules+signs · Wk2 right-of-way/intersections · Wk3 parking/maneuvers/special conditions · Wk4 mock tests till consistent pass. <strong>Autodrome:</strong> 2-3 Sat/Sun AFTERNOON sessions in Aug (afternoons keep the Sat/Sun-AM Axler slots intact). Evenings + weekend afternoons only; yields before Lever 1.</div>
+      </div>
+    </div>
+    <div class="checkbox-row" data-task-id="ops-jul20-4">
+      <input type="checkbox">
+      <div class="task-content">
+        <div>Lever 1 maintenance: Abbott review + start Rudin Ch 1 in mid-Aug</div>
+        <div class="task-meta">Goal by Sep 1: Abbott done, Rudin Ch 1 underway. Bridges to MATH 447 (Feb 2027).</div>
+      </div>
+    </div>
+  </details>
+
+</section>
+</div>
+</div>
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return;
+    const today = new Date('2026-06-04');
+    const dayOfWeek = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    document.getElementById('week-date').textContent =
+      'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
+      ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
+      ' · Phase 0 Wk 1 + Lever 1 starts';
+
+    const weekTasks = [
+      {id: 'wk-ops-1', text: 'Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduit, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore-specific anchor)', meta: 'Per Step 0 verification w9qh053sx (3 Jun 2026). ~1 hr. The spec\'s framing currently overstates what postdoc letters buy at top-5 Stats.'},
+      {id: 'wk-ops-2', text: 'Clone conditional-conformal repo via HTTPS + reproduce experiments/SyntheticData.ipynb', meta: 'git clone https://github.com/jjcherian/conditional-conformal.git ; cd conditional-conformal ; git checkout release ; jupyter notebook experiments/SyntheticData.ipynb. Pip install conditionalconformal already done. Budget 1 full day for dep drift. Target: numerical agreement with paper Fig 1 marginal coverage.'},
+      {id: 'wk-ops-3', text: 'Lever 1 self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers + Cauchy completeness)', meta: '15-20 hr/wk through summer. Pen-and-paper proofs only — no skimming. Goal: Abbott Ch 1-3 by end of Jun, Ch 1-8 by Aug 31. This is the #1 leverage; protects MATH 447 A-grade Feb 2027.'},
+      {id: 'wk-ops-4', text: 'Kozha paperwork block (Fri 15:00-18:00) — compute-infra credit stack', meta: 'AWS Research + DigitalOcean + HuggingFace + Anthropic + OpenAI + Google Cloud credits (if not yet sent per kozha-funding-tracker.md). ~3 hr this week. Steady-state ~12 hr/mo.'},
+      {id: 'wk-ops-5', text: 'Norman Lewis daily 30 min + GregMat free vocab + 1 higher-register essay (LRB/NYRB/Harper\'s/TLS) — GRE Verbal background', meta: 'Maintenance. Sep 2027 test. Free path through Oct 2026; paid GregMat ($7.99/mo) only for the Jun-Sep 2027 intensive.'},
+      {id: 'wk-ops-6', text: 'Income/ML-upskill block: ~10-15 hr/wk soft cap (per §9 fork resolution)', meta: 'Apex tech intern Summer 2027 application prep starts soon (apps Aug-Oct 2026). Freelance ML via network if available. ONE Kaggle competition max. NOT hackathon-bingo, NOT cold-startup-fundraising.'},
+      {id: 'wk-ops-7', text: 'Verify your KBTU class ranking (top-10%?) — gates ETH Excellence Scholarship eligibility', meta: 'If you fall outside top-10% of KBTU DS&BA cohort, ESOP (CHF 12K/sem + tuition waiver) is unrealistic for ETH MSc Stats Nov 2027 deadline. Email registrar or department for class-ranking data. ~30 min admin.'},
+      {id: 'wk-ops-8', text: 'Recurring schedule maintained: sleep 23:00-07:00, gym Tue/Thu/Sat 15:00-18:00, deep work block protected', meta: 'No project-anchor extras this week. Hit the basics first.'},
+    ];
+    const ul = document.getElementById('week-tasks');
+    ul.innerHTML = '';
+    weekTasks.forEach(t => {
+      const row = document.createElement('div');
+      row.className = 'checkbox-row';
+      row.dataset.taskId = t.id;
+      row.innerHTML = `
+        <input type="checkbox">
+        <div class="task-content">
+          <div>${t.text}</div>
+          <div class="task-meta">${t.meta}</div>
+        </div>
+      `;
+      ul.appendChild(row);
+    });
+    // Re-bind checkbox states for newly added rows
+    loadCheckboxes();
+  }
+
+  // Kozha funding table: sort + filter
+  (function() {
+    const table = document.getElementById('kozha-table');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('th[data-sort-key]');
+    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
+    let sortState = { key: 'deadline', dir: 'asc' };
+
+    function applySort() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
+      rows.sort((a, b) => {
+        const av = a.dataset[sortState.key];
+        const bv = b.dataset[sortState.key];
+        let comp;
+        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
+        else comp = String(av).localeCompare(String(bv));
+        return sortState.dir === 'asc' ? comp : -comp;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      headers.forEach(th => {
+        const k = th.dataset.sortKey;
+        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
+        th.textContent = labels[k] + arrow;
+      });
+    }
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sortKey;
+        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = k; sortState.dir = 'asc'; }
+        applySort();
+      });
+    });
+
+    document.querySelectorAll('.kozha-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lead = btn.dataset.lead;
+        let visible = 0;
+        tbody.querySelectorAll('tr').forEach(row => {
+          const rowLead = row.dataset.lead;
+          let show;
+          if (lead === 'all') show = true;
+          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
+          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
+          else if (lead === 'Either') show = rowLead === 'Either';
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
+        if (allBtn) allBtn.textContent = 'All (38)';
+        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
+      });
+    });
+
+    applySort();
+  })();
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
+
+
+// per-page sidebar: highlight section in view
+(function(){
+  const links=[...document.querySelectorAll('.site-subnav a')];
+  if(!links.length)return;
+  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
+  const ids=Object.keys(map);
+  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
+    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body></html>

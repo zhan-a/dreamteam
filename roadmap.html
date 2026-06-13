@@ -1,0 +1,1242 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — Roadmap</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --bg-2: #ffffff;
+    --bg-3: #f4f4f2;
+    --bg-soft: #f8f7f3;
+    --border: #e6e4df;
+    --border-strong: #d5d2cb;
+    --fg: #1c1c19;
+    --fg-dim: #5f5d57;
+    --fg-dimmer: #8a877f;
+    --accent: #2954c8;
+    --accent-2: #7c3aed;
+    --accent-soft: #eaf0ff;
+    --ok: #1f8a4d;
+    --ok-soft: #e8f5ed;
+    --warn: #b06a00;
+    --warn-soft: #fbf2e1;
+    --urgent: #c8302a;
+    --urgent-soft: #fbeae8;
+    --info: #0d7e8c;
+    --info-soft: #e6f4f6;
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-md: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  }
+  body.dark {
+    --bg: #0f1216;
+    --bg-2: #161a21;
+    --bg-3: #1d232c;
+    --bg-soft: #181d25;
+    --border: #2a313d;
+    --border-strong: #3a414d;
+    --fg: #e3e8ef;
+    --fg-dim: #8a94a5;
+    --fg-dimmer: #5a6374;
+    --accent: #6ab0ff;
+    --accent-2: #a78bfa;
+    --accent-soft: #1a2940;
+    --ok: #62d17a;
+    --ok-soft: #15301d;
+    --warn: #f7b04a;
+    --warn-soft: #2b210d;
+    --urgent: #ff6961;
+    --urgent-soft: #2c1715;
+    --info: #4dc4d1;
+    --info-soft: #122a2d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 18px;
+    margin: 0 24px 4px 24px;
+    font-weight: 600;
+  }
+  aside .subtitle {
+    margin: 0 24px 24px 24px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  aside nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-family: var(--sans);
+    font-size: 14px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  aside nav button:hover {
+    background: var(--bg-3);
+    color: var(--fg);
+  }
+  aside nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  aside .footer {
+    margin: 32px 24px 16px 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-dimmer);
+  }
+  aside .footer button {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  aside .footer button:hover {
+    background: var(--border);
+  }
+  main {
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 12px 0;
+    font-weight: 600;
+  }
+  .tab-subtitle {
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .stat .value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .stat .value.small { font-size: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-3);
+    font-weight: 600;
+    color: var(--fg-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-soft); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.tier-1 { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.tier-2 { background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-3 { background: var(--info-soft); color: var(--info); }
+  .badge.tier-4 { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-pending { background: var(--bg-3); color: var(--fg-dim); }
+  .badge.status-progress { background: var(--info-soft); color: var(--info); }
+  .badge.status-done { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-blocked { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.status-soon { background: var(--warn-soft); color: var(--warn); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checkbox-row:last-child { border-bottom: none; }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .checkbox-row .task-content { flex: 1; }
+  .checkbox-row .task-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .checkbox-row.done .task-content > div:first-child {
+    text-decoration: line-through;
+    color: var(--fg-dim);
+  }
+  .deadline { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .deadline.past { color: var(--urgent); }
+  .deadline.soon { color: var(--warn); }
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .alert {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .alert.info { background: var(--info-soft); border-left-color: var(--info); }
+  .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+  .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .xref {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .xref:hover { border-bottom-style: solid; background: var(--accent-soft); }
+  .xref-target {
+    scroll-margin-top: 16px;
+  }
+  .xref-target:target {
+    background: var(--warn-soft);
+    transition: background 1.2s;
+  }
+  .lock-item {
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-2);
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+  }
+  .lock-item strong { color: var(--accent); }
+  .month-group {
+    margin-bottom: 24px;
+  }
+  .month-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pill {
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+  details summary:hover { color: var(--accent); }
+  details[open] summary { margin-bottom: 12px; }
+  .small { font-size: 12px; color: var(--fg-dim); }
+  .mono { font-family: var(--mono); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .reset-btn {
+    background: var(--urgent-soft);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .kozha-filter {
+    background: var(--bg-3);
+    color: var(--fg-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .kozha-filter:hover { background: var(--bg-soft); }
+  .kozha-filter.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  #kozha-table th[data-sort-key]:hover { background: var(--bg-soft); }
+  @media (max-width: 768px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; }
+    main { padding: 16px; }
+  }
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="cur">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Roadmap</div><a href="#roa-1-roadmap-the-multi-year-map" class="">Roadmap — the multi-year map</a><a href="#roa-2-1-destination" class="h3">1. Destination</a><a href="#roa-3-2-the-three-levers-in-priority-order" class="h3">2. The three levers (in priority order)</a><a href="#roa-4-3-the-multi-year-timeline" class="h3">3. The multi-year timeline</a><a href="#roa-5-4-the-project-arc-phases-0-1-2" class="h3">4. The project arc (Phases 0 → 1 → 2)</a><a href="#roa-6-5-key-gates-deadlines-calendar-checkpoints" class="h3">5. Key gates &amp; deadlines (calendar checkpoints)</a><a href="#roa-7-6-halt-conditions-when-to-stop-the-campaign" class="h3">6. Halt conditions (when to stop the campaign)</a><a href="#roa-8-7-kill-zone-what-not-to-do-verified-by-3-adv" class="h3">7. Kill-zone (what NOT to do — verified by 3 adversarial kil</a><a href="#roa-9-8-income-hedge-the-9-fork-settled" class="h3">8. Income hedge (the §9 fork — settled)</a><a href="#roa-10-9-what-you-actually-do-this-week-pointer" class="h3">9. What you actually do this week (pointer)</a><a href="#roa-11-schedule" class="">Schedule</a><a href="#roa-12-recurring-weekly-template" class="h3">Recurring Weekly Template</a><a href="#roa-13-higher-register-reading-habit-gre-vocab-back" class="h3">Higher-register reading habit (GRE vocab background, Jun–Oct</a><a href="#roa-14-phase-0-reproduction-protocol-locked-2026-06" class="h3">Phase 0 reproduction protocol (LOCKED 2026-06-08 — applies t</a><a href="#roa-15-phase-0-anti-patterns-8-traps-to-avoid-read-" class="h3">Phase 0 anti-patterns (8 traps to avoid — read each Friday)</a><a href="#roa-16-self-study-discipline-rules-apply-to-abbott-" class="h3">Self-study discipline rules (apply to Abbott / Rudin / Axler</a><a href="#roa-17-90-day-intervention-markers-jun-1-aug-31-202" class="h3">90-day intervention markers (Jun 1 → Aug 31 2026)</a><a href="#roa-18-granular-week-by-week-plan-jun-1-nov-8-2026-" class="h3">Granular week-by-week plan (Jun 1 → Nov 8, 2026) — Mon–Fri A</a><a href="#roa-19-fall-2026-outlook-sep-1-dec-31" class="h3">Fall 2026 Outlook (Sep 1 – Dec 31)</a><a href="#roa-20-spring-2027-outlook-jan-1-may-31" class="h3">Spring 2027 Outlook (Jan 1 – May 31)</a><a href="#roa-21-summer-2027-outlook-jun-8-sep-7-gre-intensiv" class="h3">Summer 2027 Outlook (Jun 8 – Sep 7) — GRE intensive window</a></div>
+<div class="site-main"><section class="page-section" id="roadmap">
+
+  <h2 id="roa-1-roadmap-the-multi-year-map">Roadmap — the multi-year map</h2>
+  <p class="tab-subtitle">One-page picture of the whole arc: where you are now (Jun 2026) → PhD start (Sep 2030 default, earlier on halt). Levers + phases + gates + halts + kill-zone. Read top-to-bottom whenever you lose the plot.</p>
+
+  <h3 id="roa-2-1-destination">1. Destination</h3>
+  <div class="alert info">
+    <strong>Apex US Top-5 Statistics PhD</strong> (Stanford / CMU / Princeton ORFE / Berkeley / MIT — UChicago + Wharton in scope) via a <strong>3-cycle apply campaign</strong> (Fall 2028 / 2029 / 2030 starts; apps Dec 2027, Dec 2028, Dec 2029). <strong>Halt condition:</strong> Cambridge MASS / Oxford Stats / ETH Stats PhD admit stops the campaign — accept it. <strong>Modal outcome (~75–85%):</strong> sub-apex (T6–T15 US Stats, Cambridge/Oxford/ETH, or biostat T1–T3 cushion). The apex tail is ~15–25% cumulative.
+  </div>
+
+  <h3 id="roa-3-2-the-three-levers-in-priority-order">2. The three levers (in priority order)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Lever</th><th>Why dominant</th><th>Summer 2026 hours/wk</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>1a</strong></td>
+        <td><strong>Real analysis — math transcript (the GATE)</strong></td>
+        <td>The single binding gate for apex Stats committees. <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 1–8 self-study Jun–Aug → <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 1–4 Sep → UIUC MATH 447 (Rudin Ch 1-7, A-grade) Feb–Jun 2027.</td>
+        <td><span class="badge status-soon">20–25 hr/wk</span></td>
+      </tr>
+      <tr>
+        <td><strong>1b</strong></td>
+        <td><strong>Proof-based linear algebra — closes apex-peer LA gap</strong></td>
+        <td><a href="study.html#lit-axler" class="xref">Axler</a> self-study <strong>Jun 13 2026</strong> → Summer 2027 (Ch 1-8). MT1173 is computational; Axler is what MIT/Harvard/Stanford peers have on transcript via 18.700 / MATH 113 / MATH 22a. Self-study saves $1,653 vs formal UIUC MATH 416 BUT only if discipline rule applied (else captures 10-30% signal). Build public artifact (GitHub repo with chapter writeups) for SOP credibility. <strong>Earlier start 2026-06-08</strong> (was Sep) — tutoring withdrawal freed weekend slots; cumulative-hours gap closes faster.</td>
+        <td><span class="badge status-progress">5-6 hr/wk Jun 13 onward (Sat-Sun)</span></td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td><strong>Calibrated research letter</strong></td>
+        <td>Near-decisive for unknown-institution KZ applicant. Primary channel = KBTU/UoL faculty + REU + SIEPR-Athey (still unmapped). Secondary channel = postdoc-conduit via Lever 3.</td>
+        <td><span class="badge status-progress">~3 hr/wk mapping; ongoing</span></td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td><strong>Conformal-causal multi-year line (OPERATIVE) — PhD-admit on-ramp, NOT lifetime subfield</strong></td>
+        <td>The <em>vehicle</em> that earns the Lever-2 letter. Phase 0 reproduction → Phase 1 contribution → Phase 2 MSc dissertation. Engineered toward a co-authored output an apex PI can endorse. <strong>HIGH-OPTIONALITY BYPRODUCT</strong> (verified harness wrtqpsilx 2026-06-08): conformal-prediction publishes at BOTH Stats venues (JRSS-B / AoS / Biometrika) AND ML venues (NeurIPS / ICML / AISTATS / JMLR). Same PhD profile keeps academia + Big Tech AI research + standard QR + (narrow) ML-division QR all open. <strong>BUT this is a PhD-admit strategy, NOT lifetime-subfield-commitment.</strong> PhD-thesis subfield can broaden during PhD (typical apex Stats PhD students don't finish on their undergrad topic); post-PhD career subfield depends on advisor + job. Meta-skill = independent research ability.</td>
+        <td><span class="badge status-progress">15–20 hr/wk</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="color: var(--fg-dim); font-size: 13px;"><strong>Hour-collision rule:</strong> Lever 1 wins. If real analysis slips, the project pauses, not the other way around.</p>
+
+  <h3 id="roa-4-3-the-multi-year-timeline">3. The multi-year timeline</h3>
+  <table>
+    <thead><tr><th>When</th><th>What happens</th><th>What you produce</th><th>Gate / risk</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Jun–Aug 2026</strong><br><span class="deadline">NOW</span></td>
+        <td><a href="study.html#lit-abbott" class="xref">Abbott</a> self-study + Phase 0 conformal reproduction (<a href="study.html#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès arXiv:2305.12616</a>) + 2 empirical extensions</td>
+        <td>Public GitHub repo; cold-email draft for <a href="outreach.html#email-hore" class="xref">Hore (CMU)</a> + <a href="outreach.html#email-gibbs" class="xref">Gibbs (Berkeley)</a></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Sep–Nov 2026</strong></td>
+        <td>MT1173 prep ramp (<a href="study.html#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a>) + <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 1–4 + Phase 0 polish + first cold-email send Jul-Aug; sustain replies</td>
+        <td>MT1173 exam (Nov 2026) + start of postdoc relationship</td>
+        <td><span class="badge status-soon">MT1173 Nov 2026</span></td>
+      </tr>
+      <tr>
+        <td><strong>Dec 2026 – Jan 2027</strong></td>
+        <td>Phase 1 ramp: conformal-causal bend discussion with postdoc; pre-MATH 447 prep (Rudin Ch 5–7 light)</td>
+        <td>Phase 1 spec co-developed with postdoc</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Feb–Jun 2027</strong></td>
+        <td><strong>UIUC NetMath MATH 447 (<a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 1–7, A-grade)</strong> + Phase 1 contribution work in parallel</td>
+        <td>Real analysis transcript line</td>
+        <td><span class="badge tier-1">A-grade only — this is the gate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Jul–Sep 2027</strong></td>
+        <td>GRE intensive prep + measure-theoretic prob intro (Billingsley) + <a href="applications.html#summer27" class="xref">Summer 2027 placement</a> running (Direct PI J-1 / Yessenov host / fallback) + Phase 1 contribution drafting + REU/SIEPR-Athey app prep</td>
+        <td>GRE score + Phase 1 preprint draft + summer research letter</td>
+        <td><span class="badge status-soon">GRE Sep 2027</span></td>
+      </tr>
+      <tr>
+        <td><strong>Oct–Dec 2027</strong></td>
+        <td><strong>Cycle 1 apps:</strong> US apex (5–7) + Cambridge/Oxford/ETH (3) + T6–T15 (5) + Biostat T1–T3 (3) + MSc bridges (4) + predoc (2–4)</td>
+        <td>~17 applications submitted</td>
+        <td><span class="badge tier-1">Dec 15 2027 hard deadline</span></td>
+      </tr>
+      <tr>
+        <td><strong>Jan–May 2028</strong></td>
+        <td>Cycle 1 decisions. <strong>Cambridge MASS / Oxford / ETH admit → HALT.</strong> Otherwise: finish BSc + plan MSc bridge.</td>
+        <td>Admit/reject set; pick a path</td>
+        <td><span class="badge tier-2">Halt conditions trigger here</span></td>
+      </tr>
+      <tr>
+        <td><strong>Jun–Sep 2028</strong></td>
+        <td>BSc complete. Transition: MSc start OR Cycle 2 re-apply year</td>
+        <td>UoL EMFSS BSc degree</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Oct 2028 – Sep 2029</strong></td>
+        <td>MSc year (Cambridge MASS / Oxford MSc Stat Sci / ETH MSc Stats) — Phase 2 dissertation = the conformal-causal line, supervised. Cycle 2 apps Dec 2028 if not halted.</td>
+        <td>MSc thesis + apex-PI-signed letter via the postdoc conduit</td>
+        <td>Cycle 2 deadline Dec 2028</td>
+      </tr>
+      <tr>
+        <td><strong>Oct 2029 – Aug 2030</strong></td>
+        <td>Post-MSc; Cycle 3 apps Dec 2029 if needed</td>
+        <td>Final apply year (last shot)</td>
+        <td>Cycle 3 deadline Dec 2029</td>
+      </tr>
+      <tr>
+        <td><strong>Sep 2030+</strong></td>
+        <td><strong>PhD start</strong> (apex / sub-apex per Cycle 1–3 outcomes)</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-5-4-the-project-arc-phases-0-1-2">4. The project arc (Phases 0 → 1 → 2)</h3>
+  <table>
+    <thead><tr><th>Phase</th><th>When</th><th>Deliverable</th><th>Math needed</th><th>Role in letter</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Phase 0 — On-ramp</strong></td>
+        <td>now → early 2027</td>
+        <td>Reproduce + 1–2 empirical extensions of <a href="study.html#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès JRSS-B 2025 (arXiv:2305.12616)</a>. Public repo. Cold-email <a href="outreach.html#email-hore" class="xref">Hore</a> + <a href="outreach.html#email-gibbs" class="xref">Gibbs</a>.</td>
+        <td>None — code only</td>
+        <td>Bait. Converts cold email → remote collaboration.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 1 — Contribution</strong></td>
+        <td>2027 (post-MATH 447)</td>
+        <td>Modest methodological result co-developed with postdoc, bending toward <strong>conformal-causal</strong> (conditional coverage → ITE/counterfactual targets). Co-authored preprint target.</td>
+        <td>Real analysis + measure theory arriving</td>
+        <td>Builds postdoc's deep firsthand knowledge of your work.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 2 — Dissertation</strong></td>
+        <td>MSc 2028–29</td>
+        <td>The line becomes the MSc dissertation. Apex-PI co-signs / endorses via postdoc conduit.</td>
+        <td>MSc-level</td>
+        <td>This is when the letter actually gets written and signed.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-6-5-key-gates-deadlines-calendar-checkpoints">5. Key gates &amp; deadlines (calendar checkpoints)</h3>
+  <table>
+    <thead><tr><th>Gate</th><th>When</th><th>What it locks</th></tr></thead>
+    <tbody>
+      <tr><td>Phase 0 repo + cold-emails sent</td><td><span class="deadline soon">~mid-Jul 2026</span></td><td>Whether the postdoc-conduit letter channel opens at all</td></tr>
+      <tr><td>UoL MT1173 Algebra exam</td><td><span class="deadline">Nov 2026</span></td><td>BSc progress; no transcript impact on PhD apps</td></tr>
+      <tr><td>UIUC MATH 447 enrollment</td><td><span class="deadline">Jan 2027</span></td><td>Real analysis transcript line — the gate</td></tr>
+      <tr><td>MATH 447 A-grade</td><td><span class="deadline">Jun 2027</span></td><td>Apex Stats admit gate; B+ kills the apex tail</td></tr>
+      <tr><td>GRE</td><td><span class="deadline">Sep 2027</span></td><td>~5 apex programs still require it; risk-cheap to take</td></tr>
+      <tr><td><strong>Cycle 1 apps</strong></td><td><span class="deadline">Dec 15 2027</span></td><td>First PhD admit shot + MSc bridges</td></tr>
+      <tr><td>Cycle 1 halt-condition decision</td><td><span class="deadline">~Mar 2028</span></td><td>Cambridge/Oxford/ETH admit ⇒ accept, stop the campaign</td></tr>
+      <tr><td>BSc complete</td><td><span class="deadline">Jun 2028</span></td><td>UoL EMFSS BSc Data Science</td></tr>
+      <tr><td>MSc start (if no halt)</td><td><span class="deadline">Oct 2028</span></td><td>Cambridge MASS / Oxford / ETH — Phase 2 dissertation</td></tr>
+      <tr><td>Cycle 2 apps</td><td><span class="deadline">Dec 15 2028</span></td><td>Stronger letter mid-MSc</td></tr>
+      <tr><td>Cycle 3 apps (last)</td><td><span class="deadline">Dec 15 2029</span></td><td>Final shot; post-MSc letter</td></tr>
+      <tr><td>PhD start</td><td><span class="deadline">Sep 2030</span></td><td>Default — sooner on halt</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-7-6-halt-conditions-when-to-stop-the-campaign">6. Halt conditions (when to stop the campaign)</h3>
+  <div class="alert ok">
+    <strong>Accept and stop applying</strong> if any of: Cambridge MASS direct PhD admit · Oxford Stats DPhil admit · ETH Statistics PhD admit · any Top-5 US Stats admit. <strong>Don't re-apply</strong> from inside one of these — the letter you'd get from there is worth more than waiting another cycle.
+  </div>
+
+  <h3 id="roa-8-7-kill-zone-what-not-to-do-verified-by-3-adv">7. Kill-zone (what NOT to do — verified by 3 adversarial kills)</h3>
+  <table>
+    <thead><tr><th>Don't</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>OPE / off-policy evaluation projects</td><td>3-kill meta-pattern 2026-06: premise inverted, textbook-predictable, RA-conversion fatal. Stop mining OPE solo.</td></tr>
+      <tr><td>DML / estimated-nuisance / Neyman-orthogonality "novel" seams</td><td>Same kill-zone. Hard-avoid arXiv:2604.03772 + conformal-OPE.</td></tr>
+      <tr><td>Reading Wasserman / Hernán-Robins / Casella-Berger as active summer reading</td><td>Sunk-cost trap. They're 2027+ references, not load-bearing for Phase 0 or apex admit.</td></tr>
+      <tr><td>Hackathons / Venturewell / Dyson Award as PhD signal</td><td>Off-axis. Coding compounds; entrepreneurship doesn't enter the academic CV.</td></tr>
+      <tr><td>Solo theory preprints as primary letter anchor</td><td>Closed 2026-06-02 by Option α verification.</td></tr>
+      <tr><td>Cinelli sensitivity / DAG-side pivots</td><td>You explicitly rejected; stay conformal+causal locked.</td></tr>
+      <tr><td>Cold-emailing senior PIs directly (Candès, Barber, Ramdas, Kallus, Athey, Wager)</td><td>Wrong layer. The postdocs are the entry point.</td></tr>
+      <tr><td>RESNA / sign-language project as PhD-research signal</td><td>It's capability evidence + Kozha funding fuel, not a Stats PhD research letter.</td></tr>
+      <tr><td>Commit to any new project anchor without adversarial verification</td><td>Three kills in 2 weeks. Narrow citation-checks are not enough.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-9-8-income-hedge-the-9-fork-settled">8. Income hedge (the §9 fork — settled)</h3>
+  <div class="alert">
+    <strong>PhD-primary.</strong> Income block <strong>capped at 10–15 hr/wk</strong>, freelance / apex intern app prep only. Goal: defray ~$60–90K MSc cost if MSc bridge is needed. <strong>Not</strong> startup grinding, not hackathons, not product launches. Kozha funding paperwork (~12 hr/mo, Fri 15-18 block) is the existing pipeline — keep going, but don't expand it.
+  </div>
+
+  <h3 id="roa-10-9-what-you-actually-do-this-week-pointer">9. What you actually do this week (pointer)</h3>
+  <p>Go to the <strong>Tasks tab</strong> for the current week's concrete to-dos. The roadmap above answers "what's the plan"; Tasks answers "what do I touch today." For the project spec details: <code>OPERATIVE-project-spec.md</code>. For the post-3-kills strategic state: <code>STATE-OF-AFFAIRS-2026-06-03.md</code>.</p>
+
+</section>
+<section class="page-section" id="schedule">
+
+  <h2 id="roa-11-schedule">Schedule</h2>
+  <p class="tab-subtitle">Recurring weekly template + summer 2026 week-by-week plan + Fall 2026 / Spring 2027 outlook. Sleep 23:00–07:00. Gym Tue/Thu/Sat 15:00–18:00 (incl. shower). Last revised 2026-06-04 — post-3-OPE-kills pivot to <code>OPERATIVE-project-spec.md</code> (multi-year conformal-causal line via postdoc layer; Option α DR-OPE killed by adversarial verification + Step 0).</p>
+
+  <h3 id="roa-12-recurring-weekly-template">Recurring Weekly Template</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 110px;">Time</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>07:00–08:30</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Wake · Morning routine · Breakfast · Light reading (Abbott / Phase 0 papers / higher-register essay)</td></tr>
+      <tr><td><strong>08:30–12:30</strong></td><td colspan="7" style="text-align: center;"><strong>Deep work block</strong> — real analysis (Abbott→Rudin, Lever 1) + Phase 0 reproduction</td></tr>
+      <tr><td><strong>12:30–13:30</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Lunch · Walk · Decompress</td></tr>
+      <tr><td><strong>13:30–15:00</strong></td><td colspan="7" style="text-align: center;">Second work block — KBTU coursework (in semester) / admin / email replies / lighter coding</td></tr>
+      <tr>
+        <td><strong>15:00–18:00</strong></td>
+        <td>Work continue</td>
+        <td style="background: var(--accent-soft); color: var(--accent); font-weight: 600;">GYM + shower</td>
+        <td>Work continue</td>
+        <td style="background: var(--accent-soft); color: var(--accent); font-weight: 600;">GYM + shower</td>
+        <td style="background: var(--warn-soft); color: var(--warn); font-weight: 600;">Paperwork block</td>
+        <td style="background: var(--accent-soft); color: var(--accent); font-weight: 600;">GYM + shower</td>
+        <td>Free · errands · family</td>
+      </tr>
+      <tr><td><strong>18:00–19:00</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Dinner</td></tr>
+      <tr><td><strong>19:00–22:00</strong></td><td colspan="7" style="text-align: center;">Lighter work · textbook reading · leisure · social</td></tr>
+      <tr><td><strong>22:00–23:00</strong></td><td colspan="7" style="text-align: center; color: var(--fg-dim);">Wind down · plan tomorrow · shower (non-gym days)</td></tr>
+      <tr><td><strong>23:00–07:00</strong></td><td colspan="7" style="text-align: center; background: var(--bg-3); color: var(--fg-dim);">Sleep (8 hours)</td></tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>Block notes:</strong> ~7 hours of deep work + light work per weekday. ~3 hours of gym + shower 3× per week. ~9 hours of leisure/wind-down. Sundays intentionally lighter for rest and recovery. During KBTU semester, Mon-Fri morning and afternoon blocks compress around class times; during summer, they expand.
+    <br><br>
+    <strong>Paperwork block (Fri 15:00–18:00, 3 hr/wk = ~12 hr/mo) — added 2026-06:</strong> dedicated weekly slot for application admin so it doesn't bleed into deep-work blocks. In scope: <strong>Kozha funding apps</strong> (rolling: AWS / DigitalOcean / HuggingFace / Anthropic / OpenAI / Wikimedia Rapid monthly cycles; deadline-driven: BSSw Oct 31, Goldwater Berea internal Oct-Nov, MEAF Nov 1, Hertz/Soros/NSF GRFP/NDSEG/TreeHacks Nov cluster) · <strong>PhD apps</strong> (Dec 2027 cluster: SoP drafts, transcript orders, WES eval, recommender chasing, fee waivers) · <strong>MSc apps</strong> (Cambridge MASS Dec 2027, Oxford Jan 2028, ETH Nov 2027) · <strong>Predoc apps</strong> (SIEPR Athey ~Jan 2027 cycle if pursuing) · <strong>Cold-email follow-ups</strong> (response chasing, 2-3 wk cadence) · <strong>GRE registration + score-send fees</strong> · <strong>Visa paperwork</strong> (post-admit).
+    <br><br>
+    <strong>Scaling:</strong> Fri 15:00–18:00 is steady-state (~12 hr/mo). During <strong>Oct-Dec 2027 PhD app crunch</strong>, also reclaim Wed 13:30–15:00 + Sat 13:30–15:00 = +3 hr/wk → ~24 hr/mo. During <strong>summer 2026 Kozha funding stack apply (early Jun)</strong>, frontload one week of 8-12 hr in this block to bang out the rolling-cycle credit applications (AWS / DigitalOcean / HF / Anthropic / OpenAI / Google Cloud — total ~15-25 hr per Critical-path action #6).
+  </p>
+
+  <h3 id="roa-13-higher-register-reading-habit-gre-vocab-back">Higher-register reading habit (GRE vocab background, Jun–Oct 2026) — REVISED 2026-06</h3>
+  <p class="tab-subtitle">3 sessions/week, 30–40 min each. Slots into the lighter 19:00–22:00 evening block. <strong>Core principle:</strong> GRE Verbal tests the formal, literate, generalist vocabulary of the educated essayist (<em>laconic, trenchant, obdurate, salutary, perfunctory</em>) — NOT journalism (too plain) and NOT technical writing (jargon sits beside the GRE band, not above it). Target erudite long-form essays + review-essays.</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 110px;">Day</th>
+        <th>Source</th>
+        <th>What</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Mon</strong></td><td>LRB <em>or</em> NYRB <em>or</em> Harper's <em>or</em> TLS (rotate)</td><td>One 3,000–6,000-word review-essay. <strong>Densest GRE-register prose available.</strong> Vocab + critical-reading modeling + endurance in a single piece.</td></tr>
+      <tr><td><strong>Wed</strong></td><td>Literary-essay tradition (book)</td><td>30-40 min slot from one of: <strong>Phillip Lopate, <em>The Art of the Personal Essay</em></strong> (top single anthology) · Virginia Woolf, <em>The Common Reader</em> · Hazlitt / Lamb / De Quincey · Hitchens, Gore Vidal, Sontag, Trilling, Edmund Wilson · Samuel Johnson (densest end). One book at a time, slowly.</td></tr>
+      <tr><td><strong>Sat</strong></td><td>Science essayists (for GRE science RC prep)</td><td>One longer piece (~5,000–10,000 words). Top pick: <strong>Stephen Jay Gould</strong> (real biology in erudite, allusive register) · Lewis Thomas · Loren Eiseley · Oliver Sacks. Current material: Quanta Magazine, Scientific American.</td></tr>
+    </tbody>
+  </table>
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>Reading mode:</strong> active, with vocabulary notebook open. Word you don't immediately know → jot down + definition + the sentence you saw it in. Context-anchored vocab sticks ~10× better than isolated flashcards (per your prior Anki experience).
+    <br><br>
+    <strong>What NOT to use:</strong> NYT · Atlantic · Economist · WSJ · mainstream journalism (register too plain — "hard words are easily understood from context, where they appear at all"). <strong>Aeon DOWNGRADED</strong> 2026-06: substantive ideas but moderate register (edited for broad global audience) — wrong register, not bad writing; ok occasional, not core. <strong>Research papers / HBR / business writing:</strong> technical jargon ≠ GRE words; skip.
+    <br><br>
+    <strong>Pair with spaced repetition:</strong> reading alone is a slow, uneven way to cover the GRE word list in 9 months. Reading gives depth + contextual feel; GregMat (free Vocab Mountain + YouTube during background phase) gives coverage. The two together converge faster than either alone.
+  </p>
+
+  <h3 id="roa-14-phase-0-reproduction-protocol-locked-2026-06">Phase 0 reproduction protocol (LOCKED 2026-06-08 — applies to <a href="study.html#lit-gcc-2305" class="xref">GCC 2305.12616</a>)</h3>
+  <div class="alert urgent">
+    <strong>COLD → WARM → HOT hybrid.</strong> Lead with paper-first re-implementation of the 3 key functions (<code>setup_cvx_problem</code> at condconf.py:713, <code>CondConf.predict</code> at line 271, <code>CondConf.estimate_coverage</code> at line 357). Reference repo (<code>jjcherian/conditional-conformal</code>) is FORBIDDEN during Weeks 1-2; permitted ONLY at Phase 5 (numeric reconciliation, Week 4-5). Git-timestamp evidence is the audit trail — your <code>cold_reimplementation/your_condconf.py</code> must be committed BEFORE any commit referencing <code>replication_using_authors_code/</code>. This is the hardest-to-fake credential the artifact carries; converts it from "undergrad followed a tutorial" → "undergrad actually built the QP solver."
+  </div>
+  <table>
+    <thead><tr><th style="width: 220px;">Phase</th><th>What</th><th style="width: 90px;">Time</th><th style="width: 80px;">Ref repo OK?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Three-pass read</strong> (Keshav)</td><td>Pass 1 (5-10 min) skim → 5 Cs. Pass 2 (1hr) careful + figures. Pass 3 (4-8hr) math line-by-line, rederive coverage theorem, hand-derive pinball-QR duality. <strong>GATE:</strong> <code>paper-sheet.md</code> closed-paper one-pager from memory.</td><td>Wk 1 (15-20 hr)</td><td>❌</td></tr>
+      <tr><td><strong>2. Spec before code</strong> (Karpathy)</td><td>Pseudocode + tensor shapes for the 3 contribution functions. Decide YOUR directory structure (must NOT mirror jjcherian). <strong>GATE:</strong> <code>spec.md</code> with each pseudocode block referencing the paper equation it implements.</td><td>Wk 1-2 (3-4 days)</td><td>❌</td></tr>
+      <tr><td><strong>3. COLD reimplement</strong> (Rush Annotated style)</td><td>Code from YOUR spec only. Allowed: numpy, scipy, cvxpy, sklearn, quantile-forest. FORBIDDEN: mapie, crepes, nonconformist, AND jjcherian/conditional-conformal. <strong>GATE:</strong> <code>cold_reimplementation/your_condconf.py</code> committed BEFORE any commit touching original repo.</td><td>Wks 2-3 (30-40 hr)</td><td>❌</td></tr>
+      <tr><td><strong>4. Sanity-first runs</strong> (Karpathy)</td><td>Overfit one batch (n_calib=10). Predict plot shape BEFORE running. Reproduce cqrDataComparison_groups.pdf within ±0.02 across 200 trials. <strong>Notebooks BANNED as primary artifact</strong> — convert to .py within 48h.</td><td>Wk 3-4 (1 wk)</td><td>❌</td></tr>
+      <tr><td><strong>5. Numeric diff + discrepancy log</strong></td><td>ONLY NOW open jjcherian/conditional-conformal. Run their <code>experiments/synthetic_trial.py</code> + <code>experiments/run_comparison.py</code> on identical seed. Diff outputs. Log every >0.02 gap in <code>discrepancy-log.md</code> with root cause. Tag commit <code>baseline-reproduced</code> when one headline number matches. <strong>This file IS the cold-email artifact.</strong></td><td>Wk 4-5 (10-20 hr)</td><td>✅ for 3 contribution functions only</td></tr>
+      <tr><td><strong>6. Extensions + REPORT.md</strong></td><td>Ext 1: stratified coverage on unused variable (racePctBlack quartiles / population quartiles), alpha sweep [0.05, 0.2], framed as "when does finite-dim guarantee bind?" Ext 2: base-learner ablation (OLS→XGB→qforest→MLP, Phi constant), framed as "are CondConf gains orthogonal to base-model expressivity?" Pre-register hypothesis BEFORE running. REPORT.md in MLRC format.</td><td>Wks 5-6 (30-40 hr)</td><td>✅</td></tr>
+    </tbody>
+  </table>
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>Realism adjustment:</strong> ~50% of paths through this plan hit a Week-2 duality cliff and slip 1-3 weeks. Realistic time-to-artifact = <strong>8-10 weeks, not 6</strong>. Slipping past Week 6 is normal; slipping past Week 10 is failure. Compound funnel: P(artifact ships ~ 40-55%) × P(Cherian/Hore reply | ships ~ 15-25%) × P(sustained engagement | reply ~ 30-50%) × P(LoR-generating relationship | engagement ~ 20-40%) = <strong>~1-5% per attempt</strong>; multi-cycle apex campaign brings cumulative to ~15-25% per OPERATIVE plan.<br>
+    <strong>Week-2 hard go/no-go</strong>: if you cannot reproduce group coverage on synthetic data WITHOUT consulting jjcherian by end of Week 2 → STOP. Remediate Koenker quantile-regression Ch.3 + Boyd Convex Optimization Ch.5 for 1-2 weeks. Resume Week 2. Do NOT paper over with copy-paste — that ends the OPERATIVE plan.
+  </p>
+
+  <h3 id="roa-15-phase-0-anti-patterns-8-traps-to-avoid-read-">Phase 0 anti-patterns (8 traps to avoid — read each Friday)</h3>
+  <table>
+    <thead><tr><th style="width: 70px;">#</th><th>Trap</th><th>Defense</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Read-code-first (recognition memory)</td><td>5-7 day blackout: only PDF + blank .py + pen-and-paper on screen. Browser-history honesty check — if your tab history shows jjcherian repo before <code>your_condconf.py</code> first commit, you failed.</td></tr>
+      <tr><td>2</td><td>Copy-paste with renames (fake comprehension)</td><td>Ban repo's directory structure. Your layout must NOT mirror theirs. Every function docstring written BEFORE the body, stating which paper equation it implements. No equation reference → delete and re-derive.</td></tr>
+      <tr><td>3</td><td>Notebook-runs-clean = understanding</td><td>Before any plot cell, write down on paper: (i) expected shape, (ii) which 2 hyperparameters move it most, (iii) which assumption violation breaks it. Convert all notebooks to scripts within 48h so out-of-order execution can't mask hidden state bugs.</td></tr>
+      <tr><td>4</td><td>Skip-the-proofs</td><td>This is a THEOREM paper — algorithm mechanically derived from finite-dim characterization theorem. Hand-derive main coverage theorem TWICE on paper — once with paper open, once 24h later closed. One-sentence test: "which step breaks if I drop exchangeability?"</td></tr>
+      <tr><td>5</td><td>Extensions-before-baseline-match</td><td>HARD GATE end of Week 4: reproduction must match at least one paper number within ±0.02 on group-conditional coverage (averaged 200 trials). No match → cut extensions, not baseline diagnosis. Otherwise extension delta confounds method-effect with your-silent-bug.</td></tr>
+      <tr><td>6</td><td>Figure-as-mechanism</td><td>Coverage plots all look like near-diagonal lines. Recognizing SHAPE ≠ understanding MECHANISM. For each cqrDataComparison_*.pdf write down: (a) what the null-method curve looks like, (b) which curve is load-bearing, (c) what would have to be true about CondConf for the load-bearing curve to look this way.</td></tr>
+      <tr><td>7</td><td>Ambition creep</td><td>WILDSExperiments.ipynb is explicitly out of Phase 0 scope. Two extensions, both pre-registered. Any third idea goes in <code>phase1-ideas.md</code>, not the repo.</td></tr>
+      <tr><td>8</td><td>Input/output ratio drift</td><td>End-of-session log: input-minutes (reading/scrolling/running others' code) vs output-minutes (deriving/writing-before-checking/predicting-before-observing). Target 1:1, ideally 1:1.5 output-heavy. Any >70% input day triggers 45-min mandatory output before any input next session.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-16-self-study-discipline-rules-apply-to-abbott-">Self-study discipline rules (apply to <a href="study.html#lit-abbott" class="xref">Abbott</a> / <a href="study.html#lit-rudin" class="xref">Rudin</a> / <a href="study.html#lit-axler" class="xref">Axler</a> / Phase 0 reading)</h3>
+  <div class="alert urgent">
+    <strong>Read at top of every Friday paperwork block + before every deep-work session.</strong> Without this, self-study captures 10-30% of formal-course signal. With this, 70-80%. Locked 2026-06-05 post-diagnostic.
+  </div>
+  <table>
+    <thead><tr><th style="width: 180px;">Rule</th><th>Threshold</th><th>What it prevents</th></tr></thead>
+    <tbody>
+      <tr><td><strong>No premature consultation</strong></td><td>45 min minimum focused attempt on Abbott/Axler exercise before consulting Claude / Stack Exchange / forums / textbook solution. For Rudin / MATH 447: 2 hours across 2-3 sittings. For Phase 0 paper concept: 30 min self-derivation before reading paper's derivation.</td><td>The familiarity-illusion trap — feeling understanding from passive consumption</td></tr>
+      <tr><td><strong>Cold reproduction</strong></td><td>After every chapter, close book + re-prove main theorems on blank page 24h later, 1 week later, 1 month later. Maintain a "proofs I can write cold" list; if it falls off, re-prove.</td><td>Recognition-without-recall pattern</td></tr>
+      <tr><td><strong>Partial-step consultation</strong></td><td>When you DO consult: read only the FIRST step you didn't see, then close source, try again. Don't import a finished proof.</td><td>Importing fluency instead of building it</td></tr>
+      <tr><td><strong>Engineering-vs-conceptual distinction</strong></td><td>Use Claude/Stack Overflow freely for engineering friction (syntax, library versions, GPU drivers). The discipline rule applies ONLY to conceptual understanding.</td><td>Over-correction into paralysis</td></tr>
+      <tr><td><strong>Daily writing check</strong></td><td>End of each day: did I write at least one proof from a blank page today? If no for 3 days in a row, you've reverted to consumption mode.</td><td>Reverting after initial weeks of discipline</td></tr>
+      <tr><td><strong>Predict-before-derive (Phase 0)</strong></td><td>For every paper section: close paper after theorem statement, try to prove yourself, only then read paper's proof. For code: predict function output BEFORE running.</td><td>Code-as-pattern-matching without underlying model</td></tr>
+      <tr><td><strong>Public artifact for self-study</strong></td><td>For Axler specifically: GitHub repo with chapter writeups + selected proof-writeups, OR Stack Exchange profile answering LA questions credibly. Replaces transcript line for SOP signal.</td><td>Self-study being illegible to apex committees</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-17-90-day-intervention-markers-jun-1-aug-31-202">90-day intervention markers (Jun 1 → Aug 31 2026)</h3>
+  <table>
+    <thead><tr><th style="width: 120px;">Window</th><th>Intervention focus</th><th>Success criterion at end</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Weeks 1-2 (Jun 1-14)</strong></td><td>Habit reset: apply no-premature-consultation rule mechanically. Re-do Abbott Ex 1.2.1 (√3) yourself. Then Ex 1.2.2 (√6). Time each problem.</td><td>Cold-prove √3 irrational + √6 irrational without notes</td></tr>
+      <tr><td><strong>Weeks 3-6 (Jun 15-Jul 12)</strong></td><td>Spaced re-derivation: after every Abbott section, close book; next morning re-prove cold; 1 week later again; 1 month later again. Running "proofs I can write cold" list.</td><td>Cold-prove every major Abbott Ch 1-3 theorem on blank page</td></tr>
+      <tr><td><strong>Weeks 7-12 (Jul 13-Aug 31)</strong></td><td>Production transfer: generate proof variations (relax assumption X? replace > with ≥?). Predict-before-derive on Phase 0 papers.</td><td>Cold-prove Abbott Ch 1-8 majors + take any unseen Abbott Ch 1-8 problem and either solve in 60 min OR articulate exact missing lemma</td></tr>
+    </tbody>
+  </table>
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>Daily mantra (write at top of notebook each morning):</strong> "If I felt that I understood, I didn't yet. Understanding is what I can produce on a blank page tomorrow without notes."
+  </p>
+
+  <h3 id="roa-18-granular-week-by-week-plan-jun-1-nov-8-2026-">Granular week-by-week plan (Jun 1 → Nov 8, 2026) — Mon–Fri AM deep-work mapping</h3>
+  <p class="tab-subtitle">Each cell = the 08:30–12:30 morning deep-work block (4 hr). Afternoons follow the recurring template (second work block 13:30–15:00, gym Tue/Thu/Sat 15-18, Kozha paperwork Fri 15-18, light work 19-22). <strong>P0</strong> = Phase 0 conformal · <strong>L1</strong> = Lever 1 real analysis · <strong>MT</strong> = MT1173 algebra prep · <strong>O</strong> = outreach/admin. Friday afternoon Kozha block (3 hr) implicit every week.</p>
+
+  <div style="overflow-x: auto; margin-bottom: 16px;">
+  <table style="font-size: 13px;">
+    <thead>
+      <tr style="background: var(--bg-3);">
+        <th style="width: 90px;">Week</th>
+        <th>Mon AM</th>
+        <th>Tue AM</th>
+        <th>Wed AM</th>
+        <th>Thu AM</th>
+        <th>Fri AM</th>
+        <th style="width: 200px;">Week milestone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Jun 1–7</strong><br><span class="badge status-soon">PHASE 1 RESET</span></td>
+        <td colspan="5" style="background: var(--warn-soft);"><strong>RECONCILIATION (per 2026-06-08 protocol revision):</strong> the original Wk 1 plan said "clone repo + start SyntheticData.ipynb" — this is now <strong>against the discipline rule</strong> (touches reference repo before <code>your_condconf.py</code> exists). If you only inspected directory structure, treat it as acknowledged slip and DO NOT REOPEN any file until Week 5. If you already started reading <code>condconf.py</code> line by line, strict reset = delete local clone + don't look for 2 weeks. Be ruthlessly honest. <strong>Real load this week was:</strong> <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 1 + applying 4 reframes to OPERATIVE-spec.</td>
+        <td><a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 1 done; OPERATIVE-spec reframes applied; clone-or-not decision made</td>
+      </tr>
+      <tr><td><strong>Jun 8–14</strong><br><span class="badge status-progress">NOW · PHASE 1 + 2</span></td>
+        <td><strong>P0</strong> <a href="study.html#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> §1–3 + run toy code (NO reference to jjcherian repo)</td>
+        <td><strong>P0</strong> <a href="study.html#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates</a> §4–6 + finish toy code; vocab notes</td>
+        <td><strong>P0</strong> <a href="study.html#lit-gcc-2305" class="xref">GCC 2305.12616</a> Pass 1 (skim, 5 Cs) + Pass 2 (careful read, figures)</td>
+        <td><strong>P0</strong> <a href="study.html#lit-gcc-2305" class="xref">GCC 2305.12616</a> Pass 3 (math line-by-line, rederive coverage theorem, hand-derive pinball-QR duality on paper)</td>
+        <td><strong>P0</strong> Write <code>paper-sheet.md</code> closed-paper one-pager FROM MEMORY (problem, finite-dim theorem, key proof step, imputed test point eta_{n+1} trick, headline number). Vanilla split conformal + CQR on synthetic data (n=2000/1000/500, 200 trials), marginal cov ≈ 0.9. <strong>ZERO LINES from jjcherian.</strong></td>
+        <td><strong>GATE:</strong> state Theorem 1 in one sentence paper-closed; state which proof step breaks if exchangeability dropped. Hand-derived pinball-QR duality photographed into <code>derivations/</code>. ~150 LoC + 1 notebook. If gate fails → Wk 1 extends. <strong>+ Sat-Sun (Jun 13-14): <a href="study.html#lit-axler" class="xref">Axler</a> Ch 1.A (R^n and C^n) — Lever 1b starts.</strong></td>
+      </tr>
+      <tr><td><strong>Jun 15–21</strong><br><span class="badge tier-1">LOAD-BEARING HARD GATE</span></td>
+        <td><strong>P0 Phase 3</strong> Spec your <code>your_condconf.py</code> — eta variable length n_calib+1 (imputed test point trick), Phi-orthogonality constraint, pinball bounds</td>
+        <td><strong>P0 Phase 3</strong> Implement <code>setup_cvx_problem_v1</code> with <code>phi_fn_groups = indicator_matrix(x, disc=[0, 0.5, ..., 5])</code></td>
+        <td><strong>P0 Phase 3</strong> Group-conditional coverage test on 10 disjoint groups across 200 trials</td>
+        <td><strong>L1</strong> <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 2 §2.4–2.7 (series); start Ch 3</td>
+        <td><strong>O</strong> Letter-channel memo (KBTU/UoL faculty + REU + SIEPR-Athey KZ-eligibility 1-pg) + Wk-2 gate retrospective</td>
+        <td><strong>HARD GO/NO-GO:</strong> group cov ≥ 0.85 on each of 10 groups WITHOUT consulting jjcherian (max 90 min consulting condconf.py:713 PERMITTED only AFTER cold version runs end-to-end). Commit <code>cold_reimplementation/your_condconf.py</code> BEFORE any commit referencing original repo. If fails → STOP, remediate Koenker Ch.3 + Boyd Ch.5 for 1-2 weeks. <strong>+ Sat-Sun: <a href="study.html#lit-axler" class="xref">Axler</a> Ch 1.B (def of vector spaces, axiom checking).</strong></td>
+      </tr>
+      <tr><td><strong>Jun 22–28</strong></td>
+        <td><strong>P0 Phase 3</strong> Add <code>phi_fn_shifts</code> (Gaussian density basis: norm.pdf stacked)</td>
+        <td><strong>P0 Phase 3</strong> Add RKHS penalty (0.5*C*||L^T eta||^2 with Cholesky factor of RBF kernel, gamma=12.5, lambda=0.005)</td>
+        <td><strong>P0 Phase 4</strong> Overfit one batch (n_calib=10), verify LP/QP solves exactly; predict plot shape BEFORE running</td>
+        <td><strong>L1</strong> <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 3 §3.2–3.5 (topology, compactness, perfect sets)</td>
+        <td><strong>P0 Phase 4</strong> Reproduce cqrDataComparison_shifts.pdf + agnostic.pdf within ±0.02 of paper. Port crossval.py:runCV. <strong>DO NOT install MOSEK</strong> — OSQP/HiGHS identical for reproduction.</td>
+        <td>Side-by-side reproduction of 2 synthetic figures committed with caption "matches paper within MC error (σ≈0.07)". <strong>+ Sat-Sun: <a href="study.html#lit-axler" class="xref">Axler</a> Ch 1.C (subspaces, sums, direct sums) — cold-prove every proposition.</strong></td>
+      </tr>
+      <tr><td><strong>Jun 29–Jul 5</strong><br><span class="badge tier-2">PHASE 5 GATE</span></td>
+        <td><strong>P0 Phase 5</strong> Swap data loader to UCI Communities &amp; Crime (n=650/650/694, alpha=0.1, 200 trials). NOW open jjcherian/conditional-conformal.</td>
+        <td><strong>P0 Phase 5</strong> Run their <code>experiments/run_comparison.py</code> + your version on identical seed</td>
+        <td><strong>P0 Phase 5</strong> Diff outputs; log every >0.02 gap in <code>discrepancy-log.md</code> with root cause (hyperparameter / seed / numerical solver / imputed-test-point indexing)</td>
+        <td><strong>L1</strong> <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 4 (Functional Limits + Continuity)</td>
+        <td><strong>P0</strong> read <a href="study.html#lit-rlcp" class="xref">Hore RLCP (arXiv:2310.07850)</a> + Hore 2026 papers (<a href="study.html#lit-hore-2602" class="xref">2602.06267</a>, <a href="study.html#lit-hore-2605" class="xref">2605.21627</a>) — for cold-email anchor prep</td>
+        <td><strong>HARD GATE:</strong> NO extension code until baseline matches within ±0.02 on at least one C&amp;C headline number. Tag commit <code>baseline-reproduced</code> when match. discrepancy-log.md ≥ 5 entries. If no match → cut extensions, extend reconciliation. <strong>+ Sat-Sun: <a href="study.html#lit-axler" class="xref">Axler</a> Ch 2.A (span + linear independence) start.</strong></td>
+      </tr>
+      <tr><td><strong>Jul 6–12</strong><br><span class="badge status-soon">EXTENSION 1</span></td>
+        <td><strong>P0 Phase 6</strong> Pre-register Ext 1 hypothesis in <code>extension1_hypothesis.md</code> BEFORE running</td>
+        <td><strong>P0 Phase 6</strong> Run CondConf on C&amp;C with Phi on variable paper does NOT use — racePctBlack quartiles OR population quartiles</td>
+        <td><strong>P0 Phase 6</strong> Alpha sweep [0.05, 0.2]; generate one figure + paragraph commentary framed as "when does finite-dim guarantee bind tightly vs loosely?"</td>
+        <td><strong>L1</strong> <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 5 (Derivatives) + start Ch 6 (Uniform Convergence)</td>
+        <td><strong>O</strong> Draft <a href="outreach.html#email-hore" class="xref">Hore cold-email</a> (200 words, subject "7 implementation details from reproducing CPCG"); draft <a href="outreach.html#email-gibbs" class="xref">Gibbs cold-email</a></td>
+        <td>Ext 1 figure shows non-trivial result (not flat 0.9 line). Pre-registered hypothesis file committed BEFORE figure-generating script. <strong>+ Sat-Sun: <a href="study.html#lit-axler" class="xref">Axler</a> Ch 2.A finish — Ch 1 COMPLETE, Ch 2.A done.</strong></td>
+      </tr>
+      <tr><td><strong>Jul 13–19</strong><br><span class="badge tier-1">EXT 2 + REPORT.md (NOT cold-email yet)</span></td>
+        <td><strong>P0 Phase 6</strong> Pre-register Ext 2 hypothesis. Base-learner ablation: OLS → quantile-forest → XGBoost → MLP, Phi held constant</td>
+        <td><strong>P0 Phase 6</strong> Table: marginal cov / max group-conditional cov gap / mean prediction-set length per base learner</td>
+        <td><strong>P0 Phase 6</strong> Write REPORT.md in MLRC format (Reproducibility Summary / Methodology / Results / What was easy / What was difficult / Communication with authors / Pineau-checklist appendix)</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">Anthony &amp; Harvey</a> Ch 1 (Matrices) — MT1173 prep begins (15-25 hr/wk ramping)</td>
+        <td><strong>P0 Phase 6</strong> Polish repo to PwC 5-item compliance (Dockerfile + requirements.txt pinned + <code>make reproduce</code> regenerates figures + saved model checkpoints + results table). README leads with 2x3 side-by-side reproduction grid + 2 extension findings</td>
+        <td><strong>Repo passes 10-second-scroll PwC test.</strong> REPORT.md complete. ONLY NOW is cold-email eligible to send. <strong>Send to Cherian FIRST</strong> (Stanford PhD under Candès, runs the repo issues page = natural inbound channel), then Hore. Gibbs lower-probability cold. DO NOT email Candès directly — status mismatch.</td>
+      </tr>
+      <tr><td><strong>Jul 20–26</strong><br><span class="badge status-soon">SLIP BUFFER / SEND</span></td>
+        <td><strong>P0 buffer</strong> if Phase 0 slipped past Jul 19 (50% likely per realism adjustment): finish REPORT.md + polish; OR if shipped, <strong>SEND Cherian cold-email</strong> first (jjcherian via repo issues channel)</td>
+        <td><strong>P0</strong> Send Hore cold-email Tue (rhore@andrew.cmu.edu) IF artifact shipped; otherwise more buffer</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 4 (Determinants)</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 5 (Matrix inversion)</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 6 (Eigenvalues intro)</td>
+        <td>Phase 0 artifact SHIPPED OR explicit buffer decision (cut Ext 2? push to Aug?). Cold-emails sent IF shipped. <strong>+ Sat-Sun: <a href="study.html#lit-axler" class="xref">Axler</a> Ch 2.B (bases) — Axler PAUSES Jul 27+ as MT1173 takes weekends; resumes Sep 1.</strong></td>
+      </tr>
+      <tr><td><strong>Jul 27–Aug 2</strong></td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 7 (Vector spaces — formal)</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 8 (Subspaces, sums)</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 9 (Linear independence, basis — formal)</td>
+        <td><strong>L1</strong> <a href="study.html#lit-abbott" class="xref">Abbott</a> Ch 8 (Additional Topics — selected)</td>
+        <td><strong>O</strong> intern-app research (apex tech summer 2027 apps open Aug–Oct)</td>
+        <td><a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 7–9 done; <a href="study.html#lit-abbott" class="xref">Abbott</a> COMPLETE</td>
+      </tr>
+      <tr><td><strong>Aug 3–9</strong></td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 10 (Linear transformations)</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 11 (Eigenvalues + diagonalization)</td>
+        <td><strong>MT</strong> <a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 12 (Inner products) + 40 problems</td>
+        <td><strong>L1</strong> <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 1 (Real &amp; complex number systems)</td>
+        <td><strong>O</strong> intern résumé + CV polish; first 2 intern apps drafted</td>
+        <td><a href="study.html#lit-anthony-harvey" class="xref">A&amp;H</a> Ch 10–12 done; <a href="study.html#lit-rudin" class="xref">Rudin</a> started</td>
+      </tr>
+      <tr><td><strong>Aug 10–16</strong></td>
+        <td><strong>MT</strong> practice — sequences + matrices recap (chosen weak areas)</td>
+        <td><strong>MT</strong> practice — vector spaces + linear maps</td>
+        <td><strong>MT</strong> UoL past paper #1 (timed)</td>
+        <td><strong>MT</strong> UoL past paper #1 review + UoL past paper #2 start</td>
+        <td><strong>L1</strong> <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 2 (Basic Topology)</td>
+        <td>2 past papers done; <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 2 done</td>
+      </tr>
+      <tr><td><strong>Aug 17–24</strong></td>
+        <td><strong>MT</strong> UoL past paper #2 finish + review</td>
+        <td><strong>MT</strong> Full mock exam #1 (3 hr, exam conditions)</td>
+        <td><strong>MT</strong> Mock #1 review + targeted weakness drill</td>
+        <td><strong>L1</strong> <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 3 (Numerical Sequences and Series)</td>
+        <td><strong>MT</strong> UoL past paper #3</td>
+        <td>1 mock + 2 past papers; <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 3 done</td>
+      </tr>
+      <tr><td><strong>Aug 25–31</strong></td>
+        <td><strong>MT</strong> Mock exam #2</td>
+        <td><strong>MT</strong> Mock #2 review</td>
+        <td><strong>MT</strong> weak-area drill (whatever mocks expose)</td>
+        <td><strong>L1</strong> <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 4 (Continuity)</td>
+        <td><strong>MT</strong> UoL past paper #4</td>
+        <td><strong>Summer wrap.</strong> <a href="study.html#lit-abbott" class="xref">Abbott</a> DONE · <a href="study.html#lit-rudin" class="xref">Rudin</a> Ch 1–4 DONE · MT1173 ~70% ready</td>
+      </tr>
+      <tr style="background: var(--bg-3);"><td colspan="7" style="text-align: center; color: var(--fg-dim); font-style: italic;">— Fall 2026 begins. UoL Year 3 semester starts. Morning deep-work block compresses around classes. —</td></tr>
+      <tr><td><strong>Sep 1–7</strong><br><span class="badge status-pending">AXLER RESUMES</span></td>
+        <td><strong>MT</strong> Mock exam #3</td>
+        <td><strong>UoL</strong> Year 3 classes start; MT1173 review evenings</td>
+        <td><strong>MT</strong> Mock #3 review + UoL coursework</td>
+        <td><strong>L1b</strong> <a href="study.html#lit-axler" class="xref">Axler</a> Ch 2.C (dimension) RESUMES post-summer-pause — should be entering Ch 2.C if summer Jun-mid-Jul ran as planned (Ch 1 + 2.A + 2.B done)</td>
+        <td><strong>MT</strong> past paper #5</td>
+        <td>UoL Y3 launched; Axler resumes from Ch 2.C; MT1173 mock cadence stable</td>
+      </tr>
+      <tr><td><strong>Sep 8–14</strong></td>
+        <td><strong>UoL</strong> + <strong>MT</strong> Mock exam #4</td>
+        <td><strong>UoL</strong> coursework + assignments</td>
+        <td><strong>MT</strong> Mock #4 review</td>
+        <td><strong>L1</strong> Rudin Ch 5 finish</td>
+        <td><strong>MT</strong> past paper #6</td>
+        <td>3 mocks total; Rudin Ch 5 done</td>
+      </tr>
+      <tr><td><strong>Sep 15–21</strong></td>
+        <td><strong>UoL</strong> classes</td>
+        <td><strong>MT</strong> targeted weakness drill</td>
+        <td><strong>UoL</strong> coursework</td>
+        <td><strong>L1b</strong> <a href="study.html#lit-axler" class="xref">Axler</a> Ch 3.A (linear maps) — Ch 2 finished by end of Sep W1</td>
+        <td><strong>UoL</strong> + outreach maintenance</td>
+        <td>UoL rhythm + MT1173 holding + Axler Ch 3.A done</td>
+      </tr>
+      <tr><td><strong>Sep 22–28</strong></td>
+        <td><strong>MT</strong> Mock exam #5</td>
+        <td><strong>UoL</strong> classes</td>
+        <td><strong>MT</strong> Mock #5 review</td>
+        <td><strong>L1b</strong> <a href="study.html#lit-axler" class="xref">Axler</a> Ch 3.B (matrices)</td>
+        <td><strong>MT</strong> past paper #8</td>
+        <td>5 mocks done; Axler Ch 3.B done</td>
+      </tr>
+      <tr><td><strong>Sep 29–Oct 5</strong></td>
+        <td><strong>MT</strong> intensive drill — proofs week</td>
+        <td><strong>UoL</strong> classes</td>
+        <td><strong>MT</strong> intensive drill — computation week</td>
+        <td><strong>L1b</strong> <a href="study.html#lit-axler" class="xref">Axler</a> Ch 3.C (invertibility, isomorphic vector spaces)</td>
+        <td><strong>MT</strong> mixed timed sets</td>
+        <td>MT1173 final-month ramp begins; Axler Ch 3 nearly done</td>
+      </tr>
+      <tr><td><strong>Oct 6–12</strong></td>
+        <td><strong>MT</strong> Mock exam #6</td>
+        <td><strong>UoL</strong> classes</td>
+        <td><strong>MT</strong> Mock #6 review + drill</td>
+        <td><strong>L1b</strong> <a href="study.html#lit-axler" class="xref">Axler</a> Ch 3 finish — light slot only; MT1173 dominates</td>
+        <td><strong>MT</strong> past paper #9</td>
+        <td>Axler Ch 3 done — Axler PAUSES through MT1173 exam (resume mid-Nov)</td>
+      </tr>
+      <tr><td><strong>Oct 13–19</strong></td>
+        <td><strong>MT</strong> Mock exam #7</td>
+        <td><strong>UoL</strong> classes (deprioritized for MT1173)</td>
+        <td><strong>MT</strong> Mock #7 review</td>
+        <td><strong>MT</strong> intensive — weak areas from mocks 5–7</td>
+        <td><strong>MT</strong> past paper #10</td>
+        <td>7 mocks + 10 past papers banked</td>
+      </tr>
+      <tr><td><strong>Oct 20–26</strong></td>
+        <td><strong>MT</strong> Mock #8 (under exam conditions)</td>
+        <td><strong>MT</strong> Mock #8 review</td>
+        <td><strong>MT</strong> targeted drill</td>
+        <td><strong>MT</strong> past paper #11</td>
+        <td><strong>MT</strong> light review + sleep prep</td>
+        <td>Final exam-prep week</td>
+      </tr>
+      <tr><td><strong>Oct 27–Nov 2</strong><br><span class="badge tier-1">EXAM WEEK</span></td>
+        <td><strong>MT</strong> formula review + light drill</td>
+        <td><strong>MT</strong> sleep + light drill ONLY</td>
+        <td><strong>MT</strong> sleep + final formula sheet</td>
+        <td><strong>MT</strong> sleep + light review</td>
+        <td><strong>MT1173 EXAM</strong> (likely Fri or window early Nov)</td>
+        <td>MT1173 SAT</td>
+      </tr>
+      <tr style="background: var(--ok-soft);"><td><strong>Nov 3–8</strong></td>
+        <td>Recovery / rest</td>
+        <td>Recovery; light Rudin reading</td>
+        <td><strong>L1</strong> Rudin Ch 6 (Riemann-Stieltjes) start</td>
+        <td><strong>L1b</strong> <a href="study.html#lit-axler" class="xref">Axler</a> Ch 4 (polynomials) start — UoL classes resume</td>
+        <td><strong>O</strong> outreach maintenance + UIUC MATH 447 enrollment prep</td>
+        <td>Post-exam recovery; Axler enters Ch 4; Rudin Ch 5-7 fall finish</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="color: var(--fg-dim); font-size: 13px;">
+    <strong>How to use this table:</strong> The morning deep-work block (08:30–12:30, 4 hr) is the dominant productive window — that's what these cells map. The second daily work block (13:30–15:00, 1.5 hr) is for KBTU/UoL coursework in semester, light coding, email replies, or extending the morning's task. Friday afternoon Kozha block (15:00–18:00, 3 hr) is implicit every week. <strong>Gym Tue/Thu/Sat 15:00–18:00</strong> per recurring template. Evening (19:00–22:00) is leisure/light reading/social — including the higher-register reading habit (Mon LRB, Wed Lopate/literary essay, Sat Gould/science essayist) for GRE vocab background.
+    <br><br>
+    <strong>Slippage rules:</strong> If a Mon-Tue P0 task overruns, push it to Wed/Thu and compress the L1 block (Lever 1 floor is "Abbott done by end Aug" — within that, weekly chapter pacing is flexible). If Lever 1 slips more than 2 weeks behind, pause the project — Lever 1 wins on collisions. MT1173 prep is non-negotiable from Jul 14 onward (Nov exam is fixed).
+    <br><br>
+    <strong>Hour bookkeeping:</strong> Morning deep (5 × 4 hr) + afternoon second block (5 × 1.5 hr) + Fri Kozha (3 hr) + Tue/Thu/Sat gym (3 × 3 hr, of which ~1.5 hr usable for light reading on rest sets) + evening light work (~3 × 2 hr) = ~40–50 hr/wk academic + ~12 hr/mo Kozha + ~9 hr/wk gym. Sustainable. Bandwidth ceiling 60–72 hr/wk preserved.
+  </p>
+
+  <h3 id="roa-19-fall-2026-outlook-sep-1-dec-31">Fall 2026 Outlook (Sep 1 – Dec 31)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 130px;">Window</th>
+        <th>Primary focus</th>
+        <th>Deliverables / deadlines</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Sep 1–30</strong></td><td>UoL Year 3 start + MT1173 prep intensifies + <a href="study.html#lit-axler" class="xref">Axler</a> Lever 1b starts + GRE background continues</td><td>UoL Year 3 coursework begins (MT2116 Abstract Maths, ST2133 Distribution Theory, ST2134 Statistical Inference, MT3042 Optimisation) — <strong>GPA up-weighted 2026-06-05 since UoL Y3 grades land on Cycle-1 PhD transcript</strong>. <strong>MT1173 prep at 25-35 hr/wk</strong> — primary focus. <strong>Axler Ch 1-2 light parallel (5-8 hr/wk)</strong> — Lever 1b begins, proof-based LA per apex-peer gap. GRE background continues at 5-7 hr/wk (Norman Lewis + GregMat + higher-register reading). Per-programme GRE policy preliminary check (Sep 2027 is the gate decision but start collecting data now).</td></tr>
+      <tr><td><strong>Oct 1–31</strong></td><td>MT1173 prep crunch + Summer 2027 application drafts</td><td><strong>MT1173 final ramp 30-35 hr/wk</strong> — mock exams, past papers, Anthony &amp; Harvey re-read of weakness chapters. CaCTüS draft + recommender outreach. Summer@EPFL Nov 29 deadline draft. ETH SSRF prep. GRE background unchanged.</td></tr>
+      <tr><td><strong>Nov 1–30</strong></td><td><strong>MT1173 EXAM</strong> (UoL October-November session) + Summer 2027 application sprint</td><td><strong>MT1173 EXAM IS THE PRIORITY.</strong> Suspend GRE prep entirely in Nov. Suspend project work in exam week. Other deadlines this month: <strong>Yessenov Research Internship (~Nov 7)</strong>, <strong>CaCTüS (~Nov 20)</strong>, <strong>Summer@EPFL (Nov 29)</strong>. AAAI 2027 workshop decisions arrive late Nov.</td></tr>
+      <tr><td><strong>Dec 1–31</strong></td><td>Post-MT1173 recovery + GRE calibration + ETH SSRF + KAUST VSRP</td><td>Post-MT1173 cognitive recovery week. <strong>Take POWERPREP Plus Test 1 (TIMED, $39.95)</strong> mid-December for GRE calibration baseline. ETH SSRF mid-Dec submission. KAUST VSRP rolling (target Dec). Begin Dec 2027 PhD-app cycle prep (12 months out). MT1173 grade visible by mid-January 2027.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-20-spring-2027-outlook-jan-1-may-31">Spring 2027 Outlook (Jan 1 – May 31)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 130px;">Window</th>
+        <th>Primary focus</th>
+        <th>Deliverables / deadlines</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Jan 1–31</strong></td><td>UIUC MATH 447 registration + light prep</td><td>Register UIUC NetMath MATH 447 ~late Jan for Feb 15 start ($1,653). Begin Anthony &amp; Harvey review for MT1173 follow-through (if MT1173 results not yet visible). <strong>GRE prep SUSPENDED</strong> per revised 2026-05-26 plan (test shifted to Sep 2027 — no January intensive needed).</td></tr>
+      <tr><td><strong>Feb 15–Jun 7</strong></td><td><strong>UIUC NetMath MATH 447 (16 weeks)</strong> + UoL Year 3 coursework + Phase 1 ramp</td><td>UIUC course Feb 15 start, standard 16-wk pace finishes Jun 7. ~10-15 hr/wk on UIUC (3 credits, ~120-135 hr total). Three proctored 90-min midterms + 3-hr proctored final via ProctorU. A-grade target. Concurrent: UoL Year 3 coursework (MT2116 Abstract Maths, ST2133 Distribution Theory, ST2134 Statistical Inference, MT3042 Optimisation). <strong>Phase 1 (OPERATIVE) ramp</strong> in light parallel: spec co-developed with Hore/Gibbs postdoc; conformal-coverage machinery bending toward ITE/counterfactual; theory engagement starts only as real analysis arrives.</td></tr>
+      <tr><td><strong>May 1–31</strong></td><td>UoL Year 3 finals + UIUC midterm progress</td><td>UoL Year 3 finals (MT2116, ST2133, ST2134, MT3042). UIUC ~halfway through course. Summer 2027 program offers arriving (CaCTüS, ETH SSRF, KAUST VSRP). Phase 1 contribution draft progressing with postdoc.</td></tr>
+      <tr><td><strong>Jun 1–7</strong></td><td>UIUC MATH 447 final exam + Spring 2027 wrap</td><td>UIUC 3-hr proctored final via ProctorU. Course complete. <strong>Real analysis transcript line in hand</strong> — the gate.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="roa-21-summer-2027-outlook-jun-8-sep-7-gre-intensiv">Summer 2027 Outlook (Jun 8 – Sep 7) — GRE intensive window</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 130px;">Window</th>
+        <th>Primary focus</th>
+        <th>Deliverables / deadlines</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Jun 8–30</strong></td><td>UIUC recovery + Phase 1 contribution work + cold-email maintenance</td><td>Recovery week post-UIUC. <strong>Phase 1 (OPERATIVE) contribution drafting</strong> — co-developed with Hore/Gibbs postdoc; aim for preprint draft by Aug. Cold-email maintenance: Hore/Gibbs response chasing or backfill from causal-ra-outreach-db.csv if no engagement.</td></tr>
+      <tr><td><strong>Jul 1–31</strong></td><td><strong>GRE intensive (15-20 hr/wk)</strong> + Phase 1 preprint polish</td><td>Phase 5 Wk 1-4: Manhattan 5lb Quant content review + 100 problem set + 1 timed Quant section + 3 AW essays + RC practice. POWERPREP Plus Test 2 (Wk 2). Manhattan PT 1 (Wk 4). Phase 1 (OPERATIVE) preprint draft polish in parallel — postdoc collaboration ongoing.</td></tr>
+      <tr><td><strong>Aug 1–31</strong></td><td><strong>GRE final ramp (15-20 hr/wk)</strong></td><td>Phase 5 Wk 5-7: Targeted weakness + 3-4 AW essays + ScoreItNow! calibration + Manhattan PT 2 + mock test in test conditions. Book Almaty test center late Jul for mid-Sep test.</td></tr>
+      <tr><td><strong>Sep 1–7</strong></td><td><strong>GRE TEST</strong></td><td>Phase 6: TEST DAY early-mid Sep 2027. Saturday morning slot. V/Q immediately; AW + official 8-10 days later. Decide retake based on score (Q≥167 / V≥155 / AW≥4.0 thresholds).</td></tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--fg-dim); font-size: 13px; margin-top: 16px;">
+    <strong>Real-analysis path (LOCKED 2026-05-25, reframed under apex pivot 2026-05-27):</strong>
+    <br>(a) <strong>UIUC NetMath MATH 447 Feb 15, 2027 start.</strong> $1,653. Full Rudin Ch 1-7. UIUC R1 transcript. 16-wk standard pace → June 7 finish. <strong>A-grade target — this is the gate for the apex tail.</strong> Sufficient for T6-T25 apply list; for top-5 apex tail the A-grade matters more than the institution brand.
+    <br>(b) <strong>Earlier-start alternative (only if MT1173 prep going lighter than feared by July 2026):</strong> August 2026 UIUC start — finishes ~December 2026 standard pace. Requires confidence MT1173 prep won't suffer; default = wait for Feb 2027.
+    <br>(c) <strong>Brand-upgrade alternative (if expanding to T1-T5 reach with budget headroom):</strong> Harvard Extension MATH E-23a Spring 2027 ($2,160) + E-23b Fall 2027 ($2,160) = $4,320 total. Full Ch 1-7 across two semesters.
+    <br>(d) <strong>Elite-signal alternative (deprioritized under apex Stats pivot — JHU is biostat-coded):</strong> JHU EP EN.625.601 Spring 2027 ($5,620). Useful only if biostat T1-T3 cushion becomes the realistic target; otherwise UIUC + A-grade is the right call.
+    <br>(e) <strong>DO NOT use Athabasca</strong> — MSCHE accreditation lost 31 March 2025; only viable as last-resort fallback.
+    <br><br>
+    <strong>Theoretical linear algebra path (REVISED 2026-06-05 per cost-benefit + Cambridge MASt-vs-MPhil clarification):</strong>
+    <br>(α) <strong>DEFAULT: Self-study <a href="study.html#lit-axler" class="xref">Axler</a> Ch 1-8</strong> Sep 2026 → Summer 2027, parallel to Rudin + MATH 447. $0 cost; captures ~70-80% of MATH 416 signal IF discipline rule applied. Public artifact (GitHub repo with chapter writeups) replaces transcript line for SOP signal. <strong>This is the chosen path per 2026-06-05 user decision.</strong>
+    <br>(β) <strong>FORMAL UIUC MATH 416 (Abstract Linear Algebra)</strong> — $1,653, 16 weeks. Reserved for IF: (1) Cambridge MASt Math Stats becomes locked-in primary MSc target AND (2) unexpected budget headroom AND (3) timing slot opens (Summer 2027 if no research placement, OR Fall 2027). Otherwise skip; self-studied Axler is sufficient for Oxford MSc / ETH MSc / T6-T15 US Stats. Cambridge MASt admit ~5-8% anyway; MATH 416 marginal lift ~3pp.
+    <br>(γ) <strong>Alternative text:</strong> <a href="study.html#lit-friedberg" class="xref">Friedberg-Insel-Spence</a> if Axler proofs feel too compressed; equally accepted as proof-based LA reference.
+  </p>
+
+
+</section>
+</div>
+</div>
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return;
+    const today = new Date('2026-06-04');
+    const dayOfWeek = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    document.getElementById('week-date').textContent =
+      'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
+      ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
+      ' · Phase 0 Wk 1 + Lever 1 starts';
+
+    const weekTasks = [
+      {id: 'wk-ops-1', text: 'Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduit, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore-specific anchor)', meta: 'Per Step 0 verification w9qh053sx (3 Jun 2026). ~1 hr. The spec\'s framing currently overstates what postdoc letters buy at top-5 Stats.'},
+      {id: 'wk-ops-2', text: 'Clone conditional-conformal repo via HTTPS + reproduce experiments/SyntheticData.ipynb', meta: 'git clone https://github.com/jjcherian/conditional-conformal.git ; cd conditional-conformal ; git checkout release ; jupyter notebook experiments/SyntheticData.ipynb. Pip install conditionalconformal already done. Budget 1 full day for dep drift. Target: numerical agreement with paper Fig 1 marginal coverage.'},
+      {id: 'wk-ops-3', text: 'Lever 1 self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers + Cauchy completeness)', meta: '15-20 hr/wk through summer. Pen-and-paper proofs only — no skimming. Goal: Abbott Ch 1-3 by end of Jun, Ch 1-8 by Aug 31. This is the #1 leverage; protects MATH 447 A-grade Feb 2027.'},
+      {id: 'wk-ops-4', text: 'Kozha paperwork block (Fri 15:00-18:00) — compute-infra credit stack', meta: 'AWS Research + DigitalOcean + HuggingFace + Anthropic + OpenAI + Google Cloud credits (if not yet sent per kozha-funding-tracker.md). ~3 hr this week. Steady-state ~12 hr/mo.'},
+      {id: 'wk-ops-5', text: 'Norman Lewis daily 30 min + GregMat free vocab + 1 higher-register essay (LRB/NYRB/Harper\'s/TLS) — GRE Verbal background', meta: 'Maintenance. Sep 2027 test. Free path through Oct 2026; paid GregMat ($7.99/mo) only for the Jun-Sep 2027 intensive.'},
+      {id: 'wk-ops-6', text: 'Income/ML-upskill block: ~10-15 hr/wk soft cap (per §9 fork resolution)', meta: 'Apex tech intern Summer 2027 application prep starts soon (apps Aug-Oct 2026). Freelance ML via network if available. ONE Kaggle competition max. NOT hackathon-bingo, NOT cold-startup-fundraising.'},
+      {id: 'wk-ops-7', text: 'Verify your KBTU class ranking (top-10%?) — gates ETH Excellence Scholarship eligibility', meta: 'If you fall outside top-10% of KBTU DS&BA cohort, ESOP (CHF 12K/sem + tuition waiver) is unrealistic for ETH MSc Stats Nov 2027 deadline. Email registrar or department for class-ranking data. ~30 min admin.'},
+      {id: 'wk-ops-8', text: 'Recurring schedule maintained: sleep 23:00-07:00, gym Tue/Thu/Sat 15:00-18:00, deep work block protected', meta: 'No project-anchor extras this week. Hit the basics first.'},
+    ];
+    const ul = document.getElementById('week-tasks');
+    ul.innerHTML = '';
+    weekTasks.forEach(t => {
+      const row = document.createElement('div');
+      row.className = 'checkbox-row';
+      row.dataset.taskId = t.id;
+      row.innerHTML = `
+        <input type="checkbox">
+        <div class="task-content">
+          <div>${t.text}</div>
+          <div class="task-meta">${t.meta}</div>
+        </div>
+      `;
+      ul.appendChild(row);
+    });
+    // Re-bind checkbox states for newly added rows
+    loadCheckboxes();
+  }
+
+  // Kozha funding table: sort + filter
+  (function() {
+    const table = document.getElementById('kozha-table');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('th[data-sort-key]');
+    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
+    let sortState = { key: 'deadline', dir: 'asc' };
+
+    function applySort() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
+      rows.sort((a, b) => {
+        const av = a.dataset[sortState.key];
+        const bv = b.dataset[sortState.key];
+        let comp;
+        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
+        else comp = String(av).localeCompare(String(bv));
+        return sortState.dir === 'asc' ? comp : -comp;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      headers.forEach(th => {
+        const k = th.dataset.sortKey;
+        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
+        th.textContent = labels[k] + arrow;
+      });
+    }
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sortKey;
+        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = k; sortState.dir = 'asc'; }
+        applySort();
+      });
+    });
+
+    document.querySelectorAll('.kozha-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lead = btn.dataset.lead;
+        let visible = 0;
+        tbody.querySelectorAll('tr').forEach(row => {
+          const rowLead = row.dataset.lead;
+          let show;
+          if (lead === 'all') show = true;
+          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
+          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
+          else if (lead === 'Either') show = rowLead === 'Either';
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
+        if (allBtn) allBtn.textContent = 'All (38)';
+        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
+      });
+    });
+
+    applySort();
+  })();
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
+
+
+// per-page sidebar: highlight section in view
+(function(){
+  const links=[...document.querySelectorAll('.site-subnav a')];
+  if(!links.length)return;
+  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
+  const ids=Object.keys(map);
+  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
+    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body></html>

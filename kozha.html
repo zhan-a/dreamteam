@@ -1,0 +1,757 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — Kozha</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --bg-2: #ffffff;
+    --bg-3: #f4f4f2;
+    --bg-soft: #f8f7f3;
+    --border: #e6e4df;
+    --border-strong: #d5d2cb;
+    --fg: #1c1c19;
+    --fg-dim: #5f5d57;
+    --fg-dimmer: #8a877f;
+    --accent: #2954c8;
+    --accent-2: #7c3aed;
+    --accent-soft: #eaf0ff;
+    --ok: #1f8a4d;
+    --ok-soft: #e8f5ed;
+    --warn: #b06a00;
+    --warn-soft: #fbf2e1;
+    --urgent: #c8302a;
+    --urgent-soft: #fbeae8;
+    --info: #0d7e8c;
+    --info-soft: #e6f4f6;
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-md: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  }
+  body.dark {
+    --bg: #0f1216;
+    --bg-2: #161a21;
+    --bg-3: #1d232c;
+    --bg-soft: #181d25;
+    --border: #2a313d;
+    --border-strong: #3a414d;
+    --fg: #e3e8ef;
+    --fg-dim: #8a94a5;
+    --fg-dimmer: #5a6374;
+    --accent: #6ab0ff;
+    --accent-2: #a78bfa;
+    --accent-soft: #1a2940;
+    --ok: #62d17a;
+    --ok-soft: #15301d;
+    --warn: #f7b04a;
+    --warn-soft: #2b210d;
+    --urgent: #ff6961;
+    --urgent-soft: #2c1715;
+    --info: #4dc4d1;
+    --info-soft: #122a2d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 18px;
+    margin: 0 24px 4px 24px;
+    font-weight: 600;
+  }
+  aside .subtitle {
+    margin: 0 24px 24px 24px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  aside nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-family: var(--sans);
+    font-size: 14px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  aside nav button:hover {
+    background: var(--bg-3);
+    color: var(--fg);
+  }
+  aside nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  aside .footer {
+    margin: 32px 24px 16px 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-dimmer);
+  }
+  aside .footer button {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  aside .footer button:hover {
+    background: var(--border);
+  }
+  main {
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 12px 0;
+    font-weight: 600;
+  }
+  .tab-subtitle {
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .stat .value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .stat .value.small { font-size: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-3);
+    font-weight: 600;
+    color: var(--fg-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-soft); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.tier-1 { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.tier-2 { background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-3 { background: var(--info-soft); color: var(--info); }
+  .badge.tier-4 { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-pending { background: var(--bg-3); color: var(--fg-dim); }
+  .badge.status-progress { background: var(--info-soft); color: var(--info); }
+  .badge.status-done { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-blocked { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.status-soon { background: var(--warn-soft); color: var(--warn); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checkbox-row:last-child { border-bottom: none; }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .checkbox-row .task-content { flex: 1; }
+  .checkbox-row .task-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .checkbox-row.done .task-content > div:first-child {
+    text-decoration: line-through;
+    color: var(--fg-dim);
+  }
+  .deadline { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .deadline.past { color: var(--urgent); }
+  .deadline.soon { color: var(--warn); }
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .alert {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .alert.info { background: var(--info-soft); border-left-color: var(--info); }
+  .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+  .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .xref {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .xref:hover { border-bottom-style: solid; background: var(--accent-soft); }
+  .xref-target {
+    scroll-margin-top: 16px;
+  }
+  .xref-target:target {
+    background: var(--warn-soft);
+    transition: background 1.2s;
+  }
+  .lock-item {
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-2);
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+  }
+  .lock-item strong { color: var(--accent); }
+  .month-group {
+    margin-bottom: 24px;
+  }
+  .month-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pill {
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+  details summary:hover { color: var(--accent); }
+  details[open] summary { margin-bottom: 12px; }
+  .small { font-size: 12px; color: var(--fg-dim); }
+  .mono { font-family: var(--mono); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .reset-btn {
+    background: var(--urgent-soft);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .kozha-filter {
+    background: var(--bg-3);
+    color: var(--fg-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .kozha-filter:hover { background: var(--bg-soft); }
+  .kozha-filter.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  #kozha-table th[data-sort-key]:hover { background: var(--bg-soft); }
+  @media (max-width: 768px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; }
+    main { padding: 16px; }
+  }
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:980px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="cur">Kozha</a><a href="locks.html" class="">Locks</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Kozha</div><a href="#koz-1-kozha-funding" class="">Kozha Funding</a><a href="#koz-2-filter-by-lead" class="h3">Filter by lead</a><a href="#koz-3-master-table-sortable" class="h3">Master table (sortable)</a><a href="#koz-4-attendance-legend" class="h3">Attendance legend</a><a href="#koz-5-critical-path-actions" class="h3">Critical-path actions</a><a href="#koz-6-key-notes" class="h3">Key notes</a></div>
+<div class="site-main"><section class="page-section" id="kozha">
+
+  <h2 id="koz-1-kozha-funding">Kozha Funding</h2>
+  <p class="tab-subtitle">38 funders · target $70-365K cash + $15-60K cloud credits over 2026-2027 · click column headers to sort · filter by lead · source: <code>kozha-funding-tracker.md</code></p>
+
+  <h3 id="koz-2-filter-by-lead">Filter by lead</h3>
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+    <button class="kozha-filter active" data-lead="all">All (38)</button>
+    <button class="kozha-filter" data-lead="BB">BB-eligible</button>
+    <button class="kozha-filter" data-lead="BM">BM-eligible</button>
+    <button class="kozha-filter" data-lead="Either">Either only</button>
+  </div>
+
+  <h3 id="koz-3-master-table-sortable">Master table (sortable)</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">Default sort: deadline ascending. Rolling/TBD items sort last. Click any header to re-sort. Award sort uses upper-bound USD.</p>
+  <table id="kozha-table">
+    <thead>
+      <tr>
+        <th data-sort-key="num" style="cursor:pointer; user-select:none;">#</th>
+        <th data-sort-key="funder" style="cursor:pointer; user-select:none;">Funder</th>
+        <th data-sort-key="award" style="cursor:pointer; user-select:none;">Award</th>
+        <th data-sort-key="deadline" style="cursor:pointer; user-select:none;">Deadline ▲</th>
+        <th data-sort-key="lead" style="cursor:pointer; user-select:none;">Lead</th>
+        <th data-sort-key="hrs" style="cursor:pointer; user-select:none;">Hrs</th>
+        <th>Attend</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-num="1" data-funder="openai researcher access" data-award="1000" data-deadline="2026-06-15" data-lead="Either" data-hrs="3"><td>1</td><td><a href="https://openai.com/form/researcher-access-program/" target="_blank">OpenAI Researcher Access</a></td><td>$1K API credits</td><td><span class="deadline soon">Jun 2026 (quarterly)</span></td><td>Either</td><td>2-5</td><td>🟢</td></tr>
+      <tr data-num="2" data-funder="debut challenge nibib venturewell" data-award="20000" data-deadline="2026-06-05" data-lead="BB" data-hrs="20"><td>2</td><td><a href="https://venturewell.org/debut/" target="_blank">DEBUT Challenge — NIBIB + VentureWell</a></td><td>Up to $20K (purse $190K)</td><td><span class="deadline soon">Jun 5, 2026 11:59pm EDT ⚠️</span></td><td>BB</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="27" data-funder="itu ai for good innovation factory" data-award="20000" data-deadline="2026-07-01" data-lead="Either" data-hrs="16"><td>27</td><td><a href="https://aiforgood.itu.int/about-us/innovation-factory/" target="_blank">ITU AI for Good Innovation Factory</a></td><td>$20K Grand Finale + UN visibility</td><td><span class="deadline">Monthly → 2027 Geneva finale</span></td><td>Either</td><td>12-20</td><td>🟡</td></tr>
+      <tr data-num="3" data-funder="assets 2026 src" data-award="1000" data-deadline="2026-07-15" data-lead="Either" data-hrs="30"><td>3</td><td><a href="https://assets26.sigaccess.org/" target="_blank">ASSETS 2026 SRC</a></td><td>$500-1K + ACM DL pub</td><td><span class="deadline">~mid-Jul 2026</span></td><td>Either</td><td>20-40</td><td>🟡/🔴</td></tr>
+      <tr data-num="4" data-funder="james dyson award" data-award="36000" data-deadline="2026-07-17" data-lead="BB" data-hrs="20"><td>4</td><td><a href="https://jamesdysonaward.org/" target="_blank">James Dyson Award</a></td><td>£5.5K nat'l / £30K medical</td><td><span class="deadline">Jul 17, 2026</span></td><td>BB</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="5" data-funder="falling walls lab" data-award="1800" data-deadline="2026-09-15" data-lead="BB" data-hrs="10"><td>5</td><td><a href="https://falling-walls.com/lab/find-a-lab/" target="_blank">Falling Walls Lab — US regional</a></td><td>€500-1500 + Berlin Finale</td><td><span class="deadline">Through Sep 15, 2026</span></td><td>BB</td><td>10</td><td>🟡/🟠</td></tr>
+      <tr data-num="6" data-funder="venturewell e-team pioneer" data-award="5000" data-deadline="2026-09-29" data-lead="BB" data-hrs="12"><td>6</td><td><a href="https://venturewell.org/e-team-program/" target="_blank">VentureWell E-Team Pioneer (Stage 1)</a></td><td>$5K Stage 1 → $20K Stage 2</td><td><span class="deadline">Sep 29, 2026 (Winter 2027) ⚠️</span></td><td>BB</td><td>10-15</td><td>🟢</td></tr>
+      <tr data-num="7" data-funder="lsa first-gen travel grant" data-award="500" data-deadline="2026-10-01" data-lead="BB" data-hrs="2"><td>7</td><td><a href="https://www.lsadc.org/fgae-travel-grant" target="_blank">LSA First-Gen Travel Grant</a></td><td>$500 travel</td><td><span class="deadline">~Sept-Oct 2026</span></td><td>BB</td><td>2</td><td>🟠</td></tr>
+      <tr data-num="8" data-funder="numfocus small dev grant" data-award="10000" data-deadline="2026-10-17" data-lead="Either" data-hrs="12"><td>8</td><td><a href="https://numfocus.org/programs/small-development-grants" target="_blank">NumFOCUS Small Dev Grant</a></td><td>$10K (max 2/yr)</td><td><span class="deadline">Oct 17, 2026</span></td><td>Either</td><td>10-15</td><td>🟢</td></tr>
+      <tr data-num="9" data-funder="hertz fellowship" data-award="250000" data-deadline="2026-10-28" data-lead="BB" data-hrs="100"><td>9</td><td><a href="https://www.hertzfoundation.org/" target="_blank">Hertz Fellowship</a></td><td>Up to $250K / 5yr</td><td><span class="deadline">Late Oct 2026</span></td><td>BB</td><td>80-120</td><td>🟠</td></tr>
+      <tr data-num="10" data-funder="soros fellowship" data-award="90000" data-deadline="2026-10-29" data-lead="BB" data-hrs="50"><td>10</td><td><a href="https://pdsoros.org/" target="_blank">Soros Fellowship</a></td><td>$90K / 2yr</td><td><span class="deadline">Oct 29, 2026 (2pm ET)</span></td><td>BB</td><td>40-60</td><td>🟠</td></tr>
+      <tr data-num="11" data-funder="bssw fellowship 2027" data-award="25000" data-deadline="2026-10-31" data-lead="BB" data-hrs="20"><td>11</td><td><a href="https://bssw.io/pages/apply-for-the-bssw-fellowship-program" target="_blank">BSSw Fellowship 2027</a></td><td>Up to $25K</td><td><span class="deadline">~Oct 31, 2026</span></td><td>BB</td><td>15-25</td><td>⚫</td></tr>
+      <tr data-num="12" data-funder="goldwater scholarship 2027" data-award="7500" data-deadline="2026-11-01" data-lead="BB" data-hrs="40"><td>12</td><td><a href="https://goldwaterscholarship.gov/" target="_blank">Goldwater Scholarship 2027</a></td><td>$7.5K/yr + STEM credential</td><td><span class="deadline">Berea Oct-Nov 2026; nat'l Feb 2027</span></td><td>BB</td><td>30-50</td><td>🟢</td></tr>
+      <tr data-num="14" data-funder="meaf" data-award="100000" data-deadline="2026-11-01" data-lead="BB" data-hrs="20"><td>14</td><td><a href="https://www.meaf.org/" target="_blank">MEAF (Mitsubishi Electric)</a></td><td>$10-100K/yr × 1-2yr</td><td><span class="deadline">Nov 1, 2026</span></td><td>BB</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="16" data-funder="nsf grfp" data-award="111000" data-deadline="2026-11-14" data-lead="BB" data-hrs="80"><td>16</td><td><a href="https://www.nsfgrfp.org/" target="_blank">NSF GRFP</a></td><td>$37K/yr × 3 + tuition (~$111K)</td><td><span class="deadline">Nov 14, 2026 (Chem); refs ~Nov 6</span></td><td>BB</td><td>60-100</td><td>⚫</td></tr>
+      <tr data-num="15" data-funder="treehacks 2027" data-award="50000" data-deadline="2026-11-15" data-lead="BB" data-hrs="41"><td>15</td><td><a href="https://treehacks-2026.devpost.com/" target="_blank">TreeHacks 2027</a></td><td>$5K credits + HC Fellowship $50K equity-free</td><td><span class="deadline">~Nov 2026 app</span></td><td>BB</td><td>36hr + 5 prep</td><td>🟠</td></tr>
+      <tr data-num="17" data-funder="ndseg fellowship" data-award="145000" data-deadline="2026-11-15" data-lead="BB" data-hrs="50"><td>17</td><td><a href="https://ndseg.org/" target="_blank">NDSEG Fellowship</a></td><td>$3.4K/mo × 3yr + tuition + health</td><td><span class="deadline">~Nov 15, 2026</span></td><td>BB</td><td>40-60</td><td>🟠</td></tr>
+      <tr data-num="13" data-funder="yessenov foundation" data-award="3000" data-deadline="2026-11-30" data-lead="BM" data-hrs="7"><td>13</td><td><a href="https://yessenovfoundation.org/en/" target="_blank">Yessenov Foundation</a></td><td>$1-3K</td><td><span class="deadline">Annual Oct-Dec 2026</span></td><td>BM</td><td>5-10</td><td>🟡</td></tr>
+      <tr data-num="18" data-funder="microsoft ai for accessibility" data-award="65000" data-deadline="2026-12-15" data-lead="Either" data-hrs="20"><td>18</td><td><a href="https://www.microsoft.com/en-us/ai/ai-for-accessibility-grants" target="_blank">Microsoft AI for Accessibility</a></td><td>$50K cash + $15-20K Azure</td><td><span class="deadline">Fall 2026 / early 2027</span></td><td>Either</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="19" data-funder="fel small grants" data-award="1000" data-deadline="2026-12-31" data-lead="Either" data-hrs="10"><td>19</td><td><a href="https://www.ogmios.org/grants/" target="_blank">FEL Small Grants</a></td><td>$1K</td><td><span class="deadline">Dec 31, 2026</span></td><td>Either</td><td>8-12</td><td>🟢</td></tr>
+      <tr data-num="25" data-funder="nidilrr fip research" data-award="245000" data-deadline="2027-02-01" data-lead="BB" data-hrs="115"><td>25</td><td><a href="https://acl.gov/programs/research-and-development/field-initiated-projects-fip-program" target="_blank">NIDILRR FIP Research</a></td><td>$245-250K × 36mo</td><td><span class="deadline">FY26 reissue Oct 2026-Apr 2027</span></td><td>BB</td><td>80-150</td><td>⚫</td></tr>
+      <tr data-num="20" data-funder="cisco global problem solver" data-award="100000" data-deadline="2027-02-15" data-lead="Either" data-hrs="20"><td>20</td><td><a href="https://www.ciscoglobalproblemsolver.com/" target="_blank">Cisco Global Problem Solver</a></td><td>$25K-$100K (Grand $100K)</td><td><span class="deadline">Jan-Mar 2027 (est)</span></td><td>Either</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="21" data-funder="mit solve global challenges" data-award="250000" data-deadline="2027-04-15" data-lead="Either" data-hrs="40"><td>21</td><td><a href="https://solve.mit.edu/" target="_blank">MIT Solve early-stage</a></td><td>$100K + stack up to $150K AI for Humanity</td><td><span class="deadline">~Mar-May 2027 (opens Sep 2026)</span></td><td>Either</td><td>30-50</td><td>🟡</td></tr>
+      <tr data-num="22" data-funder="endangered language fund" data-award="4000" data-deadline="2027-04-15" data-lead="Either" data-hrs="8"><td>22</td><td><a href="https://www.endangeredlanguagefund.org/lang-legacies-grants.php" target="_blank">Endangered Language Fund</a></td><td>$2-4K</td><td><span class="deadline">~Apr 2027</span></td><td>Either</td><td>8</td><td>🟢</td></tr>
+      <tr data-num="23" data-funder="neurips 2027 d&b track" data-award="2000" data-deadline="2027-05-15" data-lead="Either" data-hrs="115"><td>23</td><td><a href="https://neurips.cc/Conferences/2026/CallForEvaluationsDatasets" target="_blank">NeurIPS 2027 D&B Track</a></td><td>Recognition + D&I reg+hotel (no flights)</td><td><span class="deadline">~May 2027</span></td><td>Either</td><td>80-150</td><td>🟠</td></tr>
+      <tr data-num="24" data-funder="acl 2027 di subsidies" data-award="2000" data-deadline="2027-05-15" data-lead="BM" data-hrs="4"><td>24</td><td><a href="https://2026.aclweb.org/calls/di_subsidies/" target="_blank">ACL 2027 + ARR D&I Subsidies</a></td><td>Reg waiver + travel reimbursement</td><td><span class="deadline">ARR bimonthly; D&I ~May 2027</span></td><td>BM</td><td>3-5</td><td>🟠</td></tr>
+      <tr data-num="28" data-funder="anthropic research credits" data-award="25000" data-deadline="9999-01-01" data-lead="Either" data-hrs="3"><td>28</td><td><a href="https://www.anthropic.com/research" target="_blank">Anthropic Research Credits</a></td><td>$500-25K compute</td><td><span class="deadline">Rolling, contact form</span></td><td>Either</td><td>2-5</td><td>🟢</td></tr>
+      <tr data-num="29" data-funder="eldp rapid grant" data-award="15000" data-deadline="9999-01-02" data-lead="Either" data-hrs="17"><td>29</td><td><a href="https://eldp.net/" target="_blank">ELDP Rapid Grant</a></td><td>$5-15K</td><td><span class="deadline">Rolling, 6-wk turnaround</span></td><td>Either</td><td>15-20</td><td>🟢</td></tr>
+      <tr data-num="30" data-funder="gallaudet tap partnership" data-award="25000" data-deadline="9999-01-03" data-lead="Either" data-hrs="7"><td>30</td><td><a href="https://tap.gallaudet.edu/" target="_blank">Gallaudet TAP partnership</a></td><td>$5-25K subaward possible</td><td><span class="deadline">Rolling, direct outreach</span></td><td>Either</td><td>5-10</td><td>🟡</td></tr>
+      <tr data-num="31" data-funder="microsoft techspark soar" data-award="5000" data-deadline="9999-01-04" data-lead="BB" data-hrs="7"><td>31</td><td><a href="https://soar-ky.org/" target="_blank">Microsoft TechSpark via SOAR</a></td><td>In-kind compute + TEALS</td><td><span class="deadline">Rolling (relationship)</span></td><td>BB</td><td>5-10</td><td>🟡</td></tr>
+      <tr data-num="32" data-funder="aws cloud credit research" data-award="5000" data-deadline="9999-01-05" data-lead="Either" data-hrs="5"><td>32</td><td><a href="https://pages.awscloud.com/aws-cloud-credit-for-research.html" target="_blank">AWS Cloud Credit for Research</a></td><td>Up to $5K credits (student); uncapped via faculty PI</td><td><span class="deadline">Rolling (30-60 day)</span></td><td>Either</td><td>4-6</td><td>🟢</td></tr>
+      <tr data-num="33" data-funder="google cloud research credits" data-award="5000" data-deadline="9999-01-06" data-lead="BB" data-hrs="4"><td>33</td><td><a href="https://edu.google.com/intl/ALL_us/programs/credits/research/" target="_blank">Google Cloud Research Credits</a></td><td>$1K (PhD) / $5K (faculty) credits/yr</td><td><span class="deadline">Rolling (4-8 wk)</span></td><td>BB</td><td>3-5</td><td>🟢</td></tr>
+      <tr data-num="34" data-funder="digitalocean open source credits" data-award="20000" data-deadline="9999-01-07" data-lead="Either" data-hrs="2"><td>34</td><td><a href="https://www.digitalocean.com/open-source/credits-for-projects" target="_blank">DigitalOcean Open Source Credits</a></td><td>$60-20K credits/yr</td><td><span class="deadline">Rolling</span></td><td>Either</td><td>2-3</td><td>🟢</td></tr>
+      <tr data-num="35" data-funder="huggingface gpu grants" data-award="10000" data-deadline="9999-01-08" data-lead="Either" data-hrs="1"><td>35</td><td><a href="https://huggingface.co/pricing" target="_blank">Hugging Face GPU Grants</a></td><td>A100/H100 time (in-kind)</td><td><span class="deadline">Rolling (in-thread)</span></td><td>Either</td><td>1-2</td><td>🟢</td></tr>
+      <tr data-num="36" data-funder="devpost accessibility hackathons" data-award="5000" data-deadline="9999-01-09" data-lead="Either" data-hrs="30"><td>36</td><td><a href="https://devpost.com/hackathons" target="_blank">Devpost accessibility/AI-for-good hackathons</a></td><td>$500-5K cash + sponsor credits per challenge</td><td><span class="deadline">Rolling (selective)</span></td><td>Either</td><td>20-40/event</td><td>🟢</td></tr>
+      <tr data-num="37" data-funder="open source collective" data-award="0" data-deadline="9999-01-10" data-lead="Either" data-hrs="4"><td>37</td><td><a href="https://www.oscollective.org/" target="_blank">Open Source Collective</a></td><td>Infrastructure (10% host fee)</td><td><span class="deadline">2-4 wk onboarding</span></td><td>Either</td><td>3-5</td><td>🟢</td></tr>
+      <tr data-num="38" data-funder="github sponsors" data-award="0" data-deadline="9999-12-30" data-lead="Either" data-hrs="4"><td>38</td><td><a href="https://github.com/sponsors" target="_blank">GitHub Sponsors</a></td><td>Recurring donations</td><td><span class="deadline">Always-on</span></td><td>Either</td><td>3-5 setup</td><td>🟢</td></tr>
+      <tr data-num="26" data-funder="nsf convergence accelerator track h" data-award="5750000" data-deadline="9999-12-31" data-lead="BB" data-hrs="100"><td>26</td><td><a href="https://www.nsf.gov/funding/initiatives/convergence-accelerator/" target="_blank">NSF Convergence Accelerator Track H</a></td><td>Phase 1 $750K / Phase 2 $5M</td><td><span class="deadline">TBD (track reissue)</span></td><td>BB</td><td>80-120</td><td>⚫</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="koz-4-attendance-legend">Attendance legend</h3>
+  <p class="tab-subtitle" style="margin-top:-8px;">🟢 virtual · 🟡 hybrid · 🟠 in-person travel covered · 🔴 in-person not covered · ⚫ funded activity = in-person work</p>
+
+  <details style="margin-top:24px;">
+    <summary style="cursor:pointer; font-weight:600; padding:8px 0;">Cut from tracker (bad ROI even with AI-assisted boilerplate)</summary>
+    <ul style="margin-top:8px;">
+      <li><strong>Berea-internal:</strong> Berea Discovery Fund · Berea URCPP (friend won't engage with these 2 specifically)</li>
+      <li><strong>Weak thematic fit:</strong> Spencer Small Research Grants · DOE CSGF · W4A 2027 (no advertised cash, travel not covered) · AAAL 2027 Distinguished Service (recognition only)</li>
+      <li><strong>Framing mismatch:</strong> Astana Hub Battle (commercial pitch + revenue share)</li>
+      <li><strong>Pivot required:</strong> ARC INSPIRE/POWER FY27 · ASHFoundation (requires CSD program; BB is chemistry)</li>
+      <li><strong>Narrow scope:</strong> Code for Science & Society Event Fund (only if Kozha hosts an event)</li>
+      <li><strong>Travel cost &gt; prize:</strong> Falling Walls Lab Baden-Württemberg · EF × Raspberry Pi London Hackathon</li>
+      <li><strong>Eligibility DQ:</strong> Davidson Fellows (age ≤18 + US citizen) · Astronaut Scholarship (Berea not on participating list) · Collegiate Inventors / NIHF (BM not at US institution → ineligible to be on team; prior public disclosure risk from open-source repo + RESNA 2026 finalist listing; BB-solo workaround judged not worth the friction)</li>
+      <li><strong>Effort/win mismatch:</strong> CHI 2027 Papers (80-120hr at 6-12%) · DeveloperWeek 2027 virtual (~$5/hr EV) · LSA Student Abstract Award ($500 at 5-10%) · EMNLP 2026 SV/Best Resource (paper-conditional, no travel) · Experiment.com crowdfunding (outreach burden)</li>
+    </ul>
+  </details>
+
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer; font-weight:600; padding:8px 0;">Deferred (memory only — pursue when condition met)</summary>
+    <ul style="margin-top:8px;">
+      <li><strong>NeurIPS 2026 Financial Assistance</strong> — only if D&B paper accepted (reg+hotel, no flights)</li>
+      <li><strong>AWS Imagine Grant</strong> — March 2027 + needs fiscal sponsor</li>
+      <li><strong>AWS Nonprofit Credit</strong> — needs 501(c)(3) confirmed via TechSoup</li>
+      <li><strong>Eurasia Foundation CSSP</strong> — verify post-USAID status + KZ NGO partner</li>
+      <li><strong>NVIDIA Inception</strong> — only if Kozha incorporates ($100K AWS + $150K Nebius credits)</li>
+      <li><strong>Cloudflare for Startups Nonprofit</strong> — monitor next call + needs fiscal sponsor</li>
+      <li><strong>Beinecke Scholarship 2027</strong> — verify Berea participation + STEM eligibility</li>
+      <li><strong>Google PhD / Meta PhD Fellowships</strong> — BB-future once enrolled in chemistry PhD</li>
+      <li><strong>US Embassy Astana Small Grants</strong> — needs KZ NGO partner</li>
+    </ul>
+  </details>
+
+  <h3 style="margin-top:24px;" id="koz-5-critical-path-actions">Critical-path actions</h3>
+  <ol>
+    <li>BB verifies Soros eligibility (naturalized US citizen / child of 2 immigrant non-citizens / DACA/refugee/asylee) — determines whether #10 stays in scope.</li>
+    <li>BB confirms Berea CFFR + Government Grant Services endorsement for external grants (MEAF #14, BSSw #11, NIDILRR #25, NSF CA #26, Goldwater #12 nomination). Email <code>cffr@berea.edu</code> + <code>governmentgrants@berea.edu</code>.</li>
+    <li>BB recruits Berea faculty PI sponsor: NIDILRR #25, NSF CA #26 (3-yr commit); BSSw #11, Google Cloud #33 (co-applicant). <strong>Hardest single gating step.</strong></li>
+    <li>NumFOCUS Affiliated Project application when reopens ~Q3 2026 (prerequisite for #8).</li>
+    <li>Verify ASSETS 2026 location — if NA-based, #3 ROI improves substantially with cheap intra-US travel.</li>
+    <li>Stack cloud-infra credits ASAP: AWS #32 + DigitalOcean #34 + HuggingFace #35 + Anthropic #28 + Google Cloud #33 + OpenAI #1 (~15-25hr total for $5-30K credits).</li>
+    <li><strong>DEBUT #2 decision by Jun 4, 2026</strong> (1-day buffer before Jun 5 deadline): without a Berea BME-dept teammate AND foreign-student-prize-eligibility constraints, 2026 cycle is essentially unworkable. Defer to 2027 cycle if BME teammate recruited; else drop.</li>
+    <li><strong>E-Team #6 decision by ~Sep 1, 2026</strong>: verify Berea VentureWell-network status + recruit Berea faculty advisor + ≥1 Berea student. BB-solo path with Berea-only team for Sep 29 deadline.</li>
+  </ol>
+
+  <h3 id="koz-6-key-notes">Key notes</h3>
+  <ul>
+    <li>Apply to everything in the table. AI assists with boilerplate.</li>
+    <li><strong>Oct 31 – Nov 15, 2026 cluster:</strong> 8 applications inside ~2 weeks (BSSw, Goldwater Berea internal, Soros, MEAF, TreeHacks, Hertz, NSF GRFP, NDSEG). Start drafting essays Aug-Sep 2026.</li>
+    <li><strong>Publication anchor:</strong> NeurIPS 2027 D&B Track #23 is highest-fit venue for the cross-corpus sign-language dataset paper. ACL D&I #24 stacks reg+travel if parallel ACL paper accepted.</li>
+    <li>Realistic combined 2026-2027 revenue: $20-210K cash + $15-60K cloud credits (Wikimedia dropped ~$50-155K cash ceiling). Dominated by 1-2 hits (Microsoft A4A or MIT Solve + one US-citizen fellowship + possibly NIDILRR/NSF CA if faculty PI lands + ITU AI for Good moonshot).</li>
+  </ul>
+
+</section>
+</div>
+</div>
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return;
+    const today = new Date('2026-06-04');
+    const dayOfWeek = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    document.getElementById('week-date').textContent =
+      'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
+      ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
+      ' · Phase 0 Wk 1 + Lever 1 starts';
+
+    const weekTasks = [
+      {id: 'wk-ops-1', text: 'Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduit, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore-specific anchor)', meta: 'Per Step 0 verification w9qh053sx (3 Jun 2026). ~1 hr. The spec\'s framing currently overstates what postdoc letters buy at top-5 Stats.'},
+      {id: 'wk-ops-2', text: 'Clone conditional-conformal repo via HTTPS + reproduce experiments/SyntheticData.ipynb', meta: 'git clone https://github.com/jjcherian/conditional-conformal.git ; cd conditional-conformal ; git checkout release ; jupyter notebook experiments/SyntheticData.ipynb. Pip install conditionalconformal already done. Budget 1 full day for dep drift. Target: numerical agreement with paper Fig 1 marginal coverage.'},
+      {id: 'wk-ops-3', text: 'Lever 1 self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers + Cauchy completeness)', meta: '15-20 hr/wk through summer. Pen-and-paper proofs only — no skimming. Goal: Abbott Ch 1-3 by end of Jun, Ch 1-8 by Aug 31. This is the #1 leverage; protects MATH 447 A-grade Feb 2027.'},
+      {id: 'wk-ops-4', text: 'Kozha paperwork block (Fri 15:00-18:00) — compute-infra credit stack', meta: 'AWS Research + DigitalOcean + HuggingFace + Anthropic + OpenAI + Google Cloud credits (if not yet sent per kozha-funding-tracker.md). ~3 hr this week. Steady-state ~12 hr/mo.'},
+      {id: 'wk-ops-5', text: 'Norman Lewis daily 30 min + GregMat free vocab + 1 higher-register essay (LRB/NYRB/Harper\'s/TLS) — GRE Verbal background', meta: 'Maintenance. Sep 2027 test. Free path through Oct 2026; paid GregMat ($7.99/mo) only for the Jun-Sep 2027 intensive.'},
+      {id: 'wk-ops-6', text: 'Income/ML-upskill block: ~10-15 hr/wk soft cap (per §9 fork resolution)', meta: 'Apex tech intern Summer 2027 application prep starts soon (apps Aug-Oct 2026). Freelance ML via network if available. ONE Kaggle competition max. NOT hackathon-bingo, NOT cold-startup-fundraising.'},
+      {id: 'wk-ops-7', text: 'Verify your KBTU class ranking (top-10%?) — gates ETH Excellence Scholarship eligibility', meta: 'If you fall outside top-10% of KBTU DS&BA cohort, ESOP (CHF 12K/sem + tuition waiver) is unrealistic for ETH MSc Stats Nov 2027 deadline. Email registrar or department for class-ranking data. ~30 min admin.'},
+      {id: 'wk-ops-8', text: 'Recurring schedule maintained: sleep 23:00-07:00, gym Tue/Thu/Sat 15:00-18:00, deep work block protected', meta: 'No project-anchor extras this week. Hit the basics first.'},
+    ];
+    const ul = document.getElementById('week-tasks');
+    ul.innerHTML = '';
+    weekTasks.forEach(t => {
+      const row = document.createElement('div');
+      row.className = 'checkbox-row';
+      row.dataset.taskId = t.id;
+      row.innerHTML = `
+        <input type="checkbox">
+        <div class="task-content">
+          <div>${t.text}</div>
+          <div class="task-meta">${t.meta}</div>
+        </div>
+      `;
+      ul.appendChild(row);
+    });
+    // Re-bind checkbox states for newly added rows
+    loadCheckboxes();
+  }
+
+  // Kozha funding table: sort + filter
+  (function() {
+    const table = document.getElementById('kozha-table');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('th[data-sort-key]');
+    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
+    let sortState = { key: 'deadline', dir: 'asc' };
+
+    function applySort() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
+      rows.sort((a, b) => {
+        const av = a.dataset[sortState.key];
+        const bv = b.dataset[sortState.key];
+        let comp;
+        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
+        else comp = String(av).localeCompare(String(bv));
+        return sortState.dir === 'asc' ? comp : -comp;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      headers.forEach(th => {
+        const k = th.dataset.sortKey;
+        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
+        th.textContent = labels[k] + arrow;
+      });
+    }
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sortKey;
+        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = k; sortState.dir = 'asc'; }
+        applySort();
+      });
+    });
+
+    document.querySelectorAll('.kozha-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lead = btn.dataset.lead;
+        let visible = 0;
+        tbody.querySelectorAll('tr').forEach(row => {
+          const rowLead = row.dataset.lead;
+          let show;
+          if (lead === 'all') show = true;
+          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
+          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
+          else if (lead === 'Either') show = rowLead === 'Either';
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
+        if (allBtn) allBtn.textContent = 'All (38)';
+        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
+      });
+    });
+
+    applySort();
+  })();
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
+
+
+// per-page sidebar: highlight section in view
+(function(){
+  const links=[...document.querySelectorAll('.site-subnav a')];
+  if(!links.length)return;
+  const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a;});
+  const ids=Object.keys(map);
+  function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<160)cur=id;}
+    links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body></html>
