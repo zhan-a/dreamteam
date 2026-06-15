@@ -47,6 +47,14 @@ build_site.py
 *.py
 # (opportunities.html + the multi-page site files ARE published — see git add)
 
+# Added 2026-06-15 — folder reorg: private container dirs (whole-dir ignore so any future file inside stays local)
+_planning/
+_outreach/
+_kozha/
+_research/
+_reference/
+_transcripts/
+
 # Jekyll-specific (we removed Jekyll; using .nojekyll instead)
 _config.yml
 _site/
