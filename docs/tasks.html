@@ -413,16 +413,44 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="cur">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Tasks</div><a href="#tas-1-tasks" class="">Tasks</a><a href="#current-week-heading" class="h3">Current week</a><a href="#tas-3-lookahead-summer-2026-jun-17-aug-31-colour-t" class="h3">Lookahead — Summer 2026 (Jun 17 → Aug 31) — colour-tagged by</a><a href="#tas-4-recurring-every-week-the-routine-backbone-no" class="h3">Recurring EVERY week (the routine backbone — not repeated be</a></div>
+<div class="site-subnav"><div class="lbl">Tasks</div><a href="#tas-1-tasks" class="">Tasks</a><a href="#daily-rhythm" class="h3">Daily rhythm — what time is what</a><a href="#current-week-heading" class="h3">Current week</a><a href="#tas-4-lookahead-summer-2026-jun-17-aug-31-colour-t" class="h3">Lookahead — Summer 2026 (Jun 17 → Aug 31) — colour-tagged by</a><a href="#tas-5-recurring-every-week-the-routine-backbone-no" class="h3">Recurring EVERY week (the routine backbone — not repeated be</a></div>
 <div class="site-main"><section class="page-section" id="week">
 
   <h2 id="tas-1-tasks">Tasks</h2>
   <p class="tab-subtitle" id="week-date">Current week tasks. Tasks roll automatically based on date.</p>
 
   <div class="alert urgent" id="week-alert">
-    <strong>SUMMER RESTART — work begins Jun 17 2026</strong> (back from Turkey Jun 16). Full week-by-week below. <strong>Weekend policy (your call 2026-06-15):</strong> weekends are WORK (Axler, extra analysis problems, Phase-0, MT1173, driving, outreach prep) — NOT relaxation — until the Western contact + Lytkin + Mynbaev relationships are secured. <strong>Guardrail:</strong> keep gym (Tue/Thu/Sat) + ~one light half-day; hard proof-math degrades past sustained over-intensity, so don't let zero-rest lower the quality of the deep work. <strong>Phase-0 cold-implementation rule holds:</strong> the reference repo <code>jjcherian/conditional-conformal</code> is FORBIDDEN until the Week-4 (Jul 8–14) open-ref gate. Full protocol on the <a href="roadmap.html#schedule">Schedule</a> tab; multi-year arc on <a href="roadmap.html#roadmap">Roadmap</a>.
+    <strong>SUMMER RESTART — work begins Jun 17 2026</strong> (back from Turkey Jun 16). Full week-by-week below. <strong>Weekend policy (your call 2026-06-15):</strong> weekends are WORK (Axler, extra analysis problems, Phase-0, MT1173, driving, outreach prep) — NOT relaxation — until the Western contact + Lytkin + Mynbaev relationships are secured. <strong>Guardrail:</strong> keep gym (Tue/Thu/Sat) + ~one light half-day; hard proof-math degrades past sustained over-intensity, so don't let zero-rest lower the quality of the deep work. <strong>Phase-0 cold-implementation rule holds:</strong> the reference repo <code>jjcherian/conditional-conformal</code> is FORBIDDEN until the Week-4 (Jul 8–14) open-ref gate. Full Phase-0 protocol + long-range outlook on the <a href="roadmap.html#schedule">Roadmap → Protocols</a> section; multi-year arc on <a href="roadmap.html#roadmap">Roadmap</a>.
   </div>
 
+  <div class="card">
+    <h3 id="daily-rhythm">Daily rhythm — what time is what</h3>
+    <p class="tab-subtitle">The hour-by-hour template the badges map onto (🌅 Morning = deep block · ☀️ Afternoon = second block · 🌙 Evening = light). Sleep 23:00–07:00. <strong>Weekends are WORK</strong> until the Western contact + Lytkin + Mynbaev land (your 2026-06-15 call) — Sat full + gym, Sun keeps one light half-day so zero-rest does not degrade the proof-math.</p>
+    <table>
+      <thead><tr><th style="width:110px;">Time</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
+      <tbody>
+        <tr><td><strong>07:00–08:30</strong></td><td colspan="7" style="text-align:center;color:var(--fg-dim);">Wake · routine · breakfast · light reading (Pugh/Abbott · Phase-0 papers · higher-register essay)</td></tr>
+        <tr><td><strong>08:30–12:30</strong></td><td colspan="7" style="text-align:center;"><strong>🌅 Deep-work block</strong> — real analysis (Abbott→Pugh, Lever 1) + Phase-0 build</td></tr>
+        <tr><td><strong>12:30–13:30</strong></td><td colspan="7" style="text-align:center;color:var(--fg-dim);">Lunch · walk · decompress</td></tr>
+        <tr><td><strong>13:30–15:00</strong></td><td colspan="7" style="text-align:center;">☀️ Second work block — coursework / MT1173 / admin / lighter coding</td></tr>
+        <tr>
+          <td><strong>15:00–18:00</strong></td>
+          <td>Work continue</td>
+          <td style="background:var(--accent-soft);color:var(--accent);font-weight:600;">GYM + shower</td>
+          <td>Work continue</td>
+          <td style="background:var(--accent-soft);color:var(--accent);font-weight:600;">GYM + shower</td>
+          <td style="background:var(--warn-soft);color:var(--warn);font-weight:600;">📌 Kozha paperwork</td>
+          <td style="background:var(--accent-soft);color:var(--accent);font-weight:600;">GYM + work</td>
+          <td>Work · then light half-day (errands/family)</td>
+        </tr>
+        <tr><td><strong>18:00–19:00</strong></td><td colspan="7" style="text-align:center;color:var(--fg-dim);">Dinner</td></tr>
+        <tr><td><strong>19:00–22:00</strong></td><td colspan="7" style="text-align:center;">🌙 Lighter work · textbook reading · GRE-vocab reading · social</td></tr>
+        <tr><td><strong>22:00–23:00</strong></td><td colspan="7" style="text-align:center;color:var(--fg-dim);">Wind down · plan tomorrow</td></tr>
+        <tr><td><strong>23:00–07:00</strong></td><td colspan="7" style="text-align:center;background:var(--bg-3);color:var(--fg-dim);">Sleep (8 h)</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--fg-dim);font-size:13px;"><strong>Block notes:</strong> ~7 h deep+light work/weekday; gym Tue/Thu/Sat (recovery protects deep-work quality); evening = light reading + GRE-vocab. <strong>Weekend policy (2026-06-15):</strong> weekends are work until the 3 connections land — Sat full + gym, one light half-day on Sun as the guardrail against over-intensity (hard proof-math degrades past ~3–4 h/day). Reinstate a fuller Sunday once Lytkin + Mynbaev + the Western RA are secured. In KBTU semester the morning/afternoon blocks compress around class times.</p>
+  </div>
   <div class="card">
     <h3 id="current-week-heading">Current week</h3>
     <div id="week-tasks">
@@ -430,7 +458,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
     </div>
   </div>
 
-  <h3 id="tas-3-lookahead-summer-2026-jun-17-aug-31-colour-t">Lookahead — Summer 2026 (Jun 17 → Aug 31) — colour-tagged by time + pace, REWRITTEN 2026-06-16</h3>
+  <h3 id="tas-4-lookahead-summer-2026-jun-17-aug-31-colour-t">Lookahead — Summer 2026 (Jun 17 → Aug 31) — colour-tagged by time + pace, REWRITTEN 2026-06-16</h3>
   <div class='alert info'>
     <strong>How to read the tags.</strong> Each task has a <em>when</em> badge and a <em>pace</em> badge.<br>
     <strong>When:</strong> <span style='background:#2563eb;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>🌅 Morning</span>hardest deep work (08:30–12:30) &nbsp; <span style='background:#0891b2;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>☀️ Afternoon</span>coursework / drills / coding &nbsp; <span style='background:#7c3aed;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>🌙 Evening</span>light / review &nbsp; <span style='background:#db2777;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>📅 Weekend</span>weekends (now work) &nbsp; <span style='background:#475569;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>📌 Friday</span>Kozha block &nbsp; <span style='background:#64748b;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>🗓️ Anytime</span>one-off / flexible.<br>
@@ -438,7 +466,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
     <strong>The rule:</strong> finish early → add more <span style='background:#16a34a;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>⚡ Push</span> work, never more <span style='background:#ca8a04;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>🐢 Steady</span>. And hard-proof work has a ~3–4 h/day quality ceiling — past that, switch to a <span style='background:#16a34a;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>⚡ Push</span> project/computation task (those tolerate long hours).
   </div>
   <div class='card'>
-    <h3 id="tas-4-recurring-every-week-the-routine-backbone-no">Recurring EVERY week (the routine backbone — not repeated below)</h3>
+    <h3 id="tas-5-recurring-every-week-the-routine-backbone-no">Recurring EVERY week (the routine backbone — not repeated below)</h3>
     <ul>
       <li><span style='background:#2563eb;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>🌅 Morning</span><span style='background:#16a34a;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>⚡ Push</span><br><strong>Morning deep-work (08:30–12:30):</strong> the week's analysis problems + Phase-0 build — the hardest work goes here (⚡ up to ~3–4 h/day hard-proof, then pivot to ⚡ project/computation).</li>
       <li><span style='background:#7c3aed;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>🌙 Evening</span><span style='background:#ca8a04;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-right:3px;white-space:nowrap'>🐢 Steady</span><br><strong>GRE-verbal + higher-register reading + vocab (~30–45 min/day):</strong> spaced, daily — do NOT cram (your word-learning case).</li>
