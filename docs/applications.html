@@ -893,45 +893,34 @@ h2[id],h3[id]{scroll-margin-top:130px}
   // Current week tasks
   function renderCurrentWeek() {
     if(!document.getElementById('week-tasks'))return;
-    const today = new Date('2026-06-04');
-    const dayOfWeek = today.getDay();
-    const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6);
-
-    document.getElementById('week-date').textContent =
-      'Week of ' + startOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) +
-      ' – ' + endOfWeek.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) +
-      ' · Phase 0 Wk 1 + Lever 1 starts';
-
-    const weekTasks = [
-      {id: 'wk-ops-1', text: 'Apply 4 reframes to OPERATIVE-project-spec.md (drop Cherian, demote Hore/Gibbs to co-author conduit, name Ramdas/Barber/Tibshirani as actual letter PIs, add Hore RLCP arXiv:2310.07850 as Hore-specific anchor)', meta: 'Per Step 0 verification w9qh053sx (3 Jun 2026). ~1 hr. The spec\'s framing currently overstates what postdoc letters buy at top-5 Stats.'},
-      {id: 'wk-ops-2', text: 'Clone conditional-conformal repo via HTTPS + reproduce experiments/SyntheticData.ipynb', meta: 'git clone https://github.com/jjcherian/conditional-conformal.git ; cd conditional-conformal ; git checkout release ; jupyter notebook experiments/SyntheticData.ipynb. Pip install conditionalconformal already done. Budget 1 full day for dep drift. Target: numerical agreement with paper Fig 1 marginal coverage.'},
-      {id: 'wk-ops-3', text: 'Lever 1 self-study STARTS — Abbott "Understanding Analysis" Ch 1 (Real Numbers + Cauchy completeness)', meta: '15-20 hr/wk through summer. Pen-and-paper proofs only — no skimming. Goal: Abbott Ch 1-3 by end of Jun, Ch 1-8 by Aug 31. This is the #1 leverage; protects MATH 447 A-grade Feb 2027.'},
-      {id: 'wk-ops-4', text: 'Kozha paperwork block (Fri 15:00-18:00) — compute-infra credit stack', meta: 'AWS Research + DigitalOcean + HuggingFace + Anthropic + OpenAI + Google Cloud credits (if not yet sent per kozha-funding-tracker.md). ~3 hr this week. Steady-state ~12 hr/mo.'},
-      {id: 'wk-ops-5', text: 'Norman Lewis daily 30 min + GregMat free vocab + 1 higher-register essay (LRB/NYRB/Harper\'s/TLS) — GRE Verbal background', meta: 'Maintenance. Sep 2027 test. Free path through Oct 2026; paid GregMat ($7.99/mo) only for the Jun-Sep 2027 intensive.'},
-      {id: 'wk-ops-6', text: 'Income/ML-upskill block: ~10-15 hr/wk soft cap (per §9 fork resolution)', meta: 'Apex tech intern Summer 2027 application prep starts soon (apps Aug-Oct 2026). Freelance ML via network if available. ONE Kaggle competition max. NOT hackathon-bingo, NOT cold-startup-fundraising.'},
-      {id: 'wk-ops-7', text: 'Verify your KBTU class ranking (top-10%?) — gates ETH Excellence Scholarship eligibility', meta: 'If you fall outside top-10% of KBTU DS&BA cohort, ESOP (CHF 12K/sem + tuition waiver) is unrealistic for ETH MSc Stats Nov 2027 deadline. Email registrar or department for class-ranking data. ~30 min admin.'},
-      {id: 'wk-ops-8', text: 'Recurring schedule maintained: sleep 23:00-07:00, gym Tue/Thu/Sat 15:00-18:00, deep work block protected', meta: 'No project-anchor extras this week. Hit the basics first.'},
-    ];
-    const ul = document.getElementById('week-tasks');
-    ul.innerHTML = '';
-    weekTasks.forEach(t => {
-      const row = document.createElement('div');
-      row.className = 'checkbox-row';
-      row.dataset.taskId = t.id;
-      row.innerHTML = `
-        <input type="checkbox">
-        <div class="task-content">
-          <div>${t.text}</div>
-          <div class="task-meta">${t.meta}</div>
-        </div>
-      `;
-      ul.appendChild(row);
+    const wk = document.getElementById('week-tasks');
+    if (!wk) return;
+    const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
+    const dateEl = document.getElementById('week-date');
+    if (!cards.length) return;
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const P = function(d){ const a=d.split('-'); return new Date(+a[0], +a[1]-1, +a[2]); };
+    let match=null, status='current';
+    for (const c of cards){ if (today>=P(c.dataset.start) && today<=P(c.dataset.end)){ match=c; status='current'; break; } }
+    if (!match){
+      if (today < P(cards[0].dataset.start)) { match=cards[0]; status='upcoming'; }
+      else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
+      else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
+    }
+    const label = (match.querySelector('.wk-label')||{}).textContent || '';
+    const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
+    const banner = {current:'\uD83D\uDCCD This week', upcoming:'\u23F3 Summer starts Jun 17 \u2014 first up', wrap:'\u2705 Summer plan complete \u2014 last week', next:'\u23ED Next up'}[status];
+    if (dateEl) dateEl.textContent = banner + ' \u00B7 ' + label + ' ' + theme;
+    wk.innerHTML = '';
+    match.querySelectorAll('.week-body .checkbox-row .task-content > div:first-child').forEach(function(div){
+      const r = document.createElement('div'); r.className='cur-row'; r.innerHTML = div.innerHTML; wk.appendChild(r);
     });
-    // Re-bind checkbox states for newly added rows
-    loadCheckboxes();
+    const note = document.createElement('div'); note.className='small'; note.style.marginTop='8px';
+    note.textContent = 'Read-only summary \u2014 check tasks off in the highlighted week below \u2193';
+    wk.appendChild(note);
+    cards.forEach(function(c){ c.classList.remove('is-current'); });
+    match.classList.add('is-current'); match.open = true;
   }
 
   // Kozha funding table: sort + filter
