@@ -651,10 +651,9 @@ h2[id],h3[id]{scroll-margin-top:130px}
   // Current week tasks
   function renderCurrentWeek() {
     if(!document.getElementById('week-tasks'))return;
-    const wk = document.getElementById('week-tasks');
-    if (!wk) return;
+    const banner = document.getElementById('week-tasks');
+    if (!banner) return;
     const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
-    const dateEl = document.getElementById('week-date');
     if (!cards.length) return;
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -666,19 +665,12 @@ h2[id],h3[id]{scroll-margin-top:130px}
       else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
       else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
     }
+    cards.forEach(function(c){ c.classList.remove('is-current'); if (c.id==='wk-current') c.removeAttribute('id'); });
+    match.id = 'wk-current'; match.classList.add('is-current'); match.open = true;
     const label = (match.querySelector('.wk-label')||{}).textContent || '';
     const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
-    const banner = {current:'\uD83D\uDCCD This week', upcoming:'\u23F3 Summer starts Jun 17 \u2014 first up', wrap:'\u2705 Summer plan complete \u2014 last week', next:'\u23ED Next up'}[status];
-    if (dateEl) dateEl.textContent = banner + ' \u00B7 ' + label + ' ' + theme;
-    wk.innerHTML = '';
-    match.querySelectorAll('.week-body .checkbox-row .task-content > div:first-child').forEach(function(div){
-      const r = document.createElement('div'); r.className='cur-row'; r.innerHTML = div.innerHTML; wk.appendChild(r);
-    });
-    const note = document.createElement('div'); note.className='small'; note.style.marginTop='8px';
-    note.textContent = 'Read-only summary \u2014 check tasks off in the highlighted week below \u2193';
-    wk.appendChild(note);
-    cards.forEach(function(c){ c.classList.remove('is-current'); });
-    match.classList.add('is-current'); match.open = true;
+    const lead = {current:'📍 This week', upcoming:'⏳ Summer starts Jun 17 — first week', wrap:'✅ Summer plan complete — last week', next:'⏭ Next up'}[status] || 'This week';
+    banner.innerHTML = '<strong>' + lead + '</strong> · ' + label + ' ' + theme + ' · <a href="#wk-current">jump to this week’s tasks ↓</a>';
   }
 
   // Kozha funding table: sort + filter

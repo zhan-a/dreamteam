@@ -413,11 +413,11 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="cur">Tasks</a><a href="study.html" class="">Study</a><a href="applications.html" class="">Applications</a><a href="opportunities.html" class="">Opportunities</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a><a href="locks.html" class="">Locks</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Tasks</div><a href="#tas-1-tasks" class="">Tasks</a><a href="#daily-rhythm" class="h3">Daily rhythm — what time is what</a><a href="#current-week-heading" class="h3">Current week</a><a href="#lookahead-summer" class="h3">Lookahead — Summer 2026 (Jun 17 → Aug 31)</a><a href="#tas-5-recurring-every-week-routine-backbone-not-re" class="h3">Recurring EVERY week (routine backbone — not repeated below)</a></div>
+<div class="site-subnav"><div class="lbl">Tasks</div><a href="#tas-1-tasks" class="">Tasks</a><a href="#daily-rhythm" class="h3">Daily rhythm — what time is what</a><a href="#lookahead-summer" class="h3">Lookahead — Summer 2026 (Jun 17 → Aug 31)</a><a href="#tas-4-recurring-every-week-habits-to-tick-the-dail" class="h3">Recurring EVERY week — habits to tick (the Daily-rhythm grid</a></div>
 <div class="site-main"><section class="page-section" id="week">
 
   <h2 id="tas-1-tasks">Tasks</h2>
-  <p class="tab-subtitle" id="week-date">Current week tasks. Tasks roll automatically based on date.</p>
+  <p class="tab-subtitle" id="week-date">Weekly schedule — the current week is auto-highlighted and opened in the Lookahead below.</p>
 
   <div class="alert urgent" id="week-alert">
     <strong>SUMMER RESTART — work begins Jun 17 2026</strong> (back from Turkey Jun 16). Full week-by-week below. <strong>Weekend policy (your call 2026-06-15):</strong> weekends are WORK (Axler, extra analysis problems, Phase-0, MT1173, driving, outreach prep) — NOT relaxation — until the Lytkin + Mynbaev primary-letter relationships are secured (plus the Canadian-MSc bridge supervisor outreach underway); a Western reply is upside, not a gate. <strong>Guardrail:</strong> keep gym (Tue/Thu/Sat) + ~one light half-day; hard proof-math degrades past sustained over-intensity, so don't let zero-rest lower the quality of the deep work. <strong>Phase-0 cold-implementation rule holds:</strong> the reference repo <code>jjcherian/conditional-conformal</code> is FORBIDDEN until the Week-4 (Jul 8–14) open-ref gate. Full Phase-0 protocol + long-range outlook on the <a href="roadmap.html#schedule">Roadmap → Protocols</a> section; multi-year arc on <a href="roadmap.html#roadmap">Roadmap</a>.
@@ -451,12 +451,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
     </table>
     <p style="color:var(--fg-dim);font-size:13px;"><strong>Block notes:</strong> ~7 h deep+light work/weekday; gym Tue/Thu/Sat (recovery protects deep-work quality); evening = light reading + GRE-vocab. <strong>Weekend policy (2026-06-15):</strong> weekends are work until the 3 connections land — Sat full + gym, one light half-day on Sun as the guardrail against over-intensity (hard proof-math degrades past ~3–4 h/day). Reinstate a fuller Sunday once Lytkin + Mynbaev are secured (a Western RA reply is a bonus, not a condition). In KBTU semester the morning/afternoon blocks compress around class times.</p>
   </div>
-  <div class="card">
-    <h3 id="current-week-heading">Current week</h3>
-    <div id="week-tasks">
-      <!-- populated by JS -->
-    </div>
-  </div>
+  <div id="week-tasks" class="alert info" style="margin-bottom:16px"><!-- this-week locator banner, filled by renderCurrentWeek() --></div>
 
   <style>
 /* ============================================================
@@ -759,10 +754,8 @@ h2[id],h3[id]{scroll-margin-top:130px}
 /* weekend WHEN distinct from steady PACE (both were amber) -> pink, light+dark safe */
 .wb-weekend { background:#fce7f3; color:#be185d; border-color:#db2777; }
 body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777; }
-/* current-week: read-only summary rows + ring on the live week-card */
-.cur-row { padding:7px 0; border-bottom:1px solid var(--border); font-size:14px; }
-.cur-row:last-of-type { border-bottom:none; }
-.tl-scope details.week-card.is-current { box-shadow:0 0 0 2px var(--accent); }
+/* live week-card highlight ring */
+.tl-scope details.week-card.is-current { box-shadow:0 0 0 2px var(--accent); scroll-margin-top:120px; }
   </style>
 <h3 id="lookahead-summer">Lookahead — Summer 2026 (Jun 17 → Aug 31)</h3>
 <div class="tl-scope">
@@ -807,7 +800,7 @@ body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777;
 
   <!-- ===== RECURRING card (one track-bordered card, not collapsible) ===== -->
   <div class="card" style="border-left:4px solid var(--border-strong)">
-    <h3 id="tas-5-recurring-every-week-routine-backbone-not-re">Recurring EVERY week (routine backbone — not repeated below)</h3>
+    <h3 id="tas-4-recurring-every-week-habits-to-tick-the-dail">Recurring EVERY week — habits to tick <span class="small" style="font-weight:400">(the Daily-rhythm grid shows <em>when</em>; this is <em>what</em> to check off, every week)</span></h3>
     <div class="checkbox-row" data-task-id="recur-morning"><input type="checkbox"><div class="task-content">
       <div><strong>Morning deep-work (08:30–12:30):</strong> the week's analysis problems + Phase-0 build — the hardest work goes here (⚡ up to ~3–4 h/day hard-proof, then pivot to a ⚡ project/computation task).
         <div class="task-badges"><span class="tk tk-analysis">Analysis</span><span class="wb wb-morning">🌅 Morning</span><span class="pb pb-push">⚡ Push</span></div>
@@ -1428,10 +1421,9 @@ body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777;
   // Current week tasks
   function renderCurrentWeek() {
     if(!document.getElementById('week-tasks'))return;
-    const wk = document.getElementById('week-tasks');
-    if (!wk) return;
+    const banner = document.getElementById('week-tasks');
+    if (!banner) return;
     const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
-    const dateEl = document.getElementById('week-date');
     if (!cards.length) return;
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -1443,19 +1435,12 @@ body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777;
       else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
       else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
     }
+    cards.forEach(function(c){ c.classList.remove('is-current'); if (c.id==='wk-current') c.removeAttribute('id'); });
+    match.id = 'wk-current'; match.classList.add('is-current'); match.open = true;
     const label = (match.querySelector('.wk-label')||{}).textContent || '';
     const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
-    const banner = {current:'\uD83D\uDCCD This week', upcoming:'\u23F3 Summer starts Jun 17 \u2014 first up', wrap:'\u2705 Summer plan complete \u2014 last week', next:'\u23ED Next up'}[status];
-    if (dateEl) dateEl.textContent = banner + ' \u00B7 ' + label + ' ' + theme;
-    wk.innerHTML = '';
-    match.querySelectorAll('.week-body .checkbox-row .task-content > div:first-child').forEach(function(div){
-      const r = document.createElement('div'); r.className='cur-row'; r.innerHTML = div.innerHTML; wk.appendChild(r);
-    });
-    const note = document.createElement('div'); note.className='small'; note.style.marginTop='8px';
-    note.textContent = 'Read-only summary \u2014 check tasks off in the highlighted week below \u2193';
-    wk.appendChild(note);
-    cards.forEach(function(c){ c.classList.remove('is-current'); });
-    match.classList.add('is-current'); match.open = true;
+    const lead = {current:'📍 This week', upcoming:'⏳ Summer starts Jun 17 — first week', wrap:'✅ Summer plan complete — last week', next:'⏭ Next up'}[status] || 'This week';
+    banner.innerHTML = '<strong>' + lead + '</strong> · ' + label + ' ' + theme + ' · <a href="#wk-current">jump to this week’s tasks ↓</a>';
   }
 
   // Kozha funding table: sort + filter
