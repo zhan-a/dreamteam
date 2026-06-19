@@ -577,7 +577,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
     <strong>"Butcher the problems" tactics:</strong> prove-before-you-read; ≥60% of time on HARD problems (not reading); work UoL <strong>past papers + Examiners' Commentaries AHEAD of the course</strong>; timed closed-book proof-reproduction decks for the ST exams (Cramér–Rao, Rao–Blackwell, Neyman–Pearson, factorization, CLT); spaced + interleaved practice; an error-pattern log; AI to explain/check, never to crib.
   </div>
 
-  <h3 id="stu-4-1-phase-0-paper-anchors-conformal-core-repro">1. Phase 0 paper anchors (conformal-core; reproduce + extend) <span class="badge status-progress" style="font-size: 11px;">ACTIVE — 5 papers</span></h3>
+  <h3 id="stu-4-1-phase-0-paper-anchors-conformal-core-repro">1. Phase 0 paper anchors (conformal-core; reproduce + extend) <span class="badge status-progress" style="font-size: 11px;">ACTIVE — reproduce (2): A–B + GCC · outreach-anchor (3): RLCP + 2 Hore-2026</span></h3>
   <div class="card">
     <p class="small"><strong>Essential before sending Hore/Gibbs cold-emails.</strong> These are the papers Phase 0 reproduces.</p>
     <ul>
@@ -585,7 +585,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
       <li id="lit-rlcp" class="xref-target"><strong>Hore &amp; Barber RLCP (arXiv:2310.07850)</strong> — <em>"Conformal prediction with local weights"</em>. Repo: <a href="https://github.com/rohanhore/RLCP">github.com/rohanhore/RLCP</a>. <strong>The Phase 0 anchor for Hore outreach.</strong> Use this, NOT 2305.12616, when emailing Hore — anchor on his own work.</li>
       <li id="lit-hore-2602" class="xref-target"><strong>Hore &amp; Ramdas 2026 (arXiv:2602.06267)</strong> — <em>"Conformal changepoint localization"</em>. Recent Hore first-author paper with Ramdas. Reference in Hore cold-email as evidence of current line.</li>
       <li id="lit-hore-2605" class="xref-target"><strong>Hore &amp; Ramdas 2026 (arXiv:2605.21627)</strong> — <em>"Distribution-free root cause analysis"</em>. Second 2026 Hore+Ramdas paper.</li>
-      <li id="lit-angelopoulos-intro" class="xref-target"><strong>Angelopoulos &amp; Bates 2022 (arXiv:2107.07511)</strong> — <em>"A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"</em>. Tutorial that establishes conformal vocabulary in ~50 pages. Read first in Phase 0 Wk 2.</li>
+      <li id="lit-angelopoulos-intro" class="xref-target"><strong>Angelopoulos &amp; Bates 2022 (arXiv:2107.07511)</strong> — <em>"A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"</em>. Tutorial that establishes conformal vocabulary in ~50 pages. Read first, in Phase 0 Week 1.</li>
       <li id="lit-lei-candes-2021" class="xref-target"><strong>Lei &amp; Candès 2021 (arXiv:2006.06138)</strong> — <em>"Conformal Inference of Counterfactuals and Individual Treatment Effects"</em>. JRSS-B 2021. Foundational conformal-causal paper. Referenced when Phase 1 bends toward causal.</li>
       <li id="lit-hines-eif" class="xref-target"><strong>Hines, Dukes, Diaz-Ordaz, Vansteelandt 2022 (arXiv:2107.00681)</strong> — <em>"Demystifying Statistical Learning Based on Efficient Influence Functions"</em>. Pedagogical EIF derivation. For when math arrives (post MATH 447 Feb 2027) and Phase 1 bends to conformal-causal.</li>
     </ul>
@@ -707,7 +707,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
   <h3 id="stu-12-9-r-python-tooling-conformal-first">9. R / Python tooling (conformal-first)</h3>
   <div class="card">
     <ul>
-      <li><strong>conditionalconformal</strong> (Python, pip) — Gibbs-Cherian-Candès canonical implementation. <code>pip install conditionalconformal</code>. Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a>. <strong>Phase 0 substrate.</strong></li>
+      <li><strong>conditionalconformal</strong> (Python, pip — note: the pip name has NO hyphen; the repo does) — Gibbs-Cherian-Candès canonical implementation. <code>pip install conditionalconformal</code>. Repo: <a href="https://github.com/jjcherian/conditional-conformal">github.com/jjcherian/conditional-conformal</a>. <strong>Phase 0 substrate.</strong></li>
       <li><strong>crepes</strong> (Python) — Henrik Boström. <a href="https://github.com/henrikbostrom/crepes">github.com/henrikbostrom/crepes</a>. General-purpose conformal regression + classification.</li>
       <li><strong>crepes-weighted</strong> (Python) — Predict-IDLab. Weighted-conformal extension. Useful for ITE later.</li>
       <li><strong>MAPIE</strong> (Python) — Scikit-learn-API-compatible conformal library. Production-grade. <a href="https://github.com/scikit-learn-contrib/MAPIE">github.com/scikit-learn-contrib/MAPIE</a>.</li>
@@ -814,7 +814,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
   <h3 id="stu-14-how-to-use-this-list">How to use this list</h3>
   <div class="alert">
     <strong>Recommended sequence for summer 2026 (per OPERATIVE pivot):</strong><br>
-    (1) Section 1 — <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> + <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès 2305.12616</a> + <a href="#lit-rlcp" class="xref">Hore RLCP</a> + Hore 2026 papers (<a href="#lit-hore-2602" class="xref">2602.06267</a>, <a href="#lit-hore-2605" class="xref">2605.21627</a>) by mid-Jul 2026 (Phase 0 anchors). · (2) Section 5 — <strong><a href="#lit-abbott" class="xref">Abbott</a> Ch 1-8 by end Aug 2026 (Lever 1, DOMINANT);</strong> <a href="#lit-rudin" class="xref">Rudin</a> Ch 1-4 by Sep 2026. · (3) Section 3 — re-read TARGET'S OWN recent paper before drafting cold-email (NOT another author's paper from the same lab). · (4) Section 8 — pick 2-3 frontier conformal-causal papers per month from Q3 2026 to track the field.
+    (1) Section 1 — <a href="#lit-angelopoulos-intro" class="xref">Angelopoulos-Bates intro</a> + <a href="#lit-gcc-2305" class="xref">Gibbs-Cherian-Candès 2305.12616</a> + <a href="#lit-rlcp" class="xref">Hore RLCP</a> + Hore 2026 papers (<a href="#lit-hore-2602" class="xref">2602.06267</a>, <a href="#lit-hore-2605" class="xref">2605.21627</a>) by mid-Jul 2026 (Phase 0 anchors). · (2) Section 5 — <strong><a href="#lit-eccles" class="xref">Eccles</a> → <a href="#lit-abbott" class="xref">Abbott</a> → <a href="#lit-pugh" class="xref">Pugh</a> (the analysis spine) over the summer (Lever 1, DOMINANT);</strong> <a href="#lit-rudin" class="xref">Rudin</a> is a later 2nd pass / MATH 447. · (3) Section 3 — re-read TARGET'S OWN recent paper before drafting cold-email (NOT another author's paper from the same lab). · (4) Section 8 — pick 2-3 frontier conformal-causal papers per month from Q3 2026 to track the field.
     <br><br>
     <strong>Sections 4, 6, 7 (Hernán-Robins, Casella-Berger, ESL/ISL, Wasserman) are REFERENCES,</strong> NOT active reading for summer 2026. Phase 0 doesn't need DR/MLE/semiparametric theory. Phase 1 bend toward conformal-causal in 2027 will pull from Section 4 (H-R Ch 1-4 + 12) THEN — premature now. Section 6 reading lives inside MATH 447 (Feb 2027) and MSc coursework (2028-29).
     <br><br>

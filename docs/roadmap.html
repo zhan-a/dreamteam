@@ -521,8 +521,8 @@ h2[id],h3[id]{scroll-margin-top:130px}
   <table>
     <thead><tr><th style="width:170px;">Step</th><th>What</th><th style="width:80px;">Ref repo?</th></tr></thead>
     <tbody>
-      <tr><td><strong>Read (3 passes)</strong></td><td>Skim → careful + figures → line-by-line math; re-derive the coverage theorem. Gate: a closed-paper one-page summary from memory.</td><td>❌</td></tr>
-      <tr><td><strong>Spec, then code cold</strong></td><td>Pseudocode from the paper, your own directory layout; implement with numpy/scipy/cvxpy/sklearn only. Gate: your version runs end-to-end.</td><td>❌</td></tr>
+      <tr><td><strong>Read (3 passes)</strong></td><td>Skim → careful + figures → line-by-line math; re-derive the marginal coverage theorem (A–B App. D) and state GCC Thm 1 (its conditional generalization). Gate: the closed-paper <code>paper-sheet.md</code> one-pager from memory.</td><td>❌</td></tr>
+      <tr><td><strong>Spec, then code cold</strong></td><td>Pseudocode from the paper, your own directory layout; implement the 3 core functions (<code>setup_cvx_problem</code> · <code>predict</code> · <code>estimate_coverage</code>) with numpy/scipy/cvxpy/sklearn only. Gate: your version runs end-to-end.</td><td>❌</td></tr>
       <tr><td><strong>Sanity runs</strong></td><td>Overfit one tiny batch; predict each plot's shape before running; reproduce the group-coverage figure within ±0.02.</td><td>❌</td></tr>
       <tr><td><strong>Reconcile</strong></td><td>Now open their repo. Diff outputs on the same seed; log every &gt;0.02 gap with its cause. This log is the cold-email artifact.</td><td>✅</td></tr>
       <tr><td><strong>Extend + report</strong></td><td>Two pre-registered extensions; write it up in reproducibility-report format.</td><td>✅</td></tr>
