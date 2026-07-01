@@ -380,6 +380,340 @@
   }
 
 
+/* ---- Daily rhythm: vertical time-block timeline (replaces the old 7-col table) ---- */
+.rhythm { border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--bg-2); margin-bottom:14px; }
+.rh-row { display:flex; align-items:flex-start; gap:14px; padding:9px 14px; border-bottom:1px solid var(--border); border-left:4px solid transparent; }
+.rh-row:last-child { border-bottom:none; }
+.rh-time { flex:none; width:104px; font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--fg-dim); padding-top:1px; }
+.rh-act { flex:1; font-size:14px; }
+.rh-deep { border-left-color:var(--accent); }
+.rh-work { border-left-color:var(--info); }
+.rh-after { border-left-color:var(--warn); }
+.rh-eve { border-left-color:var(--accent-2); }
+.rh-rest { background:var(--bg-soft); }
+.rh-rest .rh-act, .rh-sleep .rh-act { color:var(--fg-dim); }
+.rh-sleep { background:var(--bg-3); }
+.rh-week { display:flex; flex-wrap:wrap; gap:6px; }
+.rh-day { font-size:12.5px; padding:3px 9px; border-radius:8px; background:var(--bg-3); border:1px solid var(--border); white-space:nowrap; }
+.rh-day b { color:var(--fg-dimmer); font-weight:700; margin-right:4px; }
+.rh-day.gym { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+.rh-day.kozha { background:var(--warn-soft); border-color:var(--warn); color:var(--warn); }
+.rh-day.light { background:var(--ok-soft); border-color:var(--ok); color:var(--ok); }
+.rh-day.gym b, .rh-day.kozha b, .rh-day.light b { color:inherit; opacity:.65; }
+/* ============================================================
+   TRACK-CODED TIMELINE — Lookahead (Summer 2026) only.
+   All colours via existing theme vars -> light + dark safe.
+   Does NOT redefine .card/.badge/.checkbox-row/.alert/details.
+   ============================================================ */
+
+/* ---- per-track accent variables (mapped onto existing theme vars) ---- */
+.tl-scope {
+  --tk-analysis: var(--accent);       /* Lever-1 / real analysis = binding apex gate */
+  --tk-analysis-soft: var(--accent-soft);
+  --tk-phase0: var(--accent-2);       /* Phase-0 conformal artifact */
+  --tk-phase0-soft: var(--accent-soft);
+  --tk-mt1173: var(--info);           /* MT1173 exam track */
+  --tk-mt1173-soft: var(--info-soft);
+  --tk-stats: var(--ok);              /* Casella-Berger / Axler / ST2133 feed */
+  --tk-stats-soft: var(--ok-soft);
+  --tk-outreach: var(--warn);         /* letters / cold-email / admin */
+  --tk-outreach-soft: var(--warn-soft);
+  --tk-life: var(--fg-dim);           /* driving / life — lowest stakes */
+  --tk-life-soft: var(--bg-3);
+}
+
+/* ---- track chip ---- */
+.tk {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px 1px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.tk::before {                          /* leading dot in the track colour */
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.tk-analysis { color: var(--tk-analysis); background: var(--tk-analysis-soft); border-color: var(--tk-analysis); }
+.tk-phase0   { color: var(--tk-phase0);   background: var(--tk-phase0-soft);   border-color: var(--tk-phase0); }
+.tk-mt1173   { color: var(--tk-mt1173);   background: var(--tk-mt1173-soft);   border-color: var(--tk-mt1173); }
+.tk-stats    { color: var(--tk-stats);    background: var(--tk-stats-soft);    border-color: var(--tk-stats); }
+.tk-outreach { color: var(--tk-outreach); background: var(--tk-outreach-soft); border-color: var(--tk-outreach); }
+.tk-life     { color: var(--tk-life);     background: var(--tk-life-soft);     border-color: var(--border-strong); }
+
+/* ---- WHEN badge (.wb) — reusable, theme-var based.
+   GRAFT 1 (from B): fixed min-width so when/pace chips align into a column. ---- */
+.wb {
+  display: inline-block;
+  min-width: 96px;
+  text-align: center;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--bg-3);
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
+}
+.wb-morning   { background: var(--accent-soft); color: var(--accent);   border-color: var(--accent); }
+.wb-afternoon { background: var(--info-soft);   color: var(--info);     border-color: var(--info); }
+.wb-evening   { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-2); }
+.wb-weekend   { background: var(--warn-soft);   color: var(--warn);     border-color: var(--warn); }
+.wb-friday    { background: var(--bg-3);        color: var(--fg-dim);   border-color: var(--border-strong); }
+.wb-anytime   { background: var(--bg-3);        color: var(--fg-dimmer); border-color: var(--border); }
+
+/* ---- PACE badge (.pb) — reusable, theme-var based. GRAFT 1: same min-width alignment ---- */
+.pb {
+  display: inline-block;
+  min-width: 96px;
+  text-align: center;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.pb-push   { background: var(--ok-soft);     color: var(--ok);     border-color: var(--ok); }
+.pb-steady { background: var(--warn-soft);   color: var(--warn);   border-color: var(--warn); }
+.pb-timed  { background: var(--urgent-soft); color: var(--urgent); border-color: var(--urgent); }
+.pb-defer  { background: var(--bg-3);        color: var(--fg-dimmer); border-color: var(--border); }
+
+/* ---- badge row inside a task. NOTE: kept INSIDE task-content > div:first-child
+   (see GRAFT 4) so the existing .done line-through rule at the source line
+   ".checkbox-row.done .task-content > div:first-child" keeps striking the
+   task text + badges together and is NOT regressed. ---- */
+.task-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+/* ---- week CARD: <details> styled as a track-bordered card ---- */
+.tl-scope details.week-card {
+  position: relative;
+  padding: 0;                          /* header/body manage their own padding */
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--track, var(--border-strong));
+  border-radius: 8px;
+  background: var(--bg-2);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.tl-scope details.week-card[open] { box-shadow: var(--shadow-md); }
+
+/* per-week dominant-track colour */
+.wk-analysis { --track: var(--tk-analysis); }
+.wk-phase0   { --track: var(--tk-phase0); }
+.wk-mt1173   { --track: var(--tk-mt1173); }
+.wk-stats    { --track: var(--tk-stats); }
+.wk-outreach { --track: var(--tk-outreach); }
+.wk-life     { --track: var(--tk-life); }
+
+/* ---- the clickable header (summary) ---- */
+.tl-scope details.week-card > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  user-select: none;
+}
+.tl-scope details.week-card > summary::-webkit-details-marker { display: none; }
+.tl-scope details.week-card > summary::marker { content: ""; }
+.tl-scope details.week-card[open] > summary {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+.wk-headline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.wk-chevron {
+  color: var(--fg-dimmer);
+  font-size: 12px;
+  transition: transform 0.15s;
+  flex: none;
+}
+.tl-scope details.week-card[open] .wk-chevron { transform: rotate(90deg); }
+.wk-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--fg);
+}
+.wk-theme {
+  font-size: 13px;
+  color: var(--fg-dim);
+  font-weight: 400;
+}
+/* GRAFT 2 (from B): static, honest "N tasks" count chip */
+.wk-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-dim);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 8px;
+  white-space: nowrap;
+  flex: none;
+}
+/* status chip on the right of the header */
+.wk-status {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--track, var(--bg-3));
+  color: var(--bg-2);
+  flex: none;
+}
+.wk-status.muted { background: var(--bg-3); color: var(--fg-dim); margin-left: auto; }
+
+/* subtle track-mix indicator: row of small track dots */
+.wk-track-strip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.wk-track-strip .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex: none;
+  opacity: 0.9;
+}
+.wk-track-strip .dot.analysis { background: var(--tk-analysis); }
+.wk-track-strip .dot.phase0   { background: var(--tk-phase0); }
+.wk-track-strip .dot.mt1173   { background: var(--tk-mt1173); }
+.wk-track-strip .dot.stats    { background: var(--tk-stats); }
+.wk-track-strip .dot.outreach { background: var(--tk-outreach); }
+.wk-track-strip .dot.life     { background: var(--tk-life); }
+.wk-track-strip .strip-label {
+  font-size: 11px;
+  color: var(--fg-dimmer);
+  margin-left: 2px;
+}
+
+/* ---- body: the checkbox-rows live here, restyled padding only ---- */
+.tl-scope details.week-card .week-body { padding: 4px 16px 8px 16px; }
+.tl-scope details.week-card .week-body .checkbox-row:last-child { border-bottom: none; }
+
+/* ---- legend card grid ---- */
+.tl-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin: 4px 0;
+}
+.tl-legend .lg-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tl-group {
+  font-size: 11px;
+  color: var(--fg-dimmer);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 8px 0 4px 0;
+}
+
+/* ============================================================
+   GRAFT 3 (from C): CSS-ONLY track filter.
+   Hidden radio inputs + <label> chips drive sibling .week-card
+   visibility via :has() on the wrapper. Purely additive; the
+   existing checkbox/progress/persistence JS never uses :has(),
+   so this cannot touch those listeners.
+   Graceful no-op fallback: where :has() is unsupported, all
+   weeks simply stay visible (no filtering, nothing breaks).
+   ============================================================ */
+.tl-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 10px 0 12px 0;
+}
+.tl-filter .flt-label {
+  font-size: 11px;
+  color: var(--fg-dimmer);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 2px;
+}
+/* the radios are visually hidden but still focusable */
+.tl-scope input.tl-flt {
+  position: absolute;
+  opacity: 0;
+  width: 1px; height: 1px;
+  pointer-events: none;
+}
+.tl-scope label.flt-chip {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 11px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-3);
+  color: var(--fg-dim);
+  user-select: none;
+}
+.tl-scope label.flt-chip:hover { background: var(--bg-soft); color: var(--fg); }
+/* selected-chip highlight, keyed off the matching radio */
+.tl-scope:has(#flt-all:checked)      label[for="flt-all"],
+.tl-scope:has(#flt-analysis:checked) label[for="flt-analysis"],
+.tl-scope:has(#flt-phase0:checked)   label[for="flt-phase0"],
+.tl-scope:has(#flt-mt1173:checked)   label[for="flt-mt1173"],
+.tl-scope:has(#flt-stats:checked)    label[for="flt-stats"],
+.tl-scope:has(#flt-outreach:checked) label[for="flt-outreach"],
+.tl-scope:has(#flt-life:checked)     label[for="flt-life"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+/* when a track filter is active, hide week-cards that lack that track.
+   data-tracks lists every track present in the week; the substring match
+   keeps a week visible only if it contains the selected track token. */
+.tl-scope:has(#flt-analysis:checked) details.week-card:not([data-tracks~="analysis"]),
+.tl-scope:has(#flt-phase0:checked)   details.week-card:not([data-tracks~="phase0"]),
+.tl-scope:has(#flt-mt1173:checked)   details.week-card:not([data-tracks~="mt1173"]),
+.tl-scope:has(#flt-stats:checked)    details.week-card:not([data-tracks~="stats"]),
+.tl-scope:has(#flt-outreach:checked) details.week-card:not([data-tracks~="outreach"]),
+.tl-scope:has(#flt-life:checked)     details.week-card:not([data-tracks~="life"]) {
+  display: none;
+}
+/* weekend WHEN distinct from steady PACE (both were amber) -> pink, light+dark safe */
+.wb-weekend { background:#fce7f3; color:#be185d; border-color:#db2777; }
+body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777; }
+/* live week-card highlight ring */
+.tl-scope details.week-card.is-current { box-shadow:0 0 0 2px var(--accent); scroll-margin-top:120px; }
+  
+
+.prog-filters{display:flex;flex-direction:column;gap:8px;margin:10px 0 14px}
+.pf-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pf-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--fg-dimmer,#8a94a3);width:72px;flex-shrink:0}
+.pf{cursor:pointer;border:1px solid var(--border-strong,#3a424e);border-radius:16px;padding:4px 12px;font-size:12.5px;font-weight:600;background:var(--bg-2,#171c23);color:var(--fg,#e6edf3)}
+.pf:hover{background:var(--bg-3,#20262f)}
+.pf.active{background:var(--accent,#2954c8);color:#fff;border-color:var(--accent,#2954c8)}
+#prog-table td{vertical-align:top}
+#prog-count{color:var(--fg-dim,#9aa7b8);font-size:12.5px;margin:0 0 10px}
+
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -410,10 +744,10 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="rhythm.html" class="">Daily rhythm</a><a href="tasks.html" class="">Tasks</a><a href="programs.html" class="">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="cur">Reading</a><a href="gre.html" class="">GRE</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="programs.html" class="">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="cur">Reading</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Reading</div><a href="#rea-1-literature-reading-list-references" class="">Literature — Reading List + References</a><a href="#lit-roadmap" class="h3">0. Reading roadmap by timeline (what to read WHEN)</a><a href="#rea-3-0b-verified-study-plan-textbook-picks-2026-0" class="h3">0b. Verified study plan + textbook picks (2026-06-15) OPTIMI</a><a href="#rea-4-1-phase-0-paper-anchors-conformal-core-repro" class="h3">1. Phase 0 paper anchors (conformal-core; reproduce + extend</a><a href="#rea-5-2-conformal-frontier-papers-distribution-fre" class="h3">2. Conformal frontier papers (distribution-free inference + </a><a href="#rea-6-3-cold-email-faculty-s-recent-work-anchor-pa" class="h3">3. Cold-email faculty's recent work (anchor papers for each)</a><a href="#rea-7-4-classical-causal-inference-textbooks-refer" class="h3">4. Classical causal inference textbooks REFERENCE — 2027+</a><a href="#rea-8-5-real-analysis-math-foundations-textbooks-a" class="h3">5. Real analysis + math foundations textbooks ABBOTT + A&amp</a><a href="#rea-9-6-statistical-inference-foundations-textbook" class="h3">6. Statistical inference foundations textbooks CASELLA-BERGE</a><a href="#rea-10-7-ml-statistical-learning-textbooks-referenc" class="h3">7. ML / statistical learning textbooks REFERENCE — PhD cours</a><a href="#rea-11-8-frontier-2024-2026-papers-worth-tracking-c" class="h3">8. Frontier 2024–2026 papers worth tracking (conformal-causa</a><a href="#rea-12-9-r-python-tooling-conformal-first" class="h3">9. R / Python tooling (conformal-first)</a><a href="#lit-character" class="h3">10. Character / self-engineering reading REVISED 2026-06-08 </a><a href="#rea-14-how-to-use-this-list" class="h3">How to use this list</a></div>
+<div class="site-subnav"><div class="lbl">Reading</div><a href="#rea-1-literature-reading-list-references" class="">Literature — Reading List + References</a><a href="#lit-roadmap" class="h3">Reading by timeline (what to read when)</a><a href="#rea-3-study-plan-textbook-picks" class="h3">Study plan + textbook picks</a><a href="#rea-4-1-phase-0-paper-anchors-conformal-core-repro" class="h3">1. Phase 0 paper anchors (conformal-core; reproduce + extend</a><a href="#rea-5-2-conformal-frontier-papers-distribution-fre" class="h3">2. Conformal frontier papers (distribution-free inference + </a><a href="#rea-6-3-cold-email-faculty-s-recent-work-anchor-pa" class="h3">3. Cold-email faculty's recent work (anchor papers for each)</a><a href="#rea-7-4-classical-causal-inference-textbooks-refer" class="h3">4. Classical causal inference textbooks REFERENCE — 2027+</a><a href="#rea-8-5-real-analysis-math-foundations-textbooks-a" class="h3">5. Real analysis + math foundations textbooks ABBOTT + A&amp</a><a href="#rea-9-6-statistical-inference-foundations-textbook" class="h3">6. Statistical inference foundations textbooks CASELLA-BERGE</a><a href="#rea-10-7-ml-statistical-learning-textbooks-referenc" class="h3">7. ML / statistical learning textbooks REFERENCE — PhD cours</a><a href="#rea-11-8-frontier-2024-2026-papers-worth-tracking-c" class="h3">8. Frontier 2024–2026 papers worth tracking (conformal-causa</a><a href="#rea-12-9-r-python-tooling-conformal-first" class="h3">9. R / Python tooling (conformal-first)</a><a href="#lit-character" class="h3">10. Character / self-engineering reading REVISED 2026-06-08 </a><a href="#rea-14-how-to-use-this-list" class="h3">How to use this list</a></div>
 <div class="site-main"><section class="page-section" id="literature">
 
   <h2 id="rea-1-literature-reading-list-references">Literature — Reading List + References</h2>
@@ -466,10 +800,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
     <strong>Why so light?</strong> Apex Stats committees gate on real-analysis transcript + calibrated letter, NOT self-studied textbook count. See <a href="#lit-roadmap" class="xref">§0 Reading roadmap</a> for the full phase-by-phase breakdown.
   </p>
 
-  <h3 id="lit-roadmap">0. Reading roadmap by timeline (what to read WHEN)</h3>
-  <div class="alert info">
-    <strong>Read this first.</strong> Apex Stats committees gate on <strong>transcript credentials (real analysis grade) + research letter</strong> — NOT on self-studied textbook count. Active reading is short; reference shelf is long. Don't sunk-cost-read books that aren't load-bearing for the current phase.
-  </div>
+  <h3 id="lit-roadmap">Reading by timeline (what to read when)</h3>
   <table>
     <thead>
       <tr>
@@ -557,12 +888,10 @@ h2[id],h3[id]{scroll-margin-top:130px}
     </tbody>
   </table>
   <p style="color: var(--fg-dim); font-size: 13px;">
-    <strong>What NOT to read prematurely:</strong> Tsiatis 2006, vdV Asymptotic Stats, Lehmann-Romano, Wainwright, vdV-Wellner, Murphy Vol 2, Pearl's <em>Causality</em> (heavy DAG reference) — all PhD-coursework or post-real-analysis. Reading them now produces low retention with high opportunity cost.<br>
-    <strong>What's load-bearing for apex Stats admit:</strong> Rudin Ch 1-7 + A-grade transcript line + a calibrated research letter — self-studied stats foundations aren't the apex <em>gate</em> (real analysis is), BUT Casella-Berger IS load-bearing for your ST2133/34 course grades (see §0b).<br>
-    <strong>The §0–§9 sections below are organized by topic, not timeline.</strong> Use this §0 to know <em>when</em> to consult them.
+    <strong>Now:</strong> Rudin Ch 1–7 (real analysis); Casella-Berger for the ST2133/34 grade. <strong>Not yet (PhD-level, after real analysis):</strong> Tsiatis, van der Vaart, Lehmann-Romano, Wainwright, Murphy Vol 2, Pearl. Sections below are grouped by topic, not date.
   </p>
 
-  <h3 id="rea-3-0b-verified-study-plan-textbook-picks-2026-0">0b. Verified study plan + textbook picks (2026-06-15) <span class="badge status-progress" style="font-size: 11px;">OPTIMIZED</span></h3>
+  <h3 id="rea-3-study-plan-textbook-picks">Study plan + textbook picks</h3>
   <div class="alert info">
     <strong>Texts (merit-only — cost is NOT a criterion, full library access; agent-verified vs the actual UoL syllabi):</strong>
     <ul style="margin:6px 0;">
@@ -826,204 +1155,14 @@ h2[id],h3[id]{scroll-margin-top:130px}
 </div>
 </div>
 <script>
-  // Tab navigation
-  const tabs = document.querySelectorAll('aside nav button');
-  const sections = document.querySelectorAll('main section.tab');
-  function switchTab(tabId) {
-    tabs.forEach(b => b.classList.remove('active'));
-    sections.forEach(s => s.classList.remove('active'));
-    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
-    if (btn) btn.classList.add('active');
-    const sec = document.getElementById(tabId);
-    if (sec) sec.classList.add('active');
-  }
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-  });
-
-  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a[href^="#"]');
-    if (!link) return;
-    const href = link.getAttribute('href');
-    if (href === '#' || href.length < 2) return;
-    const targetId = href.substring(1);
-    const targetEl = document.getElementById(targetId);
-    if (!targetEl) return;
-    const targetTab = targetEl.closest('section.tab');
-    if (!targetTab) return;
-    e.preventDefault();
-    if (!targetTab.classList.contains('active')) {
-      switchTab(targetTab.id);
-    }
-    setTimeout(() => {
-      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Brief highlight on the target
-      targetEl.classList.add('xref-target');
-      history.replaceState(null, '', '#' + targetId);
-    }, 30);
-  });
-
-  // Honor initial #hash on page load
-  if (location.hash && location.hash.length > 1) {
-    const targetEl = document.getElementById(location.hash.substring(1));
-    if (targetEl) {
-      const targetTab = targetEl.closest('section.tab');
-      if (targetTab) {
-        switchTab(targetTab.id);
-        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
-      }
-    }
-  }
-
-  // Theme toggle
-  const themeBtn = document.getElementById('theme-toggle');
-  function applyTheme() {
-    const dark = localStorage.getItem('dt-theme') === 'dark';
-    document.body.classList.toggle('dark', dark);
-    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
-  }
-  themeBtn.addEventListener('click', () => {
-    const cur = localStorage.getItem('dt-theme') || 'light';
-    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
-    applyTheme();
-  });
-  applyTheme();
-
-  // Checkbox state persistence
-  function loadCheckboxes() {
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (!id) return;
-      const stored = localStorage.getItem('dt-task-' + id) === 'true';
-      cb.checked = stored;
-      if (row && stored) row.classList.add('done');
-    });
-    updateProgress();
-  }
-  document.addEventListener('change', (e) => {
-    if (e.target.type === 'checkbox') {
-      const cb = e.target;
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (!id) return;
-      localStorage.setItem('dt-task-' + id, cb.checked);
-      if (row) row.classList.toggle('done', cb.checked);
-      updateProgress();
-    }
-  });
-
-  function updateProgress() {
-    const all = document.querySelectorAll('input[type="checkbox"]').length;
-    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
-    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
-  }
-
-  // Reset all checkboxes
-  document.getElementById('reset-btn').addEventListener('click', () => {
-    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (id) localStorage.removeItem('dt-task-' + id);
-      cb.checked = false;
-      if (row) row.classList.remove('done');
-    });
-    updateProgress();
-  });
-
-  // Current week tasks
-  function renderCurrentWeek() {
-    if(!document.getElementById('week-tasks'))return;
-    const banner = document.getElementById('week-tasks');
-    if (!banner) return;
-    const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
-    if (!cards.length) return;
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const P = function(d){ const a=d.split('-'); return new Date(+a[0], +a[1]-1, +a[2]); };
-    let match=null, status='current';
-    for (const c of cards){ if (today>=P(c.dataset.start) && today<=P(c.dataset.end)){ match=c; status='current'; break; } }
-    if (!match){
-      if (today < P(cards[0].dataset.start)) { match=cards[0]; status='upcoming'; }
-      else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
-      else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
-    }
-    cards.forEach(function(c){ c.classList.remove('is-current'); if (c.id==='wk-current') c.removeAttribute('id'); });
-    match.id = 'wk-current'; match.classList.add('is-current'); match.open = true;
-    const label = (match.querySelector('.wk-label')||{}).textContent || '';
-    const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
-    const lead = {current:'📍 This week', upcoming:'⏳ Summer starts Jun 17 — first week', wrap:'✅ Summer plan complete — last week', next:'⏭ Next up'}[status] || 'This week';
-    banner.innerHTML = '<strong>' + lead + '</strong> · ' + label + ' ' + theme + ' · <a href="#wk-current">jump to this week’s tasks ↓</a>';
-  }
-
-  // Kozha funding table: sort + filter
-  (function() {
-    const table = document.getElementById('kozha-table');
-    if (!table) return;
-    const tbody = table.querySelector('tbody');
-    const headers = table.querySelectorAll('th[data-sort-key]');
-    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
-    let sortState = { key: 'deadline', dir: 'asc' };
-
-    function applySort() {
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
-      rows.sort((a, b) => {
-        const av = a.dataset[sortState.key];
-        const bv = b.dataset[sortState.key];
-        let comp;
-        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
-        else comp = String(av).localeCompare(String(bv));
-        return sortState.dir === 'asc' ? comp : -comp;
-      });
-      rows.forEach(r => tbody.appendChild(r));
-      headers.forEach(th => {
-        const k = th.dataset.sortKey;
-        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
-        th.textContent = labels[k] + arrow;
-      });
-    }
-
-    headers.forEach(th => {
-      th.addEventListener('click', () => {
-        const k = th.dataset.sortKey;
-        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
-        else { sortState.key = k; sortState.dir = 'asc'; }
-        applySort();
-      });
-    });
-
-    document.querySelectorAll('.kozha-filter').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const lead = btn.dataset.lead;
-        let visible = 0;
-        tbody.querySelectorAll('tr').forEach(row => {
-          const rowLead = row.dataset.lead;
-          let show;
-          if (lead === 'all') show = true;
-          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
-          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
-          else if (lead === 'Either') show = rowLead === 'Either';
-          row.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
-        if (allBtn) allBtn.textContent = 'All (38)';
-        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
-      });
-    });
-
-    applySort();
-  })();
-
-  // Init
-  renderCurrentWeek();
-  loadCheckboxes();
+(function(){var tbl=document.getElementById('prog-table');if(!tbl)return;
+var sel={type:'all',region:'all',funding:'all'},cnt=document.getElementById('prog-count');
+function apply(){var n=0,rows=tbl.querySelectorAll('tbody tr');rows.forEach(function(tr){
+ var ok=(sel.type=='all'||tr.dataset.type==sel.type)&&(sel.region=='all'||tr.dataset.region==sel.region)&&(sel.funding=='all'||tr.dataset.funding==sel.funding);
+ tr.style.display=ok?'':'none';if(ok)n++;});if(cnt)cnt.textContent=n+' of '+rows.length+' programs';}
+document.querySelectorAll('.pf').forEach(function(b){b.addEventListener('click',function(){
+ sel[b.dataset.f]=b.dataset.v;document.querySelectorAll('.pf[data-f="'+b.dataset.f+'"]').forEach(function(x){x.classList.remove('active')});
+ b.classList.add('active');apply();});});apply();})();
 
 
 (function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;

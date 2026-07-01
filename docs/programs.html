@@ -380,6 +380,340 @@
   }
 
 
+/* ---- Daily rhythm: vertical time-block timeline (replaces the old 7-col table) ---- */
+.rhythm { border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--bg-2); margin-bottom:14px; }
+.rh-row { display:flex; align-items:flex-start; gap:14px; padding:9px 14px; border-bottom:1px solid var(--border); border-left:4px solid transparent; }
+.rh-row:last-child { border-bottom:none; }
+.rh-time { flex:none; width:104px; font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--fg-dim); padding-top:1px; }
+.rh-act { flex:1; font-size:14px; }
+.rh-deep { border-left-color:var(--accent); }
+.rh-work { border-left-color:var(--info); }
+.rh-after { border-left-color:var(--warn); }
+.rh-eve { border-left-color:var(--accent-2); }
+.rh-rest { background:var(--bg-soft); }
+.rh-rest .rh-act, .rh-sleep .rh-act { color:var(--fg-dim); }
+.rh-sleep { background:var(--bg-3); }
+.rh-week { display:flex; flex-wrap:wrap; gap:6px; }
+.rh-day { font-size:12.5px; padding:3px 9px; border-radius:8px; background:var(--bg-3); border:1px solid var(--border); white-space:nowrap; }
+.rh-day b { color:var(--fg-dimmer); font-weight:700; margin-right:4px; }
+.rh-day.gym { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+.rh-day.kozha { background:var(--warn-soft); border-color:var(--warn); color:var(--warn); }
+.rh-day.light { background:var(--ok-soft); border-color:var(--ok); color:var(--ok); }
+.rh-day.gym b, .rh-day.kozha b, .rh-day.light b { color:inherit; opacity:.65; }
+/* ============================================================
+   TRACK-CODED TIMELINE — Lookahead (Summer 2026) only.
+   All colours via existing theme vars -> light + dark safe.
+   Does NOT redefine .card/.badge/.checkbox-row/.alert/details.
+   ============================================================ */
+
+/* ---- per-track accent variables (mapped onto existing theme vars) ---- */
+.tl-scope {
+  --tk-analysis: var(--accent);       /* Lever-1 / real analysis = binding apex gate */
+  --tk-analysis-soft: var(--accent-soft);
+  --tk-phase0: var(--accent-2);       /* Phase-0 conformal artifact */
+  --tk-phase0-soft: var(--accent-soft);
+  --tk-mt1173: var(--info);           /* MT1173 exam track */
+  --tk-mt1173-soft: var(--info-soft);
+  --tk-stats: var(--ok);              /* Casella-Berger / Axler / ST2133 feed */
+  --tk-stats-soft: var(--ok-soft);
+  --tk-outreach: var(--warn);         /* letters / cold-email / admin */
+  --tk-outreach-soft: var(--warn-soft);
+  --tk-life: var(--fg-dim);           /* driving / life — lowest stakes */
+  --tk-life-soft: var(--bg-3);
+}
+
+/* ---- track chip ---- */
+.tk {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px 1px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.tk::before {                          /* leading dot in the track colour */
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.tk-analysis { color: var(--tk-analysis); background: var(--tk-analysis-soft); border-color: var(--tk-analysis); }
+.tk-phase0   { color: var(--tk-phase0);   background: var(--tk-phase0-soft);   border-color: var(--tk-phase0); }
+.tk-mt1173   { color: var(--tk-mt1173);   background: var(--tk-mt1173-soft);   border-color: var(--tk-mt1173); }
+.tk-stats    { color: var(--tk-stats);    background: var(--tk-stats-soft);    border-color: var(--tk-stats); }
+.tk-outreach { color: var(--tk-outreach); background: var(--tk-outreach-soft); border-color: var(--tk-outreach); }
+.tk-life     { color: var(--tk-life);     background: var(--tk-life-soft);     border-color: var(--border-strong); }
+
+/* ---- WHEN badge (.wb) — reusable, theme-var based.
+   GRAFT 1 (from B): fixed min-width so when/pace chips align into a column. ---- */
+.wb {
+  display: inline-block;
+  min-width: 96px;
+  text-align: center;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--bg-3);
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
+}
+.wb-morning   { background: var(--accent-soft); color: var(--accent);   border-color: var(--accent); }
+.wb-afternoon { background: var(--info-soft);   color: var(--info);     border-color: var(--info); }
+.wb-evening   { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-2); }
+.wb-weekend   { background: var(--warn-soft);   color: var(--warn);     border-color: var(--warn); }
+.wb-friday    { background: var(--bg-3);        color: var(--fg-dim);   border-color: var(--border-strong); }
+.wb-anytime   { background: var(--bg-3);        color: var(--fg-dimmer); border-color: var(--border); }
+
+/* ---- PACE badge (.pb) — reusable, theme-var based. GRAFT 1: same min-width alignment ---- */
+.pb {
+  display: inline-block;
+  min-width: 96px;
+  text-align: center;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.pb-push   { background: var(--ok-soft);     color: var(--ok);     border-color: var(--ok); }
+.pb-steady { background: var(--warn-soft);   color: var(--warn);   border-color: var(--warn); }
+.pb-timed  { background: var(--urgent-soft); color: var(--urgent); border-color: var(--urgent); }
+.pb-defer  { background: var(--bg-3);        color: var(--fg-dimmer); border-color: var(--border); }
+
+/* ---- badge row inside a task. NOTE: kept INSIDE task-content > div:first-child
+   (see GRAFT 4) so the existing .done line-through rule at the source line
+   ".checkbox-row.done .task-content > div:first-child" keeps striking the
+   task text + badges together and is NOT regressed. ---- */
+.task-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+/* ---- week CARD: <details> styled as a track-bordered card ---- */
+.tl-scope details.week-card {
+  position: relative;
+  padding: 0;                          /* header/body manage their own padding */
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--track, var(--border-strong));
+  border-radius: 8px;
+  background: var(--bg-2);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.tl-scope details.week-card[open] { box-shadow: var(--shadow-md); }
+
+/* per-week dominant-track colour */
+.wk-analysis { --track: var(--tk-analysis); }
+.wk-phase0   { --track: var(--tk-phase0); }
+.wk-mt1173   { --track: var(--tk-mt1173); }
+.wk-stats    { --track: var(--tk-stats); }
+.wk-outreach { --track: var(--tk-outreach); }
+.wk-life     { --track: var(--tk-life); }
+
+/* ---- the clickable header (summary) ---- */
+.tl-scope details.week-card > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  user-select: none;
+}
+.tl-scope details.week-card > summary::-webkit-details-marker { display: none; }
+.tl-scope details.week-card > summary::marker { content: ""; }
+.tl-scope details.week-card[open] > summary {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+.wk-headline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.wk-chevron {
+  color: var(--fg-dimmer);
+  font-size: 12px;
+  transition: transform 0.15s;
+  flex: none;
+}
+.tl-scope details.week-card[open] .wk-chevron { transform: rotate(90deg); }
+.wk-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--fg);
+}
+.wk-theme {
+  font-size: 13px;
+  color: var(--fg-dim);
+  font-weight: 400;
+}
+/* GRAFT 2 (from B): static, honest "N tasks" count chip */
+.wk-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-dim);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 8px;
+  white-space: nowrap;
+  flex: none;
+}
+/* status chip on the right of the header */
+.wk-status {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--track, var(--bg-3));
+  color: var(--bg-2);
+  flex: none;
+}
+.wk-status.muted { background: var(--bg-3); color: var(--fg-dim); margin-left: auto; }
+
+/* subtle track-mix indicator: row of small track dots */
+.wk-track-strip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.wk-track-strip .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex: none;
+  opacity: 0.9;
+}
+.wk-track-strip .dot.analysis { background: var(--tk-analysis); }
+.wk-track-strip .dot.phase0   { background: var(--tk-phase0); }
+.wk-track-strip .dot.mt1173   { background: var(--tk-mt1173); }
+.wk-track-strip .dot.stats    { background: var(--tk-stats); }
+.wk-track-strip .dot.outreach { background: var(--tk-outreach); }
+.wk-track-strip .dot.life     { background: var(--tk-life); }
+.wk-track-strip .strip-label {
+  font-size: 11px;
+  color: var(--fg-dimmer);
+  margin-left: 2px;
+}
+
+/* ---- body: the checkbox-rows live here, restyled padding only ---- */
+.tl-scope details.week-card .week-body { padding: 4px 16px 8px 16px; }
+.tl-scope details.week-card .week-body .checkbox-row:last-child { border-bottom: none; }
+
+/* ---- legend card grid ---- */
+.tl-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin: 4px 0;
+}
+.tl-legend .lg-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tl-group {
+  font-size: 11px;
+  color: var(--fg-dimmer);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 8px 0 4px 0;
+}
+
+/* ============================================================
+   GRAFT 3 (from C): CSS-ONLY track filter.
+   Hidden radio inputs + <label> chips drive sibling .week-card
+   visibility via :has() on the wrapper. Purely additive; the
+   existing checkbox/progress/persistence JS never uses :has(),
+   so this cannot touch those listeners.
+   Graceful no-op fallback: where :has() is unsupported, all
+   weeks simply stay visible (no filtering, nothing breaks).
+   ============================================================ */
+.tl-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 10px 0 12px 0;
+}
+.tl-filter .flt-label {
+  font-size: 11px;
+  color: var(--fg-dimmer);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 2px;
+}
+/* the radios are visually hidden but still focusable */
+.tl-scope input.tl-flt {
+  position: absolute;
+  opacity: 0;
+  width: 1px; height: 1px;
+  pointer-events: none;
+}
+.tl-scope label.flt-chip {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 11px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-3);
+  color: var(--fg-dim);
+  user-select: none;
+}
+.tl-scope label.flt-chip:hover { background: var(--bg-soft); color: var(--fg); }
+/* selected-chip highlight, keyed off the matching radio */
+.tl-scope:has(#flt-all:checked)      label[for="flt-all"],
+.tl-scope:has(#flt-analysis:checked) label[for="flt-analysis"],
+.tl-scope:has(#flt-phase0:checked)   label[for="flt-phase0"],
+.tl-scope:has(#flt-mt1173:checked)   label[for="flt-mt1173"],
+.tl-scope:has(#flt-stats:checked)    label[for="flt-stats"],
+.tl-scope:has(#flt-outreach:checked) label[for="flt-outreach"],
+.tl-scope:has(#flt-life:checked)     label[for="flt-life"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+/* when a track filter is active, hide week-cards that lack that track.
+   data-tracks lists every track present in the week; the substring match
+   keeps a week visible only if it contains the selected track token. */
+.tl-scope:has(#flt-analysis:checked) details.week-card:not([data-tracks~="analysis"]),
+.tl-scope:has(#flt-phase0:checked)   details.week-card:not([data-tracks~="phase0"]),
+.tl-scope:has(#flt-mt1173:checked)   details.week-card:not([data-tracks~="mt1173"]),
+.tl-scope:has(#flt-stats:checked)    details.week-card:not([data-tracks~="stats"]),
+.tl-scope:has(#flt-outreach:checked) details.week-card:not([data-tracks~="outreach"]),
+.tl-scope:has(#flt-life:checked)     details.week-card:not([data-tracks~="life"]) {
+  display: none;
+}
+/* weekend WHEN distinct from steady PACE (both were amber) -> pink, light+dark safe */
+.wb-weekend { background:#fce7f3; color:#be185d; border-color:#db2777; }
+body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777; }
+/* live week-card highlight ring */
+.tl-scope details.week-card.is-current { box-shadow:0 0 0 2px var(--accent); scroll-margin-top:120px; }
+  
+
+.prog-filters{display:flex;flex-direction:column;gap:8px;margin:10px 0 14px}
+.pf-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pf-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--fg-dimmer,#8a94a3);width:72px;flex-shrink:0}
+.pf{cursor:pointer;border:1px solid var(--border-strong,#3a424e);border-radius:16px;padding:4px 12px;font-size:12.5px;font-weight:600;background:var(--bg-2,#171c23);color:var(--fg,#e6edf3)}
+.pf:hover{background:var(--bg-3,#20262f)}
+.pf.active{background:var(--accent,#2954c8);color:#fff;border-color:var(--accent,#2954c8)}
+#prog-table td{vertical-align:top}
+#prog-count{color:var(--fg-dim,#9aa7b8);font-size:12.5px;margin:0 0 10px}
+
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -410,348 +744,92 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="rhythm.html" class="">Daily rhythm</a><a href="tasks.html" class="">Tasks</a><a href="programs.html" class="cur">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="">Reading</a><a href="gre.html" class="">GRE</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="programs.html" class="cur">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="">Reading</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Programs</div><a href="#pro-1-apply-portfolio" class="">Apply Portfolio</a><a href="#pro-2-us-stats-phds-13-primary-track-post-apex-piv" class="h3">US Stats PhDs (13 — primary track post-apex-pivot 2026-05-27</a><a href="#pro-3-swiss-stats-phds-2-apex-adjacent-alternative" class="h3">Swiss Stats PhDs (2 — apex-adjacent alternative, added 2026-</a><a href="#pro-4-or-orfe-ieor-mse-phds-funded-quant-aligned-a" class="h3">OR / ORFE / IEOR / MS&amp;E PhDs (funded, quant-aligned — ad</a><a href="#pro-5-us-bridge-positions-5-7" class="h3">US Bridge Positions (5–7)</a><a href="#pro-6-funded-or-orfe-thesis-msc-bridges-2-added-20" class="h3">Funded OR/ORFE thesis-MSc bridges (2 — added 2026-07-01, rep</a><a href="#pro-7-international-funded-msc-bridge-4-cycle-1-de" class="h3">International Funded MSc bridge (4 — Cycle 1 Dec 2027 deadli</a><a href="#pro-8-mid-tier-us-stats-msc-ta-funding-4-6-added-2" class="h3">Mid-tier US Stats MSc + TA funding (4–6 — added 2026-05-17 p</a><a href="#pro-9-euro-msc-backup-3-plan-c-floor-tuition-free-" class="h3">Euro MSc Backup (3 — Plan C floor · tuition-free / low-net G</a><a href="#pro-10-backup-options-if-any-of-the-above-falls-thr" class="h3">Backup options (if any of the above falls through)</a></div>
+<div class="site-subnav"><div class="lbl">Programs</div><a href="#pro-1-programs" class="">Programs</a></div>
 <div class="site-main"><section class="page-section" id="apply">
 
-  <h2 id="pro-1-apply-portfolio">Apply Portfolio</h2>
-  <p class="tab-subtitle">REVISED 2026-07-01 — field = <strong>statistics + OR/ORFE</strong> (biostat EXCLUDED per user; OR/ORFE added — see the OR/ORFE PhDs block below). Multi-cycle 3-attempt apply campaign (Fall 2027/2028/2029). Cycle 1 = BSc Year 4 · Cycle 2 = during MSc · Cycle 3 = post-MSc. Apex US top-5 = a low (single-digit) free-option swing; the modal target = a funded research PhD (US top-20 / strong UK-Swiss / US-top-40 / Canadian; German = last-line floor); bridge = funded Canadian thesis-MSc (+ OR thesis-MSc: Toronto MIE-OR, HK MPhils).</p>
-
-  <div class="alert urgent">
-    <strong>SCOPE (2026-07-01):</strong> field = <strong>statistics + OR/ORFE</strong> (rigorous IEOR / MS&amp;E-stochastic included; soft IE / business-Management-Science excluded). <strong>Biostatistics EXCLUDED</strong> — the old 3-program biostat cushion is dropped. Endgame = quant (QR/QT/QD); OR/ORFE is co-equal-or-better aligned than generic stats. Apply DIRECT + WIDE to funded US stats + OR PhDs in parallel with the funded MSc bridge. <strong>Acceptance rule:</strong> a Cambridge / Oxford / ETH (or a funded US) admit HALTS the campaign.
-    <br><br>
-    <strong>GRE:</strong> conditional, not mandatory — required only at a subset (Stanford / Duke / UW-Madison Stats; Stanford MS&amp;E, Berkeley IEOR, Northwestern, NYU Stern, UT-Austin OR). Prep Quant-only. See <strong>GRE Prep tab</strong>.
-  </div>
-
-  <h3 id="pro-2-us-stats-phds-13-primary-track-post-apex-piv">US Stats PhDs (13 — primary track post-apex-pivot 2026-05-27)</h3>
-  <table>
-    <thead>
-      <tr><th></th><th>Program</th><th>Tier</th><th>GRE class</th><th>Apply</th><th>Submitted</th><th>Decided</th><th>Notes</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>S1</td><td>CMU Statistics &amp; Data Science</td><td><span class="badge tier-1">T1</span></td><td>(a)</td><td><input type="checkbox" data-task-id="stats-1-decide"></td><td><input type="checkbox" data-task-id="stats-1-sub"></td><td><input type="checkbox" data-task-id="stats-1-result"></td><td><strong>Kennedy direct fit (DR-learner author)</strong> · highest methodology fit on portfolio</td></tr>
-      <tr><td>S2</td><td>Stanford Statistics</td><td><span class="badge tier-1">T2</span></td><td>(c)</td><td><input type="checkbox" data-task-id="stats-2-decide"></td><td><input type="checkbox" data-task-id="stats-2-sub"></td><td><input type="checkbox" data-task-id="stats-2-result"></td><td>Reach · admit avg Q94% (~169) · Wager, Hastie, Tibshirani · ALWAYS SUBMIT GRE</td></tr>
-      <tr><td>S3</td><td>UChicago Statistics</td><td><span class="badge tier-1">T3</span></td><td>(c)</td><td><input type="checkbox" data-task-id="stats-3-decide"></td><td><input type="checkbox" data-task-id="stats-3-sub"></td><td><input type="checkbox" data-task-id="stats-3-result"></td><td>Reach · Q≥90th de facto required · methodology depth · ALWAYS SUBMIT GRE</td></tr>
-      <tr><td>S4</td><td>Wharton (UPenn) Statistics &amp; Data Science</td><td><span class="badge tier-2">T6</span></td><td>(c)</td><td><input type="checkbox" data-task-id="stats-4-decide"></td><td><input type="checkbox" data-task-id="stats-4-sub"></td><td><input type="checkbox" data-task-id="stats-4-result"></td><td>Required GRE or GMAT · top-10% admits · stats + DS · ALWAYS SUBMIT</td></tr>
-      <tr><td>S5</td><td>Cornell ORIE (Operations Research)</td><td><span class="badge tier-2">T8</span></td><td>(c)</td><td><input type="checkbox" data-task-id="stats-5-decide"></td><td><input type="checkbox" data-task-id="stats-5-sub"></td><td><input type="checkbox" data-task-id="stats-5-result"></td><td>Strongly encouraged GRE · stochastic + ops research adjacent · ALWAYS SUBMIT</td></tr>
-      <tr><td>S6</td><td>Duke Statistical Science</td><td><span class="badge tier-2">T11</span></td><td>(b)</td><td><input type="checkbox" data-task-id="stats-6-decide"></td><td><input type="checkbox" data-task-id="stats-6-sub"></td><td><input type="checkbox" data-task-id="stats-6-result"></td><td>Optional but considered · Volfovsky causal inference fit · Submit if Q≥167</td></tr>
-      <tr><td>S7</td><td>Columbia Statistics</td><td><span class="badge tier-2">T12</span></td><td>(b)</td><td><input type="checkbox" data-task-id="stats-7-decide"></td><td><input type="checkbox" data-task-id="stats-7-sub"></td><td><input type="checkbox" data-task-id="stats-7-result"></td><td>"Recommended but not required" · Submit if Q≥167 · methodology adjacency</td></tr>
-      <tr><td>S8</td><td>Cornell Statistics &amp; Data Science</td><td><span class="badge tier-2">T13</span></td><td>(d)</td><td><input type="checkbox" data-task-id="stats-8-decide"></td><td><input type="checkbox" data-task-id="stats-8-sub"></td><td><input type="checkbox" data-task-id="stats-8-result"></td><td>GRE not reviewed · DO NOT SUBMIT · safety target</td></tr>
-      <tr><td>S9</td><td><strong>NYU Stern Statistics</strong></td><td><span class="badge tier-2">T6</span></td><td>(c)</td><td><input type="checkbox" data-task-id="stats-9-decide"></td><td><input type="checkbox" data-task-id="stats-9-sub"></td><td><input type="checkbox" data-task-id="stats-9-result"></td><td><strong>HARD REQUIRED · NO WAIVERS</strong> · apply only if Q≥165 confirmed · time series + causal-inference faculty · Stern MBA Q proxy 164</td></tr>
-      <tr><td>S10</td><td><strong>MIT IDSS-SES + IDPS add-on</strong></td><td><span class="badge tier-1">T2-T5</span></td><td>(b)</td><td><input type="checkbox" data-task-id="stats-10-decide"></td><td><input type="checkbox" data-task-id="stats-10-sub"></td><td><input type="checkbox" data-task-id="stats-10-result"></td><td>SES = entry door (~6 PhDs/yr) · IDPS = stats add-on · Rakhlin/Rigollet/Uhler/Wornell · published floors V157(150 non-native)/Q165/AW4.0 · MIT has NO standalone Stats PhD</td></tr>
-      <tr><td>S11</td><td><strong>Stanford GSB OIT (Wager/Athey/Spiess)</strong></td><td><span class="badge tier-1">T1-T3</span></td><td>(c)</td><td><input type="checkbox" data-task-id="stats-11-decide"></td><td><input type="checkbox" data-task-id="stats-11-sub"></td><td><input type="checkbox" data-task-id="stats-11-result"></td><td>REQUIRED · 1-3 PhDs/yr brutal admit · business-school research framing required in SOP · Wager/Athey direct methodology fit</td></tr>
-      <tr><td>S12</td><td><strong>Yale Statistics &amp; Data Science</strong></td><td><span class="badge tier-2">T8</span></td><td>(b)</td><td><input type="checkbox" data-task-id="stats-12-decide"></td><td><input type="checkbox" data-task-id="stats-12-sub"></td><td><input type="checkbox" data-task-id="stats-12-result"></td><td>Only Yale stats PhD entry (Yale Biostat is separate in SPH) · "now optional" GRE · Q165+ helps borderline files · submit if Q≥167</td></tr>
-      <tr><td>S13</td><td>Princeton ORFE (Operations Research &amp; Financial Engineering)</td><td><span class="badge tier-1">T4-T6</span></td><td>(a)</td><td><input type="checkbox" data-task-id="stats-13-decide"></td><td><input type="checkbox" data-task-id="stats-13-sub"></td><td><input type="checkbox" data-task-id="stats-13-result"></td><td>Optional GRE for Fall 2025/26 · <strong>policy announced cycle-by-cycle</strong> · re-verify Sept 2026 for Fall 2028 status · broad methodology · submit if Q≥167 for KZ calibration</td></tr>
-    </tbody>
-  </table>
-  <p style="color: var(--fg-dim); font-size: 13px; margin-top: 4px;">
-    <strong>Note (2026-05-26):</strong> S2 Stanford Statistics reclassified as reach-reach due to ETS percentile compression — published "Q94% admit avg" predates current 2021-2024 tables; current Q170 = 91-92nd percentile, so Stanford Stats admits effectively need Q169-170. Your projected ceiling Q165-168 is below median there. Apply as long-reach, not target. UChicago Stats has same constraint (Q≥90th de facto = Q169 modal admit).
-  </p>
-
-  <h3 id="pro-3-swiss-stats-phds-2-apex-adjacent-alternative">Swiss Stats PhDs (2 — apex-adjacent alternative, added 2026-05-27 vs US funding-cut risk)</h3>
-  <p class="tab-subtitle" style="margin-top:-8px;">Insulated from US funding-cut + visa friction dynamics. Funded as employee (CHF 65-90K/yr salary, ~$73-100K). 4-yr PhD. <strong>Admission is advisor-first</strong> — cold-email Maathuis / Peters / Bühlmann in parallel with US Tier A starting Sep-Oct 2026. ETH Stats admit halts campaign on same terms as Cambridge/Oxford.</p>
-  <table>
-    <thead>
-      <tr><th></th><th>Program</th><th>Tier</th><th>GRE class</th><th>Apply</th><th>Submitted</th><th>Decided</th><th>Notes</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>CH1</td><td><strong>ETH Zürich — Department of Mathematics, Section of Statistics</strong></td><td><span class="badge tier-1">Apex-adjacent</span></td><td>—</td><td><input type="checkbox" data-task-id="ch-1-decide"></td><td><input type="checkbox" data-task-id="ch-1-sub"></td><td><input type="checkbox" data-task-id="ch-1-result"></td><td><strong>HALT condition.</strong> Target PIs: Maathuis (causal+DAGs), Peters (causal discovery+ML), Bühlmann (high-dim+causal), van de Geer (theory). Funded as employee CHF 65-90K. 4-yr program. Admission = supervisor agreement first; cold-email Sep-Oct 2026. No GRE.</td></tr>
-      <tr><td>CH2</td><td>EPFL — Statistics</td><td><span class="badge tier-2">Apex-secondary</span></td><td>—</td><td><input type="checkbox" data-task-id="ch-2-decide"></td><td><input type="checkbox" data-task-id="ch-2-sub"></td><td><input type="checkbox" data-task-id="ch-2-result"></td><td>Backup to ETH. OPE-relevant pool thinner (Stensrud biostat-leaning). Volkan Cevher in ML/optimization. Apply only if ETH outreach progresses. Funded as employee similar to ETH. No GRE.</td></tr>
-    </tbody>
-  </table>
-  <p style="color: var(--fg-dim); font-size: 13px; margin-top: 4px;">
-    <strong>Swiss admission mechanics (different from US):</strong> No department adcom filtering applications top-down. You need a PI to agree to take you BEFORE formal application matters. Cold-email Maathuis / Peters with Option α 1-page proposal + repo link in Sep-Nov 2026 — same package as Kallus outreach. Direct BSc→PhD rare; MSc credential typically expected. <strong>Admit is personal-fit-driven and low in absolute terms — no invented cumulative %.</strong> Process is more private + personal-fit-driven than US standardized.
-  </p>
-
-  <h3 id="pro-4-or-orfe-ieor-mse-phds-funded-quant-aligned-a">OR / ORFE / IEOR / MS&amp;E PhDs (funded, quant-aligned — added 2026-07-01)</h3>
-  <p class="tab-subtitle" style="margin-top:-8px;">Replaces the dropped biostat cushion. Funded == admit, BSc-direct in the US, genuine quant feeders, clean fit for EMFSS-stats + optimization + MATH 447 (no engineering/CS-theory gate). Source: <span class="mono">reference_or_orfe_catalogue_2026-06-30 (memory)</span>. Apex ORFE reaches are free-option swings — must NOT crowd out the funded tier.</p>
-  <table>
-    <thead>
-      <tr><th></th><th>Program</th><th>Tier</th><th>Apply</th><th>Submitted</th><th>Decided</th><th>Notes</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>O1</td><td><strong>Columbia IEOR</strong></td><td><span class="badge tier-1">APPLY · best fit</span></td><td><input type="checkbox" data-task-id="apply-1-decide"></td><td><input type="checkbox" data-task-id="apply-1-sub"></td><td><input type="checkbox" data-task-id="apply-1-result"></td><td>Literal prereqs = Real Analysis + Linear Algebra + Probability&amp;Stats · funded-all-admits · GRE optional · FE&amp;RM concentration, NYC</td></tr>
-      <tr><td>O2</td><td>Georgia Tech ISyE (OR)</td><td><span class="badge tier-2">APPLY</span></td><td><input type="checkbox" data-task-id="apply-2-decide"></td><td><input type="checkbox" data-task-id="apply-2-sub"></td><td><input type="checkbox" data-task-id="apply-2-result"></td><td>Funded · GRE-optional · exact optimization/stochastics core · quant exit self-driven</td></tr>
-      <tr><td>O3</td><td>Michigan IOE</td><td><span class="badge tier-2">APPLY</span></td><td><input type="checkbox" data-task-id="apply-3-decide"></td><td><input type="checkbox" data-task-id="apply-3-sub"></td><td><input type="checkbox" data-task-id="apply-3-result"></td><td>100% funded intl · GRE-free · quant-feed indirect</td></tr>
-      <tr><td>O4</td><td>Purdue IE (OR)</td><td><span class="badge tier-2">APPLY</span></td><td><input type="checkbox" data-task-id="apply-4-decide"></td><td><input type="checkbox" data-task-id="apply-4-sub"></td><td><input type="checkbox" data-task-id="apply-4-result"></td><td>Funded (Dec-1 deadline) · option-pricing / stochastic-OR coursework</td></tr>
-      <tr><td>O5</td><td>NYU Stern OM</td><td><span class="badge tier-1">APPLY · reach</span></td><td><input type="checkbox" data-task-id="apply-5-decide"></td><td><input type="checkbox" data-task-id="apply-5-sub"></td><td><input type="checkbox" data-task-id="apply-5-result"></td><td>Funded 5yr · documented 2025 Point72-QR placement · GRE required · ~2 admits/yr</td></tr>
-      <tr><td>O6</td><td>Aarhus BSS econometrics (DK)</td><td><span class="badge tier-2">APPLY · sleeper</span></td><td><input type="checkbox" data-task-id="apply-6-decide"></td><td><input type="checkbox" data-task-id="apply-6-sub"></td><td><input type="checkbox" data-task-id="apply-6-result"></td><td>Salaried · BSc-entry via 4+4 · GRE-free · ONLY non-elite prog with documented QR exits (NBIM / InCommodities)</td></tr>
-      <tr><td>O7</td><td>Asia — NUS Math / NTU SPMS / HKUST IEDA / CUHK SEEM / HKUST ISOM</td><td><span class="badge tier-2">APPLY</span></td><td><input type="checkbox" data-task-id="apply-7-decide"></td><td><input type="checkbox" data-task-id="apply-7-sub"></td><td><input type="checkbox" data-task-id="apply-7-result"></td><td>All funded for intl (RS + HK PGS/HKPFS) · no cosigner · mostly GRE-free · co-primary quant hubs; HKUST ISOM = best fit-to-endgame</td></tr>
-      <tr><td>O8</td><td>Apex reaches: Princeton ORFE / MIT ORC / Stanford MS&amp;E / Berkeley IEOR / Cornell ORIE</td><td><span class="badge tier-1">free-option</span></td><td><input type="checkbox" data-task-id="apply-8-decide"></td><td><input type="checkbox" data-task-id="apply-8-sub"></td><td><input type="checkbox" data-task-id="apply-8-result"></td><td>Funded · elite documented quant feeders · top-5-class selectivity — swings, must NOT crowd out the funded tier (Stanford / Berkeley GRE-required)</td></tr>
-    </tbody>
-  </table>
-  <p class="tab-subtitle" style="margin-top:-8px;"><strong>SKIP</strong> (funded but fail the quant-feeder test): CMU Tepper / ACO, GT-ACO, business-school OM PhDs (Imperial / NUS / NTU / SMU / CUHK-business, Montréal). <strong>No funded US OR thesis-MS exists</strong> — the funded US route is BSc→PhD. Biostat fully excluded (restore from git if ever re-opened).</p>
-
-  <h3 id="pro-5-us-bridge-positions-5-7">US Bridge Positions (5–7)</h3>
-  <table>
-    <thead><tr><th></th><th>Position</th><th>Stipend</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>17</td><td>Dana-Farber Associate Computational Biologist</td><td>$70–85K</td><td><input type="checkbox" data-task-id="bridge-1-decide"></td><td><input type="checkbox" data-task-id="bridge-1-sub"></td><td><input type="checkbox" data-task-id="bridge-1-result"></td><td>Best risk-adjusted bet · cap-exempt H-1B</td></tr>
-      <tr><td>—</td><td colspan="6" style="color:var(--fg-dim)">Biostat-clinical bridges (MD Anderson Postbac, MSK Biostatistician) <strong>DROPPED 2026-07-01</strong> — off the quant endgame. Prefer a quant/OR-adjacent RA or the Phase-0-artifact + calibrated-letter channel.</td></tr>
-      <tr><td>20</td><td>Harvard HCP RA (Zubizarreta)</td><td>$55–70K</td><td><input type="checkbox" data-task-id="bridge-4-decide"></td><td><input type="checkbox" data-task-id="bridge-4-sub"></td><td><input type="checkbox" data-task-id="bridge-4-result"></td><td>Nov–Dec 2027 deadline · matching/causal</td></tr>
-      <tr><td>21</td><td>Cold-email RA: Tchetgen Tchetgen (Penn) OR Nabi (Emory)</td><td>$50–70K</td><td><input type="checkbox" data-task-id="bridge-5-decide"></td><td><input type="checkbox" data-task-id="bridge-5-sub"></td><td><input type="checkbox" data-task-id="bridge-5-result"></td><td>March–May 2027 cold email</td></tr>
-      <tr><td>22</td><td>Cold-email RA: Volfovsky (Duke) OR Díaz (NYU Langone)</td><td>$50–70K</td><td><input type="checkbox" data-task-id="bridge-6-decide"></td><td><input type="checkbox" data-task-id="bridge-6-sub"></td><td><input type="checkbox" data-task-id="bridge-6-result"></td><td>Cap-exempt H-1B / J-1</td></tr>
-      <tr><td>23</td><td>Stanford King Center Predoc</td><td>$45–55K + tuition</td><td><input type="checkbox" data-task-id="bridge-7-decide"></td><td><input type="checkbox" data-task-id="bridge-7-sub"></td><td><input type="checkbox" data-task-id="bridge-7-result"></td><td>Optional · econ/policy not biostat · J-1 + LMIC explicit</td></tr>
-    </tbody>
-  </table>
-
-  <h3 id="pro-6-funded-or-orfe-thesis-msc-bridges-2-added-20">Funded OR/ORFE thesis-MSc bridges (2 — added 2026-07-01, replaces biostat MS hedges)</h3>
-  <table>
-    <thead><tr><th></th><th>Program</th><th>Funding</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>24</td><td><strong>Toronto MIE — MASc Operations Research</strong></td><td>Tuition absorbed + ~$21K net stipend</td><td><input type="checkbox" data-task-id="usms-1-decide"></td><td><input type="checkbox" data-task-id="usms-1-sub"></td><td><input type="checkbox" data-task-id="usms-1-result"></td><td>Funded for intl, no cosigner · thesis · OR-finance (Kwon/MMF) · GRE-free · supervisor-gated. NOTE: the old "SKIP Toronto (self-funded)" was the Stats MSc/MEng — this research MASc IS funded.</td></tr>
-      <tr><td>25</td><td>HKUST IEDA MPhil / CUHK SEEM MPhil (HK)</td><td>PGS ~HK$19K/mo</td><td><input type="checkbox" data-task-id="usms-2-decide"></td><td><input type="checkbox" data-task-id="usms-2-sub"></td><td><input type="checkbox" data-task-id="usms-2-result"></td><td>Funded (KZ-eligible), no cosigner · thesis · Financial-Engineering topic · genuine funded OR research-master in an Asian quant hub · supervisor-gated</td></tr>
-      <tr><td>—</td><td colspan="6" style="color:var(--fg-dim)">WU Vienna MSc QF <strong>REMOVED 2026-07-01</strong> — tuition-free but living ~€12–16K/yr is self-funded (net &gt; ±$10K, no scholarship) → fails the funding rule. The funded HK MPhils + Toronto MIE-OR cover the OR thesis-MSc need.</td></tr>
-    </tbody>
-  </table>
-
-  <h3 id="pro-7-international-funded-msc-bridge-4-cycle-1-de">International Funded MSc bridge (4 — Cycle 1 Dec 2027 deadline cluster)</h3>
-  <table>
-    <thead><tr><th></th><th>Program</th><th>Funding</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>26</td><td><strong>Cambridge MASt Part III Mathematical Statistics + Gates Cambridge</strong></td><td>Full ride</td><td><input type="checkbox" data-task-id="uk-1-decide"></td><td><input type="checkbox" data-task-id="uk-1-sub"></td><td><input type="checkbox" data-task-id="uk-1-result"></td><td><strong>Primary MSc bridge.</strong> Dec 2027 deadline · 9-month program · max math-theory rigor · target supervisor: Zhao (causal inference). Gates PhD-favored ~5-8% MASt admit · also try Cambridge Trust. <strong>VERIFY 2026-06-05: confirm MASt MASS is correct program (user asked about MPhil Statistics — Cambridge does NOT appear to offer standalone MPhil Statistics; MASt MASS is the taught masters bridge per current understanding; user-side verification recommended on postgraduate.study.cam.ac.uk).</strong> <strong>LA prerequisite note:</strong> Part III expects proof-based LA at <a href="reading.html#lit-axler" class="xref">Axler</a>-level as prerequisite; self-studied Axler with public artifact = borderline-sufficient; formal MATH 416 = stronger; without either, admit prob drops ~3-5pp.</td></tr>
-      <tr><td>27</td><td>Oxford MSc Statistical Science + Clarendon Fund + Weidenfeld-Hoffmann</td><td>Full ride</td><td><input type="checkbox" data-task-id="uk-2-decide"></td><td><input type="checkbox" data-task-id="uk-2-sub"></td><td><input type="checkbox" data-task-id="uk-2-result"></td><td>Secondary MSc bridge. Jan 2028 deadline · 12 mo + summer dissertation · KZ explicitly listed for W-H · Clarendon automatic ~10-15%</td></tr>
-      <tr><td>28</td><td>ETH Zürich MSc Statistics (90 ECTS, 3-4 semesters) + ESOP scholarship</td><td>Tuition waiver + CHF 12K/sem if ESOP awarded</td><td><input type="checkbox" data-task-id="uk-4-decide"></td><td><input type="checkbox" data-task-id="uk-4-sub"></td><td><input type="checkbox" data-task-id="uk-4-result"></td><td><strong>Backup if Cambridge MASS rejects.</strong> <strong>Deadline 30 Nov 2027 (verified)</strong> for Fall 2028 entry, NOT April. Program 1.5-2 yrs (90 ECTS); 4-semester completion typical. ETH D-MATH internal pathway to ETH Stats PhD reduces apex-PhD friction. <strong>ESOP eligibility = top-10% of bachelor's cohort + thesis pre-proposal + 2 academic refs</strong> — your 3.5/4 GPA may not clear top-10% bar; verify KBTU class ranking before committing. ~60 ESOP awards/yr ETH-wide.</td></tr>
-      <tr><td>29</td><td>Stanford MS Statistics / MS Biomedical Data Science + Knight-Hennessy</td><td>Full ride</td><td><input type="checkbox" data-task-id="uk-3-decide"></td><td><input type="checkbox" data-task-id="uk-3-sub"></td><td><input type="checkbox" data-task-id="uk-3-result"></td><td>Hedge. Oct 2027 deadline · 2-3 yr · KZ precedent confirmed 2025 cohort · ~1-3% K-H scholarship</td></tr>
-    </tbody>
-  </table>
-  <p class="tab-subtitle" style="margin-top:-8px;"><strong>Kept as low-chance long-shots (per the funding rule) — feasible ONLY on the attached full-ride:</strong> Gates ~5-8% · Clarendon ~10-15% · ESOP top-10% (GPA 3.5 may not clear) · Knight-Hennessy ~1-3%. Do NOT self-fund the unfunded case — UK/US/Swiss tuition + living breaks the parental cap, and the UK 28-day maintenance rule blocks an unfunded visa anyway. Bank the funded Canada / HK / German routes; treat these as scholarship swings.</p>
-
-  <h3 id="pro-8-mid-tier-us-stats-msc-ta-funding-4-6-added-2">Mid-tier US Stats MSc + TA funding (4–6 — added 2026-05-17 per msc-backup-reframed addendum)</h3>
-  <table>
-    <thead><tr><th></th><th>Program</th><th>Funding</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>29</td><td>Iowa State Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-1-decide"></td><td><input type="checkbox" data-task-id="midus-1-sub"></td><td><input type="checkbox" data-task-id="midus-1-result"></td><td>Large dept · documented international TAs · Dec 2027 deadline · 15-30% admit</td></tr>
-      <tr><td>30</td><td>Penn State Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-2-decide"></td><td><input type="checkbox" data-task-id="midus-2-sub"></td><td><input type="checkbox" data-task-id="midus-2-result"></td><td>Annual international TA hires · Dec 2027 deadline</td></tr>
-      <tr><td>31</td><td>Texas A&M Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-3-decide"></td><td><input type="checkbox" data-task-id="midus-3-sub"></td><td><input type="checkbox" data-task-id="midus-3-result"></td><td>Large dept · generous TA pool · Dec 2027 / Jan 2028 deadline</td></tr>
-      <tr><td>32</td><td>NC State Stat MS</td><td>TA-funded</td><td><input type="checkbox" data-task-id="midus-4-decide"></td><td><input type="checkbox" data-task-id="midus-4-sub"></td><td><input type="checkbox" data-task-id="midus-4-result"></td><td>Documented international TA funding · Dec 2027 deadline</td></tr>
-      <tr><td>—</td><td colspan="6" style="color:var(--fg-dim)">Biostat MS options (UW Biostat, Kansas State / Pitt / Iowa Biostat) <strong>DROPPED 2026-07-01</strong>. The funded stats/OR MS route is the OR/ORFE thesis-MSc bridges above (Toronto MIE-OR, HK MPhils) + the Canadian thesis-MScs (Alberta / McGill) + the stats-side rows 29–32 here.</td></tr>
-    </tbody>
-  </table>
-
-  <h3 id="pro-9-euro-msc-backup-3-plan-c-floor-tuition-free-">Euro MSc Backup (3 — Plan C floor · tuition-free / low-net German + Finland-waiver)</h3>
-  <table>
-    <thead><tr><th></th><th>Program</th><th>Net cost/yr</th><th>Decide</th><th>Apply</th><th>Decided</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>27</td><td>TU Dortmund MSc Data Science</td><td>$5–8K</td><td><input type="checkbox" data-task-id="msc-1-decide"></td><td><input type="checkbox" data-task-id="msc-1-sub"></td><td><input type="checkbox" data-task-id="msc-1-result"></td><td>#1 by net cost · Bayer Werkstudent corridor · verify ADS prereq</td></tr>
-      <tr><td>—</td><td colspan="6" style="color:var(--fg-dim)">Bremen MSc <strong>Medical Biometry</strong> REMOVED 2026-07-01 — biostatistics (off the stats+OR scope). Financially it was fine ($6–9K); dropped on field grounds, not cost.</td></tr>
-      <tr><td>29</td><td>University of Helsinki MSc Math & Stats</td><td>$0–17K</td><td><input type="checkbox" data-task-id="msc-3-decide"></td><td><input type="checkbox" data-task-id="msc-3-sub"></td><td><input type="checkbox" data-task-id="msc-3-result"></td><td>Tuition waiver scheme (40–60% prob of 100% waiver) · 4-yr PR with study time</td></tr>
-      <tr><td>30</td><td>LMU Munich MSc Statistics &amp; Data Science</td><td>$10–14K</td><td><input type="checkbox" data-task-id="msc-4-decide"></td><td><input type="checkbox" data-task-id="msc-4-sub"></td><td><input type="checkbox" data-task-id="msc-4-result"></td><td>DAAD Master Studienstipendien target · Bavaria fee risk by 2028 · take the general stats/DS track (not the biostat specialization)</td></tr>
-    </tbody>
-  </table>
-
-  <h3 id="pro-10-backup-options-if-any-of-the-above-falls-thr">Backup options (if any of the above falls through)</h3>
-  <ul>
-    <li>Alberta MSc Math &amp; Stat Sciences (Math-Finance thesis) — funded intl · GRE-free · Jan-15 deadline · supervisor-gated</li>
-    <li>McGill MSc Statistics (thesis) — funded (thin vs intl tuition; chase a TA/award) · clean stats fit</li>
-    <li>Tuition-free German OR / math-finance bridges (RWTH Mgmt-Sci &amp; Math / RPTU Kaiserslautern / Bonn Area-F) — no cosigner; stipend needs external DAAD; actuarial/risk feeders</li>
-    <li>Waterloo MMath (C&amp;O / Management Sciences) — funded, but discrete-math fit shaky; verify quals before committing</li>
-  </ul>
+<h2 id="pro-1-programs">Programs</h2>
+<p class="tab-subtitle">Everything you might apply to, in one filterable list — filter by type, region, or funding. Funded PhDs are the trunk; funded Canadian and Hong&nbsp;Kong master's are the bridges into Europe; scholarship-only master's (UK, Swiss, Stanford MS) are long-shots that only work if you win the full ride.</p>
+<div class="prog-filters"><div class="pf-group"><span class="pf-label">Type</span><button class="pf active" data-f="type" data-v="all">All</button><button class="pf" data-f="type" data-v="phd">PhD</button><button class="pf" data-f="type" data-v="msc">Master's</button><button class="pf" data-f="type" data-v="bridge">Bridge / RA</button></div><div class="pf-group"><span class="pf-label">Region</span><button class="pf active" data-f="region" data-v="all">All</button><button class="pf" data-f="region" data-v="us">US</button><button class="pf" data-f="region" data-v="canada">Canada</button><button class="pf" data-f="region" data-v="asia">Asia</button><button class="pf" data-f="region" data-v="swiss">Switzerland</button><button class="pf" data-f="region" data-v="uk">UK</button><button class="pf" data-f="region" data-v="germany">Germany</button><button class="pf" data-f="region" data-v="nordic">Nordic</button></div><div class="pf-group"><span class="pf-label">Funding</span><button class="pf active" data-f="funding" data-v="all">All</button><button class="pf" data-f="funding" data-v="funded">Funded</button><button class="pf" data-f="funding" data-v="scholarship">Scholarship-only</button><button class="pf" data-f="funding" data-v="lowcost">Low-cost</button></div></div>
+<p id="prog-count"></p>
+<table id="prog-table"><thead><tr><th></th><th>Program</th><th>Type</th><th>Region</th><th>Funding</th><th>GRE</th><th>Notes</th></tr></thead>
+<tbody>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-0"></td><td><strong>Stanford Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Apex reach — Q≈170 needed</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-1"></td><td><strong>UChicago Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Recommended</td><td class="small">Apex reach — Q≥90th</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-2"></td><td><strong>UC Berkeley Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Not accepted</td><td class="small">Strong — letters-driven</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-3"></td><td><strong>UW Seattle Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Not used</td><td class="small">Strong</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-4"></td><td><strong>CMU Statistics &amp; DS</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Strong</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-5"></td><td><strong>Michigan Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Not used</td><td class="small">Target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-6"></td><td><strong>Duke Statistical Science</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-7"></td><td><strong>UW–Madison Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-8"></td><td><strong>Columbia Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-9"></td><td><strong>Cornell Statistics &amp; DS</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Not accepted</td><td class="small">Safer target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-10"></td><td><strong>Yale Statistics &amp; DS</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-11"></td><td><strong>Wharton (Penn) Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Reach</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-12"></td><td><strong>NC State Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-13"></td><td><strong>Texas A&amp;M Statistics</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Target</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-14"></td><td><strong>Columbia IEOR</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Best OR fit — real-analysis/LA/prob prereqs; NYC FE</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-15"></td><td><strong>Georgia Tech ISyE (OR)</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Optimization + stochastics core</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-16"></td><td><strong>Michigan IOE</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Not used</td><td class="small">OR; quant-feed indirect</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-17"></td><td><strong>Purdue IE (OR)</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Dec-1 funding deadline</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-18"></td><td><strong>NYU Stern OM</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Documented Point72 QR; ~2 admits/yr</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-19"></td><td><strong>Princeton ORFE</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Apex reach — top quant feeder</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-20"></td><td><strong>MIT ORC</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">Apex reach</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-21"></td><td><strong>Stanford MS&amp;E (OR)</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Apex reach — Quant-Finance track</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-22"></td><td><strong>UC Berkeley IEOR</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Required</td><td class="small">Apex reach — Two Sigma/Jump placement</td></tr>
+<tr data-type="phd" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-23"></td><td><strong>Cornell ORIE</strong></td><td>PhD</td><td>US</td><td>Funded</td><td>Strongly rec</td><td class="small">Apex reach — financial engineering</td></tr>
+<tr data-type="phd" data-region="swiss" data-funding="funded"><td><input type="checkbox" data-task-id="prog-24"></td><td><strong>ETH Zürich Statistics</strong></td><td>PhD</td><td>Switzerland</td><td>Funded</td><td>—</td><td class="small">Salaried; any admit ends the campaign; via MSc</td></tr>
+<tr data-type="phd" data-region="swiss" data-funding="funded"><td><input type="checkbox" data-task-id="prog-25"></td><td><strong>EPFL Statistics</strong></td><td>PhD</td><td>Switzerland</td><td>Funded</td><td>—</td><td class="small">Salaried; backup to ETH</td></tr>
+<tr data-type="phd" data-region="asia" data-funding="funded"><td><input type="checkbox" data-task-id="prog-26"></td><td><strong>NUS Mathematics (fin-math)</strong></td><td>PhD</td><td>Asia</td><td>Funded</td><td>Recommended</td><td class="small">Singapore quant hub</td></tr>
+<tr data-type="phd" data-region="asia" data-funding="funded"><td><input type="checkbox" data-task-id="prog-27"></td><td><strong>NTU SPMS (fin-math)</strong></td><td>PhD</td><td>Asia</td><td>Funded</td><td>Recommended</td><td class="small">Singapore</td></tr>
+<tr data-type="phd" data-region="asia" data-funding="funded"><td><input type="checkbox" data-task-id="prog-28"></td><td><strong>HKUST IEDA</strong></td><td>PhD</td><td>Asia</td><td>Funded</td><td>Optional</td><td class="small">Hong Kong — OR / decision analytics</td></tr>
+<tr data-type="phd" data-region="asia" data-funding="funded"><td><input type="checkbox" data-task-id="prog-29"></td><td><strong>CUHK SEEM</strong></td><td>PhD</td><td>Asia</td><td>Funded</td><td>Optional</td><td class="small">Hong Kong — financial engineering</td></tr>
+<tr data-type="phd" data-region="asia" data-funding="funded"><td><input type="checkbox" data-task-id="prog-30"></td><td><strong>HKUST ISOM (Business Statistics)</strong></td><td>PhD</td><td>Asia</td><td>Funded</td><td>GMAT/GRE</td><td class="small">Best fit-to-quant (financial econometrics)</td></tr>
+<tr data-type="phd" data-region="nordic" data-funding="funded"><td><input type="checkbox" data-task-id="prog-31"></td><td><strong>Aarhus BSS (econometrics)</strong></td><td>PhD</td><td>Nordic</td><td>Funded</td><td>—</td><td class="small">4+4 BSc-entry; documented QR exits (NBIM/InCommodities)</td></tr>
+<tr data-type="msc" data-region="canada" data-funding="funded"><td><input type="checkbox" data-task-id="prog-32"></td><td><strong>Alberta — MSc Math &amp; Stat Sci (Math-Finance thesis)</strong></td><td>Master's</td><td>Canada</td><td>Funded</td><td>—</td><td class="small">Thesis · supervisor-gated · Jan 15</td></tr>
+<tr data-type="msc" data-region="canada" data-funding="funded"><td><input type="checkbox" data-task-id="prog-33"></td><td><strong>McGill — MSc Statistics (thesis)</strong></td><td>Master's</td><td>Canada</td><td>Funded</td><td>—</td><td class="small">Thesis · funding thin vs intl tuition</td></tr>
+<tr data-type="msc" data-region="canada" data-funding="funded"><td><input type="checkbox" data-task-id="prog-34"></td><td><strong>Waterloo — MMath (Statistics / C&amp;O)</strong></td><td>Master's</td><td>Canada</td><td>Funded</td><td>—</td><td class="small">Thesis · verify fit</td></tr>
+<tr data-type="msc" data-region="canada" data-funding="funded"><td><input type="checkbox" data-task-id="prog-35"></td><td><strong>Toronto — MASc Operations Research</strong></td><td>Master's</td><td>Canada</td><td>Funded</td><td>—</td><td class="small">Funded research MASc (not the course MEng)</td></tr>
+<tr data-type="msc" data-region="asia" data-funding="funded"><td><input type="checkbox" data-task-id="prog-36"></td><td><strong>HKUST IEDA — MPhil</strong></td><td>Master's</td><td>Asia</td><td>Funded</td><td>—</td><td class="small">Thesis · FE topic</td></tr>
+<tr data-type="msc" data-region="asia" data-funding="funded"><td><input type="checkbox" data-task-id="prog-37"></td><td><strong>CUHK SEEM — MPhil</strong></td><td>Master's</td><td>Asia</td><td>Funded</td><td>—</td><td class="small">Thesis · FE group</td></tr>
+<tr data-type="msc" data-region="uk" data-funding="scholarship"><td><input type="checkbox" data-task-id="prog-38"></td><td><strong>Cambridge MASt (Math Statistics)</strong></td><td>Master's</td><td>UK</td><td>Scholarship-only</td><td>—</td><td class="small">Only on a full ride (Gates ~5–8%)</td></tr>
+<tr data-type="msc" data-region="uk" data-funding="scholarship"><td><input type="checkbox" data-task-id="prog-39"></td><td><strong>Oxford MSc Statistical Science</strong></td><td>Master's</td><td>UK</td><td>Scholarship-only</td><td>—</td><td class="small">Only on Clarendon (~10–15%)</td></tr>
+<tr data-type="msc" data-region="swiss" data-funding="scholarship"><td><input type="checkbox" data-task-id="prog-40"></td><td><strong>ETH — MSc Statistics</strong></td><td>Master's</td><td>Switzerland</td><td>Scholarship-only</td><td>—</td><td class="small">Only on ESOP (top-10% of cohort)</td></tr>
+<tr data-type="msc" data-region="us" data-funding="scholarship"><td><input type="checkbox" data-task-id="prog-41"></td><td><strong>Stanford — MS Statistics</strong></td><td>Master's</td><td>US</td><td>Scholarship-only</td><td>—</td><td class="small">Only on Knight-Hennessy (~1–3%)</td></tr>
+<tr data-type="msc" data-region="germany" data-funding="lowcost"><td><input type="checkbox" data-task-id="prog-42"></td><td><strong>TU Dortmund — MSc Data Science</strong></td><td>Master's</td><td>Germany</td><td>Low-cost</td><td>—</td><td class="small">Tuition-free; DAAD for living costs</td></tr>
+<tr data-type="msc" data-region="germany" data-funding="lowcost"><td><input type="checkbox" data-task-id="prog-43"></td><td><strong>LMU Munich — MSc Statistics &amp; DS</strong></td><td>Master's</td><td>Germany</td><td>Low-cost</td><td>—</td><td class="small">Tuition-free; DAAD target</td></tr>
+<tr data-type="msc" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-44"></td><td><strong>Iowa State — MS Statistics</strong></td><td>Master's</td><td>US</td><td>Funded</td><td>Optional</td><td class="small">TA-funded course MS (also Penn State / Texas A&amp;M / NC State)</td></tr>
+<tr data-type="bridge" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-45"></td><td><strong>Dana-Farber — Computational Biologist</strong></td><td>Bridge</td><td>US</td><td>Funded</td><td>—</td><td class="small">Paid $70–85K · cap-exempt H-1B</td></tr>
+<tr data-type="bridge" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-46"></td><td><strong>Harvard HCP — RA (Zubizarreta)</strong></td><td>Bridge</td><td>US</td><td>Funded</td><td>—</td><td class="small">Paid $55–70K · matching / causal</td></tr>
+<tr data-type="bridge" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-47"></td><td><strong>SIEPR–Athey predoc (Stanford)</strong></td><td>Bridge</td><td>US</td><td>Funded</td><td>—</td><td class="small">Paid · check KZ eligibility</td></tr>
+<tr data-type="bridge" data-region="us" data-funding="funded"><td><input type="checkbox" data-task-id="prog-48"></td><td><strong>Cold-email RA (Volfovsky / Tchetgen / …)</strong></td><td>Bridge</td><td>US</td><td>Funded</td><td>—</td><td class="small">Paid $50–70K</td></tr>
+</tbody></table>
+<p class="small" style="margin-top:16px;color:var(--fg-dim,#9aa7b8)"><strong>GRE:</strong> conditional — required only at Stanford / Duke / UW–Madison (stats) and Stanford&nbsp;MS&amp;E / Berkeley&nbsp;IEOR / Northwestern / NYU&nbsp;Stern / UT-Austin (OR). Optional or not-accepted elsewhere; the Canada bridge is GRE-free. Prep Quant-only — Verbal is not a gate.</p>
+<script>
+(function(){var tbl=document.getElementById('prog-table');if(!tbl)return;
+var sel={type:'all',region:'all',funding:'all'},cnt=document.getElementById('prog-count');
+function apply(){var n=0,rows=tbl.querySelectorAll('tbody tr');rows.forEach(function(tr){
+ var ok=(sel.type=='all'||tr.dataset.type==sel.type)&&(sel.region=='all'||tr.dataset.region==sel.region)&&(sel.funding=='all'||tr.dataset.funding==sel.funding);
+ tr.style.display=ok?'':'none';if(ok)n++;});if(cnt)cnt.textContent=n+' of '+rows.length+' programs';}
+document.querySelectorAll('.pf').forEach(function(b){b.addEventListener('click',function(){
+ sel[b.dataset.f]=b.dataset.v;document.querySelectorAll('.pf[data-f="'+b.dataset.f+'"]').forEach(function(x){x.classList.remove('active')});
+ b.classList.add('active');apply();});});apply();})();
+</script>
 
 </section>
 </div>
 </div>
 <script>
-  // Tab navigation
-  const tabs = document.querySelectorAll('aside nav button');
-  const sections = document.querySelectorAll('main section.tab');
-  function switchTab(tabId) {
-    tabs.forEach(b => b.classList.remove('active'));
-    sections.forEach(s => s.classList.remove('active'));
-    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
-    if (btn) btn.classList.add('active');
-    const sec = document.getElementById(tabId);
-    if (sec) sec.classList.add('active');
-  }
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-  });
-
-  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a[href^="#"]');
-    if (!link) return;
-    const href = link.getAttribute('href');
-    if (href === '#' || href.length < 2) return;
-    const targetId = href.substring(1);
-    const targetEl = document.getElementById(targetId);
-    if (!targetEl) return;
-    const targetTab = targetEl.closest('section.tab');
-    if (!targetTab) return;
-    e.preventDefault();
-    if (!targetTab.classList.contains('active')) {
-      switchTab(targetTab.id);
-    }
-    setTimeout(() => {
-      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Brief highlight on the target
-      targetEl.classList.add('xref-target');
-      history.replaceState(null, '', '#' + targetId);
-    }, 30);
-  });
-
-  // Honor initial #hash on page load
-  if (location.hash && location.hash.length > 1) {
-    const targetEl = document.getElementById(location.hash.substring(1));
-    if (targetEl) {
-      const targetTab = targetEl.closest('section.tab');
-      if (targetTab) {
-        switchTab(targetTab.id);
-        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
-      }
-    }
-  }
-
-  // Theme toggle
-  const themeBtn = document.getElementById('theme-toggle');
-  function applyTheme() {
-    const dark = localStorage.getItem('dt-theme') === 'dark';
-    document.body.classList.toggle('dark', dark);
-    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
-  }
-  themeBtn.addEventListener('click', () => {
-    const cur = localStorage.getItem('dt-theme') || 'light';
-    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
-    applyTheme();
-  });
-  applyTheme();
-
-  // Checkbox state persistence
-  function loadCheckboxes() {
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (!id) return;
-      const stored = localStorage.getItem('dt-task-' + id) === 'true';
-      cb.checked = stored;
-      if (row && stored) row.classList.add('done');
-    });
-    updateProgress();
-  }
-  document.addEventListener('change', (e) => {
-    if (e.target.type === 'checkbox') {
-      const cb = e.target;
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (!id) return;
-      localStorage.setItem('dt-task-' + id, cb.checked);
-      if (row) row.classList.toggle('done', cb.checked);
-      updateProgress();
-    }
-  });
-
-  function updateProgress() {
-    const all = document.querySelectorAll('input[type="checkbox"]').length;
-    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
-    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
-  }
-
-  // Reset all checkboxes
-  document.getElementById('reset-btn').addEventListener('click', () => {
-    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (id) localStorage.removeItem('dt-task-' + id);
-      cb.checked = false;
-      if (row) row.classList.remove('done');
-    });
-    updateProgress();
-  });
-
-  // Current week tasks
-  function renderCurrentWeek() {
-    if(!document.getElementById('week-tasks'))return;
-    const banner = document.getElementById('week-tasks');
-    if (!banner) return;
-    const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
-    if (!cards.length) return;
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const P = function(d){ const a=d.split('-'); return new Date(+a[0], +a[1]-1, +a[2]); };
-    let match=null, status='current';
-    for (const c of cards){ if (today>=P(c.dataset.start) && today<=P(c.dataset.end)){ match=c; status='current'; break; } }
-    if (!match){
-      if (today < P(cards[0].dataset.start)) { match=cards[0]; status='upcoming'; }
-      else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
-      else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
-    }
-    cards.forEach(function(c){ c.classList.remove('is-current'); if (c.id==='wk-current') c.removeAttribute('id'); });
-    match.id = 'wk-current'; match.classList.add('is-current'); match.open = true;
-    const label = (match.querySelector('.wk-label')||{}).textContent || '';
-    const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
-    const lead = {current:'📍 This week', upcoming:'⏳ Summer starts Jun 17 — first week', wrap:'✅ Summer plan complete — last week', next:'⏭ Next up'}[status] || 'This week';
-    banner.innerHTML = '<strong>' + lead + '</strong> · ' + label + ' ' + theme + ' · <a href="#wk-current">jump to this week’s tasks ↓</a>';
-  }
-
-  // Kozha funding table: sort + filter
-  (function() {
-    const table = document.getElementById('kozha-table');
-    if (!table) return;
-    const tbody = table.querySelector('tbody');
-    const headers = table.querySelectorAll('th[data-sort-key]');
-    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
-    let sortState = { key: 'deadline', dir: 'asc' };
-
-    function applySort() {
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
-      rows.sort((a, b) => {
-        const av = a.dataset[sortState.key];
-        const bv = b.dataset[sortState.key];
-        let comp;
-        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
-        else comp = String(av).localeCompare(String(bv));
-        return sortState.dir === 'asc' ? comp : -comp;
-      });
-      rows.forEach(r => tbody.appendChild(r));
-      headers.forEach(th => {
-        const k = th.dataset.sortKey;
-        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
-        th.textContent = labels[k] + arrow;
-      });
-    }
-
-    headers.forEach(th => {
-      th.addEventListener('click', () => {
-        const k = th.dataset.sortKey;
-        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
-        else { sortState.key = k; sortState.dir = 'asc'; }
-        applySort();
-      });
-    });
-
-    document.querySelectorAll('.kozha-filter').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const lead = btn.dataset.lead;
-        let visible = 0;
-        tbody.querySelectorAll('tr').forEach(row => {
-          const rowLead = row.dataset.lead;
-          let show;
-          if (lead === 'all') show = true;
-          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
-          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
-          else if (lead === 'Either') show = rowLead === 'Either';
-          row.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
-        if (allBtn) allBtn.textContent = 'All (38)';
-        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
-      });
-    });
-
-    applySort();
-  })();
-
-  // Init
-  renderCurrentWeek();
-  loadCheckboxes();
+(function(){var tbl=document.getElementById('prog-table');if(!tbl)return;
+var sel={type:'all',region:'all',funding:'all'},cnt=document.getElementById('prog-count');
+function apply(){var n=0,rows=tbl.querySelectorAll('tbody tr');rows.forEach(function(tr){
+ var ok=(sel.type=='all'||tr.dataset.type==sel.type)&&(sel.region=='all'||tr.dataset.region==sel.region)&&(sel.funding=='all'||tr.dataset.funding==sel.funding);
+ tr.style.display=ok?'':'none';if(ok)n++;});if(cnt)cnt.textContent=n+' of '+rows.length+' programs';}
+document.querySelectorAll('.pf').forEach(function(b){b.addEventListener('click',function(){
+ sel[b.dataset.f]=b.dataset.v;document.querySelectorAll('.pf[data-f="'+b.dataset.f+'"]').forEach(function(x){x.classList.remove('active')});
+ b.classList.add('active');apply();});});apply();})();
 
 
 (function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;

@@ -380,68 +380,6 @@
   }
 
 
-/* === multi-page layout overrides === */
-body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
-.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
-h2[id],h3[id]{scroll-margin-top:130px}
-.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
-.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
-.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
-.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
-.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
-.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
-.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
-.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
-.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
-@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
-/* === calendar === */
-.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
-.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
-.cal-filter.off{opacity:.38}
-.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
-.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
-.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
-.cal-item{font-weight:600}
-.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
-.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
-.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
-.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
-.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
-.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
-</style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="rhythm.html" class="">Daily rhythm</a><a href="tasks.html" class="cur">Tasks</a><a href="programs.html" class="">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="">Reading</a><a href="gre.html" class="">GRE</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
-<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
-<div class="site-layout">
-<div class="site-subnav"><div class="lbl">Tasks</div><a href="#tas-1-tasks" class="">Tasks</a><a href="#daily-rhythm" class="h3">Daily rhythm — what time is what</a><a href="#lookahead-summer" class="h3">Lookahead — Summer 2026 (Jun 17 → Aug 31)</a><a href="#tas-4-recurring-every-week-habits-to-tick-the-dail" class="h3">Recurring EVERY week — habits to tick (the Daily-rhythm grid</a></div>
-<div class="site-main"><section class="page-section" id="week">
-
-  <h2 id="tas-1-tasks">Tasks</h2>
-  <p class="tab-subtitle" id="week-date">Weekly schedule — the current week is auto-highlighted and opened in the Lookahead below.</p>
-
-  <div class="alert urgent" id="week-alert">
-    <strong>SUMMER RESTART — work begins Jun 17 2026</strong> (back from Turkey Jun 16). Full week-by-week below. <strong>Weekend policy (your call 2026-06-15):</strong> weekends are WORK (Axler, extra analysis problems, Phase-0, MT1173, driving, outreach prep) — NOT relaxation — until the Lytkin + Mynbaev primary-letter relationships are secured (plus the Canadian-MSc bridge supervisor outreach underway); a Western reply is upside, not a gate. <strong>Guardrail:</strong> keep gym (Tue/Thu/Sat) + ~one light half-day; hard proof-math degrades past sustained over-intensity, so don't let zero-rest lower the quality of the deep work. <strong>Phase-0 cold-implementation rule holds:</strong> the reference repo <code>jjcherian/conditional-conformal</code> is FORBIDDEN until the Week-4 (Jul 8–14) open-ref gate. Full Phase-0 protocol on the <a href="rhythm.html#schedule">Roadmap → Execution playbook</a>; multi-year arc on <a href="roadmap.html#roadmap">Roadmap</a>.
-  </div>
-
-  <div class="card">
-    <h3 id="daily-rhythm">Daily rhythm — what time is what</h3>
-    <p class="tab-subtitle">The hour-by-hour template the badges map onto (🌅 Morning = deep block · ☀️ Afternoon = second block · 🌙 Evening = light). Sleep 23:00–07:00. <strong>Weekends are WORK</strong> until the Lytkin + Mynbaev primary letters land (your 2026-06-15 call); a Western reply is a bonus, not a precondition — Sat full + gym, Sun keeps one light half-day so zero-rest does not degrade the proof-math.</p>
-    <div class="rhythm">
-      <div class="rh-row rh-rest"><div class="rh-time">07:00–08:30</div><div class="rh-act">Wake · routine · breakfast · light reading (Eccles/Abbott/Pugh · Phase-0 papers · essay)</div></div>
-      <div class="rh-row rh-deep"><div class="rh-time">08:30–12:30</div><div class="rh-act"><strong>🌅 Deep-work block</strong> — real analysis (Eccles→Abbott→Pugh, Lever 1) + Phase-0 build</div></div>
-      <div class="rh-row rh-rest"><div class="rh-time">12:30–13:30</div><div class="rh-act">Lunch · walk · decompress</div></div>
-      <div class="rh-row rh-work"><div class="rh-time">13:30–15:00</div><div class="rh-act">☀️ Second block — coursework / MT1173 / admin / lighter coding</div></div>
-      <div class="rh-row rh-after"><div class="rh-time">15:00–18:00</div><div class="rh-act"><div class="rh-week"><span class="rh-day"><b>Mon</b> Work</span><span class="rh-day gym"><b>Tue</b> 🏋 Gym</span><span class="rh-day"><b>Wed</b> Work</span><span class="rh-day gym"><b>Thu</b> 🏋 Gym</span><span class="rh-day kozha"><b>Fri</b> 📌 Kozha</span><span class="rh-day gym"><b>Sat</b> 🏋 Gym</span><span class="rh-day light"><b>Sun</b> light</span></div></div></div>
-      <div class="rh-row rh-rest"><div class="rh-time">18:00–19:00</div><div class="rh-act">Dinner</div></div>
-      <div class="rh-row rh-eve"><div class="rh-time">19:00–22:00</div><div class="rh-act">🌙 Lighter work · textbook reading · GRE-vocab · recreation — <a class="xref" href="reading.html#lit-character">§10 character/Stoic reading</a> + fiction · social</div></div>
-      <div class="rh-row rh-rest"><div class="rh-time">22:00–23:00</div><div class="rh-act">Wind down · plan tomorrow (jot tomorrow's top 1–3) · optional: a few pages of fiction or a short Stoic passage (Meditations/Seneca) to decompress</div></div>
-      <div class="rh-row rh-sleep"><div class="rh-time">23:00–07:00</div><div class="rh-act">😴 Sleep (8 h)</div></div>
-    </div>
-    <p style="color:var(--fg-dim);font-size:13px;"><strong>Block notes:</strong> ~7 h deep+light work/weekday; gym Tue/Thu/Sat (recovery protects deep-work quality); evening = light reading + GRE-vocab. <strong>Weekend policy (2026-06-15):</strong> weekends are work until the 3 connections land — Sat full + gym, one light half-day on Sun as the guardrail against over-intensity (hard proof-math degrades past ~3–4 h/day). Reinstate a fuller Sunday once Lytkin + Mynbaev are secured (a Western RA reply is a bonus, not a condition). In KBTU semester the morning/afternoon blocks compress around class times. <strong>What "light" / recreation means:</strong> Sunday's light half-day = recovery + your longest reading stretch + the weekly plan-ahead (open next week's card) — NOT a deep block. <strong>Recreation / character reading (your call when):</strong> the <a class="xref" href="reading.html#lit-character">§10 character / Stoic list</a> — this summer's Phase 1 = Stockdale → Hays <em>Meditations</em> → A.A. Long → <em>Atomic Habits</em> → Sellars + Newport + Inwood — plus fiction. Read it in the evening (19:00–22:00) and the Sunday-light stretch; a short Stoic passage can close the day at wind-down. It is recovery/character work, so it lives in the rhythm (not a weekly task-gate) and stays light — it must not eat proof-math time.</p>
-  </div>
-  <div id="week-tasks" class="alert info" style="margin-bottom:16px"><!-- this-week locator banner, filled by renderCurrentWeek() --></div>
-
-  <style>
 /* ---- Daily rhythm: vertical time-block timeline (replaces the old 7-col table) ---- */
 .rhythm { border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--bg-2); margin-bottom:14px; }
 .rh-row { display:flex; align-items:flex-start; gap:14px; padding:9px 14px; border-bottom:1px solid var(--border); border-left:4px solid transparent; }
@@ -764,7 +702,80 @@ h2[id],h3[id]{scroll-margin-top:130px}
 body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777; }
 /* live week-card highlight ring */
 .tl-scope details.week-card.is-current { box-shadow:0 0 0 2px var(--accent); scroll-margin-top:120px; }
-  </style>
+  
+
+.prog-filters{display:flex;flex-direction:column;gap:8px;margin:10px 0 14px}
+.pf-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pf-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--fg-dimmer,#8a94a3);width:72px;flex-shrink:0}
+.pf{cursor:pointer;border:1px solid var(--border-strong,#3a424e);border-radius:16px;padding:4px 12px;font-size:12.5px;font-weight:600;background:var(--bg-2,#171c23);color:var(--fg,#e6edf3)}
+.pf:hover{background:var(--bg-3,#20262f)}
+.pf.active{background:var(--accent,#2954c8);color:#fff;border-color:var(--accent,#2954c8)}
+#prog-table td{vertical-align:top}
+#prog-count{color:var(--fg-dim,#9aa7b8);font-size:12.5px;margin:0 0 10px}
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+h2[id],h3[id]{scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+/* === calendar === */
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
+.cal-filter.off{opacity:.38}
+.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
+.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
+.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.cal-item{font-weight:600}
+.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
+.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
+.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
+.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
+.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
+.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="tasks.html" class="cur">Tasks</a><a href="programs.html" class="">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="">Reading</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Tasks</div><a href="#tas-1-tasks" class="">Tasks</a><a href="#daily-rhythm" class="h3">Daily rhythm — what time is what</a><a href="#lookahead-summer" class="h3">Lookahead — Summer 2026 (Jun 17 → Aug 31)</a><a href="#tas-4-recurring-every-week-habits-to-tick-the-dail" class="h3">Recurring EVERY week — habits to tick (the Daily-rhythm grid</a></div>
+<div class="site-main"><section class="page-section" id="week">
+
+  <h2 id="tas-1-tasks">Tasks</h2>
+  <p class="tab-subtitle" id="week-date">Weekly schedule — the current week is auto-highlighted and opened in the Lookahead below.</p>
+
+  <div class="alert urgent" id="week-alert">
+    <strong>SUMMER RESTART — work begins Jun 17 2026</strong> (back from Turkey Jun 16). Full week-by-week below. <strong>Weekend policy (your call 2026-06-15):</strong> weekends are WORK (Axler, extra analysis problems, Phase-0, MT1173, driving, outreach prep) — NOT relaxation — until the Lytkin + Mynbaev primary-letter relationships are secured (plus the Canadian-MSc bridge supervisor outreach underway); a Western reply is upside, not a gate. <strong>Guardrail:</strong> keep gym (Tue/Thu/Sat) + ~one light half-day; hard proof-math degrades past sustained over-intensity, so don't let zero-rest lower the quality of the deep work. <strong>Phase-0 cold-implementation rule holds:</strong> the reference repo <code>jjcherian/conditional-conformal</code> is FORBIDDEN until the Week-4 (Jul 8–14) open-ref gate. Full Phase-0 protocol on the <a href="#schedule">Roadmap → Execution playbook</a>; multi-year arc on <a href="roadmap.html#roadmap">Roadmap</a>.
+  </div>
+
+  <div class="card">
+    <h3 id="daily-rhythm">Daily rhythm — what time is what</h3>
+    <p class="tab-subtitle">The hour-by-hour template the badges map onto (🌅 Morning = deep block · ☀️ Afternoon = second block · 🌙 Evening = light). Sleep 23:00–07:00. <strong>Weekends are WORK</strong> until the Lytkin + Mynbaev primary letters land (your 2026-06-15 call); a Western reply is a bonus, not a precondition — Sat full + gym, Sun keeps one light half-day so zero-rest does not degrade the proof-math.</p>
+    <div class="rhythm">
+      <div class="rh-row rh-rest"><div class="rh-time">07:00–08:30</div><div class="rh-act">Wake · routine · breakfast · light reading (Eccles/Abbott/Pugh · Phase-0 papers · essay)</div></div>
+      <div class="rh-row rh-deep"><div class="rh-time">08:30–12:30</div><div class="rh-act"><strong>🌅 Deep-work block</strong> — real analysis (Eccles→Abbott→Pugh, Lever 1) + Phase-0 build</div></div>
+      <div class="rh-row rh-rest"><div class="rh-time">12:30–13:30</div><div class="rh-act">Lunch · walk · decompress</div></div>
+      <div class="rh-row rh-work"><div class="rh-time">13:30–15:00</div><div class="rh-act">☀️ Second block — coursework / MT1173 / admin / lighter coding</div></div>
+      <div class="rh-row rh-after"><div class="rh-time">15:00–18:00</div><div class="rh-act"><div class="rh-week"><span class="rh-day"><b>Mon</b> Work</span><span class="rh-day gym"><b>Tue</b> 🏋 Gym</span><span class="rh-day"><b>Wed</b> Work</span><span class="rh-day gym"><b>Thu</b> 🏋 Gym</span><span class="rh-day kozha"><b>Fri</b> 📌 Kozha</span><span class="rh-day gym"><b>Sat</b> 🏋 Gym</span><span class="rh-day light"><b>Sun</b> light</span></div></div></div>
+      <div class="rh-row rh-rest"><div class="rh-time">18:00–19:00</div><div class="rh-act">Dinner</div></div>
+      <div class="rh-row rh-eve"><div class="rh-time">19:00–22:00</div><div class="rh-act">🌙 Lighter work · textbook reading · GRE-vocab · recreation — <a class="xref" href="reading.html#lit-character">§10 character/Stoic reading</a> + fiction · social</div></div>
+      <div class="rh-row rh-rest"><div class="rh-time">22:00–23:00</div><div class="rh-act">Wind down · plan tomorrow (jot tomorrow's top 1–3) · optional: a few pages of fiction or a short Stoic passage (Meditations/Seneca) to decompress</div></div>
+      <div class="rh-row rh-sleep"><div class="rh-time">23:00–07:00</div><div class="rh-act">😴 Sleep (8 h)</div></div>
+    </div>
+    <p style="color:var(--fg-dim);font-size:13px;"><strong>Block notes:</strong> ~7 h deep+light work/weekday; gym Tue/Thu/Sat (recovery protects deep-work quality); evening = light reading + GRE-vocab. <strong>Weekend policy (2026-06-15):</strong> weekends are work until the 3 connections land — Sat full + gym, one light half-day on Sun as the guardrail against over-intensity (hard proof-math degrades past ~3–4 h/day). Reinstate a fuller Sunday once Lytkin + Mynbaev are secured (a Western RA reply is a bonus, not a condition). In KBTU semester the morning/afternoon blocks compress around class times. <strong>What "light" / recreation means:</strong> Sunday's light half-day = recovery + your longest reading stretch + the weekly plan-ahead (open next week's card) — NOT a deep block. <strong>Recreation / character reading (your call when):</strong> the <a class="xref" href="reading.html#lit-character">§10 character / Stoic list</a> — this summer's Phase 1 = Stockdale → Hays <em>Meditations</em> → A.A. Long → <em>Atomic Habits</em> → Sellars + Newport + Inwood — plus fiction. Read it in the evening (19:00–22:00) and the Sunday-light stretch; a short Stoic passage can close the day at wind-down. It is recovery/character work, so it lives in the rhythm (not a weekly task-gate) and stays light — it must not eat proof-math time.</p>
+  </div>
+  <div id="week-tasks" class="alert info" style="margin-bottom:16px"><!-- this-week locator banner, filled by renderCurrentWeek() --></div>
+
+  
 <h3 id="lookahead-summer">Lookahead — Summer 2026 (Jun 17 → Aug 31)</h3>
 <div class="tl-scope">
 
@@ -1303,204 +1314,14 @@ body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777;
 </div>
 </div>
 <script>
-  // Tab navigation
-  const tabs = document.querySelectorAll('aside nav button');
-  const sections = document.querySelectorAll('main section.tab');
-  function switchTab(tabId) {
-    tabs.forEach(b => b.classList.remove('active'));
-    sections.forEach(s => s.classList.remove('active'));
-    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
-    if (btn) btn.classList.add('active');
-    const sec = document.getElementById(tabId);
-    if (sec) sec.classList.add('active');
-  }
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-  });
-
-  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a[href^="#"]');
-    if (!link) return;
-    const href = link.getAttribute('href');
-    if (href === '#' || href.length < 2) return;
-    const targetId = href.substring(1);
-    const targetEl = document.getElementById(targetId);
-    if (!targetEl) return;
-    const targetTab = targetEl.closest('section.tab');
-    if (!targetTab) return;
-    e.preventDefault();
-    if (!targetTab.classList.contains('active')) {
-      switchTab(targetTab.id);
-    }
-    setTimeout(() => {
-      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Brief highlight on the target
-      targetEl.classList.add('xref-target');
-      history.replaceState(null, '', '#' + targetId);
-    }, 30);
-  });
-
-  // Honor initial #hash on page load
-  if (location.hash && location.hash.length > 1) {
-    const targetEl = document.getElementById(location.hash.substring(1));
-    if (targetEl) {
-      const targetTab = targetEl.closest('section.tab');
-      if (targetTab) {
-        switchTab(targetTab.id);
-        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
-      }
-    }
-  }
-
-  // Theme toggle
-  const themeBtn = document.getElementById('theme-toggle');
-  function applyTheme() {
-    const dark = localStorage.getItem('dt-theme') === 'dark';
-    document.body.classList.toggle('dark', dark);
-    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
-  }
-  themeBtn.addEventListener('click', () => {
-    const cur = localStorage.getItem('dt-theme') || 'light';
-    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
-    applyTheme();
-  });
-  applyTheme();
-
-  // Checkbox state persistence
-  function loadCheckboxes() {
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (!id) return;
-      const stored = localStorage.getItem('dt-task-' + id) === 'true';
-      cb.checked = stored;
-      if (row && stored) row.classList.add('done');
-    });
-    updateProgress();
-  }
-  document.addEventListener('change', (e) => {
-    if (e.target.type === 'checkbox') {
-      const cb = e.target;
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (!id) return;
-      localStorage.setItem('dt-task-' + id, cb.checked);
-      if (row) row.classList.toggle('done', cb.checked);
-      updateProgress();
-    }
-  });
-
-  function updateProgress() {
-    const all = document.querySelectorAll('input[type="checkbox"]').length;
-    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
-    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
-  }
-
-  // Reset all checkboxes
-  document.getElementById('reset-btn').addEventListener('click', () => {
-    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      const row = cb.closest('.checkbox-row');
-      const id = (row?.dataset.taskId) || cb.dataset.taskId;
-      if (id) localStorage.removeItem('dt-task-' + id);
-      cb.checked = false;
-      if (row) row.classList.remove('done');
-    });
-    updateProgress();
-  });
-
-  // Current week tasks
-  function renderCurrentWeek() {
-    if(!document.getElementById('week-tasks'))return;
-    const banner = document.getElementById('week-tasks');
-    if (!banner) return;
-    const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
-    if (!cards.length) return;
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const P = function(d){ const a=d.split('-'); return new Date(+a[0], +a[1]-1, +a[2]); };
-    let match=null, status='current';
-    for (const c of cards){ if (today>=P(c.dataset.start) && today<=P(c.dataset.end)){ match=c; status='current'; break; } }
-    if (!match){
-      if (today < P(cards[0].dataset.start)) { match=cards[0]; status='upcoming'; }
-      else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
-      else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
-    }
-    cards.forEach(function(c){ c.classList.remove('is-current'); if (c.id==='wk-current') c.removeAttribute('id'); });
-    match.id = 'wk-current'; match.classList.add('is-current'); match.open = true;
-    const label = (match.querySelector('.wk-label')||{}).textContent || '';
-    const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
-    const lead = {current:'📍 This week', upcoming:'⏳ Summer starts Jun 17 — first week', wrap:'✅ Summer plan complete — last week', next:'⏭ Next up'}[status] || 'This week';
-    banner.innerHTML = '<strong>' + lead + '</strong> · ' + label + ' ' + theme + ' · <a href="#wk-current">jump to this week’s tasks ↓</a>';
-  }
-
-  // Kozha funding table: sort + filter
-  (function() {
-    const table = document.getElementById('kozha-table');
-    if (!table) return;
-    const tbody = table.querySelector('tbody');
-    const headers = table.querySelectorAll('th[data-sort-key]');
-    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
-    let sortState = { key: 'deadline', dir: 'asc' };
-
-    function applySort() {
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
-      rows.sort((a, b) => {
-        const av = a.dataset[sortState.key];
-        const bv = b.dataset[sortState.key];
-        let comp;
-        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
-        else comp = String(av).localeCompare(String(bv));
-        return sortState.dir === 'asc' ? comp : -comp;
-      });
-      rows.forEach(r => tbody.appendChild(r));
-      headers.forEach(th => {
-        const k = th.dataset.sortKey;
-        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
-        th.textContent = labels[k] + arrow;
-      });
-    }
-
-    headers.forEach(th => {
-      th.addEventListener('click', () => {
-        const k = th.dataset.sortKey;
-        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
-        else { sortState.key = k; sortState.dir = 'asc'; }
-        applySort();
-      });
-    });
-
-    document.querySelectorAll('.kozha-filter').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const lead = btn.dataset.lead;
-        let visible = 0;
-        tbody.querySelectorAll('tr').forEach(row => {
-          const rowLead = row.dataset.lead;
-          let show;
-          if (lead === 'all') show = true;
-          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
-          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
-          else if (lead === 'Either') show = rowLead === 'Either';
-          row.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
-        if (allBtn) allBtn.textContent = 'All (38)';
-        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
-      });
-    });
-
-    applySort();
-  })();
-
-  // Init
-  renderCurrentWeek();
-  loadCheckboxes();
+(function(){var tbl=document.getElementById('prog-table');if(!tbl)return;
+var sel={type:'all',region:'all',funding:'all'},cnt=document.getElementById('prog-count');
+function apply(){var n=0,rows=tbl.querySelectorAll('tbody tr');rows.forEach(function(tr){
+ var ok=(sel.type=='all'||tr.dataset.type==sel.type)&&(sel.region=='all'||tr.dataset.region==sel.region)&&(sel.funding=='all'||tr.dataset.funding==sel.funding);
+ tr.style.display=ok?'':'none';if(ok)n++;});if(cnt)cnt.textContent=n+' of '+rows.length+' programs';}
+document.querySelectorAll('.pf').forEach(function(b){b.addEventListener('click',function(){
+ sel[b.dataset.f]=b.dataset.v;document.querySelectorAll('.pf[data-f="'+b.dataset.f+'"]').forEach(function(x){x.classList.remove('active')});
+ b.classList.add('active');apply();});});apply();})();
 
 
 (function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
