@@ -45,6 +45,9 @@ dashboard-source.html
 gen_opportunities.py
 build_site.py
 *.py
+# Private local records — kept OFF the public repo (internal notes, kill-lists, full catalogue)
+_internal/
+_catalogue/
 # (opportunities.html + the multi-page site files ARE published — see git add)
 
 # Added 2026-06-15 — folder reorg: private container dirs (whole-dir ignore so any future file inside stays local)

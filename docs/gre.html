@@ -1,0 +1,844 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — GRE</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --bg-2: #ffffff;
+    --bg-3: #f4f4f2;
+    --bg-soft: #f8f7f3;
+    --border: #e6e4df;
+    --border-strong: #d5d2cb;
+    --fg: #1c1c19;
+    --fg-dim: #5f5d57;
+    --fg-dimmer: #8a877f;
+    --accent: #2954c8;
+    --accent-2: #7c3aed;
+    --accent-soft: #eaf0ff;
+    --ok: #1f8a4d;
+    --ok-soft: #e8f5ed;
+    --warn: #b06a00;
+    --warn-soft: #fbf2e1;
+    --urgent: #c8302a;
+    --urgent-soft: #fbeae8;
+    --info: #0d7e8c;
+    --info-soft: #e6f4f6;
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-md: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  }
+  body.dark {
+    --bg: #0f1216;
+    --bg-2: #161a21;
+    --bg-3: #1d232c;
+    --bg-soft: #181d25;
+    --border: #2a313d;
+    --border-strong: #3a414d;
+    --fg: #e3e8ef;
+    --fg-dim: #8a94a5;
+    --fg-dimmer: #5a6374;
+    --accent: #6ab0ff;
+    --accent-2: #a78bfa;
+    --accent-soft: #1a2940;
+    --ok: #62d17a;
+    --ok-soft: #15301d;
+    --warn: #f7b04a;
+    --warn-soft: #2b210d;
+    --urgent: #ff6961;
+    --urgent-soft: #2c1715;
+    --info: #4dc4d1;
+    --info-soft: #122a2d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 18px;
+    margin: 0 24px 4px 24px;
+    font-weight: 600;
+  }
+  aside .subtitle {
+    margin: 0 24px 24px 24px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  aside nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-family: var(--sans);
+    font-size: 14px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  aside nav button:hover {
+    background: var(--bg-3);
+    color: var(--fg);
+  }
+  aside nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  aside .footer {
+    margin: 32px 24px 16px 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-dimmer);
+  }
+  aside .footer button {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  aside .footer button:hover {
+    background: var(--border);
+  }
+  main {
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 12px 0;
+    font-weight: 600;
+  }
+  .tab-subtitle {
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .stat .value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .stat .value.small { font-size: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-3);
+    font-weight: 600;
+    color: var(--fg-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-soft); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.tier-1 { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.tier-2 { background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-3 { background: var(--info-soft); color: var(--info); }
+  .badge.tier-4 { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-pending { background: var(--bg-3); color: var(--fg-dim); }
+  .badge.status-progress { background: var(--info-soft); color: var(--info); }
+  .badge.status-done { background: var(--ok-soft); color: var(--ok); }
+  .badge.status-blocked { background: var(--urgent-soft); color: var(--urgent); }
+  .badge.status-soon { background: var(--warn-soft); color: var(--warn); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checkbox-row:last-child { border-bottom: none; }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .checkbox-row .task-content { flex: 1; }
+  .checkbox-row .task-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .checkbox-row.done .task-content > div:first-child {
+    text-decoration: line-through;
+    color: var(--fg-dim);
+  }
+  .deadline { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .deadline.past { color: var(--urgent); }
+  .deadline.soon { color: var(--warn); }
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .alert {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .alert.info { background: var(--info-soft); border-left-color: var(--info); }
+  .alert.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+  .alert.urgent { background: var(--urgent-soft); border-left-color: var(--urgent); }
+  .xref {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .xref:hover { border-bottom-style: solid; background: var(--accent-soft); }
+  .xref-target {
+    scroll-margin-top: 16px;
+  }
+  .xref-target:target {
+    background: var(--warn-soft);
+    transition: background 1.2s;
+  }
+  .lock-item {
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-2);
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+  }
+  .lock-item strong { color: var(--accent); }
+  .month-group {
+    margin-bottom: 24px;
+  }
+  .month-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pill {
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+  details summary:hover { color: var(--accent); }
+  details[open] summary { margin-bottom: 12px; }
+  .small { font-size: 12px; color: var(--fg-dim); }
+  .mono { font-family: var(--mono); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .reset-btn {
+    background: var(--urgent-soft);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .kozha-filter {
+    background: var(--bg-3);
+    color: var(--fg-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .kozha-filter:hover { background: var(--bg-soft); }
+  .kozha-filter.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  #kozha-table th[data-sort-key]:hover { background: var(--bg-soft); }
+  @media (max-width: 768px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; }
+    main { padding: 16px; }
+  }
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+h2[id],h3[id]{scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+/* === calendar === */
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
+.cal-filter.off{opacity:.38}
+.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
+.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
+.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.cal-item{font-weight:600}
+.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
+.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
+.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
+.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
+.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
+.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="">Roadmap</a><a href="rhythm.html" class="">Daily rhythm</a><a href="tasks.html" class="">Tasks</a><a href="programs.html" class="">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="">Reading</a><a href="gre.html" class="cur">GRE</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">GRE</div><a href="#gre-1-gre-prep-june-2026-september-2027" class="">GRE Prep — June 2026 → September 2027</a><a href="#gre-2-diagnostic-baseline-untimed-powerprep-2026-0" class="h3">Diagnostic baseline (UNTIMED POWERPREP, 2026-05-25)</a><a href="#gre-3-score-targets-revised-2026-05-26" class="h3">Score targets (REVISED 2026-05-26)</a><a href="#gre-4-per-programme-operative-status-final-classif" class="h3">Per-programme operative status (FINAL classification per 18t</a><a href="#gre-5-phase-1-background-june-october-2026-5-7-hr-" class="h3">Phase 1 — Background (June–October 2026, ~5-7 hr/wk)</a><a href="#gre-6-phase-2-uol-exam-pause-november-2026" class="h3">Phase 2 — UoL exam pause (November 2026)</a><a href="#gre-7-phase-3-december-2026-calibration-3-hrs" class="h3">Phase 3 — December 2026 calibration (~3 hrs)</a><a href="#gre-8-phase-4-jan-jun-2027-gre-suspended-revised-2" class="h3">Phase 4 — Jan-Jun 2027 GRE SUSPENDED (REVISED 2026-05-26)</a><a href="#gre-9-phase-5-jul-aug-2027-intensive-25-35-hr-tota" class="h3">Phase 5 — Jul-Aug 2027 Intensive (~25-35 hr total, NEW timin</a><a href="#gre-10-phase-6-september-2027-test-retake-buffer" class="h3">Phase 6 — September 2027 test + retake buffer</a><a href="#gre-11-contingent-strategy-if-sep-2027-underperform" class="h3">Contingent strategy if Sep 2027 underperforms (Q ≤ 162)</a><a href="#gre-12-vocabulary-strategy-detail-the-long-pole" class="h3">Vocabulary strategy detail (the long pole)</a><a href="#gre-13-per-programme-gre-policy-verification-autumn" class="h3">Per-programme GRE policy verification (Autumn 2027 action)</a><a href="#gre-14-submission-decision-rule-per-programme-dec-2" class="h3">Submission decision rule (per programme, Dec 2027 applicatio</a><a href="#gre-15-key-resources-ranked-by-roi" class="h3">Key resources (ranked by ROI)</a><a href="#gre-16-total-budget" class="h3">Total budget</a></div>
+<div class="site-main"><section class="page-section" id="gre">
+
+  <h2 id="gre-1-gre-prep-june-2026-september-2027">GRE Prep — June 2026 → September 2027</h2>
+  <p class="tab-subtitle">REVISED 2026-07-01 — biostat EXCLUDED (statistics-only per user); OR/ORFE added. <strong>GRE is CONDITIONAL, not mandatory.</strong> Required only at a subset — US Stats: Stanford / Duke / UW-Madison; OR/ORFE: Stanford MS&amp;E, Berkeley IEOR, Northwestern IEMS, NYU Stern OM, UT-Austin ORIE, Wisconsin ISyE (cycle-dependent). Optional or not-accepted at most (Columbia IEOR, Georgia Tech, Michigan, Cornell, Berkeley/UW Stats, and the Asian funded PhDs). <strong>Prep QUANT-ONLY</strong>; Verbal is not a gate (only mild bars at UT-Austin V156 / KU Leuven V152, both droppable). Targets: <strong>Q ≥ 167, V respectable (~150-153, not a floor), AW ≥ 4.0.</strong> Vocab = a light 30-min hedge, NOT load-bearing. Test ~Sep 2027; decide submission per-program at the Sep-2027 gate. See <span class="mono">reference_gre_required_program_map + reference_or_orfe_catalogue (memory)</span>.</p>
+
+  <h3 id="gre-2-diagnostic-baseline-untimed-powerprep-2026-0">Diagnostic baseline (UNTIMED POWERPREP, 2026-05-25)</h3>
+  <table>
+    <thead><tr><th>Section</th><th>Raw</th><th>% correct</th><th>Untimed scaled est.</th><th>Timed est. without prep</th></tr></thead>
+    <tbody>
+      <tr><td>Verbal (Sec 2 + Sec 4)</td><td>15/27</td><td>55.6%</td><td>~152-154</td><td>~145-150</td></tr>
+      <tr><td>Quant (Sec 3 + Sec 5)</td><td>21/27</td><td>77.8%</td><td>~161-163</td><td>~154-159</td></tr>
+      <tr><td>Analytical Writing</td><td>N/A</td><td>N/A</td><td>not graded untimed</td><td>~3.5-4.0 untrained</td></tr>
+    </tbody>
+  </table>
+
+  <div class="lock-item">
+    <strong>Diagnosis (user-confirmed):</strong>
+    <ul>
+      <li><strong>Quant:</strong> NOT a content gap. Format familiarity + speed only. User finished untimed Quant in under 2 hrs, scored 91.7% on Sec 3. ~50-80 hrs of GRE-format practice needed.</li>
+      <li><strong>Verbal:</strong> Vocabulary is the bottleneck. "Knew only 1-2 of 4-6 options" on Text Completion / Sentence Equivalence. NOT a Reading Comp / inferential logic gap.</li>
+      <li><strong>AW:</strong> Standard low-time-investment section. Tackle in January batch.</li>
+    </ul>
+  </div>
+
+  <h3 id="gre-3-score-targets-revised-2026-05-26">Score targets (REVISED 2026-05-26)</h3>
+  <div class="lock-item">
+    <strong>Final targets: Q ≥ 167, V ≥ 150 (respectable — NOT a gate), AW ≥ 4.0.</strong> Q≥167 justified by UChicago Stats Q≥90th (~169), Wharton top-10% (~169), and the OR lane (UT-Austin ORIE avg 168; Berkeley IEOR / Northwestern Q165+). The old V≥155 floor was driven entirely by biostat primaries (Vanderbilt/UF), now EXCLUDED — no kept stats/OR program sets a hard Verbal floor except mild UT-Austin (V156 ~70th) and KU Leuven (V152 ~55th), both droppable. A high-Q / mid-V profile is the accepted international-quant norm; don't chase Verbal.
+  </div>
+
+  <h3 id="gre-4-per-programme-operative-status-final-classif">Per-programme operative status (FINAL classification per 18th deep-research)</h3>
+  <p class="tab-subtitle">Four operative classes: (a) Optional + not operative · (b) Optional + materially considered if submitted · (c) Effectively crucial / required · (d) Not accepted / not considered</p>
+  <table>
+    <thead><tr><th>Programme</th><th>Class</th><th>Submission rule</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">OR / ORFE / IEOR / MS&amp;E PhDs (added 2026-07-01 — see OR/ORFE catalogue)</td></tr>
+      <tr><td><strong>Columbia IEOR</strong></td><td>(b)</td><td>Optional (2026 cycle) — cleanest prereq fit; submit if Q ≥ 167</td></tr>
+      <tr><td>Georgia Tech ISyE (OR)</td><td>(b)</td><td>Optional; submit if Q ≥ 167</td></tr>
+      <tr><td>Michigan IOE</td><td>(d)</td><td>Not used in admissions</td></tr>
+      <tr><td>Cornell ORIE</td><td>(c)</td><td><strong>Strongly encouraged</strong> — submit</td></tr>
+      <tr><td><strong>Stanford MS&amp;E (OR)</strong></td><td>(c)</td><td><strong>REQUIRED of all applicants</strong> — high Q; must schedule</td></tr>
+      <tr><td><strong>UC Berkeley IEOR</strong></td><td>(c)</td><td><strong>REQUIRED</strong> (no UC-waiver for you) — Q167+; Verbal little weight</td></tr>
+      <tr><td><strong>Northwestern IEMS</strong></td><td>(c)</td><td><strong>REQUIRED</strong> — Q165+ de facto</td></tr>
+      <tr><td><strong>NYU Stern OM</strong></td><td>(c)</td><td><strong>REQUIRED</strong> (GRE/GMAT) — Q~90th; ~2 admits/yr</td></tr>
+      <tr><td><strong>UT-Austin ORIE</strong></td><td>(c)</td><td><strong>REQUIRED</strong> — Q avg 168 + Verbal "upper 50%" (V~156, the one mild Verbal bar)</td></tr>
+      <tr><td>Purdue IE (OR)</td><td>(b/c)</td><td>Pages conflict → treat as required; submit strong Q (165+)</td></tr>
+      <tr><td>Wisconsin ISyE (OR)</td><td>(c/a)</td><td>Required for Spr/Sum-2027 entry; OPTIONAL from Fall-2027 — decide by intake</td></tr>
+      <tr><td>Princeton ORFE</td><td>(a)</td><td>Optional (re-verify Sep 2026); submit if Q ≥ 167 — apex free-option</td></tr>
+      <tr><td>MIT ORC (Operations Research)</td><td>(a)</td><td>Optional; no documented advantage to submitting</td></tr>
+      <tr><td>Asian funded PhDs — NUS Math / NTU SPMS / HKUST IEDA / CUHK SEEM / HKUST ISOM</td><td>(a)</td><td>GRE-free or strongly-recommended-not-required (NUS/NTU) — no Verbal floor</td></tr>
+      <tr><td>Aarhus BSS econometrics (DK, 4+4)</td><td>(d)</td><td>No GRE — salaried; documented QR exits</td></tr>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">US Statistics PhDs</td></tr>
+      <tr><td>Stanford Stats PhD</td><td>(c)</td><td>ALWAYS SUBMIT — but Q170 effective floor (per ETS percentile compression); apply as long-reach</td></tr>
+      <tr><td>Berkeley Stats PhD</td><td>(d)</td><td><strong>DO NOT submit</strong> — "will not be accepted"</td></tr>
+      <tr><td>UW Stats PhD</td><td>(d)</td><td><strong>DO NOT submit</strong> — "not used at all"</td></tr>
+      <tr><td>UChicago Stats PhD</td><td>(c)</td><td>ALWAYS SUBMIT — Q ≥ 90th de facto (~169 modal admit); reach</td></tr>
+      <tr><td>Wharton Stats PhD</td><td>(c)</td><td>ALWAYS SUBMIT — top-10% admits</td></tr>
+      <tr><td>CMU Stats PhD (pure)</td><td>(a)</td><td>Optional — but Kennedy fit; submit if Q ≥ 167 for international calibration</td></tr>
+      <tr><td>CMU Stats joint (Stat/Public Policy, Stat/EPP, Stat/Neural Comp)</td><td>(c)</td><td>ALWAYS SUBMIT if applying to joint programmes</td></tr>
+      <tr><td>Harvard Stats PhD</td><td>(a)</td><td>Optional; submit only if Q ≥ 168</td></tr>
+      <tr><td>Michigan Stats PhD</td><td>(a)</td><td>Optional, "minor and supporting role"; submit if Q ≥ 167</td></tr>
+      <tr><td>Princeton ORFE</td><td>(a)</td><td>Optional Fall 2025/26; <strong>re-verify Sept 2026 for Fall 2028</strong>; submit if Q ≥ 167</td></tr>
+      <tr><td>NC State Stats PhD</td><td>(a)</td><td>Optional; submit if Q ≥ 167 for international calibration</td></tr>
+      <tr><td>Cornell Stats PhD</td><td>(d)</td><td>DO NOT submit — "not required or reviewed"</td></tr>
+      <tr><td>Cornell ORIE PhD</td><td>(c)</td><td>ALWAYS SUBMIT — "strongly encouraged"</td></tr>
+      <tr><td>Columbia Stats PhD</td><td>(b)</td><td>Submit if Q ≥ 167</td></tr>
+      <tr><td>Duke Stats PhD</td><td>(b)</td><td>Submit if Q ≥ 167 (Volfovsky fit)</td></tr>
+      <tr><td><strong>NYU Stern Statistics PhD</strong></td><td>(c)</td><td><strong>HARD REQUIRED, no waivers</strong>; apply only if Q ≥ 165</td></tr>
+      <tr><td><strong>MIT IDSS-SES + IDPS</strong></td><td>(b)</td><td>Submit if Q ≥ 165 (published floor); Rakhlin/Rigollet/Uhler fit</td></tr>
+      <tr><td><strong>Stanford GSB OIT (Wager/Athey/Spiess)</strong></td><td>(c)</td><td>ALWAYS SUBMIT — required; 1-3 admits/yr; business-school SOP framing</td></tr>
+      <tr><td><strong>Yale Statistics &amp; Data Science</strong></td><td>(b)</td><td>Submit if Q ≥ 167; only Yale stats PhD entry</td></tr>
+      <tr><td>Texas A&amp;M Stats</td><td>(a)</td><td>Optional; real analysis preferred — UIUC MATH 447 substitutes; submit if Q ≥ 167</td></tr>
+      <tr><td>Iowa State Stats</td><td>(b)</td><td>Department says "beneficial to submit"; published Q ≥ 163, V ≥ 148, AW ≥ 3</td></tr>
+      <tr><td>Penn State Eberly Stats</td><td>(a)</td><td>"Applications without GRE given full consideration" — explicit not-considered framing; submit if Q ≥ 167</td></tr>
+      <tr><td>MIT EECS (backup stats-track)</td><td>(d)</td><td>DO NOT submit — "not used regardless of citizenship"</td></tr>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">Stanford Knight-Hennessy eligible</td></tr>
+      <tr><td>Stanford MS Statistics</td><td>(c)</td><td>ALWAYS SUBMIT — required by Stats programme</td></tr>
+      <tr><td>Stanford MS Biomedical Data Science</td><td>(d)</td><td>DO NOT submit — "will not be considered if submitted"</td></tr>
+      <tr><td colspan="3" style="background: var(--bg-3); padding: 6px 12px; font-weight: 600;">UK MSc programmes</td></tr>
+      <tr><td>Cambridge MASt / Oxford / LSE / Imperial / Warwick / UCL MSc</td><td>(a)</td><td>NOT required at entry; useful for downstream US PhD apps per Cambridge FAQ</td></tr>
+    </tbody>
+  </table>
+
+  <div class="lock-item">
+    <strong>Summary (REVISED 2026-07-01 — statistics + OR/ORFE, biostat excluded):</strong>
+    <ul>
+      <li><strong>GRE is conditional, not mandatory.</strong> Required at a subset — Stats: Stanford / Duke / UW-Madison; OR/ORFE: Stanford MS&amp;E, Berkeley IEOR, Northwestern, NYU Stern, UT-Austin, Wisconsin (cycle-dependent). Optional or not-accepted at most of the rest (Columbia IEOR, GT, Michigan, Cornell, Berkeley/UW Stats, Asian funded PhDs, Aarhus).</li>
+      <li><strong>Prep Quant-only.</strong> Verbal gates nothing on the kept list except a mild UT-Austin (V~156) and KU Leuven (V152) — both droppable. A high-Q / mid-V profile is the accepted norm.</li>
+      <li><strong>Kill-switch (Sep-Oct 2027):</strong> pull each target's live GRE policy; if the finalized list is mostly GRE-optional, the whole test (and the vocab) drops to near-zero.</li>
+    </ul>
+  </div>
+
+  <div class="alert">
+    <strong>Stanford Stats Q170 ceiling correction (2026-05-26):</strong> Stanford Stats published "Q94% admit avg" predates current 2021-2024 ETS percentile compression. Under current tables, Q170 = 91-92nd percentile. So Stanford Stats admits effectively require Q169-170 (near-perfect Quant). Your projected ceiling Q165-168 places below median — apply as long-reach, not target. Same constraint at UChicago Stats (Q≥90th = Q169 modal admit).
+    <br><br>
+    <strong>NYU Stern Stats:</strong> HARD REQUIRED, no waivers. Apply only if Q ≥ 165 confirmed at Sep 2027 test.
+    <br><br>
+    <strong>MIT has NO standalone Statistics PhD.</strong> Entry door = MIT IDSS-SES doctoral program (~6 PhDs/yr) with IDPS stats add-on. Rakhlin/Rigollet/Uhler/Wornell faculty. Published floors: V157(150 non-native)/Q165/AW4.0.
+    <br><br>
+    <strong>Princeton ORFE:</strong> policy is announced cycle-by-cycle. Currently (a) optional for Fall 2025/26; re-verify September 2026 for Fall 2028 status.
+  </div>
+
+  <h3 id="gre-5-phase-1-background-june-october-2026-5-7-hr-">Phase 1 — Background (June–October 2026, ~5-7 hr/wk)</h3>
+  <div class="lock-item">
+    <strong>Daily / weekly routine:</strong>
+    <ul>
+      <li><strong>Norman Lewis <em>Word Power Made Easy</em></strong> (PRIMARY) — 30 min × 5 days/wk. Roots/prefixes/suffixes. Teaches DECODING not memorization. ~30-40 hr total over phase. <strong>Highest-leverage approach for Anki-resistant learners.</strong></li>
+      <li><strong>GregMat — FREE path first</strong> (SECONDARY) — Vocab Mountain (free tool on gregmat.com) + YouTube channel during Jun-Oct 2026 background phase. Upgrade to <strong>GregMat Plus ($7.99/mo, current price)</strong> only during Jun-Sep 2027 intensive if structured daily quizzes needed (~$32 total for 3-4 mo).</li>
+      <li><strong>Higher-register reading habit</strong> — 30 min × 2-3 days/wk. <strong>NOT NYT/Atlantic/Economist</strong> (register too low per user feedback). Use: <strong>New Yorker long-form / TLS / LRB or NYRB / Foreign Affairs / Aeon.co / 19th-century fiction (Henry James, Wharton, Conrad, Eliot)</strong>. Active lookup of unknown words → personal notebook.</li>
+      <li><strong>Active vocab lookup from project papers</strong> — embedded in Phase 0 reading (Gibbs-Cherian-Candès 2305.12616 + Hore RLCP + Angelopoulos intro) + higher-register essay habit. Context-anchored vocab sticks ~10x better than isolated.</li>
+      <li><strong>Quant maintenance</strong> — 15 min × 1 day/wk. One Manhattan Quantitative Comparison problem set per week. Maintains GRE-format familiarity without diluting foundations / project work.</li>
+    </ul>
+    <strong>SKIP:</strong> Anki (user's known failure mode from SAT), Magoosh Vocab Builder app (isolated cards), Quizlet decks, NYT-tier passive reading.
+  </div>
+
+  <h3 id="gre-6-phase-2-uol-exam-pause-november-2026">Phase 2 — UoL exam pause (November 2026)</h3>
+  <div class="lock-item">
+    <strong>0 hr/wk on GRE. Full suspension.</strong> UoL Linear Algebra exam + ML4H Aug 27 / CDSM submission take precedence. GPA push from 5th semester onwards is higher-weight signal than GRE per memory #94. Reading habit can continue if energy permits but no formal study.
+  </div>
+
+  <h3 id="gre-7-phase-3-december-2026-calibration-3-hrs">Phase 3 — December 2026 calibration (~3 hrs)</h3>
+  <div class="lock-item">
+    <strong>Take POWERPREP Plus Test 1 (TIMED, $39.95 from ETS).</strong> Real scaled scores + pacing diagnostic (where you ran out of time vs guess vs accuracy degrade). Review by section: pinpoint 3-5 weakest Quant question types and 3-5 weakest Verbal question types. Adjust January plan based on actual gap.
+  </div>
+
+  <h3 id="gre-8-phase-4-jan-jun-2027-gre-suspended-revised-2">Phase 4 — Jan-Jun 2027 GRE SUSPENDED (REVISED 2026-05-26)</h3>
+  <div class="lock-item">
+    GRE prep paused. Active commitments take all bandwidth:
+    <ul>
+      <li><strong>UIUC NetMath MATH 447</strong> Feb-Jun 2027 (16 weeks, ~10-15 hr/wk, A-grade target)</li>
+      <li><strong>UoL Year 3 coursework</strong> (MT2116 Abstract Maths, ST2133 Distribution Theory, ST2134 Statistical Inference, MT3042 Optimisation)</li>
+      <li><strong>UoL Year 3 finals</strong> May/June 2027 — protect GPA</li>
+      <li>Option α (DR-OPE) project execution + cold-email follow-ups</li>
+    </ul>
+    Light vocab maintenance OK (~1-2 hr/wk Norman Lewis review). No formal Quant or AW study.
+  </div>
+
+  <h3 id="gre-9-phase-5-jul-aug-2027-intensive-25-35-hr-tota">Phase 5 — Jul-Aug 2027 Intensive (~25-35 hr total, NEW timing)</h3>
+  <table>
+    <thead><tr><th>Week</th><th>Quant</th><th>Verbal + AW</th><th>Full timed practice</th></tr></thead>
+    <tbody>
+      <tr><td>Wk 1 (early Jul)</td><td>Manhattan 5lb Quant content review + diagnostic — 8 hr</td><td>Vocab refresh (Norman Lewis weakness sections) — 3 hr</td><td>—</td></tr>
+      <tr><td>Wk 2</td><td>100 problem set + 1 timed Quant section — 8 hr</td><td>RC practice + Text Completion — 4 hr</td><td>POWERPREP Plus Test 2 — 4 hr</td></tr>
+      <tr><td>Wk 3</td><td>Question-type weakness drill — 6 hr</td><td>2 timed Verbal sections — 4 hr</td><td>—</td></tr>
+      <tr><td>Wk 4 (late Jul)</td><td>1 timed Quant section — 4 hr</td><td>3 AW essays (mix Issue + Argument) — 3 hr</td><td>Manhattan PT 1 — 4 hr</td></tr>
+      <tr><td>Wk 5 (early Aug)</td><td>Targeted weakness + speed — 5 hr</td><td>3-4 AW essays + ScoreItNow! calibration — 4 hr</td><td>—</td></tr>
+      <tr><td>Wk 6</td><td>Mixed full-section practice — 5 hr</td><td>Final RC + Verbal review — 3 hr</td><td>Manhattan PT 2 — 4 hr</td></tr>
+      <tr><td>Wk 7 (late Aug)</td><td>Light review + nerves management — 3 hr</td><td>Final vocab review — 2 hr</td><td>Mock test in test conditions — 4 hr</td></tr>
+      <tr><td>Wk 8 (early Sep)</td><td>Test prep + rest — 2 hr</td><td>Light reading day before — 1 hr</td><td><strong>TEST DAY (early-mid Sep 2027)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="gre-10-phase-6-september-2027-test-retake-buffer">Phase 6 — September 2027 test + retake buffer</h3>
+  <div class="lock-item">
+    <strong>Test date:</strong> early-mid September 2027. Book Almaty test center <strong>late July 2027</strong> (~6 weeks ahead). Saturday morning slots fill fastest. V/Q scores released immediately; AW + official report 8-10 days later.
+    <br><br>
+    <strong>Retake if:</strong> Quant &lt; 165 (below the OR/stats class-(c) bar) OR AW &lt; 3.5. Verbal is NOT a retake trigger — no hard floor on the kept list (UT-Austin's V~156 is the only mild case).<br>
+    <strong>Don't retake if:</strong> Quant ≥ 167 AND AW ≥ 4.0 (Verbal wherever it lands).<br>
+    <strong>Retake windows:</strong> Late October 2027 (21+ day rule from Sep test); mid-November 2027 if the first retake is under threshold (last possible before Dec application deadlines).
+  </div>
+
+  <h3 id="gre-11-contingent-strategy-if-sep-2027-underperform">Contingent strategy if Sep 2027 underperforms (Q ≤ 162)</h3>
+  <div class="alert">
+    <strong>If Sep 2027 Quant underperforms (Q ≤ 162):</strong> lean the apply list toward the GRE-optional / not-accepted stats + OR programs — Berkeley / UW / Cornell Stats, Columbia IEOR, Georgia Tech ISyE, Michigan IOE, and the Asian funded PhDs (NUS / NTU / HKUST / CUHK) + Aarhus — where a weak or absent GRE costs nothing. Drop the GRE-required reaches (Stanford MS&amp;E, Berkeley IEOR, Northwestern, NYU Stern, UT-Austin) where a low Quant actively hurts. A retake window exists (late Oct / mid-Nov 2027); the Canada MSc bridge is entirely GRE-free regardless.
+  </div>
+
+  <h3 id="gre-12-vocabulary-strategy-detail-the-long-pole">Vocabulary strategy detail (the long pole)</h3>
+  <div class="alert">
+    <strong>Critical correction (2026-05-25):</strong> User confirmed NYT / Atlantic / Economist register is too low for GRE Verbal vocab gain. Modern journalism reads at ~10-11th grade Flesch ease; GRE Verbal tests one register higher.
+    <br><br>
+    <strong>GRE-frequent words rarely appearing in NYT-tier:</strong> abstemious, mendacious, loquacious, obstreperous, pellucid, recondite, vituperative, sanguine, specious, tendentious, perfidious, sycophantic, pusillanimous, fulsome.
+    <br><br>
+    <strong>Higher-register sources (use these instead):</strong> New Yorker long-form essays; TLS (Times Literary Supplement); LRB or NYRB; Foreign Affairs; Aeon.co; 19th-century fiction (Henry James, Edith Wharton, Joseph Conrad, T.S. Eliot — particularly <em>The Portrait of a Lady</em>, <em>The Age of Innocence</em>, <em>Heart of Darkness</em>).
+  </div>
+
+  <h3 id="gre-13-per-programme-gre-policy-verification-autumn">Per-programme GRE policy verification (Autumn 2027 action)</h3>
+  <div class="lock-item">
+    In Sep-Oct 2027, before final commitment to submit, verify GRE policy at each target programme's admissions page. <strong>Policies change annually.</strong> Decision rule at the gate:
+    <ul>
+      <li>≥70% require / strongly consider GRE → prep as planned, take Feb 2027 test, retake if needed</li>
+      <li>≥80% waived / not-accepted → reduce Jan intensity to 8-10 hr/wk, take Feb 2027 to keep optionality, submit selectively</li>
+      <li>100% waived → SKIP entirely; redirect 80+ hours to higher-leverage work (ML4H polish, cold-email pipeline, MT2175 self-study)</li>
+    </ul>
+  </div>
+
+  <h3 id="gre-14-submission-decision-rule-per-programme-dec-2">Submission decision rule (per programme, Dec 2027 application time)</h3>
+  <table>
+    <thead><tr><th>Your score vs programme median admit</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr><td>Above programme median admit</td><td><strong>Submit.</strong> Strengthens.</td></tr>
+      <tr><td>At programme median</td><td><strong>Submit.</strong> Marginal positive.</td></tr>
+      <tr><td>Below programme median</td><td><strong>Don't submit.</strong> Actively weakens (suggests optional choice was made because score wasn't strong).</td></tr>
+      <tr><td>No published median</td><td><strong>Submit if Q ≥ 162 AND V ≥ 150</strong> (default safe threshold).</td></tr>
+    </tbody>
+  </table>
+  <div class="lock-item">
+    <strong>Stats / OR median-admit context (rough):</strong> apex Stats + OR (Stanford / UChicago / Wharton / Princeton ORFE) run Q ~169-170 — apply there as a long-reach. Mid-tier stats + OR (Columbia IEOR, Duke, Georgia Tech, Michigan IOE, UT-Austin) sit Q ~165-168 — a Q167 puts you at/above median → submit. Verbal is not part of the calculus on this list.
+  </div>
+
+  <h3 id="gre-15-key-resources-ranked-by-roi">Key resources (ranked by ROI)</h3>
+  <table>
+    <thead><tr><th>Section</th><th>Primary resource</th><th>Cost</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Vocab</td><td>Norman Lewis <em>Word Power Made Easy</em></td><td>~$10</td><td>Roots-based decoding; highest leverage for Anki-resistant learners</td></tr>
+      <tr><td>Vocab</td><td>GregMat free (Vocab Mountain + YouTube); upgrade to Plus $7.99/mo only for Jun-Sep 2027 intensive</td><td>$0 background, ~$32 intensive</td><td>Free path first; paid daily quizzes only in final 3-4 mo if needed</td></tr>
+      <tr><td>Quant</td><td>Manhattan 5lb GRE Quant</td><td>~$25</td><td>~1800 problems organized by question type</td></tr>
+      <tr><td>Quant practice</td><td>POWERPREP Plus Tests 1, 2</td><td>$39.95 each</td><td>Real ETS scored practice; calibration + final practice</td></tr>
+      <tr><td>AW</td><td>ETS Issue + Argument prompt pool (free) + ScoreItNow! ($20)</td><td>$0 + $20-40</td><td>Pool is finite; official scaled rating for 1-2 essays</td></tr>
+      <tr><td>RC + Text Completion</td><td>Manhattan 5lb GRE Verbal</td><td>~$25</td><td>Companion to Quant 5lb</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="gre-16-total-budget">Total budget</h3>
+  <div class="lock-item">
+    <strong>Time:</strong> ~210-300 hours over 9 months (background 100-140 hr + January intensive 80-100 hr + retake buffer 30-60 hr if needed).<br>
+    <strong>Money:</strong> Norman Lewis $10 + GregMat ~$32 (4 mo intensive only at $7.99/mo; free during background phase) + Manhattan 5lb Quant $25 + Manhattan 5lb Verbal $25 + POWERPREP Plus ×2 $80 + ScoreItNow! ×2 $40 + test fee ~$220 = <strong>~$432 total.</strong> Retake adds $220 if needed.
+  </div>
+
+</section>
+</div>
+</div>
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return;
+    const banner = document.getElementById('week-tasks');
+    if (!banner) return;
+    const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
+    if (!cards.length) return;
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const P = function(d){ const a=d.split('-'); return new Date(+a[0], +a[1]-1, +a[2]); };
+    let match=null, status='current';
+    for (const c of cards){ if (today>=P(c.dataset.start) && today<=P(c.dataset.end)){ match=c; status='current'; break; } }
+    if (!match){
+      if (today < P(cards[0].dataset.start)) { match=cards[0]; status='upcoming'; }
+      else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
+      else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
+    }
+    cards.forEach(function(c){ c.classList.remove('is-current'); if (c.id==='wk-current') c.removeAttribute('id'); });
+    match.id = 'wk-current'; match.classList.add('is-current'); match.open = true;
+    const label = (match.querySelector('.wk-label')||{}).textContent || '';
+    const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
+    const lead = {current:'📍 This week', upcoming:'⏳ Summer starts Jun 17 — first week', wrap:'✅ Summer plan complete — last week', next:'⏭ Next up'}[status] || 'This week';
+    banner.innerHTML = '<strong>' + lead + '</strong> · ' + label + ' ' + theme + ' · <a href="#wk-current">jump to this week’s tasks ↓</a>';
+  }
+
+  // Kozha funding table: sort + filter
+  (function() {
+    const table = document.getElementById('kozha-table');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('th[data-sort-key]');
+    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
+    let sortState = { key: 'deadline', dir: 'asc' };
+
+    function applySort() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
+      rows.sort((a, b) => {
+        const av = a.dataset[sortState.key];
+        const bv = b.dataset[sortState.key];
+        let comp;
+        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
+        else comp = String(av).localeCompare(String(bv));
+        return sortState.dir === 'asc' ? comp : -comp;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      headers.forEach(th => {
+        const k = th.dataset.sortKey;
+        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
+        th.textContent = labels[k] + arrow;
+      });
+    }
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sortKey;
+        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = k; sortState.dir = 'asc'; }
+        applySort();
+      });
+    });
+
+    document.querySelectorAll('.kozha-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lead = btn.dataset.lead;
+        let visible = 0;
+        tbody.querySelectorAll('tr').forEach(row => {
+          const rowLead = row.dataset.lead;
+          let show;
+          if (lead === 'all') show = true;
+          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
+          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
+          else if (lead === 'Either') show = rowLead === 'Either';
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
+        if (allBtn) allBtn.textContent = 'All (38)';
+        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
+      });
+    });
+
+    applySort();
+  })();
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
+
+
+(function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
+ const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);if(document.getElementById(id))map[id]=a;});
+ const ids=Object.keys(map);function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<170)cur=id;}links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+ window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();
+
+</script>
+</body></html>
