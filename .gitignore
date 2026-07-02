@@ -58,6 +58,9 @@ _research/
 _reference/
 _transcripts/
 
+# Added 2026-07-02 — Fable deep-research verification prompts (local only)
+_fable-verification/
+
 # Jekyll-specific (we removed Jekyll; using .nojekyll instead)
 _config.yml
 _site/
