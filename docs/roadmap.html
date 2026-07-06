@@ -380,339 +380,15 @@
   }
 
 
-/* ---- Daily rhythm: vertical time-block timeline (replaces the old 7-col table) ---- */
-.rhythm { border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--bg-2); margin-bottom:14px; }
-.rh-row { display:flex; align-items:flex-start; gap:14px; padding:9px 14px; border-bottom:1px solid var(--border); border-left:4px solid transparent; }
-.rh-row:last-child { border-bottom:none; }
-.rh-time { flex:none; width:104px; font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--fg-dim); padding-top:1px; }
-.rh-act { flex:1; font-size:14px; }
-.rh-deep { border-left-color:var(--accent); }
-.rh-work { border-left-color:var(--info); }
-.rh-after { border-left-color:var(--warn); }
-.rh-eve { border-left-color:var(--accent-2); }
-.rh-rest { background:var(--bg-soft); }
-.rh-rest .rh-act, .rh-sleep .rh-act { color:var(--fg-dim); }
-.rh-sleep { background:var(--bg-3); }
-.rh-week { display:flex; flex-wrap:wrap; gap:6px; }
-.rh-day { font-size:12.5px; padding:3px 9px; border-radius:8px; background:var(--bg-3); border:1px solid var(--border); white-space:nowrap; }
-.rh-day b { color:var(--fg-dimmer); font-weight:700; margin-right:4px; }
-.rh-day.gym { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
-.rh-day.kozha { background:var(--warn-soft); border-color:var(--warn); color:var(--warn); }
-.rh-day.light { background:var(--ok-soft); border-color:var(--ok); color:var(--ok); }
-.rh-day.gym b, .rh-day.kozha b, .rh-day.light b { color:inherit; opacity:.65; }
-/* ============================================================
-   TRACK-CODED TIMELINE — Lookahead (Summer 2026) only.
-   All colours via existing theme vars -> light + dark safe.
-   Does NOT redefine .card/.badge/.checkbox-row/.alert/details.
-   ============================================================ */
-
-/* ---- per-track accent variables (mapped onto existing theme vars) ---- */
-.tl-scope {
-  --tk-analysis: var(--accent);       /* Lever-1 / real analysis = binding apex gate */
-  --tk-analysis-soft: var(--accent-soft);
-  --tk-phase0: var(--accent-2);       /* Phase-0 conformal artifact */
-  --tk-phase0-soft: var(--accent-soft);
-  --tk-mt1173: var(--info);           /* MT1173 exam track */
-  --tk-mt1173-soft: var(--info-soft);
-  --tk-stats: var(--ok);              /* Casella-Berger / Axler / ST2133 feed */
-  --tk-stats-soft: var(--ok-soft);
-  --tk-outreach: var(--warn);         /* letters / cold-email / admin */
-  --tk-outreach-soft: var(--warn-soft);
-  --tk-life: var(--fg-dim);           /* driving / life — lowest stakes */
-  --tk-life-soft: var(--bg-3);
-}
-
-/* ---- track chip ---- */
-.tk {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 1px 8px 1px 7px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  border: 1px solid transparent;
-}
-.tk::before {                          /* leading dot in the track colour */
-  content: "";
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  flex: none;
-}
-.tk-analysis { color: var(--tk-analysis); background: var(--tk-analysis-soft); border-color: var(--tk-analysis); }
-.tk-phase0   { color: var(--tk-phase0);   background: var(--tk-phase0-soft);   border-color: var(--tk-phase0); }
-.tk-mt1173   { color: var(--tk-mt1173);   background: var(--tk-mt1173-soft);   border-color: var(--tk-mt1173); }
-.tk-stats    { color: var(--tk-stats);    background: var(--tk-stats-soft);    border-color: var(--tk-stats); }
-.tk-outreach { color: var(--tk-outreach); background: var(--tk-outreach-soft); border-color: var(--tk-outreach); }
-.tk-life     { color: var(--tk-life);     background: var(--tk-life-soft);     border-color: var(--border-strong); }
-
-/* ---- WHEN badge (.wb) — reusable, theme-var based.
-   GRAFT 1 (from B): fixed min-width so when/pace chips align into a column. ---- */
-.wb {
-  display: inline-block;
-  min-width: 96px;
-  text-align: center;
-  padding: 1px 8px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  white-space: nowrap;
-  background: var(--bg-3);
-  color: var(--fg-dim);
-  border: 1px solid var(--border);
-}
-.wb-morning   { background: var(--accent-soft); color: var(--accent);   border-color: var(--accent); }
-.wb-afternoon { background: var(--info-soft);   color: var(--info);     border-color: var(--info); }
-.wb-evening   { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-2); }
-.wb-weekend   { background: var(--warn-soft);   color: var(--warn);     border-color: var(--warn); }
-.wb-friday    { background: var(--bg-3);        color: var(--fg-dim);   border-color: var(--border-strong); }
-.wb-anytime   { background: var(--bg-3);        color: var(--fg-dimmer); border-color: var(--border); }
-
-/* ---- PACE badge (.pb) — reusable, theme-var based. GRAFT 1: same min-width alignment ---- */
-.pb {
-  display: inline-block;
-  min-width: 96px;
-  text-align: center;
-  padding: 1px 8px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  white-space: nowrap;
-  border: 1px solid transparent;
-}
-.pb-push   { background: var(--ok-soft);     color: var(--ok);     border-color: var(--ok); }
-.pb-steady { background: var(--warn-soft);   color: var(--warn);   border-color: var(--warn); }
-.pb-timed  { background: var(--urgent-soft); color: var(--urgent); border-color: var(--urgent); }
-.pb-defer  { background: var(--bg-3);        color: var(--fg-dimmer); border-color: var(--border); }
-
-/* ---- badge row inside a task. NOTE: kept INSIDE task-content > div:first-child
-   (see GRAFT 4) so the existing .done line-through rule at the source line
-   ".checkbox-row.done .task-content > div:first-child" keeps striking the
-   task text + badges together and is NOT regressed. ---- */
-.task-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 5px;
-}
-
-/* ---- week CARD: <details> styled as a track-bordered card ---- */
-.tl-scope details.week-card {
-  position: relative;
-  padding: 0;                          /* header/body manage their own padding */
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--track, var(--border-strong));
-  border-radius: 8px;
-  background: var(--bg-2);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-.tl-scope details.week-card[open] { box-shadow: var(--shadow-md); }
-
-/* per-week dominant-track colour */
-.wk-analysis { --track: var(--tk-analysis); }
-.wk-phase0   { --track: var(--tk-phase0); }
-.wk-mt1173   { --track: var(--tk-mt1173); }
-.wk-stats    { --track: var(--tk-stats); }
-.wk-outreach { --track: var(--tk-outreach); }
-.wk-life     { --track: var(--tk-life); }
-
-/* ---- the clickable header (summary) ---- */
-.tl-scope details.week-card > summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  user-select: none;
-}
-.tl-scope details.week-card > summary::-webkit-details-marker { display: none; }
-.tl-scope details.week-card > summary::marker { content: ""; }
-.tl-scope details.week-card[open] > summary {
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-soft);
-}
-.wk-headline {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.wk-chevron {
-  color: var(--fg-dimmer);
-  font-size: 12px;
-  transition: transform 0.15s;
-  flex: none;
-}
-.tl-scope details.week-card[open] .wk-chevron { transform: rotate(90deg); }
-.wk-label {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--fg);
-}
-.wk-theme {
-  font-size: 13px;
-  color: var(--fg-dim);
-  font-weight: 400;
-}
-/* GRAFT 2 (from B): static, honest "N tasks" count chip */
-.wk-count {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--fg-dim);
-  background: var(--bg-3);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1px 8px;
-  white-space: nowrap;
-  flex: none;
-}
-/* status chip on the right of the header */
-.wk-status {
-  margin-left: auto;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: 10px;
-  background: var(--track, var(--bg-3));
-  color: var(--bg-2);
-  flex: none;
-}
-.wk-status.muted { background: var(--bg-3); color: var(--fg-dim); margin-left: auto; }
-
-/* subtle track-mix indicator: row of small track dots */
-.wk-track-strip {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
-}
-.wk-track-strip .dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex: none;
-  opacity: 0.9;
-}
-.wk-track-strip .dot.analysis { background: var(--tk-analysis); }
-.wk-track-strip .dot.phase0   { background: var(--tk-phase0); }
-.wk-track-strip .dot.mt1173   { background: var(--tk-mt1173); }
-.wk-track-strip .dot.stats    { background: var(--tk-stats); }
-.wk-track-strip .dot.outreach { background: var(--tk-outreach); }
-.wk-track-strip .dot.life     { background: var(--tk-life); }
-.wk-track-strip .strip-label {
-  font-size: 11px;
-  color: var(--fg-dimmer);
-  margin-left: 2px;
-}
-
-/* ---- body: the checkbox-rows live here, restyled padding only ---- */
-.tl-scope details.week-card .week-body { padding: 4px 16px 8px 16px; }
-.tl-scope details.week-card .week-body .checkbox-row:last-child { border-bottom: none; }
-
-/* ---- legend card grid ---- */
-.tl-legend {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 8px;
-  margin: 4px 0;
-}
-.tl-legend .lg-row { display: flex; flex-wrap: wrap; gap: 6px; }
-.tl-group {
-  font-size: 11px;
-  color: var(--fg-dimmer);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 8px 0 4px 0;
-}
-
-/* ============================================================
-   GRAFT 3 (from C): CSS-ONLY track filter.
-   Hidden radio inputs + <label> chips drive sibling .week-card
-   visibility via :has() on the wrapper. Purely additive; the
-   existing checkbox/progress/persistence JS never uses :has(),
-   so this cannot touch those listeners.
-   Graceful no-op fallback: where :has() is unsupported, all
-   weeks simply stay visible (no filtering, nothing breaks).
-   ============================================================ */
-.tl-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin: 10px 0 12px 0;
-}
-.tl-filter .flt-label {
-  font-size: 11px;
-  color: var(--fg-dimmer);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-right: 2px;
-}
-/* the radios are visually hidden but still focusable */
-.tl-scope input.tl-flt {
-  position: absolute;
-  opacity: 0;
-  width: 1px; height: 1px;
-  pointer-events: none;
-}
-.tl-scope label.flt-chip {
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 3px 11px;
-  border-radius: 12px;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-3);
-  color: var(--fg-dim);
-  user-select: none;
-}
-.tl-scope label.flt-chip:hover { background: var(--bg-soft); color: var(--fg); }
-/* selected-chip highlight, keyed off the matching radio */
-.tl-scope:has(#flt-all:checked)      label[for="flt-all"],
-.tl-scope:has(#flt-analysis:checked) label[for="flt-analysis"],
-.tl-scope:has(#flt-phase0:checked)   label[for="flt-phase0"],
-.tl-scope:has(#flt-mt1173:checked)   label[for="flt-mt1173"],
-.tl-scope:has(#flt-stats:checked)    label[for="flt-stats"],
-.tl-scope:has(#flt-outreach:checked) label[for="flt-outreach"],
-.tl-scope:has(#flt-life:checked)     label[for="flt-life"] {
-  background: var(--accent-soft);
-  color: var(--accent);
-  border-color: var(--accent);
-}
-/* when a track filter is active, hide week-cards that lack that track.
-   data-tracks lists every track present in the week; the substring match
-   keeps a week visible only if it contains the selected track token. */
-.tl-scope:has(#flt-analysis:checked) details.week-card:not([data-tracks~="analysis"]),
-.tl-scope:has(#flt-phase0:checked)   details.week-card:not([data-tracks~="phase0"]),
-.tl-scope:has(#flt-mt1173:checked)   details.week-card:not([data-tracks~="mt1173"]),
-.tl-scope:has(#flt-stats:checked)    details.week-card:not([data-tracks~="stats"]),
-.tl-scope:has(#flt-outreach:checked) details.week-card:not([data-tracks~="outreach"]),
-.tl-scope:has(#flt-life:checked)     details.week-card:not([data-tracks~="life"]) {
-  display: none;
-}
-/* weekend WHEN distinct from steady PACE (both were amber) -> pink, light+dark safe */
-.wb-weekend { background:#fce7f3; color:#be185d; border-color:#db2777; }
-body.dark .wb-weekend { background:#3b1228; color:#f9a8d4; border-color:#db2777; }
-/* live week-card highlight ring */
-.tl-scope details.week-card.is-current { box-shadow:0 0 0 2px var(--accent); scroll-margin-top:120px; }
+  .arc-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+  .arc-step{flex:1;min-width:158px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:11px 13px}
+  .arc-step .w{font-size:10.5px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.05em}
+  .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
+  .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
+  .arc-step.now{border-left-color:var(--ok)}
+  .lane-card{border-left:3px solid var(--accent)}
+  .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
   
-
-.prog-filters{display:flex;flex-direction:column;gap:8px;margin:10px 0 14px}
-.pf-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.pf-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--fg-dimmer,#8a94a3);width:72px;flex-shrink:0}
-.pf{cursor:pointer;border:1px solid var(--border-strong,#3a424e);border-radius:16px;padding:4px 12px;font-size:12.5px;font-weight:600;background:var(--bg-2,#171c23);color:var(--fg,#e6edf3)}
-.pf:hover{background:var(--bg-3,#20262f)}
-.pf.active{background:var(--accent,#2954c8);color:#fff;border-color:var(--accent,#2954c8)}
-#prog-table td{vertical-align:top}
-#prog-count{color:var(--fg-dim,#9aa7b8);font-size:12.5px;margin:0 0 10px}
-
 
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
@@ -744,104 +420,252 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="calendar.html" class="">Calendar</a><a href="roadmap.html" class="cur">Roadmap</a><a href="tasks.html" class="">Tasks</a><a href="programs.html" class="">Programs</a><a href="summer.html" class="">Summer research</a><a href="opportunities.html" class="">Opportunities</a><a href="reading.html" class="">Reading</a><a href="research.html" class="">Research</a><a href="outreach.html" class="">Outreach</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="cur">Roadmap</a><a href="lanes.html" class="">Lanes</a><a href="week.html" class="">This week</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Roadmap</div><a href="#roa-1-roadmap-your-multi-year-map" class="">Roadmap — your multi-year map</a><a href="#roa-2-1-where-you-re-going" class="h3">1. Where you're going</a><a href="#roa-3-2-the-three-levers-priority-order" class="h3">2. The three levers (priority order)</a><a href="#roa-4-3-the-timeline-rest-of-2026-in-detail" class="h3">3. The timeline — rest of 2026 in detail</a><a href="#roa-5-4-the-project-arc" class="h3">4. The project arc</a><a href="#roa-6-5-the-two-gates-that-decide-it" class="h3">5. The two gates that decide it</a><a href="#roa-7-6-when-to-stop" class="h3">6. When to stop</a><a href="#roa-8-7-what-not-to-do" class="h3">7. What NOT to do</a><a href="#roa-9-8-money" class="h3">8. Money</a><a href="#roa-10-9-today" class="h3">9. Today</a></div>
+<div class="site-subnav"><div class="lbl">Roadmap</div><a href="#roa-1-roadmap-the-two-year-bachelor-window" class="">Roadmap &mdash; the two-year bachelor window</a><a href="#roa-2-the-ramp" class="h3">The ramp</a><a href="#roa-3-the-master-timeline" class="h3">The master timeline</a><a href="#roa-4-the-shared-deliverable-a-reproduction-ladder" class="h3">The shared deliverable &mdash; a reproduction ladder</a><a href="#roa-5-protected-the-application-track" class="h3">Protected &middot; the application track</a></div>
 <div class="site-main"><section class="page-section" id="roadmap">
 
-  <h2 id="roa-1-roadmap-your-multi-year-map">Roadmap — your multi-year map</h2>
-  <p class="tab-subtitle">The whole arc on one page: where you are now (Jun 2026) → a funded PhD. Read top-to-bottom when you lose the thread. Day-to-day to-dos live on the <a href="tasks.html#week" class="xref">Tasks</a> tab.</p>
+  <h2 id="roa-1-roadmap-the-two-year-bachelor-window">Roadmap &mdash; the two-year bachelor window</h2>
+  <p class="tab-subtitle">mid-2026 &rarr; mid-2028: pre-load the flywheel across four lanes, ~20&nbsp;h/week total, ramping foundations &rarr; mastery &rarr; research output. The decade arc is on the Home page; the detailed 2&ndash;4-year forward roadmap is pending.</p>
 
-  <h3 id="roa-2-1-where-you-re-going">1. Where you're going</h3>
-  <div class="alert info">
-    <strong>A funded research PhD → a high-comp <em>quant</em> job in a strong economy.</strong> Comp is the goal; the PhD is the vehicle (deploy it to quant, not academia or ML); PR is just what lets you take the job (US / EU / Canada all fine).
-    <br><br>
-    <strong>Comp reality (re-verified 2026-07-02):</strong> the $800k–1M TC number is the <strong>survivor / PM tail, not modal</strong> — plan around <strong>~$200–500k net</strong>. The US is the thickest, visa-gated market (<strong>NYC net on $1M ≈ $540k</strong>, ~46% effective — OBBBA made the 37% bracket permanent), so the SG/HK after-tax arbitrage is <em>wider</em> than it looks (~25–30 pts). Keep a non-US lane viable: the <strong>H-1B wage-weighted lottery is final</strong> (high wage = a US tailwind, but that's a projection for the 2028+ cycle). <strong>Singapore = the steadier standalone Asian hub</strong> (HK is more cyclical); London = the US-bridge.
-    <br><br>
-    <strong>Which PhD, ranked:</strong> US top-20 ≥ strong UK/Swiss (Oxbridge · ETH/EPFL) ≥ {US top-40 ≈ Canadian}. Germany is only a last-line "never-stranded" floor. <strong>Apex US top-5 is a free swing, not the target</strong> — you won't burn years chasing it once a top-20 offer is in hand.
-    <br><br>
-    <strong>How you get in:</strong> apply direct + wide to US PhDs, and in parallel run a <strong>funded Canadian thesis-MSc</strong> as the bridge (Europe/Canada want a master's first, so it's infrastructure — and it feeds US/UK/Swiss/Canadian PhDs). Take the best funded offer when it comes. <strong>Most likely outcome: a funded sub-apex PhD — which already gets you the job and a place to stay.</strong>
+  <h3 id="roa-2-the-ramp">The ramp</h3>
+  <div class="card-grid">
+    <div class="stat"><div class="label">2026 &mdash; foundations</div><div class="value small">Setup + reading</div><div class="small">Production substrate on early; Tsay/QRM read with a keyboard; real analysis begins; the 06 footprint stood up to age.</div></div>
+    <div class="stat"><div class="label">2027 &mdash; mastery</div><div class="value small">+ first reproductions</div><div class="small">Hand-coded GARCH/GAS/EVT estimators; measure-theoretic probability to competence; rung-1 backtest + personal R package.</div></div>
+    <div class="stat"><div class="label">late-2027 / 2028 &mdash; research + apply</div><div class="value small">The PI-indexed artifact</div><div class="small">The flagship reproduction + extension; adversarial self-check; the MSc application.</div></div>
   </div>
 
-  <h3 id="roa-3-2-the-three-levers-priority-order">2. The three levers (priority order)</h3>
+  <h3 id="roa-3-the-master-timeline">The master timeline</h3>
   <table>
-    <thead><tr><th>#</th><th>Lever</th><th>Why it matters</th><th>Summer load</th></tr></thead>
+    <thead><tr><th>Window</th><th>03 Applied-risk</th><th>01 Programming</th><th>02 Math</th><th>06 Reading / network</th><th>German + admin</th></tr></thead>
     <tbody>
-      <tr><td><strong>1a</strong></td><td><strong>Real analysis — the math transcript (the GATE)</strong></td><td>The one binding requirement for strong Stats committees. <a href="reading.html#lit-eccles" class="xref">Eccles</a> → <a href="reading.html#lit-abbott" class="xref">Abbott</a> → <a href="reading.html#lit-pugh" class="xref">Pugh</a> this summer, then <strong>UIUC MATH 447 (A-grade), Feb–Jun 2027</strong> — that grade is the gate.</td><td><span class="badge status-soon">20–25 h/wk</span></td></tr>
-      <tr><td><strong>1b</strong></td><td><strong>Proof-based linear algebra</strong></td><td>Closes the gap with apex peers (who have 18.700 / Math 55 on their transcripts). Self-study <a href="reading.html#lit-axler" class="xref">Axler</a> on weekends → a public GitHub writeup for SOP credibility. (MT1173 is the computational version; Axler is the proof version.)</td><td><span class="badge status-progress">5–6 h/wk, weekends</span></td></tr>
-      <tr><td><strong>2</strong></td><td><strong>A calibrated research letter</strong></td><td>Near-decisive for an unknown-institution applicant. <strong>Primary:</strong> a close-supervised project with <strong>Lytkin</strong> (your MT2116 instructor) or <strong>Mynbaev</strong> (your ST2133/34 instructor) → the KBTU thesis → a real research letter. Start it this year. <strong>Secondary:</strong> the Hore/Gibbs cold-email (low-probability upside).</td><td><span class="badge status-progress">seed it this summer</span></td></tr>
-      <tr><td><strong>3</strong></td><td><strong>The conformal research line (the vehicle)</strong></td><td>What earns the Lever-2 letter: reproduce a conformal paper (Phase 0) → a small contribution (Phase 1) → the MSc dissertation (Phase 2). Conformal publishes at both Stats <em>and</em> ML venues, so it keeps academia + industry/quant open. It's a PhD-admit on-ramp, not a lifetime topic — your subfield can shift later.</td><td><span class="badge status-progress">15–20 h/wk</span></td></tr>
+      <tr><td><strong>Summer 2026</strong> <span class="small">(now)</span></td><td>Tsay Ch 1&ndash;2 w/ keyboard</td><td>GitHub + R 4.6 + renv; Quarto/Zenodo</td><td>start Abbott</td><td>ORCID/Scholar/site/LinkedIn + CRM</td><td>A1; anabin check</td></tr>
+      <tr><td><strong>Autumn 2026</strong></td><td>Tsay Ch 1&ndash;3 + QRM Ch 2</td><td>3 renv/Quarto/CI repos</td><td>Abbott</td><td>reading habit; 1st public note</td><td>&mdash;</td></tr>
+      <tr><td><strong>Spring 2027</strong></td><td>Tsay Ch 3 + Ch 7; QRM 3&ndash;5, 9</td><td>maintain substrate</td><td>Abbott (yields in exams)</td><td>low-intensity</td><td><span class="badge status-progress">UoL exams = freeze</span></td></tr>
+      <tr><td><strong>Summer 2027</strong></td><td>consolidate QRM</td><td>data-editor-grade hygiene</td><td>&rarr; measure-theory primer</td><td>teardown file</td><td>A1&rarr;A2; book IELTS</td></tr>
+      <tr><td><strong>Autumn 2027</strong></td><td>hand-coded estimators + reproductions</td><td><strong>rung-1 backtest; R pkg v0.1.0</strong></td><td>measure-theory to competence</td><td>reproduction-gift rehearsal</td><td><strong>IELTS; PICK the PI paper</strong></td></tr>
+      <tr><td><strong>Spring 2028</strong></td><td><strong>PI-indexed reproduction; research-active</strong></td><td><strong>flagship artifact + adversarial self-check</strong></td><td>asymptotics &rarr; the artifact</td><td>soft-touch Hoga/Demetrescu</td><td><span class="badge status-progress">UoL finals = freeze;</span> <strong>MSc APPLY 15 May</strong></td></tr>
+      <tr><td><strong>Summer 2028</strong></td><td>&mdash;</td><td>finalize; pkg v0.2.0</td><td>&mdash;</td><td>logistics</td><td>A2&rarr;B1; admission &rarr; enrol Oct</td></tr>
     </tbody>
   </table>
-  <p style="color: var(--fg-dim); font-size: 13px;"><strong>Collision rule:</strong> real analysis wins. If it slips, the project pauses — never the reverse.</p>
+  <p class="small" style="color:var(--fg-dim)">Budget ramps ~15&ndash;17&nbsp;h (2026) &rarr; ~20&nbsp;h (2027) &rarr; the build-sprint peak. Exam weeks step everything down; the applied spine slips <em>last</em>, the math lane <em>first</em>.</p>
 
-  <h3 id="roa-4-3-the-timeline-rest-of-2026-in-detail">3. The timeline — rest of 2026 in detail</h3>
+  <h3 id="roa-4-the-shared-deliverable-a-reproduction-ladder">The shared deliverable &mdash; a reproduction ladder</h3>
+  <div class="alert"><strong>One</strong> audit-grade reproducible reproduction + extension repo, built as a ladder: generic rungs now&rarr;2027 (hand-coded GARCH VaR/ES backtest &rarr; EVT &rarr; GAS, each renv/CI/Zenodo-DOI'd, growing a personal R package) &rarr; the <strong>PI-indexed rung</strong> autumn-2027 (default Krause&ndash;Paolella, hand-coded from equations). It counts four ways: artifact core &middot; thesis nucleus &middot; PI cold-open &middot; Swiss-career proof.</div>
+
+  <h3 id="roa-5-protected-the-application-track">Protected &middot; the application track</h3>
   <table>
-    <thead><tr><th>When</th><th>Focus</th><th>Produce / gate</th></tr></thead>
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
     <tbody>
-      <tr><td><strong>Jun–Aug (summer)</strong><br><span class="deadline">NOW</span></td><td>Eccles→Abbott→Pugh analysis · Phase-0 reproduction · seed Lytkin/Mynbaev · MT1173 prep from mid-Jul · driving licence · Casella-Berger late Aug. <em>Week-by-week lives on <a href="tasks.html#week" class="xref">Tasks</a>.</em></td><td>Phase-0 repo shipped + cold-emails sent; local-project pitch made</td></tr>
-      <tr><td><strong>Sep</strong></td><td>UoL Year 3 starts — <strong>MT2116 (Lytkin) · ST2133/34 (Mynbaev) · MT3042</strong>. Engage both above-syllabus and pitch the supervised project. MT1173 prep intensifies; Axler continues on weekends; iterate Phase-0 + follow up cold-emails.</td><td>Year-3 grades begin (they land on the Cycle-1 transcript) · supervised project agreed</td></tr>
-      <tr><td><strong>Oct</strong></td><td>MT1173 final ramp (mock exams + past papers). Draft the Summer-2027 research-placement apps (REU / Yessenov). Decide the thesis-supervisor direction (Lytkin vs Mynbaev).</td><td>Placement apps drafted; recommenders lined up</td></tr>
-      <tr><td><strong>Nov</strong></td><td><strong>MT1173 EXAM — the month's priority</strong> (suspend GRE + project work in exam week). Research-placement deadlines cluster — Yessenov (~Nov 7) and other REUs through the month.</td><td><span class="badge tier-1">MT1173 sat</span> · placement apps in</td></tr>
-      <tr><td><strong>Dec</strong></td><td>Post-exam recovery. One timed GRE practice test for a baseline. Begin the real Dec-2027 application prep (12 months out). MT1173 grade visible ~mid-Jan.</td><td>GRE baseline; Cycle-1 prep underway</td></tr>
+      <tr><td>UoL First</td><td>Ring-fenced in the May&ndash;June exam weeks (2027, 2028). Self-study steps down; the applied spine slips last.</td></tr>
+      <tr><td>German</td><td>A calm summer drip: A0&rarr;A1 (2026) &rarr; A2 (2027) &rarr; B1 (2028, in-country from Oct).</td></tr>
+      <tr><td>Application (spring 2028)</td><td>Fresh IELTS (~Sep 2027); pre-clear the <strong>Economics &ge;15 ECTS</strong> floor with Dzikowski; VPD; submit to TU Dortmund by <strong>15 May 2028</strong>; soft-touch Hoga/Demetrescu.</td></tr>
     </tbody>
   </table>
-  <p style="color: var(--fg-dim); font-size: 13px;"><strong>Beyond 2026 (compressed — firms up as outcomes land):</strong> <strong>2027</strong> = UIUC MATH 447 (A-grade, Feb–Jun) · GRE (Sep) · Phase-1 contribution + a summer research placement · <strong>apply Dec 2027</strong> (US PhDs direct + wide, plus the Canadian thesis-MSc). <strong>2028</strong> = decisions — a funded PhD offer → take it (Fall 2028 start); otherwise start the funded Canadian MSc. <strong>2028–30</strong> = if on the bridge, the MSc thesis becomes the conformal line → re-apply with a real advisor letter. All dated deadlines: <a href="calendar.html" class="xref">Calendar</a>.</p>
-
-  <h3 id="roa-5-4-the-project-arc">4. The project arc</h3>
-  <table>
-    <thead><tr><th>Phase</th><th>When</th><th>What</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Phase 0 — reproduce</strong></td><td>now → early 2027</td><td>Reproduce + 1–2 extensions of the <a href="reading.html#lit-gcc-2305" class="xref">conformal paper</a>; public repo. Code only — no advanced math needed yet.</td><td>The bait that turns a cold email into a collaboration.</td></tr>
-      <tr><td><strong>Phase 1 — contribute</strong></td><td>2027</td><td>A modest result bending conformal toward causal (conditional coverage → treatment-effect targets). Co-authored preprint.</td><td>Builds a supervisor who knows your work firsthand.</td></tr>
-      <tr><td><strong>Phase 2 — dissertation</strong></td><td>MSc 2028–29</td><td>The line becomes your MSc thesis.</td><td>When the strong letter actually gets written.</td></tr>
-    </tbody>
-  </table>
-
-  <h3 id="roa-6-5-the-two-gates-that-decide-it">5. The two gates that decide it</h3>
-  <div class="alert urgent">
-    Everything above serves two things: <strong>(1) the MATH 447 A-grade</strong> (the real-analysis transcript line, Jun 2027) and <strong>(2) one calibrated research letter</strong> — so start the Lytkin/Mynbaev supervised project <em>now</em>, because it has to be mature by the Dec-2027 applications. Publications are not required. Protect these two and the rest is just execution.
-  </div>
-
-  <h3 id="roa-7-6-when-to-stop">6. When to stop</h3>
-  <div class="alert ok">
-    <strong>Accept and stop applying</strong> the moment a <strong>funded PhD you'd be happy in</strong> lands — US top-20, a strong UK/Swiss programme, or a good Canadian one. Apex top-5 is a bonus if it happens, not something to re-roll years for. A real offer in hand beats another cycle of waiting.
-  </div>
-
-  <h3 id="roa-8-7-what-not-to-do">7. What NOT to do</h3>
-  <table>
-    <thead><tr><th>Don't</th><th>Why</th></tr></thead>
-    <tbody>
-      <tr><td>OPE / off-policy-evaluation projects, or DML "novel-seam" ideas</td><td>You already killed these — the premises don't survive scrutiny. Stay on conformal.</td></tr>
-      <tr><td>Cold-email senior PIs directly (Candès, Barber, Ramdas, Kallus, Athey…)</td><td>Wrong layer — the postdocs are the entry point.</td></tr>
-      <tr><td>Treat hackathons / Dyson / startup wins as PhD signal</td><td>Off-axis — entrepreneurship doesn't enter the academic CV. (It's still Kozha-funding fuel.)</td></tr>
-      <tr><td>Read Wasserman / Hernán-Robins as summer reading</td><td>They're 2027+ references, not load-bearing now. (Casella-Berger is different — it's your ST2133/34 text; start it late summer.)</td></tr>
-      <tr><td>Lean on RESNA / sign-language as a research letter</td><td>It's capability evidence + funding fuel, not a Stats research letter.</td></tr>
-      <tr><td>Commit to a new project without trying to kill it first</td><td>Three project ideas already collapsed the moment you stress-tested them. Always try to kill an idea before you invest in it.</td></tr>
-    </tbody>
-  </table>
-
-  <h3 id="roa-9-8-money">8. Money</h3>
-  <div class="alert">
-    <strong>PhD-primary.</strong> Income work is capped at ~10–15 h/wk (freelance / intern-app prep), just to defray the ~$60–90K MSc cost if the bridge is needed. Keep the Kozha funding paperwork going (~12 h/mo, Fri block) — but don't expand it into startup grinding.
-  </div>
-
-  <h3 id="roa-10-9-today">9. Today</h3>
-  <p>The map answers "what's the plan." For "what do I touch today," go to <a href="tasks.html#week" class="xref">Tasks</a> — the current week is highlighted there.</p>
 
 </section>
 </div>
 </div>
 <script>
-(function(){var tbl=document.getElementById('prog-table');if(!tbl)return;
-var sel={type:'all',region:'all',funding:'all'},cnt=document.getElementById('prog-count');
-function apply(){var n=0,rows=tbl.querySelectorAll('tbody tr');rows.forEach(function(tr){
- var ok=(sel.type=='all'||tr.dataset.type==sel.type)&&(sel.region=='all'||tr.dataset.region==sel.region)&&(sel.funding=='all'||tr.dataset.funding==sel.funding);
- tr.style.display=ok?'':'none';if(ok)n++;});if(cnt)cnt.textContent=n+' of '+rows.length+' programs';}
-document.querySelectorAll('.pf').forEach(function(b){b.addEventListener('click',function(){
- sel[b.dataset.f]=b.dataset.v;document.querySelectorAll('.pf[data-f="'+b.dataset.f+'"]').forEach(function(x){x.classList.remove('active')});
- b.classList.add('active');apply();});});apply();})();
+  // Tab navigation
+  const tabs = document.querySelectorAll('aside nav button');
+  const sections = document.querySelectorAll('main section.tab');
+  function switchTab(tabId) {
+    tabs.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    const btn = document.querySelector(`aside nav button[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
+    const sec = document.getElementById(tabId);
+    if (sec) sec.classList.add('active');
+  }
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Cross-tab anchor links: any <a href="#anchor"> jumps to the right tab + scrolls
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+    const targetTab = targetEl.closest('section.tab');
+    if (!targetTab) return;
+    e.preventDefault();
+    if (!targetTab.classList.contains('active')) {
+      switchTab(targetTab.id);
+    }
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Brief highlight on the target
+      targetEl.classList.add('xref-target');
+      history.replaceState(null, '', '#' + targetId);
+    }, 30);
+  });
+
+  // Honor initial #hash on page load
+  if (location.hash && location.hash.length > 1) {
+    const targetEl = document.getElementById(location.hash.substring(1));
+    if (targetEl) {
+      const targetTab = targetEl.closest('section.tab');
+      if (targetTab) {
+        switchTab(targetTab.id);
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'auto', block: 'start' }), 100);
+      }
+    }
+  }
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function applyTheme() {
+    const dark = localStorage.getItem('dt-theme') === 'dark';
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('dt-theme') || 'light';
+    localStorage.setItem('dt-theme', cur === 'light' ? 'dark' : 'light');
+    applyTheme();
+  });
+  applyTheme();
+
+  // Checkbox state persistence
+  function loadCheckboxes() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      const stored = localStorage.getItem('dt-task-' + id) === 'true';
+      cb.checked = stored;
+      if (row && stored) row.classList.add('done');
+    });
+    updateProgress();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox') {
+      const cb = e.target;
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (!id) return;
+      localStorage.setItem('dt-task-' + id, cb.checked);
+      if (row) row.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('task-progress').textContent = `Progress: ${done}/${all} (${pct}%)`;
+  }
+
+  // Reset all checkboxes
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const row = cb.closest('.checkbox-row');
+      const id = (row?.dataset.taskId) || cb.dataset.taskId;
+      if (id) localStorage.removeItem('dt-task-' + id);
+      cb.checked = false;
+      if (row) row.classList.remove('done');
+    });
+    updateProgress();
+  });
+
+  // Current week tasks
+  function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return;
+    const banner = document.getElementById('week-tasks');
+    if (!banner) return;
+    const cards = Array.from(document.querySelectorAll('details.week-card[data-start]'));
+    if (!cards.length) return;
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const P = function(d){ const a=d.split('-'); return new Date(+a[0], +a[1]-1, +a[2]); };
+    let match=null, status='current';
+    for (const c of cards){ if (today>=P(c.dataset.start) && today<=P(c.dataset.end)){ match=c; status='current'; break; } }
+    if (!match){
+      if (today < P(cards[0].dataset.start)) { match=cards[0]; status='upcoming'; }
+      else if (today > P(cards[cards.length-1].dataset.end)) { match=cards[cards.length-1]; status='wrap'; }
+      else { match = cards.find(c => P(c.dataset.start) > today) || cards[cards.length-1]; status='next'; }
+    }
+    cards.forEach(function(c){ c.classList.remove('is-current'); if (c.id==='wk-current') c.removeAttribute('id'); });
+    match.id = 'wk-current'; match.classList.add('is-current'); match.open = true;
+    const label = (match.querySelector('.wk-label')||{}).textContent || '';
+    const theme = (match.querySelector('.wk-theme')||{}).textContent || '';
+    const lead = {current:'📍 This week', upcoming:'⏳ Summer starts Jun 17 — first week', wrap:'✅ Summer plan complete — last week', next:'⏭ Next up'}[status] || 'This week';
+    banner.innerHTML = '<strong>' + lead + '</strong> · ' + label + ' ' + theme + ' · <a href="#wk-current">jump to this week’s tasks ↓</a>';
+  }
+
+  // Kozha funding table: sort + filter
+  (function() {
+    const table = document.getElementById('kozha-table');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('th[data-sort-key]');
+    const labels = { num:'#', funder:'Funder', award:'Award', deadline:'Deadline', lead:'Lead', hrs:'Hrs' };
+    let sortState = { key: 'deadline', dir: 'asc' };
+
+    function applySort() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNum = (k) => k === 'num' || k === 'award' || k === 'hrs';
+      rows.sort((a, b) => {
+        const av = a.dataset[sortState.key];
+        const bv = b.dataset[sortState.key];
+        let comp;
+        if (isNum(sortState.key)) comp = Number(av) - Number(bv);
+        else comp = String(av).localeCompare(String(bv));
+        return sortState.dir === 'asc' ? comp : -comp;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      headers.forEach(th => {
+        const k = th.dataset.sortKey;
+        const arrow = sortState.key === k ? (sortState.dir === 'asc' ? ' ▲' : ' ▼') : '';
+        th.textContent = labels[k] + arrow;
+      });
+    }
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sortKey;
+        if (sortState.key === k) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = k; sortState.dir = 'asc'; }
+        applySort();
+      });
+    });
+
+    document.querySelectorAll('.kozha-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.kozha-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lead = btn.dataset.lead;
+        let visible = 0;
+        tbody.querySelectorAll('tr').forEach(row => {
+          const rowLead = row.dataset.lead;
+          let show;
+          if (lead === 'all') show = true;
+          else if (lead === 'BB') show = (rowLead === 'BB' || rowLead === 'Either');
+          else if (lead === 'BM') show = (rowLead === 'BM' || rowLead === 'Either');
+          else if (lead === 'Either') show = rowLead === 'Either';
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        const allBtn = document.querySelector('.kozha-filter[data-lead="all"]');
+        if (allBtn) allBtn.textContent = 'All (38)';
+        if (lead !== 'all') btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + visible + ')';
+      });
+    });
+
+    applySort();
+  })();
+
+  // Init
+  renderCurrentWeek();
+  loadCheckboxes();
 
 
 (function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
