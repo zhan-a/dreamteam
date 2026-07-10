@@ -431,6 +431,13 @@
   .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
   
 
+  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
+  .gp .what{line-height:1.45}
+  .gp .glab{font-weight:800;color:var(--accent)}
+  .gp .qk{color:var(--fg-dimmer);font-style:italic}
+  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
+  
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -468,17 +475,22 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="site-main"><section class="page-section" id="lane01">
 
   <h2 id="01 -1-01-programming-production">01 &middot; Programming / production</h2>
-  <p class="tab-subtitle">co-primary &middot; ~5&ndash;6&nbsp;h/wk &middot; <strong>Goal:</strong> production <em>discipline</em> (not "can code") &mdash; an audit-grade reproducible artifact + a personal R package. R-primary (<code>rugarch</code>/<code>gasmodel</code>/<code>qrmtools</code>/<code>ExtremeRisks</code>); Git/renv/Quarto/CI/seeds/Zenodo. C++/Rcpp reading-level only.</p>
-  <div class="gp-timeline">
-    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Professional GitHub handle; R 4.6 + git; <code>renv</code>; first <code>renv::init()</code> repo.</div><div class="dod">Goalpost: a renv-locked, Quarto-rendered repo exists.</div></div>
-    <div class="gp major"><div class="when">Autumn 2026</div><div class="what">Three renv/Quarto/CI repos; wire GitHub &rarr; Zenodo (tag &rarr; DOI).</div><div class="dod"><span class="star">&#9733; GOALPOST (Dec 2026):</span> the production substrate is done.</div></div>
-    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze</span></div><div class="what">Maintain the substrate; Quarto reports become habitual.</div><div class="dod">Goalpost: reproducible-by-default is a habit.</div></div>
-    <div class="gp"><div class="when">Summer 2027</div><div class="what">Data-editor-grade hygiene &mdash; seeds, CI checks, pinned deps, DOIs.</div><div class="dod">Goalpost: an audit-grade pipeline.</div></div>
-    <div class="gp major"><div class="when">Autumn 2027</div><div class="what">Build the rung-1 backtest as a reusable package.</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> rung-1 shipped + personal R package v0.1.0.</div></div>
-    <div class="gp"><div class="when">Winter&ndash;Spring 2028</div><div class="what">Wrap the flagship artifact + an adversarial self-check.</div><div class="dod">Goalpost: the artifact reproduces end-to-end from a clean clone.</div></div>
-    <div class="gp major"><div class="when">Summer 2028</div><div class="what">Finalise; tag the release.</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> package v0.2.0 published (Zenodo DOI).</div></div>
+  <p class="tab-subtitle">co-primary &middot; ~5&ndash;6&nbsp;h/wk.</p>
+  <div class="lane-intro">
+    <p><strong>What this lane is.</strong> Not &ldquo;learning to code&rdquo; &mdash; that is assumed. It is <strong>production discipline</strong>: the habits that make work <strong>reproducible</strong>, so that anyone (including future-you) can re-run it and get the identical result. In research and in model-validation this is an enforced professional norm, and doing it visibly well is itself a hireable signal.</p>
+    <p><strong>The tools, defined.</strong> <strong>R 4.6</strong> is the primary language, with the risk packages <code>rugarch</code>, <code>gasmodel</code>, <code>qrmtools</code>, <code>ExtremeRisks</code>. Around the code sits the reproducibility stack: <strong>git</strong> (records every change to your code), <strong>renv</strong> (locks the exact version of every R package a project uses so it re-runs identically years later; <code>renv::init()</code> sets this up), <strong>Quarto</strong> (turns code + writing into a clean rendered report), <strong>CI</strong> / continuous integration (automated checks that run your code on every change and flag breakage), and <strong>Zenodo</strong> (archives a release and mints a permanent <strong>DOI</strong> &mdash; a citable, frozen version). C++/Rcpp at reading level only.</p>
   </div>
-  <div class="alert"><strong>End state (mid-2028):</strong> an audit-grade, reproducible artifact repo + a citable R package. Feeds &rarr; the artifact's craft + the "data-editor-grade" signal Swiss/NL groups reward.</div>
+  <div class="read-note">Setup items (this season) are quick &mdash; an evening each &mdash; but they underpin everything after. The value is that they exist early, not the hours spent.</div>
+  <div class="gp-timeline">
+    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Claim a <strong>professional, permanent GitHub username</strong> (your public code identity &mdash; choose one to keep for a career). Install/update <strong>R 4.6</strong> and <strong>git</strong>. Install <strong>renv</strong> and create a first project with <code>renv::init()</code>, which begins recording exact package versions. <span class="qk">Quick setup &mdash; an evening.</span></div><div class="dod">&rarr; <span class="glab">Goalpost:</span> a first project that is version-controlled and dependency-pinned (a clone reproduces it).</div></div>
+    <div class="gp major"><div class="when">Autumn 2026</div><div class="what">Stand up <strong>three</strong> small projects that each use renv + a Quarto report + CI, and wire GitHub to <strong>Zenodo</strong> so tagging a release mints a DOI. This substrate is what every later deliverable sits on.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST (Dec 2026):</span> the production substrate is done &mdash; three reproducible repos, Zenodo wired.</div></div>
+    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze</span></div><div class="what">Maintain the substrate; make rendering a Quarto report for the Tsay work automatic. Low effort during exams.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> reproducible-by-default is a habit, not a chore.</div></div>
+    <div class="gp"><div class="when">Summer 2027</div><div class="what">Raise the standard to <strong>data-editor grade</strong> &mdash; fixed random seeds (results identical every run), CI checks that fail loudly, pinned dependencies, archived DOIs. This is the bar journals&rsquo; data editors enforce.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> a pipeline a journal data-editor would accept.</div></div>
+    <div class="gp major"><div class="when">Autumn 2027</div><div class="what">Turn the rung-1 backtest (from lane&nbsp;03) into a <strong>proper R package</strong> &mdash; documented, tested, installable by anyone.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> rung-1 shipped as code + a personal R package v0.1.0.</div></div>
+    <div class="gp"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals</span></div><div class="what">Package the flagship artifact with an <strong>adversarial self-check</strong> &mdash; deliberately try to break your own result before anyone else can.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> the artifact reproduces end-to-end from a clean clone, no manual steps.</div></div>
+    <div class="gp major"><div class="when">Summer 2028</div><div class="what">Finalise and tag the release.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> package v0.2.0 published with a Zenodo DOI (citable).</div></div>
+  </div>
+  <div class="alert"><strong>End state (mid-2028):</strong> an audit-grade, fully reproducible artifact repository and a citable personal R package &mdash; the &ldquo;data-editor-grade&rdquo; signal Swiss and NL groups reward.</div>
 
 </section>
 </div>

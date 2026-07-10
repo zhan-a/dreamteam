@@ -431,6 +431,13 @@
   .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
   
 
+  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
+  .gp .what{line-height:1.45}
+  .gp .glab{font-weight:800;color:var(--accent)}
+  .gp .qk{color:var(--fg-dimmer);font-style:italic}
+  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
+  
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -467,18 +474,25 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="site-subnav"><div class="lbl">03 Risk</div><a href="#03 -1-03-applied-risk-econometrics-the-spine" class="">03 &middot; Applied-risk econometrics the spine</a></div>
 <div class="site-main"><section class="page-section" id="lane03">
 
+  
   <h2 id="03 -1-03-applied-risk-econometrics-the-spine">03 &middot; Applied-risk econometrics <span class="lane-badge spine">the spine</span></h2>
-  <p class="tab-subtitle">co-primary &middot; ~6&nbsp;h/wk &middot; <strong>Goal:</strong> reach <em>implement-then-research</em> level &mdash; derive the equation &rarr; hand-code the estimator &rarr; validate against a package to a numeric tolerance. This is the <strong>methods</strong> (GARCH/GAS/EVT/VaR-ES), not deep regulation (Basel/IRB/IFRS9 is on-the-job). The artifact's content + the flywheel head-start.</p>
-  <div class="gp-timeline">
-    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Tsay Ch&nbsp;1&ndash;2 with a keyboard &mdash; retype + run every R example.</div><div class="dod">Goalpost: Ch&nbsp;1&ndash;2 reproduced in a renv-locked repo.</div></div>
-    <div class="gp"><div class="when">Autumn 2026</div><div class="what">Tsay Ch&nbsp;1&ndash;3 (returns, linear TS, conditional heteroskedasticity) + QRM Ch&nbsp;2.</div><div class="dod">Goalpost: GARCH understood end-to-end.</div></div>
-    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze &mdash; step down</span></div><div class="what">Tsay Ch&nbsp;3 (volatility) + Ch&nbsp;7 (EVT); QRM Ch&nbsp;3&ndash;5, 9.</div><div class="dod">Goalpost: EVT + VaR/ES concepts in hand.</div></div>
-    <div class="gp"><div class="when">Summer 2027</div><div class="what">Consolidate QRM; start hand-deriving the estimators.</div><div class="dod">Goalpost: ready to hand-code from equations.</div></div>
-    <div class="gp major"><div class="when">Autumn 2027</div><div class="what">Hand-coded GARCH/GAS/EVT estimators; first reproductions.</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> rung-1 VaR/ES backtest to portfolio grade.</div></div>
-    <div class="gp major freeze"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals &mdash; spine slips last</span></div><div class="what">The PI-indexed reproduction; research-active.</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> the flagship artifact (methods) drafted.</div></div>
-    <div class="gp"><div class="when">Summer 2028</div><div class="what">Consolidate; hand off to lane 01 for finalisation.</div><div class="dod">Goalpost: implement-then-research level reached.</div></div>
+  <p class="tab-subtitle">co-primary &middot; ~6&nbsp;h/wk &middot; the most important lane.</p>
+  <div class="lane-intro">
+    <p><strong>What this lane is.</strong> The actual subject of the career and the research: the statistics of financial risk &mdash; modelling how volatile a market is, how often extreme losses happen, and how large they can get. Two core texts carry it: <strong>Tsay, <em>Analysis of Financial Time Series</em></strong> (the standard applied graduate text) and <strong>McNeil&ndash;Frey&ndash;Embrechts, <em>Quantitative Risk Management</em> (&ldquo;QRM&rdquo;)</strong> (the standard risk text).</p>
+    <p><strong>The models to master.</strong> <strong>GARCH / GAS</strong> &mdash; volatility that clusters and changes over time. <strong>EVT</strong> (extreme-value theory) &mdash; the statistics of rare, extreme losses. <strong>VaR / ES</strong> (Value-at-Risk and Expected Shortfall) &mdash; the two headline loss numbers every bank must report and defend.</p>
+    <p><strong>The differentiator.</strong> Not running a package and reading its output. For each model: <strong>derive the equations by hand, code the estimator from scratch, and check the numbers against an established package to a tight tolerance.</strong> That is the gap between someone who <em>uses</em> risk models and someone who can <em>build and validate</em> them &mdash; which is exactly what the PhD and the model-validation career hire for. This is the <strong>methods</strong>; the <strong>regulation</strong> (Basel / IRB / IFRS9) is learned on the job.</p>
   </div>
-  <div class="alert"><strong>End state (mid-2028):</strong> you can derive, implement, and numerically validate GARCH/GAS/EVT/VaR-ES from equations. Feeds &rarr; the MSc thesis nucleus + the PI cold-open + the Swiss-career proof.</div>
+  <div class="read-note">Each season below lists the ongoing <strong>work</strong> (where the ~6&nbsp;h/week actually go) and the <strong>goalpost</strong> it ends on (the checkpoint). The reading/coding items fill a whole season &mdash; they are not one-week tasks.</div>
+  <div class="gp-timeline">
+    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Work through <strong>Tsay Chapters 1&ndash;2</strong> (financial returns, their distributions, basic linear time series) <em>with a keyboard</em> &mdash; retype and run every R example yourself inside a proper project, not read passively. At ~6&nbsp;h/week this is roughly the whole summer; the aim is fluency with the tools, not speed.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> Chapters 1&ndash;2 fully reproduced in a version-controlled project &mdash; every example runs.</div></div>
+    <div class="gp"><div class="when">Autumn 2026</div><div class="what"><strong>Tsay Chapters 1&ndash;3</strong> (adding conditional heteroskedasticity &mdash; volatility that clusters) + <strong>QRM Chapter 2</strong>. Focus on understanding a GARCH model end to end: what it assumes, how it is estimated, what it is for.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> you can estimate a GARCH model and explain precisely what it does.</div></div>
+    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze &mdash; pace drops</span></div><div class="what"><strong>Tsay Ch&nbsp;3 (volatility) + Ch&nbsp;7 (extreme-value theory)</strong>; <strong>QRM Ch&nbsp;3&ndash;5, 9</strong> (VaR/ES, EVT, backtesting). Concepts only &mdash; the UoL exams take priority, so this lane slows but does not stop.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> EVT and the VaR/ES risk measures understood conceptually.</div></div>
+    <div class="gp"><div class="when">Summer 2027</div><div class="what">Consolidate QRM and begin <strong>deriving the estimators by hand</strong> &mdash; writing out the likelihood and update equations for GARCH and EVT yourself.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> the core estimators derived on paper, ready to code.</div></div>
+    <div class="gp major"><div class="when">Autumn 2027</div><div class="what"><strong>Hand-code GARCH / GAS / EVT estimators</strong> from those derivations and run your first full reproductions of published results. This is the season the domain turns into an output.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> a <strong>rung-1 VaR/ES backtest</strong> &mdash; your own code, validated against a package, producing a correct, reproducible risk-model backtest at a standard a risk desk would accept.</div></div>
+    <div class="gp major freeze"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals &mdash; spine slips last</span></div><div class="what">Build the <strong>PI-indexed reproduction</strong>: reproduce, and add a small extension to, a specific target professor&rsquo;s own paper, from its equations. Under exam pressure this lane is protected the longest.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> a drafted flagship artifact &mdash; a careful reproduction + a small extension of a target PI&rsquo;s paper.</div></div>
+    <div class="gp"><div class="when">Summer 2028</div><div class="what">Consolidate; hand the artifact to lane&nbsp;01 for final polishing.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> implement-then-research level reached; the artifact is ready.</div></div>
+  </div>
+  <div class="alert"><strong>End state (mid-2028):</strong> you can derive, implement, and numerically validate GARCH/GAS/EVT/VaR-ES from equations &mdash; and you have used that skill to build a research artifact. This feeds the MSc thesis, the professor cold-open, and the Swiss-career proof.</div>
 
 </section>
 </div>

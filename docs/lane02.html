@@ -431,6 +431,13 @@
   .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
   
 
+  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
+  .gp .what{line-height:1.45}
+  .gp .glab{font-weight:800;color:var(--accent)}
+  .gp .qk{color:var(--fg-dimmer);font-style:italic}
+  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
+  
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -468,17 +475,23 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="site-main"><section class="page-section" id="lane02">
 
   <h2 id="02 -1-02-math-rigour">02 &middot; Math rigour</h2>
-  <p class="tab-subtitle">serious secondary &middot; ~4&ndash;5&nbsp;h/wk &middot; <strong>Goal:</strong> master real analysis &rarr; measure-theoretic probability + asymptotics so the graded MSc core is a <em>review</em>. It <strong>feeds</strong> lane&nbsp;03 but does <strong>not gate</strong> it. <strong>STOP-HERE:</strong> no topology, functional analysis, or stochastic calculus / It&ocirc; / SDEs. The graded MATH&nbsp;447 is dropped.</p>
-  <div class="gp-timeline">
-    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Finish Eccles 6&ndash;9 (sets / functions / bijections) &rarr; open Abbott Ch&nbsp;1.</div><div class="dod">Goalpost: Abbott begun (after the Eccles on-ramp).</div></div>
-    <div class="gp"><div class="when">Autumn 2026</div><div class="what">Abbott 1&ndash;3 (the reals, sequences, series).</div><div class="dod">Goalpost: sequences + series mastered.</div></div>
-    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze &mdash; math slips first</span></div><div class="what">Abbott 4&ndash;7 (continuity, derivatives, integration) &mdash; also yields in the UoL exams.</div><div class="dod">Goalpost: single-variable analysis done.</div></div>
-    <div class="gp"><div class="when">Summer 2027</div><div class="what">Selective Pugh 1/3/5 &rarr; a measure-theory primer (Rosenthal).</div><div class="dod">Goalpost: on the measure-theory on-ramp.</div></div>
-    <div class="gp major"><div class="when">Autumn 2027</div><div class="what">Measure-theoretic probability to competence (Rosenthal/Williams, with problem sets).</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> measure theory competent &rarr; the MSc core becomes a review.</div></div>
-    <div class="gp"><div class="when">Winter&ndash;Spring 2028</div><div class="what">Asymptotics &mdash; LLN / CLT / delta-method &rarr; serves the artifact.</div><div class="dod">Goalpost: asymptotic theory in hand.</div></div>
-    <div class="gp"><div class="when">Summer 2028</div><div class="what">&mdash; banked; no new load.</div><div class="dod">Goalpost: rigour prerequisites complete.</div></div>
+  <p class="tab-subtitle">serious secondary &middot; ~4&ndash;5&nbsp;h/wk.</p>
+  <div class="lane-intro">
+    <p><strong>What this lane is.</strong> The mathematical foundation that makes the master&rsquo;s hardest course <em>easy</em>. The German MSc has a compulsory, notoriously difficult <strong>measure-theoretic probability</strong> course (the rigorous foundation of probability). Arrive already fluent in it and that course becomes a <em>review</em> while classmates struggle &mdash; which frees the time for research. That is the whole flywheel.</p>
+    <p><strong>The path and texts, in order.</strong> Real analysis first (the rigorous theory of limits, continuity, and integration on the real numbers), then measure-theoretic probability, then asymptotics (the theory of &ldquo;as the sample grows large&rdquo; &mdash; the law of large numbers, the central limit theorem &mdash; which underpins every estimator). Texts: <strong>Eccles</strong> (a gentle proof on-ramp) &rarr; <strong>Abbott, <em>Understanding Analysis</em></strong> (the standard first course) &rarr; selective <strong>Pugh</strong> (harder, for depth) &rarr; <strong>Rosenthal / Williams</strong> (measure-theoretic probability).</p>
+    <p><strong>It feeds, it does not gate.</strong> This is not required to start lane&nbsp;03 &mdash; a GARCH estimator can be hand-coded without measure theory. It runs in parallel and pays off at the MSc. <strong>STOP-HERE:</strong> no topology, functional analysis, or stochastic calculus / It&ocirc; / SDEs &mdash; that is a different (pure-maths / derivatives-pricing) lane and a time sink; do not try to out-math the mathematicians. The graded external MATH&nbsp;447 is dropped; this is ungraded self-study.</p>
   </div>
-  <div class="alert"><strong>End state (mid-2028):</strong> the MSc's compulsory measure-theory / Statistical-Theory core is a review, not a wall. STOP-HERE respected &mdash; don't out-math the math-majors.</div>
+  <div class="read-note">These are chapter-blocks of a hard subject, not weekly tasks &mdash; each season is a genuine ~4&ndash;5&nbsp;h/week of proofs and problem sets.</div>
+  <div class="gp-timeline">
+    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Finish <strong>Eccles Chapters 6&ndash;9</strong> (sets, functions, bijections &mdash; the proof-writing on-ramp), then open <strong>Abbott, <em>Understanding Analysis</em>, Chapter 1</strong>. Low intensity while lane&nbsp;03 leads.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> comfortable writing proofs; Abbott begun.</div></div>
+    <div class="gp"><div class="when">Autumn 2026</div><div class="what"><strong>Abbott Chapters 1&ndash;3</strong> &mdash; the real numbers, sequences, and series (the bedrock everything later rests on).</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> sequences and series mastered (limits, convergence).</div></div>
+    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze &mdash; math slips first</span></div><div class="what"><strong>Abbott Chapters 4&ndash;7</strong> &mdash; continuity, derivatives, integration. This also directly strengthens your UoL exams, so it is efficient. Under exam pressure the math lane is the first to step down.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> single-variable real analysis complete.</div></div>
+    <div class="gp"><div class="when">Summer 2027</div><div class="what">Selective <strong>Pugh</strong> (Chapters 1/3/5, for depth), then start a <strong>measure-theory primer (Rosenthal)</strong> &mdash; the bridge into the MSc core.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> on the measure-theory on-ramp.</div></div>
+    <div class="gp major"><div class="when">Autumn 2027</div><div class="what"><strong>Measure-theoretic probability to working competence</strong> (Rosenthal / Williams) &mdash; <em>with problem sets</em>. Solving problems, not just reading, is what makes it stick.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> measure theory competent &mdash; the MSc&rsquo;s hardest course is now a review.</div></div>
+    <div class="gp"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals</span></div><div class="what"><strong>Asymptotics</strong> &mdash; the law of large numbers, central limit theorem, and delta method: the machinery behind every estimator&rsquo;s standard errors, which the artifact needs.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> asymptotic theory in hand.</div></div>
+    <div class="gp"><div class="when">Summer 2028</div><div class="what">No new load; the foundation is complete and banked.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> rigour prerequisites done, carried into the MSc.</div></div>
+  </div>
+  <div class="alert"><strong>End state (mid-2028):</strong> the MSc&rsquo;s compulsory measure-theory / Statistical-Theory core is a review, not a wall &mdash; and you have the asymptotic theory the artifact needs. STOP-HERE respected.</div>
 
 </section>
 </div>
