@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — Lanes</title>
+<title>Dreamteam — 03 Risk</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -412,6 +412,25 @@
   .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
   
 
+  .gp-timeline{margin:4px 0 10px}
+  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
+  .gp:last-child{padding-bottom:2px}
+  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
+  .gp.major::before{background:var(--accent);border-color:var(--accent)}
+  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
+  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
+  .gp .what{font-size:13px;margin:1px 0}
+  .gp .dod{font-size:12px;color:var(--fg-dim)}
+  .gp .star{color:var(--accent);font-weight:800}
+  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
+  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
+  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
+  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
+  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
+  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
+  
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -442,30 +461,24 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="lanes.html" class="cur">Lanes</a><a href="week.html" class="">This week</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="lane03.html" class="cur">03 Risk</a><a href="lane01.html" class="">01 Prod</a><a href="lane02.html" class="">02 Math</a><a href="lane06.html" class="">06 Network</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Lanes</div><a href="#lan-1-the-four-lanes" class="">The four lanes</a><a href="#lan-2-03-applied-risk-econometrics-co-primary-6h-w" class="h3">03 &middot; Applied-risk econometrics &middot; co-primary &m</a><a href="#lan-3-01-programming-production-co-primary-56h-wk" class="h3">01 &middot; Programming / production &middot; co-primary &mi</a><a href="#lan-4-02-math-rigour-serious-secondary-45h-wk" class="h3">02 &middot; Math rigour &middot; serious secondary &middot; </a><a href="#lan-5-06-reading-intuition-network-business-low-in" class="h3">06 &middot; Reading &middot; intuition &middot; network &mid</a></div>
-<div class="site-main"><section class="page-section" id="lanes">
+<div class="site-subnav"><div class="lbl">03 Risk</div><a href="#03 -1-03-applied-risk-econometrics-the-spine" class="">03 &middot; Applied-risk econometrics the spine</a></div>
+<div class="site-main"><section class="page-section" id="lane03">
 
-  <h2 id="lan-1-the-four-lanes">The four lanes</h2>
-  <p class="tab-subtitle"><strong>~20&nbsp;h/week TOTAL</strong> (not per lane) &middot; <strong>run in parallel</strong>, not one-after-another &mdash; 03 does not wait for 02 &middot; all converge on <strong>one</strong> artifact. Each lane has its own detailed curriculum (its FINDINGS file).</p>
-
-  <div class="converge" style="margin-bottom:18px">Mental model: <strong>03 + 01 co-primary now</strong> &middot; <strong>02 feeds them</strong> &middot; <strong>06 compounds underneath</strong> &rarr; all &rarr; ONE artifact &rarr; the PhD door</div>
-
-  <h3 id="lan-2-03-applied-risk-econometrics-co-primary-6h-w">03 &middot; Applied-risk econometrics <span class="small">&middot; co-primary &middot; ~6&nbsp;h/wk &middot; THE SPINE</span></h3>
-  <p class="small">The single most important lane, running from <strong>now</strong> &mdash; it's the domain you'll research, the artifact's content, and the flywheel head-start. To implement-then-research level: Tsay (GARCH, EVT/VaR) + McNeil&ndash;Frey&ndash;Embrechts <em>QRM</em> + GAS + backtesting + copulas. The differentiator: <strong>hand-derive the equation, hand-code the estimator, validate against a package to a numeric tolerance</strong> &mdash; not run the package and stop. This is the <strong>methods</strong>, not deep regulation (Basel/IRB/IFRS9 depth is on-the-job &mdash; literacy only now). Milestone: autumn-2027 rung-1 VaR/ES backtest to portfolio grade.</p>
-
-  <h3 id="lan-3-01-programming-production-co-primary-56h-wk">01 &middot; Programming / production <span class="small">&middot; co-primary &middot; ~5&ndash;6&nbsp;h/wk</span></h3>
-  <p class="small">R-primary stack (<code>rugarch</code>/<code>gasmodel</code>/<code>qrmtools</code>/<code>ExtremeRisks</code>) + the non-negotiable reproducibility substrate (Git/renv/Quarto/CI/seeds/Zenodo). The edge is production <em>discipline</em>, not "can code". Builds the reproduction ladder + a personal R package. Milestones: Dec-2026 substrate (3 repos); autumn-2027 rung-1 + package v0.1.0. C++/Rcpp reading-level only.</p>
-
-  <h3 id="lan-4-02-math-rigour-serious-secondary-45h-wk">02 &middot; Math rigour <span class="small">&middot; serious secondary &middot; ~4&ndash;5&nbsp;h/wk</span></h3>
-  <p class="small"><strong>Master</strong> real analysis (Eccles 6&ndash;9 &rarr; Abbott, full &rarr; selective Pugh) &rarr; measure-theoretic probability (Rosenthal/Williams, with problem sets) + asymptotics &mdash; so the graded MSc core is a <em>review</em>. It <strong>feeds</strong> 03 but does <strong>not gate</strong> it (you can hand-code a GARCH estimator without measure theory). <strong>STOP-HERE:</strong> no topology, functional analysis, or stochastic calculus / It&ocirc; / SDEs (wrong lane &mdash; don't out-math the math-majors). The graded MATH 447 is dropped.</p>
-
-  <h3 id="lan-5-06-reading-intuition-network-business-low-in">06 &middot; Reading &middot; intuition &middot; network &middot; business <span class="small">&middot; low-intensity &middot; ~3&ndash;5&nbsp;h/wk</span></h3>
-  <p class="small">The slow-maturing, high-compounding lane &mdash; switched on <strong>FIRST</strong> to age. The <strong>multiplier</strong> on your hard skills, not a substitute. Priority order: <strong>written communication first</strong> (scientific writing / the artifact write-up / the SOP / the PI cold-email &mdash; high-leverage and your strength) &rarr; stats/econ <em>intuition</em> (Blitzstein &amp; Hwang) &rarr; the <strong>network</strong> (ORCID/Scholar/site/LinkedIn + a CRM, aging from now) &rarr; boutique-founder literacy (Maister, Weiss). Networking-at-events / negotiation matter more <em>later</em> (MSc &rarr; job &rarr; boutique) and are the harder channel &mdash; build gradually.</p>
-
-  <div class="alert"><strong>Everything converges on ONE reproduction+extension artifact.</strong> Depth over breadth. STOP-HEREs: no MOOC/Kaggle breadth stacks &middot; no C++ authoring &middot; no pure-math arms race &middot; deep Basel/IRB/IFRS9 regulation is on-the-job (literacy only now). Soft skills multiply the hard skills &mdash; they never replace them.</p>
+  <h2 id="03 -1-03-applied-risk-econometrics-the-spine">03 &middot; Applied-risk econometrics <span class="lane-badge spine">the spine</span></h2>
+  <p class="tab-subtitle">co-primary &middot; ~6&nbsp;h/wk &middot; <strong>Goal:</strong> reach <em>implement-then-research</em> level &mdash; derive the equation &rarr; hand-code the estimator &rarr; validate against a package to a numeric tolerance. This is the <strong>methods</strong> (GARCH/GAS/EVT/VaR-ES), not deep regulation (Basel/IRB/IFRS9 is on-the-job). The artifact's content + the flywheel head-start.</p>
+  <div class="gp-timeline">
+    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Tsay Ch&nbsp;1&ndash;2 with a keyboard &mdash; retype + run every R example.</div><div class="dod">Goalpost: Ch&nbsp;1&ndash;2 reproduced in a renv-locked repo.</div></div>
+    <div class="gp"><div class="when">Autumn 2026</div><div class="what">Tsay Ch&nbsp;1&ndash;3 (returns, linear TS, conditional heteroskedasticity) + QRM Ch&nbsp;2.</div><div class="dod">Goalpost: GARCH understood end-to-end.</div></div>
+    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze &mdash; step down</span></div><div class="what">Tsay Ch&nbsp;3 (volatility) + Ch&nbsp;7 (EVT); QRM Ch&nbsp;3&ndash;5, 9.</div><div class="dod">Goalpost: EVT + VaR/ES concepts in hand.</div></div>
+    <div class="gp"><div class="when">Summer 2027</div><div class="what">Consolidate QRM; start hand-deriving the estimators.</div><div class="dod">Goalpost: ready to hand-code from equations.</div></div>
+    <div class="gp major"><div class="when">Autumn 2027</div><div class="what">Hand-coded GARCH/GAS/EVT estimators; first reproductions.</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> rung-1 VaR/ES backtest to portfolio grade.</div></div>
+    <div class="gp major freeze"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals &mdash; spine slips last</span></div><div class="what">The PI-indexed reproduction; research-active.</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> the flagship artifact (methods) drafted.</div></div>
+    <div class="gp"><div class="when">Summer 2028</div><div class="what">Consolidate; hand off to lane 01 for finalisation.</div><div class="dod">Goalpost: implement-then-research level reached.</div></div>
+  </div>
+  <div class="alert"><strong>End state (mid-2028):</strong> you can derive, implement, and numerically validate GARCH/GAS/EVT/VaR-ES from equations. Feeds &rarr; the MSc thesis nucleus + the PI cold-open + the Swiss-career proof.</div>
 
 </section>
 </div>

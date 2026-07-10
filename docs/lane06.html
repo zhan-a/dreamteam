@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — This week</title>
+<title>Dreamteam — 06 Network</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -412,6 +412,25 @@
   .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
   
 
+  .gp-timeline{margin:4px 0 10px}
+  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
+  .gp:last-child{padding-bottom:2px}
+  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
+  .gp.major::before{background:var(--accent);border-color:var(--accent)}
+  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
+  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
+  .gp .what{font-size:13px;margin:1px 0}
+  .gp .dod{font-size:12px;color:var(--fg-dim)}
+  .gp .star{color:var(--accent);font-weight:800}
+  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
+  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
+  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
+  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
+  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
+  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
+  
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -442,41 +461,24 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="lanes.html" class="">Lanes</a><a href="week.html" class="cur">This week</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="lane03.html" class="">03 Risk</a><a href="lane01.html" class="">01 Prod</a><a href="lane02.html" class="">02 Math</a><a href="lane06.html" class="cur">06 Network</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">This week</div><a href="#thi-1-this-week-week-1-of-execution" class="">This week &mdash; Week 1 of execution</a><a href="#thi-2-a-stand-up-the-aging-infrastructure-5-h" class="h3">A &middot; Stand up the aging infrastructure (~5 h)</a><a href="#thi-3-b-switch-on-the-two-primary-reading-tracks-7" class="h3">B &middot; Switch on the two primary reading tracks (~7 h)</a><a href="#thi-4-c-slow-maturing-switch-ons-free-time-2-h" class="h3">C &middot; Slow-maturing switch-ons (free time, ~2 h)</a><a href="#thi-5-d-admin-12-h" class="h3">D &middot; Admin (~1&ndash;2 h)</a></div>
-<div class="site-main"><section class="page-section" id="week">
+<div class="site-subnav"><div class="lbl">06 Network</div><a href="#06 -1-06-reading-intuition-network-business" class="">06 &middot; Reading &middot; intuition &middot; network &mid</a></div>
+<div class="site-main"><section class="page-section" id="lane06">
 
-  <h2 id="thi-1-this-week-week-1-of-execution">This week &mdash; Week 1 of execution</h2>
-  <p class="tab-subtitle">2026-07-06 &rarr; 07-12. Summer, no exams &rarr; a <strong>setup week</strong>: stand up the infrastructure the slow-maturing lanes need (it pays off by <em>aging</em>) and switch on the two primary reading tracks. No deep model coding yet (that's 2027). Realistic ~12&ndash;16&nbsp;h.</p>
-
-  <h3 id="thi-2-a-stand-up-the-aging-infrastructure-5-h">A &middot; Stand up the aging infrastructure <span class="small">(~5 h)</span></h3>
-  <ul>
-    <li><strong>GitHub + R environment</strong> (01) &mdash; permanent professional GitHub handle; update R to 4.6.x + git; <code>install.packages("renv")</code>; first repo with <code>renv::init()</code>.</li>
-    <li><strong>Scholarly-identity shell</strong> (06) &mdash; ORCID iD; public Google Scholar (verify with KBTU email); a one-page site; a LinkedIn headline on the lane.</li>
-    <li><strong>Wire GitHub &rarr; Zenodo</strong> (tag-a-release &rarr; DOI), ~20 min; and start a <strong>CRM</strong> spreadsheet seeded with Kozha/RESNA/faculty ties.</li>
-  </ul>
-
-  <h3 id="thi-3-b-switch-on-the-two-primary-reading-tracks-7">B &middot; Switch on the two primary reading tracks <span class="small">(~7 h)</span></h3>
-  <ul>
-    <li><strong>Tsay Ch 1&ndash;2 with a keyboard</strong> (03) &mdash; retype and run every R example inside a renv-locked, Quarto-rendered repo. The primary lane; starts now.</li>
-    <li><strong>Abbott Ch 1</strong> (02) &mdash; first confirm whether MT2116 lets you skip an Eccles on-ramp, then open Abbott. Low intensity.</li>
-  </ul>
-
-  <h3 id="thi-4-c-slow-maturing-switch-ons-free-time-2-h">C &middot; Slow-maturing switch-ons <span class="small">(free time, ~2 h)</span></h3>
-  <ul>
-    <li>Begin <strong>one</strong> lane-06 reading &mdash; Blitzstein &amp; Hwang (stats intuition) or Newport (career frame).</li>
-    <li><strong>Follow, don't engage</strong>: the target PIs, FINMA, GARP/PRMIA, Big-4 model-validation on LinkedIn.</li>
-  </ul>
-
-  <h3 id="thi-5-d-admin-12-h">D &middot; Admin <span class="small">(~1&ndash;2 h)</span></h3>
-  <ul>
-    <li><strong>anabin</strong> recognition check (KBTU / UoL = H+?).</li>
-    <li><strong>German</strong> &mdash; book/start Goethe A1 (Almaty) if not already.</li>
-  </ul>
-
-  <div class="alert"><strong>If time is short, protect A1 (GitHub/R), A2 (ORCID/shell), and Tsay Ch 1&ndash;2</strong> above all &mdash; those are the load-bearing "switch on and let it age" moves. Cap each setup item (an evening, not a project).</div>
+  <h2 id="06 -1-06-reading-intuition-network-business">06 &middot; Reading &middot; intuition &middot; network &middot; business</h2>
+  <p class="tab-subtitle">low-intensity &middot; ~3&ndash;5&nbsp;h/wk &middot; runs on free / low-cognitive time &middot; <strong>Goal:</strong> the slow-maturing <em>multiplier</em> on the hard skills (never a substitute), switched on <strong>FIRST</strong> so it ages. Order: <strong>written communication first</strong> (your strength) &rarr; intuition &rarr; network &rarr; boutique literacy.</p>
+  <div class="gp-timeline">
+    <div class="gp major"><div class="when">Summer 2026 &middot; now</div><div class="what">Stand up ORCID / Google Scholar / a one-page site / LinkedIn + a CRM; begin Blitzstein &amp; Hwang.</div><div class="dod"><span class="star">&#9733; GOALPOST:</span> the scholarly-identity shell is live &mdash; aging from today.</div></div>
+    <div class="gp"><div class="when">Autumn 2026</div><div class="what">A reading habit; first public note; written-comms practice (Doumont, Spiegelhalter).</div><div class="dod">Goalpost: 1st public output shipped.</div></div>
+    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze</span></div><div class="what">Low-intensity reading; <em>follow, don't engage</em> &mdash; PIs, FINMA, GARP/PRMIA, Big-4 validation.</div><div class="dod">Goalpost: the network is seeded.</div></div>
+    <div class="gp"><div class="when">Summer 2027</div><div class="what">Scientific-writing reps &mdash; a teardown / explainer of a risk method.</div><div class="dod">Goalpost: the writing muscle is built.</div></div>
+    <div class="gp"><div class="when">Autumn 2027</div><div class="what">Rehearse the reproduction-gift PI cold-email (the artifact-as-bait craft).</div><div class="dod">Goalpost: a cold-open drafted and ready.</div></div>
+    <div class="gp"><div class="when">Winter&ndash;Spring 2028</div><div class="what">Soft-touch Hoga / Demetrescu; boutique-founder literacy (Maister, Weiss).</div><div class="dod">Goalpost: warm letter-writer ties opened.</div></div>
+    <div class="gp"><div class="when">Summer 2028</div><div class="what">Logistics; keep the public stream running.</div><div class="dod">Goalpost: two years of aged network + rep.</div></div>
+  </div>
+  <div class="alert"><strong>End state (mid-2028):</strong> an aged public identity, a written-communication edge, a seeded Europe network, and boutique literacy &mdash; the multiplier that lets the hard skills land. Networking-at-events / negotiation come <em>later</em> (MSc &rarr; job &rarr; boutique).</div>
 
 </section>
 </div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — Roadmap</title>
+<title>Dreamteam — Goalposts</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -412,6 +412,25 @@
   .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
   
 
+  .gp-timeline{margin:4px 0 10px}
+  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
+  .gp:last-child{padding-bottom:2px}
+  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
+  .gp.major::before{background:var(--accent);border-color:var(--accent)}
+  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
+  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
+  .gp .what{font-size:13px;margin:1px 0}
+  .gp .dod{font-size:12px;color:var(--fg-dim)}
+  .gp .star{color:var(--accent);font-weight:800}
+  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
+  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
+  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
+  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
+  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
+  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
+  
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -442,49 +461,40 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="roadmap.html" class="cur">Roadmap</a><a href="lanes.html" class="">Lanes</a><a href="week.html" class="">This week</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="cur">Goalposts</a><a href="lane03.html" class="">03 Risk</a><a href="lane01.html" class="">01 Prod</a><a href="lane02.html" class="">02 Math</a><a href="lane06.html" class="">06 Network</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Roadmap</div><a href="#roa-1-roadmap-the-two-year-bachelor-window" class="">Roadmap &mdash; the two-year bachelor window</a><a href="#roa-2-the-ramp" class="h3">The ramp</a><a href="#roa-3-the-master-timeline" class="h3">The master timeline</a><a href="#roa-4-the-shared-deliverable-a-reproduction-ladder" class="h3">The shared deliverable &mdash; a reproduction ladder</a><a href="#roa-5-protected-the-application-track" class="h3">Protected &middot; the application track</a></div>
-<div class="site-main"><section class="page-section" id="roadmap">
+<div class="site-subnav"><div class="lbl">Goalposts</div><a href="#goa-1-goalposts-all-lanes-one-board" class="">Goalposts &mdash; all lanes, one board</a><a href="#goa-2-the-four-milestones-that-matter-most" class="h3">&#9733; The four milestones that matter most</a><a href="#goa-3-season-lane-the-full-board" class="h3">Season &times; lane &mdash; the full board</a></div>
+<div class="site-main"><section class="page-section" id="goalposts">
 
-  <h2 id="roa-1-roadmap-the-two-year-bachelor-window">Roadmap &mdash; the two-year bachelor window</h2>
-  <p class="tab-subtitle">mid-2026 &rarr; mid-2028: pre-load the flywheel across four lanes, ~20&nbsp;h/week total, ramping foundations &rarr; mastery &rarr; research output. The decade arc is on the Home page; the detailed 2&ndash;4-year forward roadmap is pending.</p>
+  
+  <h2 id="goa-1-goalposts-all-lanes-one-board">Goalposts &mdash; all lanes, one board</h2>
+  <p class="tab-subtitle">The whole bachelor window (mid-2026 &rarr; mid-2028) at <strong>season / quarter</strong> granularity &mdash; every lane's goalposts in one place. Per-lane detail lives on each lane's own page (nav above).</p>
 
-  <h3 id="roa-2-the-ramp">The ramp</h3>
-  <div class="card-grid">
-    <div class="stat"><div class="label">2026 &mdash; foundations</div><div class="value small">Setup + reading</div><div class="small">Production substrate on early; Tsay/QRM read with a keyboard; real analysis begins; the 06 footprint stood up to age.</div></div>
-    <div class="stat"><div class="label">2027 &mdash; mastery</div><div class="value small">+ first reproductions</div><div class="small">Hand-coded GARCH/GAS/EVT estimators; measure-theoretic probability to competence; rung-1 backtest + personal R package.</div></div>
-    <div class="stat"><div class="label">late-2027 / 2028 &mdash; research + apply</div><div class="value small">The PI-indexed artifact</div><div class="small">The flagship reproduction + extension; adversarial self-check; the MSc application.</div></div>
+  <h3 id="goa-2-the-four-milestones-that-matter-most">&#9733; The four milestones that matter most</h3>
+  <div class="ms-strip">
+    <div class="ms"><div class="w">Dec 2026</div><div class="t">Production substrate done &mdash; 3 renv/Quarto/CI repos, GitHub&rarr;Zenodo wired <span class="small">(01)</span></div></div>
+    <div class="ms"><div class="w">Autumn 2027</div><div class="t">Rung-1 VaR/ES backtest to portfolio grade + R pkg v0.1.0 <span class="small">(03/01)</span> &middot; <strong>PICK the PI paper</strong> &middot; sit GRE-Q &middot; fresh IELTS</div></div>
+    <div class="ms"><div class="w">15 May 2028</div><div class="t"><strong>MSc application deadline</strong> &mdash; TU Dortmund Econometrics</div></div>
+    <div class="ms"><div class="w">Oct 2028</div><div class="t">MSc begins &mdash; arrive pre-loaded; the flywheel starts</div></div>
   </div>
 
-  <h3 id="roa-3-the-master-timeline">The master timeline</h3>
+  <h3 id="goa-3-season-lane-the-full-board">Season &times; lane &mdash; the full board</h3>
+  <div style="overflow-x:auto">
   <table>
-    <thead><tr><th>Window</th><th>03 Applied-risk</th><th>01 Programming</th><th>02 Math</th><th>06 Reading / network</th><th>German + admin</th></tr></thead>
+    <thead><tr><th>Season</th><th>03 &middot; Risk</th><th>01 &middot; Production</th><th>02 &middot; Math</th><th>06 &middot; Soft / network</th><th>German + admin</th></tr></thead>
     <tbody>
-      <tr><td><strong>Summer 2026</strong> <span class="small">(now)</span></td><td>Tsay Ch 1&ndash;2 w/ keyboard</td><td>GitHub + R 4.6 + renv; Quarto/Zenodo</td><td>start Abbott</td><td>ORCID/Scholar/site/LinkedIn + CRM</td><td>A1; anabin check</td></tr>
-      <tr><td><strong>Autumn 2026</strong></td><td>Tsay Ch 1&ndash;3 + QRM Ch 2</td><td>3 renv/Quarto/CI repos</td><td>Abbott</td><td>reading habit; 1st public note</td><td>&mdash;</td></tr>
-      <tr><td><strong>Spring 2027</strong></td><td>Tsay Ch 3 + Ch 7; QRM 3&ndash;5, 9</td><td>maintain substrate</td><td>Abbott (yields in exams)</td><td>low-intensity</td><td><span class="badge status-progress">UoL exams = freeze</span></td></tr>
-      <tr><td><strong>Summer 2027</strong></td><td>consolidate QRM</td><td>data-editor-grade hygiene</td><td>&rarr; measure-theory primer</td><td>teardown file</td><td>A1&rarr;A2; book IELTS</td></tr>
-      <tr><td><strong>Autumn 2027</strong></td><td>hand-coded estimators + reproductions</td><td><strong>rung-1 backtest; R pkg v0.1.0</strong></td><td>measure-theory to competence</td><td>reproduction-gift rehearsal</td><td><strong>IELTS; PICK the PI paper</strong></td></tr>
-      <tr><td><strong>Spring 2028</strong></td><td><strong>PI-indexed reproduction; research-active</strong></td><td><strong>flagship artifact + adversarial self-check</strong></td><td>asymptotics &rarr; the artifact</td><td>soft-touch Hoga/Demetrescu</td><td><span class="badge status-progress">UoL finals = freeze;</span> <strong>MSc APPLY 15 May</strong></td></tr>
-      <tr><td><strong>Summer 2028</strong></td><td>&mdash;</td><td>finalize; pkg v0.2.0</td><td>&mdash;</td><td>logistics</td><td>A2&rarr;B1; admission &rarr; enrol Oct</td></tr>
+      <tr><td><strong>Summer 2026</strong> <span class="small">(now)</span></td><td>Tsay Ch&nbsp;1&ndash;2, keyboard</td><td>GitHub + R 4.6 + renv; 1st repo</td><td>Eccles 6&ndash;9 &rarr; open Abbott</td><td>ORCID/Scholar/site/LinkedIn + CRM</td><td>A1; anabin check</td></tr>
+      <tr><td><strong>Autumn 2026</strong></td><td>Tsay Ch&nbsp;1&ndash;3 + QRM Ch&nbsp;2</td><td><strong>&#9733; 3 repos + Zenodo</strong></td><td>Abbott 1&ndash;3</td><td>reading habit; 1st public note</td><td>&mdash;</td></tr>
+      <tr><td><strong>Win&ndash;Spr 2027</strong> <span class="badge status-progress">exam freeze</span></td><td>Tsay Ch&nbsp;3 + 7 (EVT); QRM 3&ndash;5, 9</td><td>maintain substrate</td><td>Abbott 4&ndash;7 (yields in exams)</td><td>low-intensity; follow PIs/FINMA</td><td>&mdash;</td></tr>
+      <tr><td><strong>Summer 2027</strong></td><td>consolidate QRM; hand-derive</td><td>data-editor-grade hygiene</td><td>selective Pugh &rarr; measure primer</td><td>scientific-writing reps</td><td>A1&rarr;A2; book IELTS</td></tr>
+      <tr><td><strong>Autumn 2027</strong></td><td><strong>&#9733; rung-1 estimators + backtest</strong></td><td><strong>&#9733; rung-1 + pkg v0.1.0</strong></td><td><strong>&#9733; measure theory competent</strong></td><td>PI cold-open rehearsal</td><td><strong>&#9733; GRE-Q; IELTS; PICK PI paper</strong></td></tr>
+      <tr><td><strong>Win&ndash;Spr 2028</strong> <span class="badge status-progress">finals freeze</span></td><td><strong>PI-indexed reproduction</strong></td><td><strong>flagship artifact + self-check</strong></td><td>asymptotics &rarr; the artifact</td><td>soft-touch Hoga/Demetrescu</td><td><strong>&#9733; MSc APPLY 15 May</strong></td></tr>
+      <tr><td><strong>Summer 2028</strong></td><td>consolidate</td><td>finalize; pkg v0.2.0</td><td>&mdash; (banked)</td><td>logistics; keep the stream</td><td>A2&rarr;B1; enrol Oct</td></tr>
     </tbody>
   </table>
-  <p class="small" style="color:var(--fg-dim)">Budget ramps ~15&ndash;17&nbsp;h (2026) &rarr; ~20&nbsp;h (2027) &rarr; the build-sprint peak. Exam weeks step everything down; the applied spine slips <em>last</em>, the math lane <em>first</em>.</p>
-
-  <h3 id="roa-4-the-shared-deliverable-a-reproduction-ladder">The shared deliverable &mdash; a reproduction ladder</h3>
-  <div class="alert"><strong>One</strong> audit-grade reproducible reproduction + extension repo, built as a ladder: generic rungs now&rarr;2027 (hand-coded GARCH VaR/ES backtest &rarr; EVT &rarr; GAS, each renv/CI/Zenodo-DOI'd, growing a personal R package) &rarr; the <strong>PI-indexed rung</strong> autumn-2027 (default Krause&ndash;Paolella, hand-coded from equations). It counts four ways: artifact core &middot; thesis nucleus &middot; PI cold-open &middot; Swiss-career proof.</div>
-
-  <h3 id="roa-5-protected-the-application-track">Protected &middot; the application track</h3>
-  <table>
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
-    <tbody>
-      <tr><td>UoL First</td><td>Ring-fenced in the May&ndash;June exam weeks (2027, 2028). Self-study steps down; the applied spine slips last.</td></tr>
-      <tr><td>German</td><td>A calm summer drip: A0&rarr;A1 (2026) &rarr; A2 (2027) &rarr; B1 (2028, in-country from Oct).</td></tr>
-      <tr><td>Application (spring 2028)</td><td>Fresh IELTS (~Sep 2027); pre-clear the <strong>Economics &ge;15 ECTS</strong> floor with Dzikowski; VPD; submit to TU Dortmund by <strong>15 May 2028</strong>; soft-touch Hoga/Demetrescu.</td></tr>
-    </tbody>
-  </table>
+  </div>
+  <div class="alert"><strong>Rhythm:</strong> the budget ramps ~15&nbsp;h (2026) &rarr; ~20&nbsp;h (2027) &rarr; the build-sprint peak. In the exam freezes (May&ndash;Jun 2027 &amp; 2028) everything steps down &mdash; the <strong>math lane slips first, the applied spine last</strong>. Everything converges on <strong>one</strong> reproduction+extension artifact.</div>
 
 </section>
 </div>
