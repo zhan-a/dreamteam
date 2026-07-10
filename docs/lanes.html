@@ -386,8 +386,30 @@
   .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
   .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
   .arc-step.now{border-left-color:var(--ok)}
+  .arc-step.pivot{border-left-color:var(--warn)}
   .lane-card{border-left:3px solid var(--accent)}
   .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
+  .lane-row.t1{border-left-color:var(--accent)}
+  .lane-row.t2{border-left-color:var(--info)}
+  .lane-row.t3{border-left-color:var(--fg-dimmer)}
+  .lane-tag{flex-shrink:0;width:132px}
+  .lane-tag .n{font-weight:800;font-size:13px;display:block}
+  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
+  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
+  .lane-body{flex:1;min-width:0;font-size:12.5px}
+  .lane-body .what{font-weight:600}
+  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
+  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
+  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
+  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
+  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
+  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
+  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
+  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
+  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
+  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
   
 
 /* === multi-page layout overrides === */
@@ -427,21 +449,23 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="site-main"><section class="page-section" id="lanes">
 
   <h2 id="lan-1-the-four-lanes">The four lanes</h2>
-  <p class="tab-subtitle">~20&nbsp;h/week total (not per lane). Each lane has its own detailed curriculum (its FINDINGS file). ML lane eliminated &mdash; governance ML is on-the-job; ML methods a possible PhD-time curiosity.</p>
+  <p class="tab-subtitle"><strong>~20&nbsp;h/week TOTAL</strong> (not per lane) &middot; <strong>run in parallel</strong>, not one-after-another &mdash; 03 does not wait for 02 &middot; all converge on <strong>one</strong> artifact. Each lane has its own detailed curriculum (its FINDINGS file).</p>
 
-  <h3 id="lan-2-03-applied-risk-econometrics-co-primary-6h-w">03 &middot; Applied-risk econometrics <span class="small">&middot; co-primary &middot; ~6&nbsp;h/wk</span></h3>
-  <p class="small">The domain to implement-then-research level: Tsay (GARCH, EVT/VaR) + McNeil&ndash;Frey&ndash;Embrechts <em>QRM</em> + GAS + backtesting + copulas. The differentiator: <strong>hand-derive the equation, hand-code the estimator, validate against a package to a numeric tolerance</strong> &mdash; not run the package and stop. Milestone: autumn-2027 rung-1 VaR/ES backtest to portfolio grade.</p>
+  <div class="converge" style="margin-bottom:18px">Mental model: <strong>03 + 01 co-primary now</strong> &middot; <strong>02 feeds them</strong> &middot; <strong>06 compounds underneath</strong> &rarr; all &rarr; ONE artifact &rarr; the PhD door</div>
+
+  <h3 id="lan-2-03-applied-risk-econometrics-co-primary-6h-w">03 &middot; Applied-risk econometrics <span class="small">&middot; co-primary &middot; ~6&nbsp;h/wk &middot; THE SPINE</span></h3>
+  <p class="small">The single most important lane, running from <strong>now</strong> &mdash; it's the domain you'll research, the artifact's content, and the flywheel head-start. To implement-then-research level: Tsay (GARCH, EVT/VaR) + McNeil&ndash;Frey&ndash;Embrechts <em>QRM</em> + GAS + backtesting + copulas. The differentiator: <strong>hand-derive the equation, hand-code the estimator, validate against a package to a numeric tolerance</strong> &mdash; not run the package and stop. This is the <strong>methods</strong>, not deep regulation (Basel/IRB/IFRS9 depth is on-the-job &mdash; literacy only now). Milestone: autumn-2027 rung-1 VaR/ES backtest to portfolio grade.</p>
 
   <h3 id="lan-3-01-programming-production-co-primary-56h-wk">01 &middot; Programming / production <span class="small">&middot; co-primary &middot; ~5&ndash;6&nbsp;h/wk</span></h3>
   <p class="small">R-primary stack (<code>rugarch</code>/<code>gasmodel</code>/<code>qrmtools</code>/<code>ExtremeRisks</code>) + the non-negotiable reproducibility substrate (Git/renv/Quarto/CI/seeds/Zenodo). The edge is production <em>discipline</em>, not "can code". Builds the reproduction ladder + a personal R package. Milestones: Dec-2026 substrate (3 repos); autumn-2027 rung-1 + package v0.1.0. C++/Rcpp reading-level only.</p>
 
   <h3 id="lan-4-02-math-rigour-serious-secondary-45h-wk">02 &middot; Math rigour <span class="small">&middot; serious secondary &middot; ~4&ndash;5&nbsp;h/wk</span></h3>
-  <p class="small"><strong>Master</strong> real analysis (Abbott, full) &rarr; measure-theoretic probability (Rosenthal/Williams to competence, with problem sets) + asymptotics &mdash; so the graded MSc core is a <em>review</em>. <strong>STOP-HERE</strong>: no topology, functional analysis, stochastic calculus / It&ocirc; / SDEs (wrong lane). The graded MATH 447 is dropped.</p>
+  <p class="small"><strong>Master</strong> real analysis (Eccles 6&ndash;9 &rarr; Abbott, full &rarr; selective Pugh) &rarr; measure-theoretic probability (Rosenthal/Williams, with problem sets) + asymptotics &mdash; so the graded MSc core is a <em>review</em>. It <strong>feeds</strong> 03 but does <strong>not gate</strong> it (you can hand-code a GARCH estimator without measure theory). <strong>STOP-HERE:</strong> no topology, functional analysis, or stochastic calculus / It&ocirc; / SDEs (wrong lane &mdash; don't out-math the math-majors). The graded MATH 447 is dropped.</p>
 
   <h3 id="lan-5-06-reading-intuition-network-business-low-in">06 &middot; Reading &middot; intuition &middot; network &middot; business <span class="small">&middot; low-intensity &middot; ~3&ndash;5&nbsp;h/wk</span></h3>
-  <p class="small">The slow-maturing, high-compounding lane &mdash; switched on <strong>FIRST</strong>. Statistics/economics <em>intuition</em> (Blitzstein &amp; Hwang), communication / scientific writing (Doumont, Spiegelhalter), the <strong>network</strong> (ORCID/Scholar/site/LinkedIn + a CRM, started now to age), and boutique-founder literacy (Maister, Weiss). Reading paired with an active-output habit; runs on free/low-cognitive time, off peak hours.</p>
+  <p class="small">The slow-maturing, high-compounding lane &mdash; switched on <strong>FIRST</strong> to age. The <strong>multiplier</strong> on your hard skills, not a substitute. Priority order: <strong>written communication first</strong> (scientific writing / the artifact write-up / the SOP / the PI cold-email &mdash; high-leverage and your strength) &rarr; stats/econ <em>intuition</em> (Blitzstein &amp; Hwang) &rarr; the <strong>network</strong> (ORCID/Scholar/site/LinkedIn + a CRM, aging from now) &rarr; boutique-founder literacy (Maister, Weiss). Networking-at-events / negotiation matter more <em>later</em> (MSc &rarr; job &rarr; boutique) and are the harder channel &mdash; build gradually.</p>
 
-  <div class="alert">Everything technical converges on <strong>one</strong> shared reproduction+extension artifact (see the Roadmap). Depth over breadth; no MOOC/Kaggle stacks, no C++ authoring, no pure-math arms race.</div>
+  <div class="alert"><strong>Everything converges on ONE reproduction+extension artifact.</strong> Depth over breadth. STOP-HEREs: no MOOC/Kaggle breadth stacks &middot; no C++ authoring &middot; no pure-math arms race &middot; deep Basel/IRB/IFRS9 regulation is on-the-job (literacy only now). Soft skills multiply the hard skills &mdash; they never replace them.</p>
 
 </section>
 </div>

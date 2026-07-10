@@ -386,8 +386,30 @@
   .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
   .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
   .arc-step.now{border-left-color:var(--ok)}
+  .arc-step.pivot{border-left-color:var(--warn)}
   .lane-card{border-left:3px solid var(--accent)}
   .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
+  .lane-row.t1{border-left-color:var(--accent)}
+  .lane-row.t2{border-left-color:var(--info)}
+  .lane-row.t3{border-left-color:var(--fg-dimmer)}
+  .lane-tag{flex-shrink:0;width:132px}
+  .lane-tag .n{font-weight:800;font-size:13px;display:block}
+  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
+  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
+  .lane-body{flex:1;min-width:0;font-size:12.5px}
+  .lane-body .what{font-weight:600}
+  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
+  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
+  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
+  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
+  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
+  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
+  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
+  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
+  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
+  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
   
 
 /* === multi-page layout overrides === */

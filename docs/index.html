@@ -386,8 +386,30 @@
   .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
   .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
   .arc-step.now{border-left-color:var(--ok)}
+  .arc-step.pivot{border-left-color:var(--warn)}
   .lane-card{border-left:3px solid var(--accent)}
   .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
+  .lane-row.t1{border-left-color:var(--accent)}
+  .lane-row.t2{border-left-color:var(--info)}
+  .lane-row.t3{border-left-color:var(--fg-dimmer)}
+  .lane-tag{flex-shrink:0;width:132px}
+  .lane-tag .n{font-weight:800;font-size:13px;display:block}
+  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
+  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
+  .lane-body{flex:1;min-width:0;font-size:12.5px}
+  .lane-body .what{font-weight:600}
+  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
+  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
+  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
+  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
+  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
+  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
+  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
+  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
+  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
+  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
   
 
 /* === multi-page layout overrides === */
@@ -423,57 +445,57 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="cur">Home</a><a href="roadmap.html" class="">Roadmap</a><a href="lanes.html" class="">Lanes</a><a href="week.html" class="">This week</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Home</div><a href="#hom-1-the-plan-at-a-glance" class="">The Plan &mdash; at a glance</a><a href="#hom-2-the-arc" class="h3">The arc</a><a href="#hom-3-why-pre-load-now-the-flywheel" class="h3">Why pre-load now &mdash; the flywheel</a><a href="#hom-4-the-next-two-years-20h-week-total-four-lanes" class="h3">The next two years &mdash; ~20&nbsp;h/week total, four lanes</a><a href="#hom-5-the-ramp" class="h3">The ramp</a><a href="#hom-6-key-near-term-milestones" class="h3">Key near-term milestones</a><a href="#hom-7-protected-deferred-the-honest-caveat" class="h3">Protected &middot; deferred &middot; the honest caveat</a></div>
+<div class="site-subnav"><div class="lbl">Home</div><a href="#hom-1-the-plan-at-a-glance" class="">The Plan &mdash; at a glance</a><a href="#hom-2-the-arc-five-stages" class="h3">The arc &mdash; five stages</a><a href="#hom-3-the-engine-why-pre-load-now-the-flywheel" class="h3">The engine &mdash; why pre-load now (the flywheel)</a><a href="#hom-4-the-four-lanes-one-system-run-in-parallel" class="h3">The four lanes &mdash; one system, run in parallel</a><a href="#hom-5-the-phd-portfolio-you-only-need-one-yes" class="h3">The PhD portfolio &mdash; you only need ONE yes</a><a href="#hom-6-key-near-term-milestones" class="h3">Key near-term milestones</a><a href="#hom-7-the-honest-caveat" class="h3">The honest caveat</a></div>
 <div class="site-main"><section class="page-section" id="overview">
 
   
   <h2 id="hom-1-the-plan-at-a-glance">The Plan &mdash; at a glance</h2>
-  <p class="tab-subtitle"><strong>Maximand:</strong> a durable, affluent European life via a quant-RISK career &amp; a regulatory-quant boutique. <strong>Path:</strong> funded German MSc &rarr; salaried applied-risk PhD &rarr; Swiss quant-risk / model-validation career &rarr; own consulting boutique. <em>Updated 2026-07-06 &mdash; the high-level picture; the detail lives in the lane plans.</em></p>
+  <p class="tab-subtitle"><strong>Maximand:</strong> a durable, affluent European life via a quant-RISK career &amp; a regulatory-quant boutique &mdash; <strong>not</strong> a research PhD for its own sake. <em>Updated 2026-07-10.</em></p>
 
-  <h3 id="hom-2-the-arc">The arc</h3>
+  <h3 id="hom-2-the-arc-five-stages">The arc &mdash; five stages</h3>
   <div class="arc-strip">
-    <div class="arc-step now"><div class="w">Now &rarr; mid-2028</div><div class="t">Bachelor window</div><div class="d">Pre-load the flywheel: ~20&nbsp;h/wk self-study across 4 lanes, alongside the UoL First.</div></div>
-    <div class="arc-step"><div class="w">2028 &ndash; 2030</div><div class="t">German MSc</div><div class="d">TU Dortmund Econometrics (funded, English): measure-theory core + EVT electives + a thesis + letters.</div></div>
-    <div class="arc-step"><div class="w">2030 &ndash; 2034</div><div class="t">Salaried PhD</div><div class="d">Applied-risk &mdash; CH preferred (Paolella/Audrino/Chavez-Demoulin); NL/UK live (Zhou/Lucas/Kozhan).</div></div>
+    <div class="arc-step now"><div class="w">Now &rarr; mid-2028</div><div class="t">Bachelor window</div><div class="d">Pre-load the flywheel: ~20&nbsp;h/wk across 4 lanes, alongside the UoL First.</div></div>
+    <div class="arc-step"><div class="w">2028 &ndash; 2030</div><div class="t">German MSc</div><div class="d">TU Dortmund Econometrics (funded, English): measure-theory core + risk electives + a thesis + letters.</div></div>
+    <div class="arc-step pivot"><div class="w">2030 &ndash; 2034</div><div class="t">Salaried PhD</div><div class="d">Applied-risk. CH lead (Paolella/UZH) &middot; NL target (Zhou/Lucas) &middot; German floor &middot; UK backup.</div></div>
     <div class="arc-step"><div class="w">2034 &rarr;</div><div class="t">Swiss career</div><div class="d">Quant-risk / model-validation; C-permit &rarr; citizenship.</div></div>
-    <div class="arc-step"><div class="w">~35 &ndash; 40</div><div class="t">Boutique</div><div class="d">Own regulatory-quant / model-validation consulting practice &mdash; the wealth lever.</div></div>
+    <div class="arc-step"><div class="w">~35 &ndash; 40</div><div class="t">Boutique</div><div class="d">Own regulatory-quant consulting practice &mdash; the wealth lever.</div></div>
   </div>
 
-  <h3 id="hom-3-why-pre-load-now-the-flywheel">Why pre-load now &mdash; the flywheel</h3>
-  <div class="alert">Arrive at the MSc <strong>pre-loaded</strong> &rarr; the hard measure-theory core is a <em>review</em> &rarr; freed bandwidth &rarr; an <strong>early paid embed</strong> in a professor's funded project &rarr; a paper-shaped thesis &rarr; co-authorship + a warm PI intro + a Europe-wide network &rarr; reach the PhD gate with a <strong>surplus</strong>, not a bare transcript. Admission is rule-based (guaranteed on the floors), so the target is <strong>outstanding on arrival</strong>, not out-ranking anyone at the door.</div>
+  <h3 id="hom-3-the-engine-why-pre-load-now-the-flywheel">The engine &mdash; why pre-load now (the flywheel)</h3>
+  <div class="alert">Arrive at the MSc <strong>pre-loaded</strong> &rarr; the hard measure-theory core is a <em>review</em> &rarr; freed bandwidth &rarr; an <strong>early paid embed</strong> in a professor's funded project &rarr; a paper-shaped thesis &rarr; co-authorship + a warm PI intro + a Europe-wide network &rarr; reach the PhD gate with a <strong>surplus</strong>. MSc admission is rule-based (guaranteed on the floors), so the target is <strong>outstanding on arrival</strong>, not out-ranking anyone at a door.</div>
 
-  <h3 id="hom-4-the-next-two-years-20h-week-total-four-lanes">The next two years &mdash; ~20&nbsp;h/week total, four lanes</h3>
-  <p class="small" style="color:var(--fg-dim)">Doctrine: effort <strong>maximal + optimistic</strong>, expectations <strong>realistic</strong>; it <strong>ramps</strong> (foundations &rarr; mastery &rarr; research output), never coasts. The ~20&nbsp;h/wk is the <em>total across lanes, not per lane</em>.</p>
-  <div class="card-grid">
-    <div class="stat lane-card"><div class="lane-h">03 &middot; co-primary &middot; ~6&nbsp;h/wk</div><div class="value small">Applied-risk econometrics</div><div class="small">Tsay &middot; QRM &middot; GARCH/GAS &middot; EVT &middot; VaR/ES &mdash; hand-coded from the equations.</div></div>
-    <div class="stat lane-card"><div class="lane-h">01 &middot; co-primary &middot; ~5&ndash;6&nbsp;h/wk</div><div class="value small">Programming / production</div><div class="small">Reproducible R (renv/Quarto/CI) + the shared artifact repo. Discipline, not "can code".</div></div>
-    <div class="stat lane-card"><div class="lane-h">02 &middot; secondary &middot; ~4&ndash;5&nbsp;h/wk</div><div class="value small">Math rigour</div><div class="small">Master real analysis &rarr; measure-theoretic probability (with problem sets) &mdash; makes the MSc core a review.</div></div>
-    <div class="stat lane-card"><div class="lane-h">06 &middot; low-intensity &middot; ~3&ndash;5&nbsp;h/wk</div><div class="value small">Reading &middot; network &middot; business</div><div class="small">Stats/econ intuition, communication, the network, boutique literacy &mdash; started NOW (matures slowest).</div></div>
-  </div>
-  <p class="small" style="color:var(--fg-dim)"><strong>ML lane eliminated</strong> &mdash; governance ML is on-the-job, ML methods a possible PhD-time curiosity; not established enough to pre-load. <strong>One shared deliverable:</strong> a reproduction ladder &rarr; the PI-indexed artifact (built autumn 2027).</p>
+  <h3 id="hom-4-the-four-lanes-one-system-run-in-parallel">The four lanes &mdash; one system, run in parallel</h3>
+  <p class="small" style="color:var(--fg-dim)"><strong>~20&nbsp;h/week TOTAL</strong> (not per lane) &middot; <strong>all four at once</strong>, not one-after-another (03 does not wait for 02) &middot; each a different job, together converging on <strong>one</strong> artifact.</p>
+  <div class="lane-row t1"><div class="lane-tag"><span class="n">03 &middot; Spine</span><span class="tier">co-primary</span><span class="hrs">~6&nbsp;h/wk</span></div><div class="lane-body"><span class="what">Applied-risk econometrics</span> &mdash; Tsay &middot; QRM &middot; GARCH/GAS &middot; EVT &middot; VaR/ES, hand-coded from the equations.<div class="feeds">&rarr; the artifact's content &middot; the domain you'll research &middot; the flywheel head-start</div></div></div>
+  <div class="lane-row t1"><div class="lane-tag"><span class="n">01 &middot; Production</span><span class="tier">co-primary</span><span class="hrs">~5&ndash;6&nbsp;h/wk</span></div><div class="lane-body"><span class="what">Programming / reproducibility</span> &mdash; reproducible R (renv/Quarto/CI) + the shared repo. Discipline, not "can code".<div class="feeds">&rarr; the artifact's craft &middot; a personal R package</div></div></div>
+  <div class="lane-row t2"><div class="lane-tag"><span class="n">02 &middot; Rigour</span><span class="tier">serious secondary</span><span class="hrs">~4&ndash;5&nbsp;h/wk</span></div><div class="lane-body"><span class="what">Math rigour</span> &mdash; real analysis &rarr; measure-theoretic probability &rarr; asymptotics.<div class="feeds">&rarr; makes the MSc's hard core a <em>review</em> (feeds 03, doesn't gate it)</div></div></div>
+  <div class="lane-row t3"><div class="lane-tag"><span class="n">06 &middot; Compounding</span><span class="tier">low-intensity</span><span class="hrs">~3&ndash;5&nbsp;h/wk</span></div><div class="lane-body"><span class="what">Reading &middot; intuition &middot; network &middot; business</span> &mdash; stats/econ intuition, scientific writing/comms, the network, boutique literacy.<div class="feeds">&rarr; lands the artifact + opens doors &middot; the multiplier on the hard skills</div></div></div>
+  <div class="converge">All four &rarr; ONE reproduction+extension artifact &rarr; the PI cold-open + thesis nucleus + Swiss-career proof</div>
+  <p class="small" style="color:var(--fg-dim)"><strong>Ramp:</strong> 2026 foundations &rarr; 2027 mastery + first reproductions &rarr; late-2027/2028 the PI-indexed artifact + apply. <strong>Method-general with a risk flavor</strong> (the right breadth) &mdash; no ML pre-load, no pure-math arms race, deep regulation left for the job.</p>
 
-  <h3 id="hom-5-the-ramp">The ramp</h3>
-  <div class="card-grid">
-    <div class="stat"><div class="label">2026 &mdash; foundations</div><div class="value small">Setup + reading</div><div class="small">Production substrate on early; Tsay/QRM read with a keyboard; real analysis begins; the 06 footprint stood up to age.</div></div>
-    <div class="stat"><div class="label">2027 &mdash; mastery</div><div class="value small">+ first reproductions</div><div class="small">Hand-coded GARCH/GAS/EVT estimators; measure-theoretic probability to competence; rung-1 backtest + personal R package.</div></div>
-    <div class="stat"><div class="label">late-2027 / 2028 &mdash; research + apply</div><div class="value small">The PI-indexed artifact</div><div class="small">The flagship reproduction + extension; adversarial self-check; the MSc application.</div></div>
+  <h3 id="hom-5-the-phd-portfolio-you-only-need-one-yes">The PhD portfolio &mdash; you only need ONE yes</h3>
+  <div class="port-strip">
+    <div class="port reach"><div class="lvl">Lead &middot; reach</div><div class="who">&#127464;&#127469; Switzerland &mdash; Paolella/UZH +</div><div class="d">Best destination (comp + citizenship). Supervisor-first <strong>direct-hire</strong> &rarr; the artifact IS the admission currency. Small cohorts &rarr; a reach.</div></div>
+    <div class="port target"><div class="lvl">Target</div><div class="who">&#127475;&#127473; Netherlands &mdash; Zhou/Lucas</div><div class="d">Larger, structured, <strong>GRE-Q gated</strong>. More tractable than CH once the GRE is in hand &mdash; but competitive (you're an outside candidate).</div></div>
+    <div class="port floor"><div class="lvl">Floor</div><div class="who">&#127465;&#127466; Germany &mdash; in-house</div><div class="d">Embedded where you study (Hoga/Demetrescu/Jentsch); letters from the deciders. The most reliable seat &mdash; the safety net.</div></div>
+    <div class="port backup"><div class="lvl">Backup</div><div class="who">&#127468;&#127463; UK &mdash; Kozhan/Warwick</div><div class="d">Cohort MRes&rarr;PhD. Live, but not a lead (lowest stipend, Brexit friction).</div></div>
   </div>
+  <p class="small" style="color:var(--fg-dim)">Chase CH (best) + NL (better odds) hard; the German floor means <strong>no single "no" ends the plan</strong>. <strong>GRE = Quant-only</strong>, conditional (NL + any UZH-structured route), sit ~2027 &mdash; ignore Verbal.</p>
 
   <h3 id="hom-6-key-near-term-milestones">Key near-term milestones</h3>
   <table>
     <thead><tr><th>When</th><th>Milestone</th></tr></thead>
     <tbody>
-      <tr><td>This week</td><td>Set up GitHub + R/renv; stand up ORCID/Scholar/site/LinkedIn + CRM; start Tsay Ch&nbsp;1&ndash;2 &amp; Abbott Ch&nbsp;1; book German A1; anabin check</td></tr>
+      <tr><td>Now (Week 1)</td><td>Set up GitHub + R/renv; stand up ORCID/Scholar/site/LinkedIn + CRM; start Tsay Ch&nbsp;1&ndash;2 &amp; Abbott Ch&nbsp;1; book German A1; anabin check</td></tr>
       <tr><td>Dec 2026</td><td>Production substrate done &mdash; 3 renv/Quarto/CI repos; the aging footprint started</td></tr>
-      <tr><td>Autumn 2027</td><td>Rung-1 GARCH VaR/ES backtest to portfolio grade; <strong>pick the PI-indexed paper</strong>; fresh IELTS (~Sep)</td></tr>
+      <tr><td>Autumn 2027</td><td>Rung-1 GARCH VaR/ES backtest to portfolio grade; <strong>pick the PI-indexed paper</strong>; sit <strong>GRE-Q</strong>; fresh IELTS</td></tr>
       <tr><td>15 May 2028</td><td><strong>MSc application deadline</strong> &mdash; TU Dortmund Econometrics (pre-clear the Economics &ge;15 ECTS floor)</td></tr>
       <tr><td>Oct 2028</td><td>MSc begins &mdash; arrive pre-loaded; the flywheel starts</td></tr>
     </tbody>
   </table>
 
-  <h3 id="hom-7-protected-deferred-the-honest-caveat">Protected &middot; deferred &middot; the honest caveat</h3>
-  <p class="small" style="color:var(--fg-dim)"><strong>Protected:</strong> the UoL First (ring-fenced in the May&ndash;June exam weeks); German (a calm summer drip, A0&rarr;B1). <strong>Deferred:</strong> the specific PhD/PI + the final artifact-paper choice (~2027 &mdash; groundwork starts now); the GRE (only if a gated target is live); the external MATH 447 (dropped).</p>
-  <div class="alert">The salaried PhD is a <strong>reach</strong> &mdash; supervisor-gated, few seats. Pre-loading maximises the odds; it does not remove the dependency on a specific PI recruiting in the right cycle. Effort is controllable; the outcome is not &mdash; which is exactly why the effort is maximal.</div>
+  <h3 id="hom-7-the-honest-caveat">The honest caveat</h3>
+  <div class="alert">The salaried PhD is a <strong>reach</strong> &mdash; supervisor-gated, few seats, dependent on a specific PI recruiting in the right cycle. Pre-loading maximises the odds and the German floor de-risks it; neither makes it guaranteed. <strong>Effort is controllable; the outcome is not &mdash; which is exactly why the effort is maximal, and aimed only at the high-leverage levers</strong> (the artifact, domain depth, the PI relationship, grades, GRE-Q).</div>
 
 </section>
 </div>
