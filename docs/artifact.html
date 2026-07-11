@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — 01 Prod</title>
+<title>Dreamteam — Artifact</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -380,74 +380,18 @@
   }
 
 
-  .arc-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
-  .arc-step{flex:1;min-width:158px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:11px 13px}
-  .arc-step .w{font-size:10.5px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.05em}
-  .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
-  .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
-  .arc-step.now{border-left-color:var(--ok)}
-  .arc-step.pivot{border-left-color:var(--warn)}
-  .lane-card{border-left:3px solid var(--accent)}
-  .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
-  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
-  .lane-row.t1{border-left-color:var(--accent)}
-  .lane-row.t2{border-left-color:var(--info)}
-  .lane-row.t3{border-left-color:var(--fg-dimmer)}
-  .lane-tag{flex-shrink:0;width:132px}
-  .lane-tag .n{font-weight:800;font-size:13px;display:block}
-  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
-  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
-  .lane-body{flex:1;min-width:0;font-size:12.5px}
-  .lane-body .what{font-weight:600}
-  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
-  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
-  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
-  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
-  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
-  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
-  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
-  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
-  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
-  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
-  
-
-  .gp-timeline{margin:4px 0 10px}
-  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
-  .gp:last-child{padding-bottom:2px}
-  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
-  .gp.major::before{background:var(--accent);border-color:var(--accent)}
-  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
-  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
-  .gp .what{font-size:13px;margin:1px 0}
-  .gp .dod{font-size:12px;color:var(--fg-dim)}
-  .gp .star{color:var(--accent);font-weight:800}
-  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
-  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
-  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
-  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
-  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
-  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
-  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
-  
-
-  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
-  .gp .what{line-height:1.45}
-  .gp .glab{font-weight:800;color:var(--accent)}
-  .gp .qk{color:var(--fg-dimmer);font-style:italic}
-  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
-  
-
-  .p6{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:14px 17px;margin-bottom:12px}
-  .p6 .ph{font-weight:800;font-size:16px}
-  .p6 .pg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 9px}
-  .p6 .spine{font-size:14px;line-height:1.6}
-  .p6 .when{font-size:12.5px;color:var(--fg-dim);margin-top:9px;border-top:1px solid var(--border);padding-top:8px}
-  .p6 .when b{color:var(--accent);font-weight:800}
-  .p6 .read{font-size:12.5px;color:var(--fg-dimmer);margin-top:7px}
-  .p6 .read b{color:var(--fg-dim)}
-  .ambient{font-size:12.5px;line-height:1.55;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:12px}
-  .lane-intro p{font-size:14px;line-height:1.55}
+  /* shared lane cards (hoisted to every page by build_site.py) */
+  .ln{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:13px 16px;margin-bottom:11px}
+  .ln .lh{font-weight:800;font-size:15px}
+  .ln .lg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 8px}
+  .ln .body{font-size:13.5px;line-height:1.58}
+  .ln .body b{color:var(--fg)} .ln .body em{color:var(--accent);font-style:normal;font-weight:700}
+  .gate{border-left-color:var(--urgent)} .gate .lh{color:var(--urgent)}
+  .gpstrip{font-size:12.5px;line-height:1.75;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px}
+  .gpstrip .d{color:var(--accent);font-weight:800}
+  .hrs{font-size:12px;color:var(--fg-dimmer);font-weight:600;margin-left:4px}
+  .drop{font-size:12.5px;line-height:1.6;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px;color:var(--fg-dim)}
+  .tab-subtitle{font-size:13.5px}
   
 
 /* === multi-page layout overrides === */
@@ -480,29 +424,27 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="lane03.html" class="">03 Risk</a><a href="lane01.html" class="cur">01 Prod</a><a href="lane02.html" class="">02 Math</a><a href="lane06.html" class="">06 Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="admissions.html" class="">Admissions</a><a href="math.html" class="">Math</a><a href="cs.html" class="">CS / Algo</a><a href="ml.html" class="">ML</a><a href="artifact.html" class="cur">Artifact</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">01 Prod</div><a href="#01 -1-01-programming-production" class="">01 &middot; Programming / production</a></div>
-<div class="site-main"><section class="page-section" id="lane01">
+<div class="site-subnav"><div class="lbl">Artifact</div><a href="#art-1-artifact-research-23-h-wk-2026-build-sprint-" class="">Artifact / Research ~2&ndash;3 h/wk 2026 &rarr; build-sprint</a></div>
+<div class="site-main"><section class="page-section" id="artifact">
 
-  <h2 id="01 -1-01-programming-production">01 &middot; Programming / production</h2>
-  <p class="tab-subtitle">co-primary &middot; ~5&ndash;6&nbsp;h/wk.</p>
-  <div class="lane-intro">
-    <p><strong>What this lane is.</strong> Not &ldquo;learning to code&rdquo; &mdash; that is assumed. It is <strong>production discipline</strong>: the habits that make work <strong>reproducible</strong>, so that anyone (including future-you) can re-run it and get the identical result. In research and in model-validation this is an enforced professional norm, and doing it visibly well is itself a hireable signal.</p>
-    <p><strong>The tools, defined.</strong> <strong>R 4.6</strong> is the primary language, with the risk packages <code>rugarch</code>, <code>gasmodel</code>, <code>qrmtools</code>, <code>ExtremeRisks</code>. Around the code sits the reproducibility stack: <strong>git</strong> (records every change to your code), <strong>renv</strong> (locks the exact version of every R package a project uses so it re-runs identically years later; <code>renv::init()</code> sets this up), <strong>Quarto</strong> (turns code + writing into a clean rendered report), <strong>CI</strong> / continuous integration (automated checks that run your code on every change and flag breakage), and <strong>Zenodo</strong> (archives a release and mints a permanent <strong>DOI</strong> &mdash; a citable, frozen version). C++/Rcpp at reading level only.</p>
+  <h2 id="art-1-artifact-research-23-h-wk-2026-build-sprint-">Artifact / Research <span class="hrs">~2&ndash;3 h/wk 2026 &rarr; build-sprint late-2027</span></h2>
+  <p class="tab-subtitle">PhD-bait, thesis nucleus, quant centerpiece, and a research letter &mdash; <strong>NOT a master-admission lever</strong> (neither program scores portfolios).</p>
+  <div class="ln"><span class="lh">Commit to ONE lane + secure Mynbaev</span>
+    <div class="body">Commit NOW to <b>ML-quant / probabilistic-ML</b> so thesis, artifact, reading, and letters all point at one subfield. Secure Prof. Mynbaev&rsquo;s <em>co-authorship-grade</em> supervised research + deep-letter commitment (autumn 2026), aimed at a stats-ML / measure-probability object &mdash; NOT risk-econometrics, NOT his functional-analysis line. (Advisor carrying revisions is what turns a thesis into a paper + a real letter.)</div>
   </div>
-  <div class="read-note">Setup items (this season) are quick &mdash; an evening each &mdash; but they underpin everything after. The value is that they exist early, not the hours spent.</div>
-  <div class="gp-timeline">
-    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Claim a <strong>professional, permanent GitHub username</strong> (your public code identity &mdash; choose one to keep for a career). Install/update <strong>R 4.6</strong> and <strong>git</strong>. Install <strong>renv</strong> and create a first project with <code>renv::init()</code>, which begins recording exact package versions. <span class="qk">Quick setup &mdash; an evening.</span></div><div class="dod">&rarr; <span class="glab">Goalpost:</span> a first project that is version-controlled and dependency-pinned (a clone reproduces it).</div></div>
-    <div class="gp major"><div class="when">Autumn 2026</div><div class="what">Stand up <strong>three</strong> small projects that each use renv + a Quarto report + CI, and wire GitHub to <strong>Zenodo</strong> so tagging a release mints a DOI. This substrate is what every later deliverable sits on.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST (Dec 2026):</span> the production substrate is done &mdash; three reproducible repos, Zenodo wired.</div></div>
-    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze</span></div><div class="what">Maintain the substrate; make rendering a Quarto report for the Tsay work automatic. Low effort during exams.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> reproducible-by-default is a habit, not a chore.</div></div>
-    <div class="gp"><div class="when">Summer 2027</div><div class="what">Raise the standard to <strong>data-editor grade</strong> &mdash; fixed random seeds (results identical every run), CI checks that fail loudly, pinned dependencies, archived DOIs. This is the bar journals&rsquo; data editors enforce.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> a pipeline a journal data-editor would accept.</div></div>
-    <div class="gp major"><div class="when">Autumn 2027</div><div class="what">Turn the rung-1 backtest (from lane&nbsp;03) into a <strong>proper R package</strong> &mdash; documented, tested, installable by anyone.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> rung-1 shipped as code + a personal R package v0.1.0.</div></div>
-    <div class="gp"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals</span></div><div class="what">Package the flagship artifact with an <strong>adversarial self-check</strong> &mdash; deliberately try to break your own result before anyone else can.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> the artifact reproduces end-to-end from a clean clone, no manual steps.</div></div>
-    <div class="gp major"><div class="when">Summer 2028</div><div class="what">Finalise and tag the release.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> package v0.2.0 published with a Zenodo DOI (citable).</div></div>
+  <div class="ln"><span class="lh">Preprint from live assets</span>
+    <div class="body">Convert the <b>RESNA SDG win (beat Cornell)</b> and/or Kozha co-lead into a citable <b>arXiv/workshop preprint</b> + one research letter &mdash; the only research output usable at master-application time (a journal paper won&rsquo;t finish by then).</div>
   </div>
-  <div class="alert"><strong>End state (mid-2028):</strong> an audit-grade, fully reproducible artifact repository and a citable personal R package &mdash; the &ldquo;data-editor-grade&rdquo; signal Swiss and NL groups reward.</div>
+  <div class="ln"><span class="lh">The flagship (late 2027)</span>
+    <div class="body">ONE deep <b>reproduction-and-extension in PyTorch</b> after the SWE base is solid: default <em>DeepLOB on FI-2010 + an honest extension</em> (adaptive conformal / distribution-free UQ), git-commit-first, hand-implemented before opening the reference repo, <b>leakage-free purged/walk-forward CV</b>, results led by costs/limitations/negative findings &mdash; never claimed alpha. Plus 1&ndash;2 merged <b>mlr3</b> PRs (Bischl/LMU) as a warm bridge into the #1 group.</div>
+  </div>
+  <div class="ln"><span class="lh">Sequencing discipline</span>
+    <div class="body">NOT a journal paper as a bachelor deliverable (it matures in the master). Keep ALL external PI cold-emails deferred to master year&nbsp;2 &mdash; bachelor PI contact stays internal (course &rarr; HiWi). A solo repo with no PI attached is near-invisible to committees.</div>
+  </div>
+  <div class="gpstrip"><span class="d">2026-10</span> lane committed; Mynbaev buy-in &middot; <span class="d">2027-mid</span> RESNA/Kozha preprint + letter &middot; <span class="d">2027-Q4</span> DeepLOB+conformal repo; &ge;1 mlr3 PR &middot; <span class="d">2028-early</span> writeup = thesis nucleus</div>
 
 </section>
 </div>

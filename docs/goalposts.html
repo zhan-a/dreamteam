@@ -380,74 +380,18 @@
   }
 
 
-  .arc-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
-  .arc-step{flex:1;min-width:158px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:11px 13px}
-  .arc-step .w{font-size:10.5px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.05em}
-  .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
-  .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
-  .arc-step.now{border-left-color:var(--ok)}
-  .arc-step.pivot{border-left-color:var(--warn)}
-  .lane-card{border-left:3px solid var(--accent)}
-  .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
-  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
-  .lane-row.t1{border-left-color:var(--accent)}
-  .lane-row.t2{border-left-color:var(--info)}
-  .lane-row.t3{border-left-color:var(--fg-dimmer)}
-  .lane-tag{flex-shrink:0;width:132px}
-  .lane-tag .n{font-weight:800;font-size:13px;display:block}
-  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
-  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
-  .lane-body{flex:1;min-width:0;font-size:12.5px}
-  .lane-body .what{font-weight:600}
-  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
-  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
-  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
-  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
-  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
-  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
-  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
-  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
-  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
-  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
-  
-
-  .gp-timeline{margin:4px 0 10px}
-  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
-  .gp:last-child{padding-bottom:2px}
-  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
-  .gp.major::before{background:var(--accent);border-color:var(--accent)}
-  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
-  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
-  .gp .what{font-size:13px;margin:1px 0}
-  .gp .dod{font-size:12px;color:var(--fg-dim)}
-  .gp .star{color:var(--accent);font-weight:800}
-  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
-  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
-  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
-  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
-  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
-  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
-  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
-  
-
-  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
-  .gp .what{line-height:1.45}
-  .gp .glab{font-weight:800;color:var(--accent)}
-  .gp .qk{color:var(--fg-dimmer);font-style:italic}
-  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
-  
-
-  .p6{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:14px 17px;margin-bottom:12px}
-  .p6 .ph{font-weight:800;font-size:16px}
-  .p6 .pg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 9px}
-  .p6 .spine{font-size:14px;line-height:1.6}
-  .p6 .when{font-size:12.5px;color:var(--fg-dim);margin-top:9px;border-top:1px solid var(--border);padding-top:8px}
-  .p6 .when b{color:var(--accent);font-weight:800}
-  .p6 .read{font-size:12.5px;color:var(--fg-dimmer);margin-top:7px}
-  .p6 .read b{color:var(--fg-dim)}
-  .ambient{font-size:12.5px;line-height:1.55;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:12px}
-  .lane-intro p{font-size:14px;line-height:1.55}
+  /* shared lane cards (hoisted to every page by build_site.py) */
+  .ln{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:13px 16px;margin-bottom:11px}
+  .ln .lh{font-weight:800;font-size:15px}
+  .ln .lg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 8px}
+  .ln .body{font-size:13.5px;line-height:1.58}
+  .ln .body b{color:var(--fg)} .ln .body em{color:var(--accent);font-style:normal;font-weight:700}
+  .gate{border-left-color:var(--urgent)} .gate .lh{color:var(--urgent)}
+  .gpstrip{font-size:12.5px;line-height:1.75;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px}
+  .gpstrip .d{color:var(--accent);font-weight:800}
+  .hrs{font-size:12px;color:var(--fg-dimmer);font-weight:600;margin-left:4px}
+  .drop{font-size:12.5px;line-height:1.6;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px;color:var(--fg-dim)}
+  .tab-subtitle{font-size:13.5px}
   
 
 /* === multi-page layout overrides === */
@@ -480,40 +424,29 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="cur">Goalposts</a><a href="lane03.html" class="">03 Risk</a><a href="lane01.html" class="">01 Prod</a><a href="lane02.html" class="">02 Math</a><a href="lane06.html" class="">06 Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="cur">Goalposts</a><a href="admissions.html" class="">Admissions</a><a href="math.html" class="">Math</a><a href="cs.html" class="">CS / Algo</a><a href="ml.html" class="">ML</a><a href="artifact.html" class="">Artifact</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Goalposts</div><a href="#goa-1-goalposts-all-lanes-one-board" class="">Goalposts &mdash; all lanes, one board</a><a href="#goa-2-the-four-milestones-that-matter-most" class="h3">&#9733; The four milestones that matter most</a><a href="#goa-3-season-lane-the-full-board" class="h3">Season &times; lane &mdash; the full board</a></div>
+<div class="site-subnav"><div class="lbl">Goalposts</div><a href="#goa-1-goalposts-the-dated-board" class="">Goalposts &middot; the dated board</a></div>
 <div class="site-main"><section class="page-section" id="goalposts">
 
-  
-  <h2 id="goa-1-goalposts-all-lanes-one-board">Goalposts &mdash; all lanes, one board</h2>
-  <p class="tab-subtitle">The whole bachelor window (mid-2026 &rarr; mid-2028) at <strong>season / quarter</strong> granularity &mdash; every lane's goalposts in one place. Per-lane detail lives on each lane's own page (nav above).</p>
-
-  <h3 id="goa-2-the-four-milestones-that-matter-most">&#9733; The four milestones that matter most</h3>
-  <div class="ms-strip">
-    <div class="ms"><div class="w">Dec 2026</div><div class="t">Production substrate done &mdash; 3 renv/Quarto/CI repos, GitHub&rarr;Zenodo wired <span class="small">(01)</span></div></div>
-    <div class="ms"><div class="w">Autumn 2027</div><div class="t">Rung-1 VaR/ES backtest to portfolio grade + R pkg v0.1.0 <span class="small">(03/01)</span> &middot; <strong>PICK the PI paper</strong> &middot; sit GRE-Q &middot; fresh IELTS</div></div>
-    <div class="ms"><div class="w">15 May 2028</div><div class="t"><strong>MSc application deadline</strong> &mdash; TU Dortmund Econometrics</div></div>
-    <div class="ms"><div class="w">Oct 2028</div><div class="t">MSc begins &mdash; arrive pre-loaded; the flywheel starts</div></div>
+  <h2 id="goa-1-goalposts-the-dated-board">Goalposts &middot; the dated board</h2>
+  <p class="tab-subtitle">Every dated milestone across lanes, in order. The spring-2028 application sprint is the anchor everything paces to.</p>
+  <div class="gpstrip">
+  <span class="d">2026-08</span> &mdash; grade-conversion emails + uni-assist VPD sent; MoI certificate requested; ICPC&nbsp;1 ECTS/classification confirmation requested from KBTU; ICPC team locked for the fall regional; SWE-hygiene adopted; LinkedIn alumni-placement check run; sustaining engine + weekly review live; English audiology report obtained.<br>
+  <span class="d">2026-08&rarr;12</span> &mdash; Summer-2027 quant-internship apps fired (free-roll); IMC Prosperity + Optiver Ready Trader Go entered.<br>
+  <span class="d">2026-10</span> &mdash; ML-quant lane committed; Mynbaev co-authorship-grade research + letter buy-in secured.<br>
+  <span class="d">2026-12</span> &mdash; degree-recognition / anabin + APS/VPD status resolved in writing; Abbott Ch&nbsp;1&ndash;7 done; Axler Ch&nbsp;6&ndash;7 mastered; numpy/pandas + one fast.ai pass + micrograd (backprop from scratch).<br>
+  <span class="d">2027-06</span> &mdash; best-150 average &ge;80% on track; algo-ECTS documented + buffer algorithms course enrolled; Pugh Ch&nbsp;5 (R&sup1;) + Boyd optimization slice done.<br>
+  <span class="d">2027-mid</span> &mdash; RESNA/Kozha arXiv preprint + research letter-writer lined up.<br>
+  <span class="d">2027 (thru Q4)</span> &mdash; PyTorch fluency (build-a-GPT) + Bishop; Hennig ProbML over summer; R/mlr3 fluency; 2nd ICPC regional; Codeforces CM held; pybind11 bridge shipped; flagship DeepLOB + conformal repro repo live; &ge;1 merged mlr3 PR.<br>
+  <span class="d">2027-11</span> &mdash; fresh accommodated IELTS sat, overall &ge;7.0 (target 7.5).<br>
+  <span class="d">2028-02</span> &mdash; stage-2 mock test drilled; T&uuml;bingen module-description + LMU content-mapping dossiers assembled.<br>
+  <span class="d">2028-04-30</span> &mdash; <b>T&uuml;bingen ML application submitted.</b><br>
+  <span class="d">2028-05-15</span> &mdash; <b>LMU aptitude application submitted</b> (both on 150 ECTS, degree submitted later).<br>
+  <span class="d">2028 mid</span> &mdash; BSc conferred; funding stack + year-1 blocked account staged; gap-window plan executed; light measure-theory orientation pass.<br>
+  <span class="d">2028-10</span> &mdash; <b>master starts (LMU or T&uuml;bingen).</b>
   </div>
-
-  <h3 id="goa-3-season-lane-the-full-board">Season &times; lane &mdash; the full board</h3>
-  <div style="overflow-x:auto">
-  <table>
-    <thead><tr><th>Season</th><th>03 &middot; Risk</th><th>01 &middot; Production</th><th>02 &middot; Math</th><th>06 &middot; Soft / network</th><th>German + admin</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Summer 2026</strong> <span class="small">(now)</span></td><td>Tsay Ch&nbsp;1&ndash;2, keyboard</td><td>GitHub + R 4.6 + renv; 1st repo</td><td>Eccles 6&ndash;9 &rarr; open Abbott</td><td>ORCID/Scholar/site/LinkedIn + CRM</td><td>A1; anabin check</td></tr>
-      <tr><td><strong>Autumn 2026</strong></td><td>Tsay Ch&nbsp;1&ndash;3 + QRM Ch&nbsp;2</td><td><strong>&#9733; 3 repos + Zenodo</strong></td><td>Abbott 1&ndash;3</td><td>reading habit; 1st public note</td><td>&mdash;</td></tr>
-      <tr><td><strong>Win&ndash;Spr 2027</strong> <span class="badge status-progress">exam freeze</span></td><td>Tsay Ch&nbsp;3 + 7 (EVT); QRM 3&ndash;5, 9</td><td>maintain substrate</td><td>Abbott 4&ndash;7 (yields in exams)</td><td>low-intensity; follow PIs/FINMA</td><td>&mdash;</td></tr>
-      <tr><td><strong>Summer 2027</strong></td><td>consolidate QRM; hand-derive</td><td>data-editor-grade hygiene</td><td>selective Pugh &rarr; measure primer</td><td>scientific-writing reps</td><td>A1&rarr;A2; book IELTS</td></tr>
-      <tr><td><strong>Autumn 2027</strong></td><td><strong>&#9733; rung-1 estimators + backtest</strong></td><td><strong>&#9733; rung-1 + pkg v0.1.0</strong></td><td><strong>&#9733; measure theory competent</strong></td><td>PI cold-open rehearsal</td><td><strong>&#9733; GRE-Q; IELTS; PICK PI paper</strong></td></tr>
-      <tr><td><strong>Win&ndash;Spr 2028</strong> <span class="badge status-progress">finals freeze</span></td><td><strong>PI-indexed reproduction</strong></td><td><strong>flagship artifact + self-check</strong></td><td>asymptotics &rarr; the artifact</td><td>soft-touch Hoga/Demetrescu</td><td><strong>&#9733; MSc APPLY 15 May</strong></td></tr>
-      <tr><td><strong>Summer 2028</strong></td><td>consolidate</td><td>finalize; pkg v0.2.0</td><td>&mdash; (banked)</td><td>logistics; keep the stream</td><td>A2&rarr;B1; enrol Oct</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <div class="alert"><strong>Rhythm:</strong> the budget ramps ~15&nbsp;h (2026) &rarr; ~20&nbsp;h (2027) &rarr; the build-sprint peak. In the exam freezes (May&ndash;Jun 2027 &amp; 2028) everything steps down &mdash; the <strong>math lane slips first, the applied spine last</strong>. Everything converges on <strong>one</strong> reproduction+extension artifact.</div>
 
 </section>
 </div>

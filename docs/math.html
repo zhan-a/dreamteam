@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — 02 Math</title>
+<title>Dreamteam — Math</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -380,74 +380,18 @@
   }
 
 
-  .arc-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
-  .arc-step{flex:1;min-width:158px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:11px 13px}
-  .arc-step .w{font-size:10.5px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.05em}
-  .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
-  .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
-  .arc-step.now{border-left-color:var(--ok)}
-  .arc-step.pivot{border-left-color:var(--warn)}
-  .lane-card{border-left:3px solid var(--accent)}
-  .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
-  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
-  .lane-row.t1{border-left-color:var(--accent)}
-  .lane-row.t2{border-left-color:var(--info)}
-  .lane-row.t3{border-left-color:var(--fg-dimmer)}
-  .lane-tag{flex-shrink:0;width:132px}
-  .lane-tag .n{font-weight:800;font-size:13px;display:block}
-  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
-  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
-  .lane-body{flex:1;min-width:0;font-size:12.5px}
-  .lane-body .what{font-weight:600}
-  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
-  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
-  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
-  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
-  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
-  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
-  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
-  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
-  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
-  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
-  
-
-  .gp-timeline{margin:4px 0 10px}
-  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
-  .gp:last-child{padding-bottom:2px}
-  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
-  .gp.major::before{background:var(--accent);border-color:var(--accent)}
-  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
-  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
-  .gp .what{font-size:13px;margin:1px 0}
-  .gp .dod{font-size:12px;color:var(--fg-dim)}
-  .gp .star{color:var(--accent);font-weight:800}
-  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
-  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
-  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
-  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
-  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
-  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
-  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
-  
-
-  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
-  .gp .what{line-height:1.45}
-  .gp .glab{font-weight:800;color:var(--accent)}
-  .gp .qk{color:var(--fg-dimmer);font-style:italic}
-  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
-  
-
-  .p6{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:14px 17px;margin-bottom:12px}
-  .p6 .ph{font-weight:800;font-size:16px}
-  .p6 .pg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 9px}
-  .p6 .spine{font-size:14px;line-height:1.6}
-  .p6 .when{font-size:12.5px;color:var(--fg-dim);margin-top:9px;border-top:1px solid var(--border);padding-top:8px}
-  .p6 .when b{color:var(--accent);font-weight:800}
-  .p6 .read{font-size:12.5px;color:var(--fg-dimmer);margin-top:7px}
-  .p6 .read b{color:var(--fg-dim)}
-  .ambient{font-size:12.5px;line-height:1.55;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:12px}
-  .lane-intro p{font-size:14px;line-height:1.55}
+  /* shared lane cards (hoisted to every page by build_site.py) */
+  .ln{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:13px 16px;margin-bottom:11px}
+  .ln .lh{font-weight:800;font-size:15px}
+  .ln .lg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 8px}
+  .ln .body{font-size:13.5px;line-height:1.58}
+  .ln .body b{color:var(--fg)} .ln .body em{color:var(--accent);font-style:normal;font-weight:700}
+  .gate{border-left-color:var(--urgent)} .gate .lh{color:var(--urgent)}
+  .gpstrip{font-size:12.5px;line-height:1.75;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px}
+  .gpstrip .d{color:var(--accent);font-weight:800}
+  .hrs{font-size:12px;color:var(--fg-dimmer);font-weight:600;margin-left:4px}
+  .drop{font-size:12.5px;line-height:1.6;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px;color:var(--fg-dim)}
+  .tab-subtitle{font-size:13.5px}
   
 
 /* === multi-page layout overrides === */
@@ -480,30 +424,27 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="lane03.html" class="">03 Risk</a><a href="lane01.html" class="">01 Prod</a><a href="lane02.html" class="cur">02 Math</a><a href="lane06.html" class="">06 Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="admissions.html" class="">Admissions</a><a href="math.html" class="cur">Math</a><a href="cs.html" class="">CS / Algo</a><a href="ml.html" class="">ML</a><a href="artifact.html" class="">Artifact</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">02 Math</div><a href="#02 -1-02-math-rigour" class="">02 &middot; Math rigour</a></div>
-<div class="site-main"><section class="page-section" id="lane02">
+<div class="site-subnav"><div class="lbl">Math</div><a href="#mat-1-math-the-rigour-spine-56-h-wk-the-heavy-cogn" class="">Math &middot; the rigour spine ~5&ndash;6 h/wk &middot; the </a></div>
+<div class="site-main"><section class="page-section" id="math">
 
-  <h2 id="02 -1-02-math-rigour">02 &middot; Math rigour</h2>
-  <p class="tab-subtitle">serious secondary &middot; ~4&ndash;5&nbsp;h/wk.</p>
-  <div class="lane-intro">
-    <p><strong>What this lane is.</strong> The mathematical foundation that makes the master&rsquo;s hardest course <em>easy</em>. The German MSc has a compulsory, notoriously difficult <strong>measure-theoretic probability</strong> course (the rigorous foundation of probability). Arrive already fluent in it and that course becomes a <em>review</em> while classmates struggle &mdash; which frees the time for research. That is the whole flywheel.</p>
-    <p><strong>The path and texts, in order.</strong> Real analysis first (the rigorous theory of limits, continuity, and integration on the real numbers), then measure-theoretic probability, then asymptotics (the theory of &ldquo;as the sample grows large&rdquo; &mdash; the law of large numbers, the central limit theorem &mdash; which underpins every estimator). Texts: <strong>Eccles</strong> (a gentle proof on-ramp) &rarr; <strong>Abbott, <em>Understanding Analysis</em></strong> (the standard first course) &rarr; selective <strong>Pugh</strong> (harder, for depth) &rarr; <strong>Rosenthal / Williams</strong> (measure-theoretic probability).</p>
-    <p><strong>It feeds, it does not gate.</strong> This is not required to start lane&nbsp;03 &mdash; a GARCH estimator can be hand-coded without measure theory. It runs in parallel and pays off at the MSc. <strong>STOP-HERE:</strong> no topology, functional analysis, or stochastic calculus / It&ocirc; / SDEs &mdash; that is a different (pure-maths / derivatives-pricing) lane and a time sink; do not try to out-math the mathematicians. The graded external MATH&nbsp;447 is dropped; this is ungraded self-study.</p>
+  <h2 id="mat-1-math-the-rigour-spine-56-h-wk-the-heavy-cogn">Math &middot; the rigour spine <span class="hrs">~5&ndash;6 h/wk &middot; the heavy-cognitive rail (cap deep work ~2&ndash;3 h/day)</span></h2>
+  <p class="tab-subtitle">Arrive prove-cold: LMU math-foundations points, T&uuml;bingen proof-maturity, master-excellence, and the PhD.</p>
+  <div class="ln"><span class="lh">Real analysis + R&sup1;</span>
+    <div class="body">Finish <b>Abbott Ch 1&ndash;7</b> (MT2116 is the on-ramp) + the non-optional rigorous R&sup1; slice <b>Pugh Ch 5</b> (total derivative / Jacobian / chain rule / symmetric Hessian) &mdash; MT1174 was computational, and ML theory lives in gradients/Hessians.</div>
   </div>
-  <div class="read-note">These are chapter-blocks of a hard subject, not weekly tasks &mdash; each season is a genuine ~4&ndash;5&nbsp;h/week of proofs and problem sets.</div>
-  <div class="gp-timeline">
-    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Finish <strong>Eccles Chapters 6&ndash;9</strong> (sets, functions, bijections &mdash; the proof-writing on-ramp), then open <strong>Abbott, <em>Understanding Analysis</em>, Chapter 1</strong>. Low intensity while lane&nbsp;03 leads.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> comfortable writing proofs; Abbott begun.</div></div>
-    <div class="gp"><div class="when">Autumn 2026</div><div class="what"><strong>Abbott Chapters 1&ndash;3</strong> &mdash; the real numbers, sequences, and series (the bedrock everything later rests on).</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> sequences and series mastered (limits, convergence).</div></div>
-    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze &mdash; math slips first</span></div><div class="what"><strong>Abbott Chapters 4&ndash;7</strong> &mdash; continuity, derivatives, integration. This also directly strengthens your UoL exams, so it is efficient. Under exam pressure the math lane is the first to step down.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> single-variable real analysis complete.</div></div>
-    <div class="gp"><div class="when">Summer 2027</div><div class="what">Selective <strong>Pugh</strong> (Chapters 1/3/5, for depth), then start a <strong>measure-theory primer (Rosenthal)</strong> &mdash; the bridge into the MSc core.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> on the measure-theory on-ramp.</div></div>
-    <div class="gp major"><div class="when">Autumn 2027</div><div class="what"><strong>Measure-theoretic probability to working competence</strong> (Rosenthal / Williams) &mdash; <em>with problem sets</em>. Solving problems, not just reading, is what makes it stick.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> measure theory competent &mdash; the MSc&rsquo;s hardest course is now a review.</div></div>
-    <div class="gp"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals</span></div><div class="what"><strong>Asymptotics</strong> &mdash; the law of large numbers, central limit theorem, and delta method: the machinery behind every estimator&rsquo;s standard errors, which the artifact needs.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> asymptotic theory in hand.</div></div>
-    <div class="gp"><div class="when">Summer 2028</div><div class="what">No new load; the foundation is complete and banked.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> rigour prerequisites done, carried into the MSc.</div></div>
+  <div class="ln"><span class="lh">Proof-based linear algebra</span>
+    <div class="body"><b>Axler Ch 6&ndash;7</b> tightly (inner products, projections/least-squares, real spectral theorem, PSD, SVD, Cholesky) &mdash; highest ROI-per-hour, on LMU&rsquo;s scored list, everywhere in stats/ML. Skip Ch 5/8/9.</div>
   </div>
-  <div class="alert"><strong>End state (mid-2028):</strong> the MSc&rsquo;s compulsory measure-theory / Statistical-Theory core is a review, not a wall &mdash; and you have the asymptotic theory the artifact needs. STOP-HERE respected.</div>
+  <div class="ln"><span class="lh">Optimization + optional depth</span>
+    <div class="body"><b>Boyd Ch 3/5/9&ndash;10</b> (convexity, duality/KKT, Newton/gradient &mdash; the engine behind SVM/regularization/GD). Optional MT3041 Advanced Analysis (triple-duty, but the hardest EMFSS course &mdash; summer pre-study to protect the grade).</div>
+  </div>
+  <div class="ln"><span class="lh">Measure theory = LIGHT, LATE</span>
+    <div class="body">A <em>6&ndash;10-week orientation pass ONLY</em> in the post-BSc window 2028 (Rosenthal spine; conditional-expectation-as-L&sup2;-projection, martingales via Williams, convergence theorems) &mdash; it gates NOTHING (both teach it graded); a full pre-load = doing it twice. AVOID Rudin / Royden / stoch-calc. Read actively; make it legible via a public "prove-cold" git repo.</div>
+  </div>
+  <div class="gpstrip"><span class="d">2026-12</span> Abbott 1&ndash;7 + Axler 6&ndash;7 &middot; <span class="d">2027-06</span> Pugh Ch 5 + Boyd slice &middot; <span class="d">2028 summer</span> light measure-theory pass before matriculation</div>
 
 </section>
 </div>

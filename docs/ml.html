@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — 06 Multiplier</title>
+<title>Dreamteam — ML</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -380,74 +380,18 @@
   }
 
 
-  .arc-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
-  .arc-step{flex:1;min-width:158px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:11px 13px}
-  .arc-step .w{font-size:10.5px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.05em}
-  .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
-  .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
-  .arc-step.now{border-left-color:var(--ok)}
-  .arc-step.pivot{border-left-color:var(--warn)}
-  .lane-card{border-left:3px solid var(--accent)}
-  .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
-  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
-  .lane-row.t1{border-left-color:var(--accent)}
-  .lane-row.t2{border-left-color:var(--info)}
-  .lane-row.t3{border-left-color:var(--fg-dimmer)}
-  .lane-tag{flex-shrink:0;width:132px}
-  .lane-tag .n{font-weight:800;font-size:13px;display:block}
-  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
-  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
-  .lane-body{flex:1;min-width:0;font-size:12.5px}
-  .lane-body .what{font-weight:600}
-  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
-  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
-  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
-  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
-  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
-  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
-  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
-  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
-  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
-  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
-  
-
-  .gp-timeline{margin:4px 0 10px}
-  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
-  .gp:last-child{padding-bottom:2px}
-  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
-  .gp.major::before{background:var(--accent);border-color:var(--accent)}
-  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
-  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
-  .gp .what{font-size:13px;margin:1px 0}
-  .gp .dod{font-size:12px;color:var(--fg-dim)}
-  .gp .star{color:var(--accent);font-weight:800}
-  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
-  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
-  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
-  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
-  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
-  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
-  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
-  
-
-  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
-  .gp .what{line-height:1.45}
-  .gp .glab{font-weight:800;color:var(--accent)}
-  .gp .qk{color:var(--fg-dimmer);font-style:italic}
-  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
-  
-
-  .p6{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:14px 17px;margin-bottom:12px}
-  .p6 .ph{font-weight:800;font-size:16px}
-  .p6 .pg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 9px}
-  .p6 .spine{font-size:14px;line-height:1.6}
-  .p6 .when{font-size:12.5px;color:var(--fg-dim);margin-top:9px;border-top:1px solid var(--border);padding-top:8px}
-  .p6 .when b{color:var(--accent);font-weight:800}
-  .p6 .read{font-size:12.5px;color:var(--fg-dimmer);margin-top:7px}
-  .p6 .read b{color:var(--fg-dim)}
-  .ambient{font-size:12.5px;line-height:1.55;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:12px}
-  .lane-intro p{font-size:14px;line-height:1.55}
+  /* shared lane cards (hoisted to every page by build_site.py) */
+  .ln{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:13px 16px;margin-bottom:11px}
+  .ln .lh{font-weight:800;font-size:15px}
+  .ln .lg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 8px}
+  .ln .body{font-size:13.5px;line-height:1.58}
+  .ln .body b{color:var(--fg)} .ln .body em{color:var(--accent);font-style:normal;font-weight:700}
+  .gate{border-left-color:var(--urgent)} .gate .lh{color:var(--urgent)}
+  .gpstrip{font-size:12.5px;line-height:1.75;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px}
+  .gpstrip .d{color:var(--accent);font-weight:800}
+  .hrs{font-size:12px;color:var(--fg-dimmer);font-weight:600;margin-left:4px}
+  .drop{font-size:12.5px;line-height:1.6;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px;color:var(--fg-dim)}
+  .tab-subtitle{font-size:13.5px}
   
 
 /* === multi-page layout overrides === */
@@ -480,42 +424,27 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="lane03.html" class="">03 Risk</a><a href="lane01.html" class="">01 Prod</a><a href="lane02.html" class="">02 Math</a><a href="lane06.html" class="cur">06 Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="admissions.html" class="">Admissions</a><a href="math.html" class="">Math</a><a href="cs.html" class="">CS / Algo</a><a href="ml.html" class="cur">ML</a><a href="artifact.html" class="">Artifact</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">06 Multiplier</div><a href="#06 -1-06-footprint-intuition-network-business" class="">06 &middot; Footprint, intuition, network &amp; business</a></div>
-<div class="site-main"><section class="page-section" id="lane06">
+<div class="site-subnav"><div class="lbl">ML</div><a href="#ml-1-ml-arrive-fluent-56-h-wk" class="">ML &middot; arrive fluent ~5&ndash;6 h/wk</a></div>
+<div class="site-main"><section class="page-section" id="ml">
 
-  
-  <h2 id="06 -1-06-footprint-intuition-network-business">06 &middot; Footprint, intuition, network &amp; business</h2>
-  <p class="tab-subtitle" style="font-size:13.5px">low-intensity &middot; ~3&ndash;5&nbsp;h/wk &middot; off-clock (evenings, commutes). <strong>Four outputs, not a reading list</strong> &mdash; each pillar is something you <em>build</em>; reading is demoted to one load-bearing book apiece (three total). The slow-burn multiplier behind the technical lanes.</p>
-
-  <div class="p6"><span class="ph">1 &middot; Public technical writing</span><span class="pg">the footprint &amp; letter-legibility channel &mdash; one engine, publish once everywhere</span>
-    <div class="spine">Ship a short public explainer on something you <em>genuinely just learned</em> &mdash; a GARCH/GAS or EVT result, a backtest you ran, an idea made concrete. The day it ships, it lands on your site + LinkedIn under <strong>one Zenodo DOI</strong>. This <em>is</em> the footprint &mdash; not blogging for its own sake &mdash; and it absorbs the old &ldquo;identity&rdquo; item entirely: publish once, everywhere, DOI'd. The footprint starts ageing from ~20, and that early date is itself the asset. Your teardowns (pillar&nbsp;2) are the natural feedstock.</div>
-    <div class="when"><b>When:</b> ORCID + the publish pipeline set up <b>this summer</b> (~1 evening) &rarr; <b>~1 piece every 6&ndash;8 weeks from autumn 2026</b>, DOI'd + syndicated in the same action &rarr; Google Scholar waits for a real output.</div>
-    <div class="read"><b>One read:</b> Williams &amp; Bizup, <em>Style: Lessons in Clarity and Grace</em> &mdash; do the exercises.</div>
+  <h2 id="ml-1-ml-arrive-fluent-56-h-wk">ML &middot; arrive fluent <span class="hrs">~5&ndash;6 h/wk</span></h2>
+  <p class="tab-subtitle">Close the tensor/DL gap (his biggest silent gap), pre-load the target courses, build ML+markets substance.</p>
+  <div class="ln"><span class="lh">PyTorch from scratch</span>
+    <div class="body">numpy (vectorization/broadcasting) &rarr; pandas &rarr; <b>PyTorch, implementing core ML from scratch</b> (autograd/backprop by hand, logistic&rarr;MLP&rarr;small CNN/transformer, proper train/val loop, SGD/Adam). ICPC transfers zero tensor muscle &mdash; this is the gap.</div>
   </div>
-
-  <div class="p6"><span class="ph">2 &middot; Risk-model failure teardowns</span><span class="pg">intuition, earned as a validator &mdash; not as a reader</span>
-    <div class="spine">A private file of real blowups, each worked the way a <strong>model-validator</strong> would, not read about: LTCM&nbsp;'98, the 2008 Gaussian-copula machinery, the Aug-2007 quant quake, the 2022 UK LDI/gilt spiral, SVB duration, Archegos. Per case: <strong>what the risk model assumed &rarr; which assumption broke</strong> (fat tails, correlation&nbsp;&rarr;&nbsp;1, funding/liquidity) &rarr; <strong>what an ES estimate or a backtest would have caught.</strong> This rehearses the exact reasoning of the job you're aiming at &mdash; the crisis canon becomes a <em>teardown target</em>, not a reading list.</div>
-    <div class="when"><b>When:</b> <b>1 teardown per quarter</b>, ongoing from summer 2026.</div>
-    <div class="read"><b>One read:</b> Mandelbrot &amp; Hudson, <em>The (Mis)behavior of Markets</em> &mdash; the tails book.</div>
+  <div class="ln"><span class="lh">The right path for a math-strong coder</span>
+    <div class="body">ONE fast <em>fast.ai</em> pass &rarr; rigorous: <b>Bishop "Deep Learning" (2024) + Karpathy Zero-to-Hero</b> (build backprop + a GPT). PyTorch only &mdash; no TensorFlow/JAX/Julia sprawl. Classical base leveraging his stats: ISLP &rarr; selective ESL &rarr; "Mathematics for ML" (feeds T&uuml;bingen&rsquo;s Math-for-ML + the proof-rigor gate).</div>
   </div>
-
-  <div class="p6"><span class="ph">3 &middot; Relationships</span><span class="pg">a lean reflex, not a CRM program</span>
-    <div class="spine">Keep the ties you <em>already have</em> warm &mdash; the <strong>RESNA-win faculty &amp; collaborators</strong> (the team that beat Cornell), the <strong>Kozha</strong> co-founders/backers, your <strong>DS&amp;BA faculty</strong> &mdash; one line of record each and a zero-ask re-contact so none goes cold before you need letters and intros in 2027. No CRM theatre, no 48-hour rule, no seminar-question quota. The PI cold-open via the reproduction artifact is a <strong>2027</strong> move &mdash; it does not live here as a task yet.</div>
-    <div class="when"><b>When:</b> ongoing reflex &mdash; touch each real tie <b>~2&times;/year</b>.</div>
+  <div class="ln"><span class="lh">Pre-load the targets&rsquo; OWN courses + R</span>
+    <div class="body">Cite them in the letters: <b>LMU</b> &mdash; Bischl&rsquo;s open I2ML + the <em>mlr3/R</em> stack (LMU&rsquo;s compulsory modelling modules are R-centric; Python-only is a semester-1 tax); <b>T&uuml;bingen</b> &mdash; Hennig&rsquo;s Probabilistic-ML series + Murphy. The probabilistic/Bayesian track is the T&uuml;bingen fit differentiator AND an underrated quant edge.</div>
   </div>
-
-  <div class="p6"><span class="ph">4 &middot; Boutique market teardown</span><span class="pg">business literacy, slow-burn &mdash; the most deferrable thing here</span>
-    <div class="spine">A slow private file reverse-engineering the <strong>regulatory-quant consulting market</strong> you actually aim at &mdash; real model-validation/risk boutiques (swissQuant and peers): who they bill, what a <strong>FINMA/Basel validation engagement</strong> is worth, the demand a single rule-change (FRTB, IRRBB) manufactures. Understand the business before you can ever price it.</div>
-    <div class="when"><b>When:</b> ambient &mdash; revisit <b>~2&times;/year through 2027&ndash;28</b>. Not an active task now.</div>
-    <div class="read"><b>One read (late):</b> Maister, <em>Managing the Professional Service Firm</em>.</div>
+  <div class="ln"><span class="lh">Markets domain-literacy</span>
+    <div class="body">The quant differentiator ML alone won&rsquo;t supply &mdash; light continuous reading: Cartea-Jaimungal-Penalva (Algo &amp; HF Trading), Bouchaud et&nbsp;al. (microstructure), L&oacute;pez de Prado (research-process/validation). Deepen alongside the LOB artifact. Public GitHub whose history visibly starts 2026; no MOOC-collecting.</div>
   </div>
-
-  <div class="ambient"><strong>Off-clock, no schedule:</strong> the pop-risk canon (Kahneman, Taleb, Bernstein) and the news flow are leisure only &mdash; no line, no target. Probability lives in <strong>lane&nbsp;02</strong>, Basel/FRTB primary docs in <strong>lane&nbsp;03</strong> &mdash; neither is repeated here.</div>
-
-  <div class="alert"><strong>End state (mid-2028):</strong> a DOI'd public-writing trail aged ~2 years, a bank of risk-model-failure teardowns that <em>are</em> the validator's reasoning, a handful of warm ties ready to write letters, and a real read on the boutique market &mdash; <strong>four outputs, three books, zero filler.</strong></div>
+  <div class="gpstrip"><span class="d">2026-12</span> numpy/pandas + fast.ai + micrograd &middot; <span class="d">2027</span> PyTorch (build-a-GPT) + Bishop; Hennig ProbML; R/mlr3 &middot; <span class="d">2027&ndash;28</span> markets reading with the artifact</div>
 
 </section>
 </div>

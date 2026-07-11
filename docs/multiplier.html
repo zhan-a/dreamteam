@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — 03 Risk</title>
+<title>Dreamteam — Multiplier</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -380,74 +380,18 @@
   }
 
 
-  .arc-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
-  .arc-step{flex:1;min-width:158px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:11px 13px}
-  .arc-step .w{font-size:10.5px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.05em}
-  .arc-step .t{font-weight:800;margin:3px 0 4px;font-size:14px}
-  .arc-step .d{font-size:12px;color:var(--fg-dim);line-height:1.4}
-  .arc-step.now{border-left-color:var(--ok)}
-  .arc-step.pivot{border-left-color:var(--warn)}
-  .lane-card{border-left:3px solid var(--accent)}
-  .lane-h{font-size:11px;color:var(--fg-dimmer);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
-  .lane-row{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:7px;border-left-width:4px}
-  .lane-row.t1{border-left-color:var(--accent)}
-  .lane-row.t2{border-left-color:var(--info)}
-  .lane-row.t3{border-left-color:var(--fg-dimmer)}
-  .lane-tag{flex-shrink:0;width:132px}
-  .lane-tag .n{font-weight:800;font-size:13px;display:block}
-  .lane-tag .tier{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dimmer);font-weight:700;margin-top:1px}
-  .lane-tag .hrs{font-size:11px;color:var(--fg-dim)}
-  .lane-body{flex:1;min-width:0;font-size:12.5px}
-  .lane-body .what{font-weight:600}
-  .lane-body .feeds{color:var(--fg-dim);font-size:11.5px;margin-top:2px}
-  .converge{background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px 14px;text-align:center;font-weight:600;font-size:13px;margin-top:4px}
-  .port-strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-  .port{flex:1;min-width:174px;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:9px;padding:10px 12px;background:var(--bg-2)}
-  .port .lvl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
-  .port .who{font-weight:700;font-size:13px;margin:2px 0 4px}
-  .port .d{font-size:11.5px;color:var(--fg-dim);line-height:1.4}
-  .port.reach{border-top-color:var(--warn)} .port.reach .lvl{color:var(--warn)}
-  .port.target{border-top-color:var(--accent)} .port.target .lvl{color:var(--accent)}
-  .port.floor{border-top-color:var(--ok)} .port.floor .lvl{color:var(--ok)}
-  .port.backup{border-top-color:var(--fg-dimmer)} .port.backup .lvl{color:var(--fg-dimmer)}
-  
-
-  .gp-timeline{margin:4px 0 10px}
-  .gp{position:relative;padding:2px 0 12px 20px;border-left:2px solid var(--border)}
-  .gp:last-child{padding-bottom:2px}
-  .gp::before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong)}
-  .gp.major::before{background:var(--accent);border-color:var(--accent)}
-  .gp.freeze::before{background:var(--warn);border-color:var(--warn)}
-  .gp .when{font-weight:800;font-size:11.5px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:.03em}
-  .gp .what{font-size:13px;margin:1px 0}
-  .gp .dod{font-size:12px;color:var(--fg-dim)}
-  .gp .star{color:var(--accent);font-weight:800}
-  .gp .frz{display:inline-block;font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:0;text-transform:none}
-  .lane-badge{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;vertical-align:middle}
-  .lane-badge.spine{background:var(--accent-soft);color:var(--accent)}
-  .ms-strip{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
-  .ms{flex:1;min-width:212px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px}
-  .ms .w{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
-  .ms .t{font-size:12.5px;margin-top:2px;line-height:1.35}
-  
-
-  .lane-intro p{font-size:13px;line-height:1.5;margin:6px 0}
-  .gp .what{line-height:1.45}
-  .gp .glab{font-weight:800;color:var(--accent)}
-  .gp .qk{color:var(--fg-dimmer);font-style:italic}
-  .read-note{font-size:12px;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:8px 12px;margin:8px 0 14px}
-  
-
-  .p6{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:14px 17px;margin-bottom:12px}
-  .p6 .ph{font-weight:800;font-size:16px}
-  .p6 .pg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 9px}
-  .p6 .spine{font-size:14px;line-height:1.6}
-  .p6 .when{font-size:12.5px;color:var(--fg-dim);margin-top:9px;border-top:1px solid var(--border);padding-top:8px}
-  .p6 .when b{color:var(--accent);font-weight:800}
-  .p6 .read{font-size:12.5px;color:var(--fg-dimmer);margin-top:7px}
-  .p6 .read b{color:var(--fg-dim)}
-  .ambient{font-size:12.5px;line-height:1.55;color:var(--fg-dim);background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:12px}
-  .lane-intro p{font-size:14px;line-height:1.55}
+  /* shared lane cards (hoisted to every page by build_site.py) */
+  .ln{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:13px 16px;margin-bottom:11px}
+  .ln .lh{font-weight:800;font-size:15px}
+  .ln .lg{font-size:12.5px;color:var(--fg-dimmer);font-weight:600;display:block;margin:2px 0 8px}
+  .ln .body{font-size:13.5px;line-height:1.58}
+  .ln .body b{color:var(--fg)} .ln .body em{color:var(--accent);font-style:normal;font-weight:700}
+  .gate{border-left-color:var(--urgent)} .gate .lh{color:var(--urgent)}
+  .gpstrip{font-size:12.5px;line-height:1.75;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px}
+  .gpstrip .d{color:var(--accent);font-weight:800}
+  .hrs{font-size:12px;color:var(--fg-dimmer);font-weight:600;margin-left:4px}
+  .drop{font-size:12.5px;line-height:1.6;background:var(--bg-3);border-radius:8px;padding:10px 14px;margin-top:10px;color:var(--fg-dim)}
+  .tab-subtitle{font-size:13.5px}
   
 
 /* === multi-page layout overrides === */
@@ -480,31 +424,27 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="lane03.html" class="cur">03 Risk</a><a href="lane01.html" class="">01 Prod</a><a href="lane02.html" class="">02 Math</a><a href="lane06.html" class="">06 Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="goalposts.html" class="">Goalposts</a><a href="admissions.html" class="">Admissions</a><a href="math.html" class="">Math</a><a href="cs.html" class="">CS / Algo</a><a href="ml.html" class="">ML</a><a href="artifact.html" class="">Artifact</a><a href="multiplier.html" class="cur">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">03 Risk</div><a href="#03 -1-03-applied-risk-econometrics-the-spine" class="">03 &middot; Applied-risk econometrics the spine</a></div>
-<div class="site-main"><section class="page-section" id="lane03">
+<div class="site-subnav"><div class="lbl">Multiplier</div><a href="#mul-1-multiplier-network-funnel-funding-cadence-23" class="">Multiplier &middot; network / funnel / funding / cadence ~2&</a></div>
+<div class="site-main"><section class="page-section" id="multiplier">
 
-  
-  <h2 id="03 -1-03-applied-risk-econometrics-the-spine">03 &middot; Applied-risk econometrics <span class="lane-badge spine">the spine</span></h2>
-  <p class="tab-subtitle">co-primary &middot; ~6&nbsp;h/wk &middot; the most important lane.</p>
-  <div class="lane-intro">
-    <p><strong>What this lane is.</strong> The actual subject of the career and the research: the statistics of financial risk &mdash; modelling how volatile a market is, how often extreme losses happen, and how large they can get. Two core texts carry it: <strong>Tsay, <em>Analysis of Financial Time Series</em></strong> (the standard applied graduate text) and <strong>McNeil&ndash;Frey&ndash;Embrechts, <em>Quantitative Risk Management</em> (&ldquo;QRM&rdquo;)</strong> (the standard risk text).</p>
-    <p><strong>The models to master.</strong> <strong>GARCH / GAS</strong> &mdash; volatility that clusters and changes over time. <strong>EVT</strong> (extreme-value theory) &mdash; the statistics of rare, extreme losses. <strong>VaR / ES</strong> (Value-at-Risk and Expected Shortfall) &mdash; the two headline loss numbers every bank must report and defend.</p>
-    <p><strong>The differentiator.</strong> Not running a package and reading its output. For each model: <strong>derive the equations by hand, code the estimator from scratch, and check the numbers against an established package to a tight tolerance.</strong> That is the gap between someone who <em>uses</em> risk models and someone who can <em>build and validate</em> them &mdash; which is exactly what the PhD and the model-validation career hire for. This is the <strong>methods</strong>; the <strong>regulation</strong> (Basel / IRB / IFRS9) is learned on the job.</p>
+  <h2 id="mul-1-multiplier-network-funnel-funding-cadence-23">Multiplier &middot; network / funnel / funding / cadence <span class="hrs">~2&ndash;3 h/wk + the always-on daily floor</span></h2>
+  <p class="tab-subtitle">Recruiting funnels, funding, the cross-cutting hearing-accommodation workstream, and the engine that protects the First.</p>
+  <div class="ln"><span class="lh">Quant funnel</span>
+    <div class="body">Enter firm-run, school-/nationality-blind competitions each cycle &mdash; <b>IMC Prosperity, Optiver Ready Trader Go, Citadel/Correlation One Data Open</b> &mdash; funnels into the exact Amsterdam targets that convert ICPC speed. Fire Summer-2027 internship apps broad+early (Aug&ndash;Dec 2026) as a <em>free-roll</em>, not the base case (the real convertible window is master summer 2029). Run the LinkedIn alumni-placement check early.</div>
   </div>
-  <div class="read-note">Each season below lists the ongoing <strong>work</strong> (where the ~6&nbsp;h/week actually go) and the <strong>goalpost</strong> it ends on (the checkpoint). The reading/coding items fill a whole season &mdash; they are not one-week tasks.</div>
-  <div class="gp-timeline">
-    <div class="gp"><div class="when">Summer 2026 &middot; now</div><div class="what">Work through <strong>Tsay Chapters 1&ndash;2</strong> (financial returns, their distributions, basic linear time series) <em>with a keyboard</em> &mdash; retype and run every R example yourself inside a proper project, not read passively. At ~6&nbsp;h/week this is roughly the whole summer; the aim is fluency with the tools, not speed.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> Chapters 1&ndash;2 fully reproduced in a version-controlled project &mdash; every example runs.</div></div>
-    <div class="gp"><div class="when">Autumn 2026</div><div class="what"><strong>Tsay Chapters 1&ndash;3</strong> (adding conditional heteroskedasticity &mdash; volatility that clusters) + <strong>QRM Chapter 2</strong>. Focus on understanding a GARCH model end to end: what it assumes, how it is estimated, what it is for.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> you can estimate a GARCH model and explain precisely what it does.</div></div>
-    <div class="gp freeze"><div class="when">Winter&ndash;Spring 2027 <span class="frz">exam freeze &mdash; pace drops</span></div><div class="what"><strong>Tsay Ch&nbsp;3 (volatility) + Ch&nbsp;7 (extreme-value theory)</strong>; <strong>QRM Ch&nbsp;3&ndash;5, 9</strong> (VaR/ES, EVT, backtesting). Concepts only &mdash; the UoL exams take priority, so this lane slows but does not stop.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> EVT and the VaR/ES risk measures understood conceptually.</div></div>
-    <div class="gp"><div class="when">Summer 2027</div><div class="what">Consolidate QRM and begin <strong>deriving the estimators by hand</strong> &mdash; writing out the likelihood and update equations for GARCH and EVT yourself.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> the core estimators derived on paper, ready to code.</div></div>
-    <div class="gp major"><div class="when">Autumn 2027</div><div class="what"><strong>Hand-code GARCH / GAS / EVT estimators</strong> from those derivations and run your first full reproductions of published results. This is the season the domain turns into an output.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> a <strong>rung-1 VaR/ES backtest</strong> &mdash; your own code, validated against a package, producing a correct, reproducible risk-model backtest at a standard a risk desk would accept.</div></div>
-    <div class="gp major freeze"><div class="when">Winter&ndash;Spring 2028 <span class="frz">finals &mdash; spine slips last</span></div><div class="what">Build the <strong>PI-indexed reproduction</strong>: reproduce, and add a small extension to, a specific target professor&rsquo;s own paper, from its equations. Under exam pressure this lane is protected the longest.</div><div class="dod">&rarr; <span class="glab">&#9733; GOALPOST:</span> a drafted flagship artifact &mdash; a careful reproduction + a small extension of a target PI&rsquo;s paper.</div></div>
-    <div class="gp"><div class="when">Summer 2028</div><div class="what">Consolidate; hand the artifact to lane&nbsp;01 for final polishing.</div><div class="dod">&rarr; <span class="glab">Goalpost:</span> implement-then-research level reached; the artifact is ready.</div></div>
+  <div class="ln"><span class="lh">Oral-comms + Nachteilsausgleich (ONE workstream)</span>
+    <div class="body">The Article-36 hearing risk recurs across &ge;6 oral gates (IELTS Listening, LMU stage-2 interview, quant superdays, HiWi/lab colloquia, PhD video interviews). Solve once: deliberate spoken-technical-English practice + a portable dated audiology report + accommodations requested early for <em>every</em> oral event.</div>
   </div>
-  <div class="alert"><strong>End state (mid-2028):</strong> you can derive, implement, and numerically validate GARCH/GAS/EVT/VaR-ES from equations &mdash; and you have used that skill to build a research artifact. This feeds the MSc thesis, the professor cold-open, and the Swiss-career proof.</div>
+  <div class="ln"><span class="lh">German + citizenship (HOLD, not execute)</span>
+    <div class="body">German = life/citizenship asset ONLY, capped at free A1&rarr;A2 (both targets English-taught; Amsterdam/London work in English) &mdash; redirect freed hours to the English gate. Citizenship: the 5-yr clock starts only at residence registration (~Oct-2028); study years count; a &sect;16b student permit does NOT qualify &rarr; switch to a &sect;18b/&sect;18d/Blue-Card work permit (the salaried PhD supplies it). The 3-yr C1 fast-track was <b>abolished Nov-2025</b>.</div>
+  </div>
+  <div class="ln"><span class="lh">Funding + the sustaining engine</span>
+    <div class="body"><b>Funding:</b> fund only the year-1 blocked account (~&euro;11,904), keep ~&euro;20k liquid; claim the higher "mit Bachelor" HiWi rate from sem&nbsp;1 (uncapped vs the 140-day rule); Deutschlandstipendium (apply first spring, re-apply); KVdS health insurance day one. <b>Engine:</b> two-rail day (deep-work ceiling ~2&ndash;3 h + a never-zero daily floor), <b>hard self-study freeze in May&ndash;June exam weeks</b>, protected 7.5&ndash;8 h sleep, one shipped win/month, a 20-min weekly review that caps Kozha + comfort-CP and logs real deep-work hours.</div>
+  </div>
+  <div class="gpstrip"><span class="d">2026-08</span> alumni check; engine live; audiology report &middot; <span class="d">2026 Aug&ndash;Dec</span> internships free-rolled; Prosperity + RTG entered &middot; <span class="d">2027</span> A1&rarr;A2; oral practice; narrative drafted &middot; <span class="d">2028</span> funding + blocked account staged; permit transition mapped</div>
 
 </section>
 </div>
