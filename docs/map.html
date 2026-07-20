@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — Programming</title>
+<title>Dreamteam — Map</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -425,48 +425,51 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="map.html" class="">Map</a><a href="math.html" class="">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="cur">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="map.html" class="cur">Map</a><a href="math.html" class="">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Programming</div><a href="#pro-1-programming-the-icpc-research-quant-delta-mo" class="">Programming &middot; the ICPC &rarr; research/quant delta mo</a></div>
-<div class="site-main"><section class="page-section" id="programming">
+<div class="site-subnav"><div class="lbl">Map</div><a href="#map-1-map-what-runs-in-parallel-what-waits" class="">Map &middot; what runs in parallel, what waits</a></div>
+<div class="site-main"><section class="page-section" id="map">
 
-  <h2 id="pro-1-programming-the-icpc-research-quant-delta-mo">Programming &middot; the ICPC &rarr; research/quant delta <span class="hrs">mostly learn-by-doing on the artifact</span></h2>
-  <p class="tab-subtitle">Not a from-scratch curriculum &mdash; you already code. The DELTA: what competitive programming does NOT give that ML-research + quant-dev need. ~80% learned by DOING on the one deferred (~2027) reproducible artifact. Full detail: <code>ml-research/PROGRAMMING-CAPABILITY-LADDER.md</code>.</p>
+  <h2 id="map-1-map-what-runs-in-parallel-what-waits">Map &middot; what runs in parallel, what waits</h2>
+  <p class="tab-subtitle">The whole plan as parallel blocks. Inside a section, <b>every bullet is a separate lane run IN PARALLEL</b>; the arrows (&rarr;) <em>inside</em> a bullet are the only thing that is sequential (&middot; = also parallel). Later sections build on earlier ones by dependency, <b>not by date</b> &mdash; nothing here is tied to a timeline; re-plan as each lane lands. Full detail is in each lane&rsquo;s own tab.</p>
 
-  <div class="ln"><span class="lh">Core &mdash; year 1, mostly by-doing on the artifact repo</span>
+  <div class="ln gate"><span class="lh">Runs continuously &mdash; alongside every section</span>
+    <div class="body"><b>Admissions</b> (bursty, low-hours, highest priority) &mdash; grade-conversion + drive best-150-ECTS GPA &ge;80% &rarr; accommodated IELTS &rarr; T&uuml;bingen algorithms-ECTS confirmed. Never blocked by the study lanes; detail in the <b>Home &rarr; Admissions</b> section.</div>
+  </div>
+
+  <div class="ln"><span class="lh">Section 1 &mdash; Foundations (the entry point; all five in parallel)</span>
     <ul>
-      <li><b>Array-brain rewire</b> &mdash; Rougier <em>From Python to Numpy</em> + numpy-100 (hard puzzles). The most expensive ICPC habit to unlearn: scalar-loop &rarr; whole-array reformulation.</li>
-      <li><b>Idiomatic Python</b> &mdash; Slatkin <em>Effective Python</em> (one fast pass).</li>
-      <li><b>Messy-data pandas</b> &mdash; Harrison <em>Effective Pandas 2</em> (McKinney as reference). Index alignment / split-apply-combine / the SettingWithCopy trap.</li>
-      <li><b>Numerical LA + floating-point stability</b> &mdash; Trefethen &amp; Bau ~6&ndash;8 lectures (conditioning, QR, SVD) + <code>scipy.linalg</code> habits (never <code>np.linalg.inv</code>). Maps 1:1 to the covariance/shrinkage specialization &mdash; the one thing you can&rsquo;t discover by doing.</li>
-      <li><b>Research-code hygiene</b> &mdash; Ousterhout <em>A Philosophy of Software Design</em> + Mineault <em>Good Research Code</em> + cookiecutter / uv / ruff wired in day one.</li>
-      <li><b>Testing without an oracle</b> &mdash; pytest + Hypothesis + finite-difference gradient checks. The #1 RSE delta from ICPC (no judge &rarr; construct correctness yourself).</li>
-      <li><b>Read + extend a large repo</b> &mdash; reproduce-then-extend a paper&rsquo;s reference code; read one sklearn estimator end-to-end. Unlocks the RA/co-author channel.</li>
-      <li><b>Analytical SQL on DuckDB</b> &mdash; Tanimura skim + grind window/CTE problems (DataLemur/pgexercises). A literal day-one hiring gate.</li>
+      <li><b>Real analysis</b> &mdash; Eccles &rarr; Abbott</li>
+      <li><b>Linear algebra</b> &mdash; Axler</li>
+      <li><b>Probability</b> &mdash; Blitzstein</li>
+      <li><b>Applied ML</b> &mdash; ISLP (done) &rarr; ESL (begin)</li>
+      <li><b>Programming rewire</b> &mdash; Rougier/numpy &rarr; Effective Python &rarr; Effective Pandas; + analytical SQL; + research-code hygiene (uv/ruff/pytest) as a habit</li>
     </ul>
   </div>
 
-  <div class="ln"><span class="lh">Secondary</span>
+  <div class="ln"><span class="lh">Section 2 &mdash; Core (builds on Section 1&rsquo;s roots; parallel within)</span>
     <ul>
-      <li><b>Calibrated performance</b> &mdash; profile-first (cProfile / line_profiler / scalene) &rarr; vectorize &rarr; numba &rarr; GPU, on your OWN slow code. Stops short of low-latency C++.</li>
-      <li><b>Point-in-time / temporal integrity</b> &mdash; as-of joins, look-ahead / survivorship avoidance, parquet/columnar. Valid backtest vs p-hacked mirage.</li>
+      <li><b>Math-stats</b> &mdash; Casella&ndash;Berger</li>
+      <li><b>Multivariable + matrix</b> &mdash; Pugh &middot; Meyer</li>
+      <li><b>Optimization</b> &mdash; Boyd &rarr; Wright&ndash;Recht</li>
+      <li><b>ML methods</b> &mdash; ESL depth &rarr; gradient boosting (+ one from-scratch booster)</li>
+      <li><b>ML-theory garnish</b> &mdash; SSBD (selective)</li>
+      <li><b>Programming depth</b> &mdash; numerical stability (Trefethen) &middot; testing-without-an-oracle &middot; read + extend a real repo</li>
     </ul>
   </div>
 
-  <div class="ln"><span class="lh">Thin-reference</span>
+  <div class="ln"><span class="lh">Section 3 &mdash; Specialty + the capstone (builds on Section 2)</span>
     <ul>
-      <li><b>Collaborative git</b> &mdash; branching / PR flow; land one real PR (unlocks the letter / co-author channel).</li>
-      <li><b>Accelerator / autodiff tooling</b> &mdash; PyTorch device/AMP/DataLoader; JAX jit/vmap/grad. Fenced to the plumbing AROUND models; Plan-B-gated.</li>
+      <li><b>High-dim statistics</b> (the spine) &mdash; Vershynin &rarr; Wainwright</li>
+      <li><b>Deep learning</b> &mdash; Prince &rarr; transformer from scratch (Raschka &rarr; nanoGPT)</li>
+      <li><b>Bayesian garnish</b> &mdash; BDA3</li>
+      <li><b>The artifact</b> (where all three study lanes converge) &mdash; the covariance-shrinkage / robust portfolio-construction repo: CVXPY + point-in-time backtester + MLAM/AFML validation</li>
     </ul>
   </div>
 
-  <div class="ln"><span class="lh">Capstone &mdash; year 2 (~2027, with the artifact; ~4&ndash;5 wk)</span>
-    <div class="body">The systematic-quant stack: <b>CVXPY</b> portfolio modeling + covariance shrinkage/denoising (<code>sklearn.covariance</code>, validated vs skfolio) + a <b>from-scratch point-in-time backtester</b> + leakage-free purged CV. Ships every capability above as ONE reproducible repo &mdash; the engineering-maturity signal a PhD supervisor / quant desk inspects.</div>
-  </div>
-
-  <div class="ln"><span class="lh">The doctrine</span>
-    <div class="body">One deferred (~2027) reproducible artifact carries ~80% of the learning; the reads only seed what doing won&rsquo;t teach. The genuine read-throughs &mdash; Rougier, Effective Python, Effective Pandas, Ousterhout, selective Trefethen &mdash; survive because a strong coder does NOT absorb them by osmosis. Everything else is docs + building. Deliberately light on what ICPC already gives (algorithms, constant-factor instinct, C++); no competitive-past-CM, no low-latency C++, no CS-fundamentals rebuild.</div>
+  <div class="ln"><span class="lh">Deferred &mdash; whenever it fits (the funded MSc teaches it)</span>
+    <div class="body"><b>Measure-theoretic probability</b> &mdash; Williams &rarr; Durrett. Gates nothing here; do not front-run it.</div>
   </div>
 
 </section>
