@@ -427,22 +427,34 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="math.html" class="">Math</a><a href="ml.html" class="cur">ML</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">ML</div><a href="#ml-1-ml-arrive-fluent-56-h-wk" class="">ML &middot; arrive fluent ~5&ndash;6 h/wk</a></div>
+<div class="site-subnav"><div class="lbl">ML</div><a href="#ml-1-ml-specialization-the-foundations-ladder-56-" class="">ML &middot; specialization + the foundations ladder ~5&ndash</a></div>
 <div class="site-main"><section class="page-section" id="ml">
 
-  <h2 id="ml-1-ml-arrive-fluent-56-h-wk">ML &middot; arrive fluent <span class="hrs">~5&ndash;6 h/wk</span></h2>
-  <p class="tab-subtitle">Close the tensor/DL gap (your biggest silent gap), pre-load the target courses, build ML+markets substance.</p>
-  <div class="ln"><span class="lh">PyTorch from scratch</span>
-    <div class="body">numpy (vectorization/broadcasting) &rarr; pandas &rarr; <b>PyTorch, implementing core ML from scratch</b> (autograd/backprop by hand, logistic&rarr;MLP&rarr;small CNN/transformer, proper train/val loop, SGD/Adam). ICPC transfers zero tensor muscle &mdash; this is the gap.</div>
+  <h2 id="ml-1-ml-specialization-the-foundations-ladder-56-">ML &middot; specialization + the foundations ladder <span class="hrs">~5&ndash;6 h/wk</span></h2>
+  <p class="tab-subtitle">The one specialization to aim everything at, and the sequenced text-only ladder that gets there. Full step-by-step: <code>ml-research/FOUNDATIONS-TEXTBOOK-LADDER.md</code>.</p>
+
+  <div class="ln gate"><span class="lh">SPECIALIZATION &mdash; high-dimensional statistics + convex/stochastic optimization</span>
+    <div class="body">The one subfield that is <b>quant-CORE</b> (covariance / shrinkage / factor + robust portfolio construction &mdash; the machinery of systematic alpha &amp; risk) AND <em>genuinely</em> lab-relevant (regularized estimation + optimizer/DL-theory) AND <b>maximally tractable from your stats/analysis base</b> (zero from-zero systems climb). Maps to your exact PhD targets: <b>ETH (B&uuml;hlmann), T&uuml;bingen, LMU Statistics, EPFL (Cevher), TU Munich (Sra)</b>. Aim foundations, reading, and the artifact here. <em>Honest:</em> the intellectually-rich SECONDARY-comp tier in both lanes, not the top-paid seat &mdash; but the least-compromised "both" bet.</div>
   </div>
-  <div class="ln"><span class="lh">The right path &mdash; TEXT + from-scratch, NO video</span>
-    <div class="body">Format = <b>text + problem sets</b>, not video (revisitable, has exercises). Spine = <b>ISLP</b> (free text + labs) + <b>from-scratch numpy implementations</b> of each method (your math is the spec; coding is the gap) &mdash; full plan in <code>ml-research/SUMMER-FOUNDATIONS-WORKPLAN.md</code>. Then rigorous: <b>Bishop "Deep Learning" (2024, text)</b> &rarr; selective ESL &rarr; "Mathematics for ML". PyTorch only. <em>Use AI to explain, never to write the code &mdash; the capability must be yours.</em></div>
+
+  <div class="ln"><span class="lh">The foundations ladder (sequenced, ~2 yrs, text + problem sets)</span>
+    <div class="body"><b>Tier A (now, all in parallel):</b> Eccles 6&ndash;9 &rarr; <b>Abbott 1&ndash;7</b> (analysis) + <b>Axler 1&ndash;7</b> (linear algebra) + <b>Blitzstein</b> (probability).<br>
+    <b>Tier B:</b> Pugh (multivariable Ch1/3/5) &middot; Meyer (matrix) &middot; <b>Casella&ndash;Berger 1&ndash;10</b> (math-stats) &middot; <b>ISLP</b> (applied on-ramp = the summer plan, from-scratch) &middot; <b>Boyd 1&ndash;5,9</b> (convex opt &mdash; a prereq lens) &middot; Wright&ndash;Recht (SGD stack).<br>
+    <b>Tier C (year 2 &mdash; the specialty core):</b> ESL &middot; <b>Vershynin &rarr; Wainwright (+ B&uuml;hlmann&ndash;van de Geer)</b> = high-dim statistics &middot; the optimization stack. <em>Secondary / plan-B:</em> Bishop-DL, Murphy &rarr; BDA3 (Bayesian).<br>
+    <b>Tier D (deferred &mdash; the MSc teaches it):</b> Williams &rarr; Durrett (measure-theoretic probability).<br>
+    Read as a quant too: <b>Wasserman "All of Statistics"</b> for desk fluency. Rule: use the TEXT + problem sets, never the video course.</div>
   </div>
-  <div class="ln"><span class="lh">Pre-load the targets&rsquo; OWN courses + R</span>
-    <div class="body">Cite them in the letters: <b>LMU</b> &mdash; Bischl&rsquo;s open I2ML + the <em>mlr3/R</em> stack (LMU&rsquo;s compulsory modelling modules are R-centric; Python-only is a semester-1 tax); <b>T&uuml;bingen</b> &mdash; Hennig&rsquo;s Probabilistic-ML series + Murphy. The probabilistic/Bayesian track is the T&uuml;bingen fit differentiator AND an underrated quant edge.</div>
+
+  <div class="ln"><span class="lh">Coding &mdash; from-scratch on the core, AI-amplified after</span>
+    <div class="body">numpy &rarr; PyTorch, implementing the core ML <b>from scratch</b> (autograd/backprop by hand, logistic&rarr;MLP&rarr;small transformer, proper train/val loop, SGD/Adam). You can code, so this is "cement the algorithm," fast. <em>Use AI to explain, never to write the core-learning code &mdash; the capability must be yours; AI-amplify everything else.</em></div>
   </div>
-  <div class="ln"><span class="lh">Markets domain-literacy</span>
-    <div class="body">The quant differentiator ML alone won&rsquo;t supply &mdash; light continuous reading: Cartea-Jaimungal-Penalva (Algo &amp; HF Trading), Bouchaud et&nbsp;al. (microstructure), L&oacute;pez de Prado (research-process/validation). Deepen alongside the LOB artifact. Public GitHub whose history visibly starts 2026; no MOOC-collecting.</div>
+
+  <div class="ln"><span class="lh">Markets literacy + the artifact direction</span>
+    <div class="body">Light continuous reading: Cartea&ndash;Jaimungal&ndash;Penalva, Bouchaud (microstructure), L&oacute;pez de Prado (validation). The eventual artifact (MSc-era, deferred) = a <b>covariance-shrinkage / robust portfolio-construction reproduction</b> (Ledoit&ndash;Wolf or factor-covariance + CVXPY/OSQP + transaction costs) &mdash; reads credibly to BOTH a stats-ML group and a systematic desk. NOT forecasting (quant-only), NOT an SSM reimplementation (lab-only). Public GitHub history visibly starting 2026.</div>
+  </div>
+
+  <div class="ln"><span class="lh">Pre-load the targets&rsquo; courses (letter fodder)</span>
+    <div class="body"><b>LMU</b> &mdash; Bischl&rsquo;s open I2ML + the <em>mlr3/R</em> stack (LMU modelling modules are R-centric; Python-only is a semester-1 tax). <b>T&uuml;bingen</b> &mdash; Hennig&rsquo;s Probabilistic-ML. Bayesian/probabilistic is now a <em>secondary / garnish</em> track, not the core &mdash; see the specialization.</div>
   </div>
 
 </section>
