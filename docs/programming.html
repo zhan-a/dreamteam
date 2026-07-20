@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — Math</title>
+<title>Dreamteam — Programming</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -425,56 +425,48 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="math.html" class="cur">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="math.html" class="">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="cur">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Math</div><a href="#mat-1-math-stats-the-foundations-ladder-56-h-wk-th" class="">Math &amp; Stats &middot; the foundations ladder ~5&ndash;6 </a></div>
-<div class="site-main"><section class="page-section" id="math">
+<div class="site-subnav"><div class="lbl">Programming</div><a href="#pro-1-programming-the-icpc-research-quant-delta-mo" class="">Programming &middot; the ICPC &rarr; research/quant delta mo</a></div>
+<div class="site-main"><section class="page-section" id="programming">
 
-  <h2 id="mat-1-math-stats-the-foundations-ladder-56-h-wk-th">Math &amp; Stats &middot; the foundations ladder <span class="hrs">~5&ndash;6 h/wk &middot; the heavy rail (cap deep work ~2&ndash;3 h/day)</span></h2>
-  <p class="tab-subtitle">The sequenced, text-only ladder to arrive prove-cold. Full step-by-step: <code>ml-research/FOUNDATIONS-TEXTBOOK-LADDER.md</code>. <b>A tier = when you start it (dependency), not priority.</b> Rule: use the TEXT + problem sets, never the video course.</p>
+  <h2 id="pro-1-programming-the-icpc-research-quant-delta-mo">Programming &middot; the ICPC &rarr; research/quant delta <span class="hrs">mostly learn-by-doing on the artifact</span></h2>
+  <p class="tab-subtitle">Not a from-scratch curriculum &mdash; you already code. The DELTA: what competitive programming does NOT give that ML-research + quant-dev need. ~80% learned by DOING on the one deferred (~2027) reproducible artifact. Full detail: <code>ml-research/PROGRAMMING-CAPABILITY-LADDER.md</code>.</p>
 
-  <div class="ln"><span class="lh">Specialty direction &mdash; where the ladder aims</span>
-    <div class="body"><b>High-dimensional statistics + convex/stochastic optimization</b> (the Tier C core). Maps to your PhD targets: ETH (B&uuml;hlmann), T&uuml;bingen, LMU Statistics, EPFL (Cevher), TU Munich (Sra).</div>
-  </div>
-
-  <div class="ln"><span class="lh">Tier A &mdash; start now, all in parallel</span>
+  <div class="ln"><span class="lh">Core &mdash; year 1, mostly by-doing on the artifact repo</span>
     <ul>
-      <li><b>Eccles</b> Ch 6&ndash;9 &mdash; proof on-ramp (2&ndash;4 wk; bail to Abbott the moment it feels easy)</li>
-      <li><b>Abbott</b> 1&ndash;7 &mdash; real-analysis spine; Ch 6 (uniform convergence) is the key rung. MT2116 is the on-ramp</li>
-      <li><b>Axler</b> 1&ndash;7 &mdash; proof-based linear algebra (Ch 6&ndash;7 = inner products / spectral theorem / SVD = highest ROI-per-hour)</li>
-      <li><b>Blitzstein</b> &mdash; calculus-based probability, through Ch 10 (concentration/LLN/CLT)</li>
+      <li><b>Array-brain rewire</b> &mdash; Rougier <em>From Python to Numpy</em> + numpy-100 (hard puzzles). The most expensive ICPC habit to unlearn: scalar-loop &rarr; whole-array reformulation.</li>
+      <li><b>Idiomatic Python</b> &mdash; Slatkin <em>Effective Python</em> (one fast pass).</li>
+      <li><b>Messy-data pandas</b> &mdash; Harrison <em>Effective Pandas 2</em> (McKinney as reference). Index alignment / split-apply-combine / the SettingWithCopy trap.</li>
+      <li><b>Numerical LA + floating-point stability</b> &mdash; Trefethen &amp; Bau ~6&ndash;8 lectures (conditioning, QR, SVD) + <code>scipy.linalg</code> habits (never <code>np.linalg.inv</code>). Maps 1:1 to the covariance/shrinkage specialization &mdash; the one thing you can&rsquo;t discover by doing.</li>
+      <li><b>Research-code hygiene</b> &mdash; Ousterhout <em>A Philosophy of Software Design</em> + Mineault <em>Good Research Code</em> + cookiecutter / uv / ruff wired in day one.</li>
+      <li><b>Testing without an oracle</b> &mdash; pytest + Hypothesis + finite-difference gradient checks. The #1 RSE delta from ICPC (no judge &rarr; construct correctness yourself).</li>
+      <li><b>Read + extend a large repo</b> &mdash; reproduce-then-extend a paper&rsquo;s reference code; read one sklearn estimator end-to-end. Unlocks the RA/co-author channel.</li>
+      <li><b>Analytical SQL on DuckDB</b> &mdash; Tanimura skim + grind window/CTE problems (DataLemur/pgexercises). A literal day-one hiring gate.</li>
     </ul>
   </div>
 
-  <div class="ln"><span class="lh">Tier B &mdash; overlaps A&rsquo;s back half</span>
+  <div class="ln"><span class="lh">Secondary</span>
     <ul>
-      <li><b>Pugh</b> Ch 1/3/5 &mdash; multivariable; Ch 5 (Jacobian / symmetric Hessian) = backprop stated rigorously</li>
-      <li><b>Meyer</b> &mdash; matrix analysis (least squares, pseudoinverse, SVD, conditioning)</li>
-      <li><b>Casella&ndash;Berger</b> 1&ndash;10 &mdash; the math-stats spine (MLE, testing, large-sample theory)</li>
-      <li><b>ISLP</b> &mdash; applied-ML on-ramp (= the summer plan; do it from-scratch in numpy)</li>
-      <li><b>Boyd</b> 1&ndash;5, 9 &mdash; convex optimization + duality/KKT (a prereq lens for ESL/DL &mdash; don&rsquo;t defer past them)</li>
-      <li><b>Wright&ndash;Recht</b> &mdash; the SGD / first-order stochastic-optimizer stack (implement from scratch)</li>
+      <li><b>Calibrated performance</b> &mdash; profile-first (cProfile / line_profiler / scalene) &rarr; vectorize &rarr; numba &rarr; GPU, on your OWN slow code. Stops short of low-latency C++.</li>
+      <li><b>Point-in-time / temporal integrity</b> &mdash; as-of joins, look-ahead / survivorship avoidance, parquet/columnar. Valid backtest vs p-hacked mirage.</li>
     </ul>
   </div>
 
-  <div class="ln"><span class="lh">Tier C &mdash; year 2, the specialty core</span>
+  <div class="ln"><span class="lh">Thin-reference</span>
     <ul>
-      <li><b>ESL</b> &mdash; the statistical-ML canon (prioritise Ch 3/7/10/15)</li>
-      <li><b>Vershynin</b> &mdash; high-dimensional probability (concentration, random matrices)</li>
-      <li><b>Wainwright</b> (+ B&uuml;hlmann&ndash;van de Geer) &mdash; high-dimensional statistics (the single most important theory text for the lane)</li>
-      <li><em>Secondary / plan-B:</em> Bishop-DL &middot; Murphy &rarr; BDA3 (Bayesian)</li>
+      <li><b>Collaborative git</b> &mdash; branching / PR flow; land one real PR (unlocks the letter / co-author channel).</li>
+      <li><b>Accelerator / autodiff tooling</b> &mdash; PyTorch device/AMP/DataLoader; JAX jit/vmap/grad. Fenced to the plumbing AROUND models; Plan-B-gated.</li>
     </ul>
   </div>
 
-  <div class="ln"><span class="lh">Tier D &mdash; deferred (the funded MSc teaches it formally)</span>
-    <ul>
-      <li><b>Williams &rarr; Durrett</b> &mdash; measure-theoretic probability. Gates nothing here; do NOT front-run it ahead of Tier C (a full pre-load = doing it twice)</li>
-    </ul>
+  <div class="ln"><span class="lh">Capstone &mdash; year 2 (~2027, with the artifact; ~4&ndash;5 wk)</span>
+    <div class="body">The systematic-quant stack: <b>CVXPY</b> portfolio modeling + covariance shrinkage/denoising (<code>sklearn.covariance</code>, validated vs skfolio) + a <b>from-scratch point-in-time backtester</b> + leakage-free purged CV. Ships every capability above as ONE reproducible repo &mdash; the engineering-maturity signal a PhD supervisor / quant desk inspects.</div>
   </div>
 
-  <div class="ln"><span class="lh">Read as a quant too</span>
-    <div class="body"><b>Wasserman "All of Statistics"</b> for desk fluency / breadth &mdash; so you read like a quant, not only a theorist.</div>
+  <div class="ln"><span class="lh">The doctrine</span>
+    <div class="body">One deferred (~2027) reproducible artifact carries ~80% of the learning; the reads only seed what doing won&rsquo;t teach. The genuine read-throughs &mdash; Rougier, Effective Python, Effective Pandas, Ousterhout, selective Trefethen &mdash; survive because a strong coder does NOT absorb them by osmosis. Everything else is docs + building. Deliberately light on what ICPC already gives (algorithms, constant-factor instinct, C++); no competitive-past-CM, no low-latency C++, no CS-fundamentals rebuild.</div>
   </div>
 
 </section>

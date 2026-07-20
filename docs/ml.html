@@ -425,17 +425,42 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="math.html" class="">Math</a><a href="ml.html" class="cur">ML</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="math.html" class="">Math</a><a href="ml.html" class="cur">ML</a><a href="programming.html" class="">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">ML</div><a href="#ml-1-ml-doing-the-artifact-56-h-wk" class="">ML &middot; doing + the artifact ~5&ndash;6 h/wk</a></div>
+<div class="site-subnav"><div class="lbl">ML</div><a href="#ml-1-ml-the-reading-rungs-the-builds-56-h-wk" class="">ML &middot; the reading rungs + the builds ~5&ndash;6 h/wk</a></div>
 <div class="site-main"><section class="page-section" id="ml">
 
-  <h2 id="ml-1-ml-doing-the-artifact-56-h-wk">ML &middot; doing + the artifact <span class="hrs">~5&ndash;6 h/wk</span></h2>
-  <p class="tab-subtitle">The ML-specific <em>doing</em> &mdash; implement from scratch, build markets literacy, aim the artifact. The reading/textbook sequence lives in the <b>Math &amp; Stats</b> tab.</p>
+  <h2 id="ml-1-ml-the-reading-rungs-the-builds-56-h-wk">ML &middot; the reading rungs + the builds <span class="hrs">~5&ndash;6 h/wk</span></h2>
+  <p class="tab-subtitle">The ML-specific deepening on top of the math/stats spine (which lives in <b>Math &amp; Stats</b>). Reading + from-scratch builds. Full detail: <code>ml-research/ML-TEXTBOOK-LADDER.md</code>. DL/Bayesian are real but SECONDARY to the spine.</p>
 
-  <div class="ln"><span class="lh">Coding &mdash; from-scratch on the core, AI-amplified after</span>
-    <div class="body">numpy &rarr; PyTorch, implementing the core ML <b>from scratch</b> (autograd/backprop by hand, logistic&rarr;MLP&rarr;small transformer, proper train/val loop, SGD/Adam). You can code, so this is "cement the algorithm," fast. <em>Use AI to explain, never to write the core-learning code &mdash; the capability must be yours; AI-amplify everything else.</em></div>
+  <div class="ln"><span class="lh">Applied core &mdash; now</span>
+    <ul>
+      <li><b>ESL</b> chapter-selective: Ch 3 (regularization), Ch 7 (model assessment = honest validation), Ch 9&rarr;10 (trees&rarr;boosting), Ch 15 (random forests). ISLP = done.</li>
+      <li><b>Gradient boosting</b> &mdash; XGBoost/LightGBM/CatBoost papers + docs, and <b>one</b> regularized booster from scratch. <em>The single highest job-value item for the quant lane</em> (still beats tabular-DL on 2023&ndash;25 benchmarks).</li>
+    </ul>
+  </div>
+
+  <div class="ln"><span class="lh">Deep learning &rarr; transformer capstone &mdash; secondary</span>
+    <ul>
+      <li><b>Prince "Understanding Deep Learning"</b> (2023), selective &mdash; per-chapter notebooks; focus the CNN/transformer chapters + the "why DL works" (generalization) chapter, the bridge to your high-dim-stats/optimization spine. <em>The DL-book pick, over Bishop-DL.</em></li>
+      <li><b>Transformer from scratch</b> (year 2, capstone) &mdash; Raschka "Build an LLM from Scratch" Ch 2&ndash;5 + Karpathy <b>nanoGPT</b> (repos + code, skip the videos). ONE small model, then stop. This IS the MSc-application artifact + the lab-plan-B door.</li>
+    </ul>
+  </div>
+
+  <div class="ln"><span class="lh">Garnish &mdash; cheap, thin by design</span>
+    <ul>
+      <li><b>SSBD "Understanding ML"</b> selective (Ch 2&ndash;5 PAC + Ch 13 stability&rarr;generalization) &mdash; ~2&ndash;3 wk of theory framing. Not Mohri &mdash; Vershynin/Wainwright own the bounds.</li>
+      <li><b>Gelman BDA3</b> selective &mdash; hierarchical shrinkage + uncertainty quantification (the genuine quant sliver). GPML / Murphy PML-2 = reference only.</li>
+    </ul>
+  </div>
+
+  <div class="ln"><span class="lh">Deferred to pre-thesis / quant-transition</span>
+    <div class="body">L&oacute;pez de Prado <b>MLAM</b> &mdash; covariance denoising (Marchenko-Pastur) / NCO, reimplemented (maps onto your covariance-shrinkage artifact) &middot; <b>AFML</b> Ch 7/8/11&ndash;12 as the finance-validation reference-pin (purged CV, backtest-overfitting). MLAM&rsquo;s covariance content can be read light now (short book).</div>
+  </div>
+
+  <div class="ln"><span class="lh">From-scratch build path</span>
+    <div class="body">numpy booster &rarr; backprop once in raw numpy (before a framework) &rarr; Marchenko-Pastur covariance denoising (seeds the artifact) &rarr; PyTorch via Prince&rsquo;s notebooks &rarr; Raschka build &rarr; nanoGPT capstone. <em>Use AI to explain, never to write the core-learning code &mdash; the capability must be yours.</em></div>
   </div>
 
   <div class="ln"><span class="lh">Markets literacy + the artifact direction</span>
