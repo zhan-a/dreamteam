@@ -432,7 +432,11 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="site-main"><section class="page-section" id="math">
 
   <h2 id="mat-1-math-stats-the-foundations-ladder-56-h-wk-th">Math &amp; Stats &middot; the foundations ladder <span class="hrs">~5&ndash;6 h/wk &middot; the heavy rail (cap deep work ~2&ndash;3 h/day)</span></h2>
-  <p class="tab-subtitle">The sequenced, text-only ladder to arrive prove-cold. Full step-by-step: <code>ml-research/FOUNDATIONS-TEXTBOOK-LADDER.md</code>. <b>A tier = when you start it (dependency), not priority.</b> Rule: use the TEXT + problem sets, never the video course.</p>
+  <p class="tab-subtitle">The sequenced, text-only ladder. Full step-by-step: <code>ml-research/FOUNDATIONS-TEXTBOOK-LADDER.md</code>. <b>A tier = when you start it (dependency), not priority.</b> Use the TEXT + problem sets, never the video.</p>
+
+  <div class="ln gate"><span class="lh">The ROI rule (the depth vs. taste calibration)</span>
+    <div class="body"><b>"Strong fundamentals = low ROI" is true for ADJACENT fields + the advanced stuff the MSc re-teaches &mdash; FALSE for the fields that ARE your lane.</b> Real analysis · probability · math-stats · core applied-ML are your PRODUCT + transcript signal + MSc-survival prep &mdash; <b>go DEEP</b> (intuition-only there = "conversant", not "can contribute"). Everything else = <b>read for taste</b> / defer to the MSc. And <b>GPA + research aren&rsquo;t either/or</b> &mdash; phase them (research in low-intensity windows, GPA-peak in exams), be efficient on GPA (nail high-weight courses), and exploit the synergy (in-lane research deepens the coursework).</div>
+  </div>
 
   <div class="ln"><span class="lh">Specialty direction &mdash; where the ladder aims</span>
     <div class="body"><b>High-dimensional statistics + convex/stochastic optimization</b> (the Tier C core). Maps to your PhD targets: ETH (B&uuml;hlmann), T&uuml;bingen, LMU Statistics, EPFL (Cevher), TU Munich (Sra).</div>
@@ -441,17 +445,17 @@ h2[id],h3[id]{scroll-margin-top:130px}
   <div class="ln"><span class="lh">Tier A &mdash; start now, all in parallel</span>
     <ul>
       <li><b>Eccles</b> Ch 6&ndash;9 &mdash; proof on-ramp (2&ndash;4 wk; bail to Abbott the moment it feels easy)</li>
-      <li><b>Abbott</b> 1&ndash;7 &mdash; real-analysis spine; Ch 6 (uniform convergence) is the key rung. MT2116 is the on-ramp</li>
-      <li><b>Axler</b> 1&ndash;7 &mdash; proof-based linear algebra (Ch 6&ndash;7 = inner products / spectral theorem / SVD = highest ROI-per-hour)</li>
-      <li><b>Blitzstein</b> &mdash; calculus-based probability, through Ch 10 (concentration/LLN/CLT)</li>
+      <li><b>Abbott</b> 1&ndash;7 &mdash; <b>DEPTH (core product)</b>: real-analysis spine; Ch 6 (uniform convergence) is the key rung. MT2116 is the on-ramp</li>
+      <li><b>Axler &mdash; Ch 5&ndash;7 ONLY</b> (trimmed): eigenvalues &rarr; inner products &rarr; spectral theorem/SVD (= covariance/PCA/projection). <em>Skip Ch 1&ndash;4 (MT1173 + Further-LA already cover it) &amp; Ch 8&ndash;9. Read for the clean theorem, not a grind &mdash; the single most trimmable math item.</em></li>
+      <li><b>Blitzstein</b> &mdash; <b>DEPTH (core)</b>: probability through Ch 10 (concentration/LLN/CLT)</li>
     </ul>
   </div>
 
   <div class="ln"><span class="lh">Tier B &mdash; overlaps A&rsquo;s back half</span>
     <ul>
-      <li><b>Pugh</b> Ch 1/3/5 &mdash; multivariable; Ch 5 (Jacobian / symmetric Hessian) = backprop stated rigorously</li>
-      <li><b>Meyer</b> &mdash; matrix analysis (least squares, pseudoinverse, SVD, conditioning)</li>
-      <li><b>Casella&ndash;Berger</b> 1&ndash;10 &mdash; the math-stats spine (MLE, testing, large-sample theory)</li>
+      <li><b>Pugh &mdash; Ch 5 ONLY</b> (trimmed): multivariable (Jacobian / symmetric Hessian = backprop stated rigorously). <em>Skim/drop the rest &mdash; a 2nd analysis pass is depth-for-depth.</em></li>
+      <li><b>Meyer</b> &mdash; matrix analysis (least squares, pseudoinverse, SVD, conditioning) &mdash; the applied LA your lane actually uses; carries more than Axler here</li>
+      <li><b>Casella&ndash;Berger</b> Ch 5&ndash;10 &mdash; <b>DEPTH (core = your lane)</b>: the math-stats spine (MLE, testing, large-sample theory)</li>
       <li><b>ISLP</b> &mdash; applied-ML on-ramp (= the summer plan; do it from-scratch in numpy)</li>
       <li><b>Boyd</b> 1&ndash;5, 9 &mdash; convex optimization + duality/KKT (a prereq lens for ESL/DL &mdash; don&rsquo;t defer past them)</li>
       <li><b>Wright&ndash;Recht</b> &mdash; the SGD / first-order stochastic-optimizer stack (implement from scratch)</li>
@@ -460,10 +464,9 @@ h2[id],h3[id]{scroll-margin-top:130px}
 
   <div class="ln"><span class="lh">Tier C &mdash; year 2, the specialty core</span>
     <ul>
-      <li><b>ESL</b> &mdash; the statistical-ML canon (prioritise Ch 3/7/10/15)</li>
-      <li><b>Vershynin</b> &mdash; high-dimensional probability (concentration, random matrices)</li>
-      <li><b>Wainwright</b> (+ B&uuml;hlmann&ndash;van de Geer) &mdash; high-dimensional statistics (the single most important theory text for the lane)</li>
-      <li><em>Secondary / plan-B:</em> Bishop-DL &middot; Murphy &rarr; BDA3 (Bayesian)</li>
+      <li><b>ESL</b> &mdash; <b>DEPTH (job-value core)</b>: the statistical-ML canon (prioritise Ch 3/7/10/15; do the exercises)</li>
+      <li><b>Vershynin &rarr; Wainwright</b> (+ B&uuml;hlmann&ndash;van de Geer) &mdash; high-dim probability &amp; statistics. <b>READ FOR TASTE in the bachelor</b> (key ideas + theorem statements &mdash; enough to read papers + seed the artifact); <b>defer deep mastery to the MSc</b> (these ARE MSc-level; not graded here, so taste costs nothing on the transcript)</li>
+      <li><em>Secondary / plan-B garnish:</em> Prince-DL (one build) &middot; BDA3 (Bayesian) &middot; SSBD (statement-level)</li>
     </ul>
   </div>
 
@@ -474,7 +477,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
   </div>
 
   <div class="ln"><span class="lh">Read as a quant too</span>
-    <div class="body"><b>Wasserman "All of Statistics"</b> for desk fluency / breadth &mdash; so you read like a quant, not only a theorist.</div>
+    <div class="body"><b>Wasserman "All of Statistics"</b> for desk fluency / breadth (read, don&rsquo;t master) &mdash; so you read like a quant, not only a theorist.</div>
   </div>
 
 </section>
