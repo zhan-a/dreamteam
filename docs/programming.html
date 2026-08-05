@@ -395,6 +395,32 @@
   .ln ul,.drop ul{margin:7px 0 2px;padding-left:20px} .ln li,.drop li{margin-bottom:5px;line-height:1.5;font-size:13.5px}
   
 
+  .tl{position:relative;margin:16px 0 8px}
+  .tl::before{content:'';position:absolute;left:96px;top:10px;bottom:14px;width:2px;background:var(--border-strong)}
+  .tl-band{position:relative;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-dimmer);margin:26px 0 13px;padding-left:120px}
+  .tl-row{position:relative;padding:0 0 18px 120px;min-height:30px}
+  .tl-date{position:absolute;left:0;top:1px;width:84px;text-align:right;font-weight:700;font-size:12px;line-height:1.2;color:var(--fg)}
+  .tl-date small{display:block;font-weight:600;font-size:10px;color:var(--fg-dimmer);margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
+  .tl-dot{position:absolute;left:89px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);z-index:2}
+  .tl-card{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;box-shadow:var(--shadow-sm)}
+  .tl-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:4px}
+  .tl-name{font-weight:700;font-size:14px}
+  .tl-sub{font-size:11px;color:var(--fg-dimmer);font-weight:600}
+  .tl-tag{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:9px;white-space:nowrap}
+  .tl-what{font-size:12.5px;color:var(--fg-dim);margin-bottom:6px}
+  .tl-before{font-size:12.5px;line-height:1.5}
+  .tl-before b{color:var(--fg)}
+  .tl-row.f .tl-dot{background:var(--urgent);width:18px;height:18px;left:88px} .tag-f{background:var(--urgent-soft);color:var(--urgent)}
+  .tl-row.t1 .tl-dot{background:var(--ok)} .tag-t1{background:var(--ok-soft);color:var(--ok)}
+  .tl-row.t2 .tl-dot{background:var(--accent)} .tag-t2{background:var(--accent-soft);color:var(--accent)}
+  .tl-row.rl .tl-dot{background:var(--warn)} .tag-rl{background:var(--warn-soft);color:var(--warn)}
+  .tl-row.op .tl-dot{background:var(--fg-dimmer)} .tag-op{background:var(--bg-3);color:var(--fg-dim)}
+  .tl-legend{display:flex;flex-wrap:wrap;gap:15px;margin:10px 0 2px;font-size:12px;color:var(--fg-dim)}
+  .tl-legend span{display:inline-flex;align-items:center;gap:6px}
+  .tl-legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  @media(max-width:640px){.tl::before{left:70px}.tl-band,.tl-row{padding-left:92px}.tl-dot{left:63px}.tl-row.f .tl-dot{left:62px}.tl-date{width:60px;font-size:11px}}
+  
+
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
 .page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
@@ -425,7 +451,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="map.html" class="">Map</a><a href="math.html" class="">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="cur">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="timeline.html" class="">Summer '27</a><a href="map.html" class="">Map</a><a href="math.html" class="">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="cur">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
 <div class="site-subnav"><div class="lbl">Programming</div><a href="#pro-1-programming-the-icpc-research-quant-delta-mo" class="">Programming &middot; the ICPC &rarr; research/quant delta mo</a></div>
