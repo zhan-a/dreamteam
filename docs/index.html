@@ -395,6 +395,15 @@
   .ln ul,.drop ul{margin:7px 0 2px;padding-left:20px} .ln li,.drop li{margin-bottom:5px;line-height:1.5;font-size:13.5px}
   
 
+  .tl-row.ln-res .tl-dot{background:var(--accent)} .tag-res{background:var(--accent-soft);color:var(--accent)}
+  .tl-row.ln-dl .tl-dot{background:var(--urgent)} .tag-dl{background:var(--urgent-soft);color:var(--urgent)}
+  .tl-row.ln-ac .tl-dot{background:var(--warn)} .tag-ac{background:var(--warn-soft);color:var(--warn)}
+  .tl-row.ln-de .tl-dot{background:var(--accent-2)} .tag-de{background:var(--accent-soft);color:var(--accent-2)}
+  .tl-row.ln-ms .tl-dot{background:var(--ok)} .tag-ms{background:var(--ok-soft);color:var(--ok)}
+  .tl-row.end .tl-dot{background:var(--ok);width:20px;height:20px;left:87px}
+  .tl-row.end .tl-card{border-color:var(--ok);background:var(--ok-soft)}
+  
+
   .tl{position:relative;margin:16px 0 8px}
   .tl::before{content:'';position:absolute;left:96px;top:10px;bottom:14px;width:2px;background:var(--border-strong)}
   .tl-band{position:relative;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-dimmer);margin:26px 0 13px;padding-left:120px}
@@ -451,7 +460,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="cur">Home</a><a href="timeline.html" class="">Summer '27</a><a href="map.html" class="">Map</a><a href="math.html" class="">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="cur">Home</a><a href="fall26.html" class="">Fall '26</a><a href="timeline.html" class="">Summer '27</a><a href="map.html" class="">Map</a><a href="math.html" class="">Math</a><a href="ml.html" class="">ML</a><a href="programming.html" class="">Programming</a><a href="multiplier.html" class="">Multiplier</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
 <div class="site-subnav"><div class="lbl">Home</div><a href="#hom-1-home-the-plan" class="">Home &middot; the plan</a><a href="#hom-2-august-2026-the-pre-semester-sprint-6-h-day-" class="">August 2026 &middot; the pre-semester sprint ~6 h/day &middo</a><a href="#hom-3-admissions-lmu-tbingen-ml-23-h-wk-bursty-low" class="">Admissions &middot; LMU + T&uuml;bingen ML ~2&ndash;3 h/wk (</a></div>
@@ -516,12 +525,12 @@ h2[id],h3[id]{scroll-margin-top:130px}
     <div class="body">Concentrated daily German (~1&ndash;1.5 h): the free month is where you gain a level; the semester only maintains. Ladder = <b>A1 by NYE 2026 &rarr; A2 by Jul 2027 &rarr; B1 by graduation</b> (the deal with mother &rarr; &euro;40k + a visible seriousness signal). August banks A1.</div>
   </div>
 
-  <div class="ln"><span class="lh">P3 &middot; Start the artifact &mdash; internship + ESOP seed</span>
-    <div class="body">The covariance-shrinkage / high-dim-regression reproduction. <b>Spec it first</b> &mdash; run <b>_master-report/PROMPT-p3-artifact-spec.md</b> in a new session (workflow) &rarr; then start building. Start Aug, finish ~early Oct for internship apps. Reads to BOTH a stats-ML group and a desk; NOT Kaggle, NOT forecasting.</div>
+  <div class="ln"><span class="lh">P3 &middot; The artifact &mdash; bank the core (the whole research lane)</span>
+    <div class="body">The Ledoit-Wolf covariance-shrinkage reproduction &mdash; <b>spec&rsquo;d, now BUILDING</b> (spec: <b>ml-research/projects/proj4-lw-shrinkage-artifact/SPEC.md</b>; fresh build sessions from <b>ml-research/PROMPT-NEW-SESSION-artifact-build.md</b>). <b>August = front-load the core</b> (Wk&nbsp;1&ndash;5: from-formula estimator &rarr; sklearn 1e-6 oracle &rarr; simulation &rarr; reproduce Figs&nbsp;8&ndash;9 + Table&nbsp;2), because Sep&ndash;Oct get crushed by the semester + MT1173. <b>Bank the Week-5 core gate before September</b>; everything after is severable. This is the entire research job in August &mdash; the PI reading is a <em>September</em> task, NOT now. Full week-by-week on the <b>Fall &rsquo;26</b> tab.</div>
   </div>
 
-  <div class="ln"><span class="lh">Secondary &middot; Internship groundwork</span>
-    <div class="body"><b>Summer@EPFL opens Oct 2026 &middot; ETH SSRF ~Dec 2026.</b> List 5&ndash;10 target PIs (ETH SfS &middot; EPFL stats/optimization), read a paper each, draft a CV + one tailored cold-email template. A few hours total &mdash; prep for the autumn application sprint.</div>
+  <div class="ln"><span class="lh">Secondary &middot; Internship groundwork &mdash; mostly DONE</span>
+    <div class="body">The target PIs + reading folders are <b>already built</b> (Ignatiadis / Na / Shen, in <b>ml-research/outreach/top3-prep/</b>) and the deadlines are now firm (<b>CaCT&uuml;S ~Nov 20 &middot; Summer@EPFL Nov 29 &middot; ETH SSRF Dec 16</b>). Nothing to add in August beyond a CV draft &mdash; the <b>reading starts in September</b> (Ignatiadis first), and the artifact <em>is</em> the credential that makes those apps land. Full sequence on the <b>Fall &rsquo;26</b> and <b>Summer &rsquo;27</b> tabs.</div>
   </div>
 
   <div class="ln"><span class="lh">Secondary &middot; Foundations tick-over</span>
@@ -529,7 +538,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
   </div>
 
   <div class="gpstrip">
-  <span class="d">NEXT &middot; the fall semester</span> &mdash; EC2020 &middot; ST2187 &middot; MT2116 &middot; Advanced Stats + the <b>MT1173 Nov exam</b>: the <b>L5/6 classification-deciding</b> year &rarr; <b>80+ in the quant core</b>, ~75+ average, &ge;70 everywhere. Money stream stays frozen; German drops to a maintenance drip.
+  <span class="d">NEXT &middot; the fall semester</span> &mdash; EC2020 &middot; ST2187 &middot; MT2116 &middot; Advanced Stats + the <b>MT1173 Oct 15 exam</b>: the <b>L5/6 classification-deciding</b> year &rarr; <b>80+ in the quant core</b>, ~75+ average, &ge;70 everywhere. Money stream stays frozen; German drops to a maintenance drip.
   </div>
 
 </section>
