@@ -47,6 +47,7 @@ ul.dt-list b{color:var(--fg)}
 .t-ac{background:var(--accent-soft);color:var(--accent)} .t-de{background:var(--info-soft);color:var(--info)}
 .t-ms{background:var(--urgent-soft);color:var(--urgent)} .t-res{background:var(--ok-soft);color:var(--ok)}
 .t-code{background:var(--accent-soft);color:var(--accent-2)}
+.t-st{background:var(--ok-soft);color:var(--ok)}
 .tl{position:relative;margin:10px 0}
 .tl::before{content:"";position:absolute;left:96px;top:6px;bottom:6px;width:2px;background:var(--border-strong)}
 .tl-band{margin:20px 0 10px 116px;font-weight:800;font-size:12.5px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
@@ -104,7 +105,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="site-main"><section class="page-section" id="spine">
 
 <h1>The Spine &mdash; dated milestones</h1>
-<p class="sub">&#9733; = highest-leverage. Check them off as you go. General deadlines, not specs.</p>
+<p class="sub">&#9733; = highest-leverage. Check them off as you go. <span class="tag t-st">START &le; date</span> = when to begin, <b>buffer already included</b> &mdash; start then and a 1&ndash;3-week slip still lands on time. If you're past a START date and haven't started, that item is eating its buffer NOW.</p>
 
 <h2 id="roa-1-skill-lanes-the-road-at-a-glance">Skill lanes &mdash; the road at a glance</h2>
 <p class="sub"><b>⚠ = crunch window</b> (grades/applications own it &mdash; every lane yields) &middot; <b>bold = that lane's peak</b> &middot; weekly hours in parentheses. Note how much of the skill road IS the coursework &mdash; that's by design.</p>
@@ -123,96 +124,96 @@ h2[id],h3[id]{scroll-margin-top:130px}
 
   <div class="tl-band">Now &mdash; Aug 2026 &middot; the 40h window</div>
   <div class="tl-row star"><div class="tl-date">Aug 2026</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-artifactcore">Artifact core push &mdash; ~25 h/wk</label> <span class="tag t-res">Artifact</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-artifactcore">Artifact core push &mdash; ~25 h/wk</label> <span class="tag t-res">Artifact</span> <span class="tag t-st">START: running &middot; buffer = 1 Nov backstop</span></div>
     <div class="tl-what">LW reproduction to 1e-6 vs sklearn + the PRIAL arbiter standing. The 40h window closes Sep 1 &mdash; this is most of its value.</div></div></div>
   <div class="tl-row star"><div class="tl-date">by 31 Aug 2026</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-adminbattery">Admin battery &times;4 sent</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-adminbattery">Admin battery &times;4 sent</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">START &le; 25 Aug</span></div>
     <div class="tl-what">&#9312; ETH email: UoL English exemption? at-home GRE? &#9313; IDP Almaty: hearing-accommodated Listening deliverable? &#9314; KBTU catalog audit vs T&uuml;bingen's &ge;6 ECTS algorithms-and-data-structures floor. &#9315; KBTU registrar: physical diploma issuance date after June-2028 graduation.</div></div></div>
 
   <div class="tl-band">Fall 2026 &mdash; ship, sit, fire</div>
   <div class="tl-row"><div class="tl-date">Sep 12/19/26</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-mocks">MT1173 mocks</label> <span class="tag t-ac">Academic</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-mocks">MT1173 mocks</label> <span class="tag t-ac">Academic</span> <span class="tag t-st">START &le; 1 Sep</span></div>
     <div class="tl-what">Artifact drops to ~10 h/wk; German 2 h; ISLP/Abbott paused.</div></div></div>
   <div class="tl-row star"><div class="tl-date">8&ndash;11 Oct 2026</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-a1ship">SHIP the P3 artifact</label> <span class="tag t-res">Artifact</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-a1ship">SHIP the P3 artifact</label> <span class="tag t-res">Artifact</span> <span class="tag t-st">FINAL PUSH &le; 1 Oct</span></div>
     <div class="tl-what">Internal target Oct 8, published Oct 11. Hard backstop 1 Nov; slip past that &rarr; cut the JM extension, ship reproduction + honest write-up. Feeds RA outreach, summer apps, ESOP pre-proposal.</div></div></div>
   <div class="tl-row star"><div class="tl-date">15 Oct 2026<small>hard</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-mt1173">MT1173 Algebra exam</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-mt1173">MT1173 Algebra exam</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">EXAM-ONLY MODE &le; 9 Oct</span></div>
     <div class="tl-what">Exam week = exam only. &ge;70 = green; it's L4 (barely counts for the class) &mdash; clear it comfortably, don't chase 90.</div></div></div>
   <div class="tl-row"><div class="tl-date">~Nov 2026</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-rabatch">Remote-RA batch-1 outreach</label> <span class="tag t-res">Research</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-rabatch">Remote-RA batch-1 outreach</label> <span class="tag t-res">Research</span> <span class="tag t-st">DRAFT &le; 20 Oct</span></div>
     <div class="tl-what">Trigger: artifact standing. Ignatiadis &middot; Na &middot; Shen &middot; Patil &middot; Ding &middot; Tian &middot; Misiakiewicz (list: <code>findings-us-remote-ra-contacts.md</code>). This engagement = letter #2's fallback vehicle.</div></div></div>
   <div class="tl-row"><div class="tl-date">29 Nov 2026<small>deadline</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-epflsummer">Summer@EPFL + E3 applications</label> <span class="tag t-res">Research</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-epflsummer">Summer@EPFL + E3 applications</label> <span class="tag t-res">Research</span> <span class="tag t-st">START &le; 1 Nov</span></div>
     <div class="tl-what">CV + all transcripts + &le;2-page motivation. Then CaCT&uuml;S / KAUST VSRP / ISTA + 8&ndash;10 direct-PI emails as windows open.</div></div></div>
   <div class="tl-row"><div class="tl-date">~mid-Dec 2026<small>deadline</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ssrf">ETH SSRF application</label> <span class="tag t-res">Research</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ssrf">ETH SSRF application</label> <span class="tag t-res">Research</span> <span class="tag t-st">START &le; 24 Nov (reuses the EPFL pack)</span></div>
     <div class="tl-what">Window opens ~early Nov 2026. Check Fanny Yang (D-INFK) is in the host pool. Goal by 20 Dec: &ge;4 programs + &ge;8 PI emails fired.</div></div></div>
   <div class="tl-row"><div class="tl-date">~Dec 2026</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-islp">ISLP finished &middot; NeetCode/LC base running (2 h/wk)</label> <span class="tag t-code">Skills</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-islp">ISLP finished &middot; NeetCode/LC base running (2 h/wk)</label> <span class="tag t-code">Skills</span> <span class="tag t-st">RESUME &le; 20 Oct</span></div>
     <div class="tl-what">Both resumed post-Oct-15. Next up: the from-scratch numpy portfolio (Jan&ndash;Mar).</div></div></div>
   <div class="tl-row star"><div class="tl-date">31 Dec 2026</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-a1lang">German A1 achieved</label> <span class="tag t-de">German</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-a1lang">German A1 achieved</label> <span class="tag t-de">German</span> <span class="tag t-st">DAILY since Aug &middot; &ge;3 sessions/wk</span></div>
     <div class="tl-what">The committed &euro;40k-deal milestone (A1 &rarr; A2 &rarr; B1 by grad).</div></div></div>
 
   <div class="tl-band">Spring 2027 &mdash; the quiet build</div>
   <div class="tl-row"><div class="tl-date">Feb&ndash;Apr 2027</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-summerdecide">Summer-2027 decisions land &rarr; Branch A or B</label> <span class="tag t-res">Research</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-summerdecide">Summer-2027 decisions land &rarr; Branch A or B</label> <span class="tag t-res">Research</span> <span class="tag t-st">EXTERNAL &middot; on offer: admin &le; +2 wks</span></div>
     <div class="tl-what">A = CH/MPI research summer. B (no offer) = remote-RA intensified &mdash; the base case never required a CH summer. Confirm referee #3 candidates now.</div></div></div>
   <div class="tl-row"><div class="tl-date">~Mar 2027</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-numpy">From-scratch numpy portfolio public</label> <span class="tag t-code">Skills</span></div>
-    <div class="tl-what">ISLP methods reimplemented + tested &mdash; the ML-fundamentals proof riding under the artifact. SQL block folds in here. Also: mock IELTS Listening (unaccommodated) &mdash; decides the accommodations question.</div></div></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-numpy">From-scratch numpy portfolio public</label> <span class="tag t-code">Skills</span> <span class="tag t-st">START &le; 5 Jan</span></div>
+    <div class="tl-what">ISLP methods reimplemented + tested &mdash; the ML-fundamentals proof riding under the artifact (~9 wks at 6 h + 2-wk buffer). SQL block folds in here. Also: mock IELTS Listening (unaccommodated) <b>&le; 15 Mar</b> &mdash; decides the accommodations question.</div></div></div>
   <div class="tl-row"><div class="tl-date">by 30 Apr 2027</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ieltsbook">Book IELTS (test ~Jun; arrangements per the mock's verdict)</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ieltsbook">Book IELTS (test ~Jun; arrangements per the mock's verdict)</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">DECIDE &le; 15 Apr</span></div>
     <div class="tl-what">&ge;6-wk centre lead if any arrangement is requested.</div></div></div>
   <div class="tl-row star"><div class="tl-date">May 2027<small>THE gate</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-may27">THE exam session &mdash; MT2116 &middot; ST2133 &middot; ST2134 &middot; ST2187 &middot; EC2020</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-may27">THE exam session &mdash; MT2116 &middot; ST2133 &middot; ST2134 &middot; ST2187 &middot; EC2020</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">RAMP &le; 1 Mar &middot; FULL &le; 1 Apr</span></div>
     <div class="tl-what"><b>This IS the application transcript</b> (May-2028 marks arrive post-freeze). From Apr 1: 16&ndash;18 h/wk exams, everything else &le;5 h. Targets: &ge;70 all &middot; 75&ndash;80 avg &middot; 80+ on MT2116/ST2133/ST2134. The plan's single point of failure &mdash; no retake before the deadlines.</div></div></div>
   <div class="tl-row star"><div class="tl-date">Jun 2027</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ielts">IELTS sit &rarr; 7.0 overall, every band &ge;6.0</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ielts">IELTS sit &rarr; 7.0 overall, every band &ge;6.0</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">PREP &le; 5 Jun &middot; buffer = Jul&ndash;Sep retake window</span></div>
     <div class="tl-what">ETH's verified bar (per-band 6.0 floor is real; L6.0 passes at zero margin &mdash; accommodations buy margin). Also: ETS Disability file if accommodated GRE wanted; GRE prep starts ~8 h/wk; German A2 ~Jul.</div></div></div>
 
   <div class="tl-band">Summer 2027 &mdash; the letter + the score (zero-float)</div>
   <div class="tl-row star"><div class="tl-date">Jul&ndash;Aug 2027</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ra">The letter summer &mdash; research full-time</label> <span class="tag t-res">Research</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ra">The letter summer &mdash; research full-time</label> <span class="tag t-res">Research</span> <span class="tag t-st">REFEREES LOCKED &le; 1 Sep</span></div>
     <div class="tl-what">Branch A: CH/MPI fellowship + GRE evenings. Branch B: remote-RA 15 h + GRE 12 h + production 6 h. Last window to mint a legible letter before the freeze. Referee lineup locked by Sep: 3 EPFL + 2 ETH.</div></div></div>
   <div class="tl-row star"><div class="tl-date">25 Sep&ndash;5 Oct 2027</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-gre">GRE sit #1 (Almaty center)</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-gre">GRE sit #1 (Almaty center)</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">PREP since 15 Jun &middot; BOOK SEAT &le; 15 Aug</span></div>
     <div class="tl-what">Bar: Q165/90% &middot; V158/80% &middot; AWA 4.0. V158 = the binding risk. Retake &le; ~5 Nov (21-day spacing, scores in 8&ndash;10 days). Still short &rarr; drop ETH only; EPFL needs no GRE.</div></div></div>
 
   <div class="tl-band">Fall 2027 &mdash; APPLICATION SEASON (the convergence)</div>
   <div class="tl-row star"><div class="tl-date">by 31 Oct 2027</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-package">Document pack complete + letters requested</label> <span class="tag t-ac">Apply</span></div>
-    <div class="tl-what">Official-issuance UoL transcripts + KBTU transcript w/ certified translations + high-school cert + gap-free CV + matriculation confirmation + course-content template + class-rank letter. Letters requested with a Dec-8 soft deadline. SoPs: EPFL &le;1000 words, ETH ~1 A4, faculty named per school.</div></div></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-package">Document pack complete + letters requested</label> <span class="tag t-ac">Apply</span> <span class="tag t-st">ORDER DOCS &le; 15 Sep</span></div>
+    <div class="tl-what">Official-issuance UoL transcripts + KBTU transcript w/ certified translations + high-school cert + gap-free CV + matriculation confirmation + course-content template + class-rank letter. Transcript orders + translations take weeks &mdash; the 15-Sep start IS the buffer. Letters requested &le; 1 Oct with a Dec-8 soft deadline. SoPs: EPFL &le;1000 words, ETH ~1 A4, faculty named per school.</div></div></div>
   <div class="tl-row star"><div class="tl-date">30 Nov 2027<small>11:59 AM CET</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-eth">Submit ETH + ESOP pre-proposal</label> <span class="tag t-ms">Deadline</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-eth">Submit ETH + ESOP pre-proposal</label> <span class="tag t-ms">Deadline</span> <span class="tag t-st">ESOP DRAFT &le; 1 Oct &middot; IN eAPPLY &le; 20 Nov</span></div>
     <div class="tl-what"><b>MIDDAY deadline, not midnight.</b> GRE report (code 3331) + IELTS TRF + both letters + all docs IN by then or formal reject. ETH's only window for a non-Swiss degree; ESOP = the artifact re-aimed at an SfS paper (upside, never banked).</div></div></div>
   <div class="tl-row star"><div class="tl-date">15 Dec 2027<small>R1</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-epfl">Submit EPFL Statistics (Round 1)</label> <span class="tag t-ms">Deadline</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-epfl">Submit EPFL Statistics (Round 1)</label> <span class="tag t-ms">Deadline</span> <span class="tag t-st">SUBMIT &le; 8 Dec &middot; referee nudges 10 Dec</span></div>
     <div class="tl-what">R1 only &mdash; R2 (closes 31 Mar, decides mid-June) is unusable on the visa runway. THREE referees named; &ge;2 letters confirmed received by ~22 Dec. One EPFL programme per year &mdash; the slot is Statistics. No GRE, no English cert.</div></div></div>
 
   <div class="tl-band">2028 &mdash; decisions &rarr; entry</div>
   <div class="tl-row"><div class="tl-date">Feb&ndash;Mar 2028</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-decisions">Decisions: ETH ~Feb &middot; EPFL late Mar</label> <span class="tag t-ms">Milestone</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-decisions">Decisions: ETH ~Feb &middot; EPFL late Mar</label> <span class="tag t-ms">Milestone</span> <span class="tag t-st">EXTERNAL &middot; visa &le; +1 wk of admit</span></div>
     <div class="tl-what">Any CH admit &rarr; start the visa immediately (up to 3 months). No deferrals exist &mdash; the offer is for Sept 2028.</div></div></div>
   <div class="tl-row"><div class="tl-date">Mar 2028</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-quantramp">Quant-prep ramp opens</label> <span class="tag t-code">Skills</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-quantramp">Quant-prep ramp opens</label> <span class="tag t-code">Skills</span> <span class="tag t-st">START &le; 1 Mar</span></div>
     <div class="tl-what">Green Book probability + Zetamac 15 min/day + LC mediums (4&ndash;6 h/wk around coursework). Drops to mental-math-only in the Apr&ndash;May exam window; the full block is Jun&ndash;Aug.</div></div></div>
   <div class="tl-row star"><div class="tl-date">15 Apr 2028<small>gate</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-germanrail">German-rail gate</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-germanrail">German-rail gate</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">DOCS PREPPED &le; 1 Mar</span></div>
     <div class="tl-what">No CH admit in hand &rarr; file T&uuml;bingen (ALMA portal, free, by 30 Apr) + LMU aptitude app (1 Apr&ndash;15 May, Nachteilsausgleich WITH the app). Both known before this date &mdash; the waterfall never times out.</div></div></div>
   <div class="tl-row star"><div class="tl-date">May 2028</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-may28">Final exams &mdash; ST2195 &middot; ST3189 &middot; MT3042 &middot; MT2175 &middot; MT2176</label> <span class="tag t-ms">Gate</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-may28">Final exams &mdash; ST2195 &middot; ST3189 &middot; MT3042 &middot; MT2175 &middot; MT2176</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">RAMP &le; 1 Feb &middot; FULL &le; 1 Apr</span></div>
     <div class="tl-what">Decides the degree classification (post-application, still matters for QR hiring). MT2175 Further Linear Algebra &rarr; 80+ (spec-core).</div></div></div>
   <div class="tl-row"><div class="tl-date">Jun&ndash;Jul 2028</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-grad">Graduate &middot; chase the physical KBTU diploma</label> <span class="tag t-ms">Milestone</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-grad">Graduate &middot; chase the physical KBTU diploma</label> <span class="tag t-ms">Milestone</span> <span class="tag t-st">LMU MAIL &le; 20 Jun &middot; certified copies &le; 1 Jul</span></div>
     <div class="tl-what">LMU IO paper application complete-on-receipt by <b>15 Jul</b> if the German rail fired (mail from Almaty: 2&ndash;3 wks). German B1 push all summer.</div></div></div>
   <div class="tl-row star"><div class="tl-date">Summer 2028<small>free window</small></div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-codingpeak">Coding peak &mdash; get OA-ready</label> <span class="tag t-code">Coding</span></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-codingpeak">Coding peak &mdash; get OA-ready</label> <span class="tag t-code">Coding</span> <span class="tag t-st">START &le; 15 Jun</span></div>
     <div class="tl-what">The last free window before recruiting. Intensify to OA-ready &mdash; the peak is here, NOT "during the master."</div></div></div>
   <div class="tl-row star"><div class="tl-date">Sept 2028</div><div class="tl-dot"></div><div class="tl-card">
-    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-master">Enroll &mdash; recruiting clock starts</label> <span class="tag t-ms">Milestone</span></div>
-    <div class="tl-what">Degree proof due: ETH ~mid-Sep &middot; EPFL 30 Sep &middot; LMU at enrollment (physical diploma) &middot; T&uuml;bingen 31 Dec. Summer-2029 internship applications open ~Aug 2028, at master-start &mdash; apply immediately.</div></div></div>
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-master">Enroll &mdash; recruiting clock starts</label> <span class="tag t-ms">Milestone</span> <span class="tag t-st">HOUSING HUNT &le; +1 wk of admit</span></div>
+    <div class="tl-what">Degree proof due: ETH ~mid-Sep &middot; EPFL 30 Sep &middot; LMU at enrollment (physical diploma) &middot; T&uuml;bingen 31 Dec. Student housing in Zurich/Lausanne/Munich is scarce &mdash; apply to halls the week the admit lands. Summer-2029 internship applications open ~Aug 2028, at master-start &mdash; apply immediately.</div></div></div>
 
 </div>
 
