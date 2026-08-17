@@ -47,6 +47,7 @@ ul.dt-list b{color:var(--fg)}
 .t-ac{background:var(--accent-soft);color:var(--accent)} .t-de{background:var(--info-soft);color:var(--info)}
 .t-ms{background:var(--urgent-soft);color:var(--urgent)} .t-res{background:var(--ok-soft);color:var(--ok)}
 .t-code{background:var(--accent-soft);color:var(--accent-2)}
+.t-st{background:var(--ok-soft);color:var(--ok)}
 .tl{position:relative;margin:10px 0}
 .tl::before{content:"";position:absolute;left:96px;top:6px;bottom:6px;width:2px;background:var(--border-strong)}
 .tl-band{margin:20px 0 10px 116px;font-weight:800;font-size:12.5px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
@@ -100,7 +101,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="cur">Curriculum</a><a href="artifacts.html" class="">Artifacts</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Curriculum</div><a href="#cur-1-coding-the-1-gap-continuous-peak-summer-2028" class="">Coding the #1 gap &middot; continuous &rarr; peak summer 202</a><a href="#cur-2-math-lean-time-boxed-behind-coding" class="">Math lean &middot; time-boxed behind coding</a><a href="#cur-3-ml-re-derive-rigorously-from-scratch-builds-" class="">ML re-derive rigorously &mdash; from-scratch builds double a</a><a href="#cur-4-stats-your-differentiator-80-maintain-2-targ" class="">Stats your differentiator &mdash; 80% maintain + 2 targeted </a></div>
+<div class="site-subnav"><div class="lbl">Curriculum</div><a href="#cur-1-coding-the-1-gap-continuous-peak-summer-2028" class="">Coding the #1 gap &middot; continuous &rarr; peak summer 202</a><a href="#cur-2-math-lean-time-boxed-behind-coding" class="">Math lean &middot; time-boxed behind coding</a><a href="#cur-3-ml-re-derive-rigorously-from-scratch-builds-" class="">ML re-derive rigorously &mdash; from-scratch builds double a</a><a href="#cur-4-stats-your-differentiator-80-maintain-2-targ" class="">Stats your differentiator &mdash; 80% maintain + 2 targeted </a><a href="#cur-5-chapter-maps-what-to-read-what-to-skip" class="">Chapter maps &mdash; what to read, what to skip</a><a href="#cur-6-islp-python-ed-the-active-one" class="h3">ISLP (Python ed.) &mdash; the active one</a><a href="#cur-7-every-other-book-one-row-each" class="h3">Every other book, one row each</a></div>
 <div class="site-main"><section class="page-section" id="curriculum">
 
 <h1>Curriculum &mdash; textbook-first</h1>
@@ -130,7 +131,7 @@ h2[id],h3[id]{scroll-margin-top:130px}
 
 <h2 id="cur-3-ml-re-derive-rigorously-from-scratch-builds-">ML <span class="tag t-ac">re-derive rigorously &mdash; from-scratch builds double as coding reps</span></h2>
 <ul class="dt-list">
-<li><b>ISLP</b> (free) + reimplement each method in pure numpy (one tested repo) &mdash; <span class="when">Fall 2026, in full</span></li>
+<li><b>ISLP</b> (free) + reimplement each method in pure numpy (one tested repo) &mdash; <span class="when">Aug + Oct&ndash;Dec 2026, core chapters per the map below</span></li>
 <li><b>Prince, Understanding Deep Learning</b> (free) + <b>Karpathy Zero-to-Hero</b> (the one video exception &mdash; builds micrograd&rarr;GPT by hand) &mdash; <span class="when">Spring 2027, in full</span></li>
 <li class="cut">Dip-in references only: Bishop <i>DL: Foundations</i>, ESL, Raschka, Huyen <i>DMLS</i> (read near job interviews, not admission)</li>
 <li><small>If buying an applied reference: G&eacute;ron's new <b>PyTorch edition</b> (Dec 2025) supersedes the 2022 TF/Keras book.</small></li>
@@ -144,6 +145,41 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <li>Conditional: Tsay <i>Analysis of Financial Time Series</i> &mdash; Year 4, <b>only if quant goes primary</b></li>
 <li class="cut">Skip as a study project: Wasserman <i>All of Statistics</i> (redundant with C-B; shelf reference)</li>
 </ul>
+
+<h2 id="cur-5-chapter-maps-what-to-read-what-to-skip">Chapter maps &mdash; what to read, what to skip</h2>
+<p class="sub">Selective by design: the lane picks the chapters. Full-read only where every chapter earns it.</p>
+
+<h3 id="cur-6-islp-python-ed-the-active-one">ISLP (Python ed.) &mdash; the active one</h3>
+<div style="overflow-x:auto"><table class="dt" style="min-width:700px">
+<tr><th>Ch</th><th>Topic</th><th>Depth</th><th>numpy build</th></tr>
+<tr><td>2&ndash;5</td><td>Bias&ndash;variance &middot; linear regression &middot; classification &middot; resampling</td><td><b>Full, in order</b> &mdash; the spine</td><td>OLS (normal eqs + GD) &middot; logistic via Newton/IRLS &middot; LDA &middot; the CV/bootstrap harness (reused for everything after)</td></tr>
+<tr><td><b>6</b></td><td><b>Model selection &amp; regularization &mdash; ridge/lasso, high-dim</b></td><td><b>Full &mdash; THE on-lane chapter</b>: shrinkage + p&gt;n = your specialization and the artifact's intuition</td><td>ridge closed-form &middot; lasso by coordinate descent (a real optimization rep)</td></tr>
+<tr><td>8</td><td>Trees, random forests, boosting</td><td><b>Full</b> &mdash; the industry workhorse (quant runs on boosting)</td><td>basic tree + boosting loop</td></tr>
+<tr><td><b>12</b></td><td><b>Unsupervised &mdash; PCA, clustering</b></td><td><b>Full</b> &mdash; spectral/covariance territory, on-spec</td><td>PCA via SVD &middot; k-means</td></tr>
+<tr><td>13</td><td>Multiple testing</td><td>Read &mdash; short; statistician identity + the backtest-overfitting concern quant lives with</td><td>&mdash;</td></tr>
+<tr><td>7</td><td>Splines / GAMs</td><td>One read &mdash; nonparametric taste for later EPFL courses</td><td>&mdash;</td></tr>
+<tr><td>9</td><td>SVM</td><td>&sect;9.1&ndash;9.2 only (margin/duality &rarr; convex-opt taste); skim the rest</td><td>&mdash;</td></tr>
+<tr><td>10</td><td>Deep learning</td><td>Orientation only &mdash; the real DL block is UDL/Karpathy, spring 2027</td><td>&mdash; don't burn numpy hours here</td></tr>
+<tr><td>11</td><td>Survival analysis</td><td><b>Skip</b> &mdash; off-lane</td><td>&mdash;</td></tr>
+</table></div>
+<p class="sub">Pacing: Ch 2&ndash;5 in the Aug 40h window if possible &middot; resume 20 Oct &middot; core done ~Dec (the Roadmap checkbox) &middot; implementations consolidate into the tested portfolio repo Jan&ndash;Mar 2027. Double-dip: ST3189 (May 2028, double-weighted L6) is ISLR-level &mdash; this pass pre-loads it.</p>
+
+<h3 id="cur-7-every-other-book-one-row-each">Every other book, one row each</h3>
+<div style="overflow-x:auto"><table class="dt" style="min-width:860px">
+<tr><th>Book</th><th>Read</th><th>Skip / defer</th><th>When &middot; note</th></tr>
+<tr><td><b>Abbott</b> <i>Understanding Analysis</i></td><td>Ch 1&ndash;7 mastered in order (reals &rarr; sequences/series &rarr; topology of &#8477; &rarr; continuity &rarr; derivative &rarr; function sequences &rarr; Riemann integral)</td><td>Ch 8 (additional topics)</td><td>Elastic lane, Nov 2026 &rarr; mid-2027 (locked 2026-07-10). MT2116/MT2176 overlap = reinforcement, not a skip-excuse</td></tr>
+<tr><td><b>Casella&ndash;Berger</b></td><td>Ch 1&ndash;5 (probability/distributions) synced to ST2133 &middot; Ch 6&ndash;10 (data reduction &rarr; estimation &rarr; testing &rarr; intervals &rarr; asymptotics) synced to ST2134 &mdash; as <b>rolling problem sets</b>, not cover-to-cover</td><td>Ch 11&ndash;12 (ANOVA/regression &mdash; ST2187/ROS cover it)</td><td>2026&ndash;27. Sync the problems to the module of the month = it doubles as the 80+-core exam prep</td></tr>
+<tr><td><b>Prince</b> <i>UDL</i> + Karpathy</td><td>Ch 1&ndash;12 (through transformers) + Ch 20 (why DL works &mdash; theory taste, feeds the optimization half)</td><td>Ch 13&ndash;19 (graph/GAN/flows/VAE/diffusion/RL) &mdash; dip in by need; Ch 21 skim</td><td>Spring&ndash;summer 2027, light. Karpathy Zero-to-Hero supplies the from-scratch reps (micrograd &rarr; GPT)</td></tr>
+<tr><td><b>Hern&aacute;n&ndash;Robins</b> <i>What If</i></td><td>Part I in full (the causal framework) &middot; Part II selectively (modeling chapters you'll meet again at EPFL)</td><td>Part III (complex longitudinal) &mdash; MSc-level</td><td>Summer 2027, folded light into the RA window. <i>Mixtape</i> = optional applied companion (IV/RDD/DiD), not a second full read</td></tr>
+<tr><td><b>Gelman</b> <i>Regression &amp; Other Stories</i></td><td>Parts 1&ndash;3 (fundamentals &rarr; linear &rarr; logistic/GLM), spread thin &mdash; the R/Stan reps are the point</td><td>The causal part (overlaps <i>What If</i>) + anything past GLMs</td><td>Light parallel, 2026&ndash;27 &middot; lowest priority: dropped right after Abbott in any crunch</td></tr>
+<tr><td><b>Zhou</b> Green Book</td><td>Ch 2 (brainteasers) + Ch 4 (probability) = the core &middot; Ch 5 (stochastic processes) selectively &mdash; Markov chains, martingale basics &middot; Ch 3 as fast review</td><td>Ch 6 (derivatives finance &mdash; not the QR entry bar) &middot; Ch 7 (algorithms &mdash; LC covers it)</td><td>Mar 2028 ramp &rarr; Jun&ndash;Aug 2028 block. Do problems timed and out loud &mdash; the interview is oral</td></tr>
+<tr><td><b>McKinney</b> <i>Python for Data Analysis</i></td><td>Ch 4&ndash;10 (numpy &rarr; pandas &rarr; IO &rarr; cleaning &rarr; wrangling &rarr; plotting &rarr; groupby) + Ch 11 (time series &mdash; on-lane)</td><td>Ch 1&ndash;3 skim; rest by need</td><td>Working reference alongside the artifact &amp; portfolio &mdash; never cover-to-cover</td></tr>
+<tr><td><b>Effective Python</b></td><td>Item-based: a few items/week against real code &mdash; functions, comprehensions, classes, robustness first</td><td>Don't read linearly</td><td>Background idiom lane, both years</td></tr>
+<tr><td><b>Teate</b> <i>SQL for Data Scientists</i></td><td>Whole book (compact) + DataLemur/Mode drills</td><td>&mdash;</td><td>One concentrated block ~Mar 2027, folds into the portfolio window</td></tr>
+<tr><td><b>Grokking Algorithms</b></td><td>Whole book, fast &mdash; the 2-week on-ramp before NeetCode patterns</td><td>&mdash;</td><td>Nov 2026, inside the 2h coding base</td></tr>
+<tr><td><b>Pro Git &middot; pytest (Okken)</b></td><td>Pro Git: basics + branching &middot; pytest: core chapters &mdash; both applied directly to the artifact repo</td><td>Rest = reference</td><td>Now &mdash; the artifact IS the exercise</td></tr>
+<tr><td><b>Deferred &mdash; no maps until they activate</b></td><td colspan="2">Boyd <i>Convex Optimization</i> &middot; Deisenroth <i>MML</i> &middot; Strang 18.065 &middot; Axler (rigorous-LA ladder) &middot; Tsay (unscheduled &mdash; QR interviews don't require it) &middot; ESL/Bishop/Raschka/Huyen = dip-in references</td><td>The MSc supplies these &mdash; opening them now is the classic over-reach</td></tr>
+</table></div>
 
 </section>
 </div>
