@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — Publish</title>
+<style>
+:root{
+  --bg:#0d1117; --bg-2:#11161d; --bg-3:#1a212b;
+  --fg:#e6edf3; --fg-dim:#9aa7b8; --fg-dimmer:#6b7684;
+  --border:#222b36; --border-strong:#2f3a48;
+  --accent:#4f8cff; --accent-soft:#16233d; --accent-2:#a970ff;
+  --urgent:#ff6b6b; --urgent-soft:#3a1d1d;
+  --ok:#3fb950; --ok-soft:#12261a;
+  --info:#3fb6d3; --info-soft:#0f2830;
+}
+:root[data-theme="light"]{
+  --bg:#f6f8fa; --bg-2:#ffffff; --bg-3:#eef1f5;
+  --fg:#1f2328; --fg-dim:#57606a; --fg-dimmer:#8b949e;
+  --border:#d0d7de; --border-strong:#afb8c1;
+  --accent:#2954c8; --accent-soft:#dbe6ff; --accent-2:#8250df;
+  --urgent:#cf222e; --urgent-soft:#ffe3e3;
+  --ok:#1a7f37; --ok-soft:#dafbe1;
+  --info:#0b7285; --info-soft:#d3f3f8;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0}
+h1{font-size:23px;margin:0 0 4px} h2{font-size:19px;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:15.5px;margin:18px 0 6px;color:var(--accent)}
+p{margin:8px 0} a{color:var(--accent)} code{background:var(--bg-3);padding:1px 5px;border-radius:4px;font-size:12.5px}
+small{color:var(--fg-dimmer)}
+.sub{color:var(--fg-dim);font-size:13.5px;margin:2px 0 14px}
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:11px;padding:14px 16px;margin:10px 0}
+.card.accent{border-left:4px solid var(--accent)}
+.card.star{border-left:4px solid var(--urgent)}
+.card h3{margin-top:2px}
+.callout{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--info);border-radius:0 10px 10px 0;padding:12px 15px;margin:14px 0;font-size:13.5px}
+.callout.warn{border-left-color:var(--urgent);background:var(--urgent-soft)}
+.callout.ok{border-left-color:var(--ok)}
+.callout b{color:var(--fg)}
+ul.dt-list{list-style:none;padding:0;margin:8px 0}
+ul.dt-list>li{position:relative;padding:6px 0 6px 22px;border-bottom:1px solid var(--border);font-size:13.8px}
+ul.dt-list>li:last-child{border-bottom:none}
+ul.dt-list>li::before{content:"\203A";position:absolute;left:4px;top:6px;color:var(--accent);font-weight:800}
+ul.dt-list>li.star::before{content:"\2605";color:var(--urgent);font-size:12px}
+ul.dt-list>li.cut::before{content:"\2013";color:var(--fg-dimmer)}
+ul.dt-list b{color:var(--fg)}
+.when{color:var(--fg-dim);font-weight:600;font-size:12.5px}
+.tag{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.t-ac{background:var(--accent-soft);color:var(--accent)} .t-de{background:var(--info-soft);color:var(--info)}
+.t-ms{background:var(--urgent-soft);color:var(--urgent)} .t-res{background:var(--ok-soft);color:var(--ok)}
+.t-code{background:var(--accent-soft);color:var(--accent-2)}
+.t-st{background:var(--ok-soft);color:var(--ok)}
+.tl{position:relative;margin:10px 0}
+.tl::before{content:"";position:absolute;left:96px;top:6px;bottom:6px;width:2px;background:var(--border-strong)}
+.tl-band{margin:20px 0 10px 116px;font-weight:800;font-size:12.5px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.tl-row{position:relative;display:flex;margin-bottom:11px;align-items:flex-start}
+.tl-date{width:90px;flex-shrink:0;text-align:right;font-weight:700;font-size:12px;color:var(--fg-dim);padding:3px 0 0}
+.tl-date small{display:block;font-weight:600;font-size:10px;color:var(--fg-dimmer)}
+.tl-dot{position:absolute;left:90px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);z-index:2}
+.tl-row.star .tl-dot{border-color:var(--urgent);box-shadow:0 0 0 3px var(--urgent-soft)}
+.tl-card{flex:1;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:8px 13px;margin-left:26px}
+.tl-row.star .tl-card{border-left:3px solid var(--urgent)}
+.tl-name{font-weight:700;font-size:13.5px}
+.tl-what{font-size:12.3px;color:var(--fg-dim);margin-top:2px;line-height:1.42}
+.tl-name label{cursor:pointer} .tl-name input{margin-right:7px;vertical-align:middle}
+table.dt{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+table.dt th,table.dt td{border:1px solid var(--border);padding:7px 10px;text-align:left;vertical-align:top}
+table.dt th{background:var(--bg-3);font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dim)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.two{grid-template-columns:1fr}}
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+h2[id],h3[id]{scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+/* === calendar === */
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
+.cal-filter.off{opacity:.38}
+.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
+.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
+.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.cal-item{font-weight:600}
+.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
+.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
+.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
+.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
+.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
+.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="artifacts.html" class="">Artifacts</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="cur">Publish</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Publish</div></div>
+<div class="site-main"><section class="page-section" id="publish">
+
+<h1>Publish &amp; Compete &mdash; the external-deadline lattice</h1>
+<p class="sub">Every venue, competition, and hard date &mdash; verified 2026-08-18 against primary sources. <span class="tag t-st">START &le; date</span> = when to begin, buffer included.</p>
+
+<div class="callout warn">
+<b>The four rules of this page.</b>
+<ul class="dt-list">
+<li><b>One manuscript, many doors.</b> Two documents exist: the reproduction write-up (Nov) and the 4&ndash;8-page extension paper (Dec&ndash;Jan). Every venue below is a routing of one of these two &mdash; never a third paper.</li>
+<li><b>Crunch windows are sacred.</b> Nothing on this page may touch Sep&ndash;mid-Oct 2026, Apr&ndash;May 2027, Sep&ndash;Dec 2027 (application season itself), or Apr&ndash;May 2028. Items landing near those windows carry a near-zero-work rule or get skipped.</li>
+<li><b>Caps:</b> puzzle/competition lane = 2 h/wk, always. Paper lane = 3&ndash;6 h/wk, Nov&ndash;Feb only, paid for by dropping Abbott. Exceeding a cap = the item gets cut, not the plan.</li>
+<li><b>Binders:</b> a deadline binds when a named person expects the thing &mdash; pre-announce every ship/submit date to someone specific.</li>
+</ul>
+</div>
+
+<div class="tl">
+
+  <div class="tl-band">Now &mdash; Aug&ndash;Oct 2026 &middot; setup + conscious skips</div>
+  <div class="tl-row"><div class="tl-date">any evening</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-jspuzzle">Jane Street monthly puzzle &mdash; first submission</label> <span class="tag t-code">Fun lane</span> <span class="tag t-st">START anytime &middot; 2 h/wk lane</span></div>
+    <div class="tl-what">Free, individual, KZ-open; 2&ndash;10 h/puzzle; <b>published named solver list</b> (verified live). The designated gaming replacement &mdash; a benign monthly loop with a public scoreboard. Opt in to the leaderboard every time.</div></div></div>
+  <div class="tl-row"><div class="tl-date">Aug&ndash;Oct</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name">Conscious skips &mdash; verified zero-cost</div>
+    <div class="tl-what">NeurIPS-26 workshops (close Aug 29&ndash;Sep 4; no finance workshop in the 102) &middot; ICLR-27 main (Sep 18/25) &middot; AISTATS-27 (~early Oct, pre-ship) &middot; MLRC-26 (needs an already-accepted TMLR paper). All collide with the artifact + MT1173. Let them die unmourned.</div></div></div>
+  <div class="tl-row"><div class="tl-date">by 31 Oct</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-arxivend">arXiv endorsement sorted (stat.ME / q-fin.PM)</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">SORT &le; 31 Oct &mdash; one-time gate</span></div>
+    <div class="tl-what">KBTU email may auto-endorse; else ask an endorser (a recently-publishing local professor). Do it before the writing window so posting is instant forever after.</div></div></div>
+  <div class="tl-row"><div class="tl-date">~12&ndash;16 Oct</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-octchecks">Post-ship goalpost checks (3&times;)</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">AT the post-ship session</span></div>
+    <div class="tl-what">&#9312; Pick <b>ReScience C vs TMLR</b> for the reproduction (one only). &#9313; Check the <b>AAAI-27 workshop list</b> (posts ~Oct 2; papers Nov 20; Montreal IN-PERSON mandatory + KZ visa squeeze &mdash; submit only if a broad-quant workshop appears AND the trip is wanted). &#9314; Watch the <b>CFE-CMStatistics</b> CFP (~Oct&ndash;Nov) for the virtual-talk abstract.</div></div></div>
+
+  <div class="tl-band">Nov 2026 &mdash; the write-up month</div>
+  <div class="tl-row star"><div class="tl-date">16 Oct&ndash;28 Nov</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-writeup">Reproduction write-up done</label> <span class="tag t-res">Paper</span> <span class="tag t-st">START 16 Oct &middot; 3&ndash;6 h/wk &middot; DONE &le; 28 Nov</span></div>
+    <div class="tl-what">The repo's report, formalized. Pre-announce the done-date to a named person.</div></div></div>
+  <div class="tl-row"><div class="tl-date">~mid-Nov</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-arxivrepro">Reproduction &rarr; arXiv</label> <span class="tag t-res">Paper</span> <span class="tag t-st">POST ~15 Nov &middot; instant CV line ("preprint")</span></div>
+    <div class="tl-what">The extension paper does NOT post yet &mdash; blinding rule below.</div></div></div>
+
+  <div class="tl-band">Dec 2026 &mdash; five doors in sixteen days</div>
+  <div class="tl-row star"><div class="tl-date">&le; 1 Dec</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-rescience">ReScience C (or TMLR) submitted</label> <span class="tag t-res">Paper</span> <span class="tag t-st">TEMPLATE WORK last week of Nov</span></div>
+    <div class="tl-what">Venue latency (6&ndash;12 mo) forces the early date. From submission day: "under open review" = a citable public thread.</div></div></div>
+  <div class="tl-row star"><div class="tl-date">~4 Dec + ~15 Dec</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-asa">ASA entries: SCSG (committed) &middot; SLDS (slack-dependent)</label> <span class="tag t-ms">Deadline</span> <span class="tag t-st">READ THE CALLS when they post (Sep&ndash;Oct) &middot; 2nd slot DECIDED at the Dec-1 review</span></div>
+    <div class="tl-what">SCSG: 6-page blinded &asymp; the extension paper as-is; undergrads eligible; no membership; faculty letter. SLDS: best fit + line, ~7% odds, ~$40 memberships. Max 2 sections; B&amp;E = doctoral-only, skip. Winners must present at JSM Aug 2027 (Chicago, US visa + ~$2&ndash;3k) &mdash; price ONLY on a ~Jan-15 win. Risk Analysis (Nov 15) = the alternative 2nd slot if December is tight.</div></div></div>
+  <div class="tl-row"><div class="tl-date">12&ndash;14 Dec</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-cfe">CFE-CMStatistics virtual talk (Berlin, remote)</label> <span class="tag t-res">Talk</span> <span class="tag t-st">200-word ABSTRACT when the CFP posts (~Oct&ndash;Nov)</span></div>
+    <div class="tl-what">Virtual contributed talks explicitly allowed &mdash; a "presented at the main European computational-stats meeting" line at zero visa/travel/writing cost. The cheapest line in the lattice.</div></div></div>
+  <div class="tl-row star"><div class="tl-date">~mid-Dec</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-usresp">USRESP entry (USPROC) &mdash; the stats-community find</label> <span class="tag t-res">Compete</span> <span class="tag t-st">SPONSOR asked &le; 1 Dec &middot; REPACKAGE ~10&ndash;20 h</span></div>
+    <div class="tl-what">The one stats-society competition genuinely open to him: globally open, fully electronic, blind-reviewed &le;20-page undergrad research-paper competition &mdash; <b>methodological simulation studies explicitly in scope</b> (the LW reproduction fits as-is). Faculty sponsor = the local professor. Winners: Amstat News + a virtual conference talk &mdash; directly stats-MSc-committee-legible. <b>December priority order when hours run short: ReScience &rarr; SCSG &rarr; USRESP &rarr; CFE talk &rarr; SLDS (usually skip).</b></div></div></div>
+  <div class="tl-row"><div class="tl-date">~16 Dec+</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-arxivext">Extension paper &rarr; arXiv</label> <span class="tag t-res">Paper</span> <span class="tag t-st">ONLY AFTER the last entered ASA deadline</span></div>
+    <div class="tl-what">Blinded competition review &mdash; a same-title arXiv post defeats it. Post the moment the last entry closes.</div></div></div>
+
+  <div class="tl-band">Jan&ndash;Mar 2027 &mdash; the hard deadline + the fun lane</div>
+  <div class="tl-row"><div class="tl-date">Jan launch</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-ens">ENS Challenge Data: ONE quant-firm challenge entered</label> <span class="tag t-code">Fun lane</span> <span class="tag t-st">PICK in launch week &middot; 2 h/wk HARD CAP</span></div>
+    <div class="tl-what">~10 new challenges Jan 2027; QRT/CFM recur. Public citable leaderboard, ENS brand. Aim top-half at the cap; the top-decile push belongs to summer 2028.</div></div></div>
+  <div class="tl-row"><div class="tl-date">~Jan</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-stat">Stat (Wiley) lottery ticket &mdash; optional</label> <span class="tag t-res">Paper</span> <span class="tag t-st">~2 h to submit &middot; 15&ndash;20-day decision</span></div>
+    <div class="tl-what">The JM note as a 10-page rapid-journal submission, after the arXiv post. Long shot on merit; near-zero calendar cost. Skip without guilt if January is full.</div></div></div>
+  <div class="tl-row star"><div class="tl-date">late Jan&ndash;mid Feb</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="m-iclrws">ICLR-2027 workshop paper &mdash; THE hard external deadline</label> <span class="tag t-ms">Deadline</span> <span class="tag t-st">WATCH blog.iclr.cc from 15 Dec &middot; DRAFT &le; 15 Jan &middot; SUBMIT &le; deadline&minus;2d</span></div>
+    <div class="tl-what">Target "Advances in Financial AI" (the only recurring finance-ML workshop across the big three &mdash; check its 2027 theme the day the list drops); fallbacks OPT@NeurIPS, HiLD@ICML. Decisions &le; ~1 Mar 2027 &rarr; citable six months before applications.</div></div></div>
+  <div class="tl-row"><div class="tl-date">Feb&ndash;15 Mar</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-siuro">SIURO submitted</label> <span class="tag t-res">Paper</span> <span class="tag t-st">ADVISOR LETTER asked &le; 1 Feb &middot; SUBMIT &le; 15 Mar</span></div>
+    <div class="tl-what">SIAM's undergrad research journal &mdash; the best odds&times;timing venue: scope fits squarely, ~2-month reviews, rolling. Project-advisor letter from the local professor (advisor &ne; co-author &mdash; solo authorship preserved). Decision ~May &rarr; a refereed publication before applications.</div></div></div>
+  <div class="tl-row"><div class="tl-date">~15 Jan</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-asaresult">ASA results &rarr; JSM decision (only on a win)</label> <span class="tag t-ms">Gate</span> <span class="tag t-st">DECIDE only if won &middot; else nothing</span></div>
+    <div class="tl-what">A win forces the Chicago question: US visa + ~$2&ndash;3k vs the award line. No win = zero further thought.</div></div></div>
+
+  <div class="tl-band">Apr&ndash;Sep 2027 &mdash; recycles + waits (exam-window rules apply)</div>
+  <div class="tl-row"><div class="tl-date">Apr&ndash;May</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-icml">ICML-2027 workshop recycle &mdash; only if ICLR rejected</label> <span class="tag t-res">Paper</span> <span class="tag t-st">&le; 3 h total (same PDF, new format) or SKIP</span></div>
+    <div class="tl-what">List ~early Apr, submissions ~late Apr&ndash;May, decisions ~mid-May &mdash; lands inside the May-2027 exam ramp, so the recycle must be near-zero work or it doesn't happen. NeurIPS-27 workshops (~Aug&ndash;Sep, decisions ~end Sep) = the bonus round after the summer.</div></div></div>
+  <div class="tl-row"><div class="tl-date">quarterly</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name">Standing watches + verified nulls</div>
+    <div class="tl-what">Watches: M7 (unannounced &mdash; UNIC page, quarterly) &middot; Kaggle alerts: Jane Street / Optiver / Hull-Tactical-class market comps &middot; ADIA Lab 2027 flagship (CrunchDAO) &middot; DrivenData probabilistic-forecasting comps. Optional: RSS Early-Career Writing Award (May 31; a Significance byline at ~15 h &mdash; draft in Jan&ndash;Mar ONLY if slack) &middot; Quantiacs (fun-lane, rolling). Verified nulls &mdash; stop wondering: IMS/Bernoulli (PhD-level), DataFest (host-gated, no KZ), ASA Data Challenge Expo (JSM-in-person-gated), Tinbergen (off-lane theme), Zindi/Tianchi (engineering), QuantConnect League + Data Science Bowl (dead). The covariance-specific challenge class is confirmed THIN &mdash; ADIA structural-break is the closest thing that exists.</div></div></div>
+
+  <div class="tl-band">Summer 2028 &mdash; the big campaign</div>
+  <div class="tl-row star"><div class="tl-date">Jun&ndash;Aug 2028</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-bigcomp">ONE big competition campaign</label> <span class="tag t-code">Campaign</span> <span class="tag t-st">CHOOSE ~May 2028 from what's live &middot; alerts set NOW</span></div>
+    <div class="tl-what">Chosen from: <b>ADIA Lab flagship</b> (structural-break/change-point statistics &mdash; the research-shaped one; $100k pools, named winners, 60&ndash;150 h) / a <b>Jane Street or Optiver Kaggle</b> (if live; Optiver Realized Volatility-class = the most on-lane firm data that exists). Runs alongside the OA-readiness peak. IMC Prosperity does NOT go here &mdash; both UG Aprils are exam-crunched; its serious run = April 2029, MSc spring.</div></div></div>
+
+  <div class="tl-band">MSc-era unlocks &mdash; from enrollment, Sept 2028</div>
+  <div class="tl-row"><div class="tl-date">Sep 2028 &rarr;</div><div class="tl-dot"></div><div class="tl-card">
+    <div class="tl-name"><label><input type="checkbox" class="dt-check" id="p-mscunlocks">The university-gated tier opens</label> <span class="tag t-res">Unlock</span> <span class="tag t-st">FROM day 1 of the MSc</span></div>
+    <div class="tl-what"><b>Citadel Data Open</b> (gated on university location, not citizenship &mdash; documented resume-screen-bypass interviews; the highest-value item in the whole class) &middot; <b>G-Research Quant Challenge</b> (runs on the EPFL campus) &middot; Jane Street ETC (European campus editions) &middot; <b>IMC Prosperity serious run, April 2029</b> &middot; AISTATS 2029 main track (deadline ~Oct 2028 &mdash; thesis-era work) &middot; ECB/BIS-IFC statistics data challenge (EU-university teams) &middot; one CMStatistics/EcoSta abstract.</div></div></div>
+
+</div>
+
+</section>
+</div>
+</div>
+<script>
+function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return; /* build-compat stub */ }
+(function(){
+  var root=document.documentElement;
+  try{var s=localStorage.getItem('dt-theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  var tb=document.getElementById('theme-toggle');
+  if(tb) tb.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')==='light'?'light':'dark';
+    var next=cur==='light'?'dark':'light'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('dt-theme',next);}catch(e){}
+  });
+  function prog(){
+    var b=document.querySelectorAll('input.dt-check'),d=0;
+    b.forEach(function(x){if(x.checked)d++;});
+    var el=document.getElementById('task-progress');
+    if(el) el.textContent=b.length?(d+'/'+b.length+' done'):'';
+  }
+  document.querySelectorAll('input.dt-check').forEach(function(x){
+    var k='dt-'+(x.id||'');
+    try{if(localStorage.getItem(k)==='1')x.checked=true;}catch(e){}
+    x.addEventListener('change',function(){try{localStorage.setItem(k,x.checked?'1':'0');}catch(e){}prog();});
+  });
+  var rb=document.getElementById('reset-btn');
+  if(rb) rb.addEventListener('click',function(){
+    document.querySelectorAll('input.dt-check').forEach(function(x){x.checked=false;try{localStorage.setItem('dt-'+(x.id||''),'0');}catch(e){}});prog();
+  });
+  prog();
+})();
+
+
+(function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
+ const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);if(document.getElementById(id))map[id]=a;});
+ const ids=Object.keys(map);function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<170)cur=id;}links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+ window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();
+
+</script>
+</body></html>
