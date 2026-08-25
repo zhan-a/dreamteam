@@ -67,6 +67,18 @@ table.dt th{background:var(--bg-3);font-size:11px;text-transform:uppercase;lette
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:720px){.two{grid-template-columns:1fr}}
 
+/* === Kozha funding table (restored 2026-08-24) === */
+.kozha-filter{background:var(--bg-3);color:var(--fg-dim);border:1px solid var(--border);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit}
+.kozha-filter:hover{background:var(--bg-3);color:var(--fg)}
+.kozha-filter.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);font-weight:700}
+#kozha-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px}
+#kozha-table th,#kozha-table td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top}
+#kozha-table th{background:var(--bg-3);font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dim);position:sticky;top:0}
+#kozha-table th[data-sort-key]{cursor:pointer;user-select:none}
+#kozha-table th[data-sort-key]:hover{color:var(--fg)}
+#kozha-table tbody tr:hover{background:var(--bg-2)}
+.kozha-wrap{overflow-x:auto;max-height:70vh;overflow-y:auto;border:1px solid var(--border);border-radius:8px}
+
 
 /* === multi-page layout overrides === */
 body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
@@ -101,12 +113,143 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="artifacts.html" class="">Artifacts</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="">Publish</a><a href="kozha.html" class="cur">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Kozha</div></div>
+<div class="site-subnav"><div class="lbl">Kozha</div><a href="#koz-1-funding-pipeline" class="">Funding pipeline</a><a href="#koz-2-filter-by-lead" class="h3">Filter by lead</a><a href="#koz-3-master-table-sortable" class="h3">Master table (sortable)</a><a href="#koz-4-attendance-legend" class="h3">Attendance legend</a><a href="#koz-5-critical-path-actions" class="h3">Critical-path actions</a><a href="#koz-6-key-notes" class="h3">Key notes</a></div>
 <div class="site-main"><section class="page-section" id="kozha">
 
 <h1>Kozha</h1>
 <p class="sub">The orthogonal live startup &mdash; a real ownership/builder signal (RESNA first place, beat Cornell). Authoritative tracker: <code>_kozha/kozha-funding-tracker.md</code>.</p>
 <div class="callout">Kept on the board because it's a genuine "builds things, more than a student" asset for master applications and the ownership thesis &mdash; <b>capped at 4 h/wk</b> (2 h inside the four crunch windows), riding alongside the ~20 h/wk study budget. Renegotiate only if it trends above ~5 h.</div>
+<div class="callout warn"><b>Deadline snapshot taken 2026-07-17; restored to the site 2026-08-24.</b> Verified at restore: <b>1 row now past-deadline, 23 with live future dates, 22 rolling/TBD</b>. Nearest hard date: <b>~1 Sep 2026 (E-Team #6 decision)</b>. Dates below are a snapshot, not a live feed &mdash; re-verify each against the funder's page before applying, and treat <code>_kozha/kozha-funding-tracker.md</code> as authoritative. <b>Applying stays inside the 4 h/wk cap</b> (grant-writing is Kozha time, not study time).</div>
+
+<h2 id="koz-1-funding-pipeline">Funding pipeline</h2>
+<p class="sub">46 rows · target $70-365K cash + $15-60K cloud credits over 2026-2027 · click column headers to sort · filter by lead · source: <code>kozha-funding-tracker.md</code></p>
+
+  <h3 id="koz-2-filter-by-lead">Filter by lead</h3>
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+    <button class="kozha-filter active" data-lead="all">All (38)</button>
+    <button class="kozha-filter" data-lead="BB">BB-eligible</button>
+    <button class="kozha-filter" data-lead="BM">BM-eligible</button>
+    <button class="kozha-filter" data-lead="Either">Either only</button>
+  </div>
+
+  <h3 id="koz-3-master-table-sortable">Master table (sortable)</h3>
+  <p class="sub" style="margin-top:-8px;">Default sort: deadline ascending. Rolling/TBD items sort last. Click any header to re-sort. Award sort uses upper-bound USD.</p>
+  <div class="kozha-wrap"><table id="kozha-table">
+    <thead>
+      <tr>
+        <th data-sort-key="num" style="cursor:pointer; user-select:none;">#</th>
+        <th data-sort-key="funder" style="cursor:pointer; user-select:none;">Funder</th>
+        <th data-sort-key="award" style="cursor:pointer; user-select:none;">Award</th>
+        <th data-sort-key="deadline" style="cursor:pointer; user-select:none;">Deadline ▲</th>
+        <th data-sort-key="lead" style="cursor:pointer; user-select:none;">Lead</th>
+        <th data-sort-key="hrs" style="cursor:pointer; user-select:none;">Hrs</th>
+        <th>Attend</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-num="27" data-funder="itu ai for good innovation factory" data-award="20000" data-deadline="2026-07-01" data-lead="Either" data-hrs="16"><td>27</td><td><a href="https://aiforgood.itu.int/about-us/innovation-factory/" target="_blank">ITU AI for Good Innovation Factory</a></td><td>$20K Grand Finale + UN visibility</td><td><span class="deadline">Monthly → 2027 Geneva finale</span></td><td>Either</td><td>12-20</td><td>🟡</td></tr>
+      <tr data-num="6" data-funder="venturewell e-team pioneer" data-award="5000" data-deadline="2026-09-29" data-lead="BB" data-hrs="12"><td>6</td><td><a href="https://venturewell.org/e-team-program/" target="_blank">VentureWell E-Team Pioneer (Stage 1)</a></td><td>$5K Stage 1 → $20K Stage 2</td><td><span class="deadline">Sep 29, 2026 (Winter 2027) ⚠️</span></td><td>BB</td><td>10-15</td><td>🟢</td></tr>
+      <tr data-num="8" data-funder="numfocus small dev grant" data-award="10000" data-deadline="2026-10-17" data-lead="Either" data-hrs="12"><td>8</td><td><a href="https://numfocus.org/programs/small-development-grants" target="_blank">NumFOCUS Small Dev Grant</a></td><td>$10K (max 2/yr)</td><td><span class="deadline">Oct 17, 2026</span></td><td>Either</td><td>10-15</td><td>🟢</td></tr>
+      <tr data-num="9" data-funder="hertz fellowship" data-award="250000" data-deadline="2026-10-28" data-lead="BB" data-hrs="100"><td>9</td><td><a href="https://www.hertzfoundation.org/" target="_blank">Hertz Fellowship</a></td><td>Up to $250K / 5yr</td><td><span class="deadline">Late Oct 2026</span></td><td>BB</td><td>80-120</td><td>🟠</td></tr>
+      <tr data-num="10" data-funder="soros fellowship" data-award="90000" data-deadline="2026-10-29" data-lead="BB" data-hrs="50"><td>10</td><td><a href="https://pdsoros.org/" target="_blank">Soros Fellowship</a></td><td>$90K / 2yr</td><td><span class="deadline">Oct 29, 2026 (2pm ET)</span></td><td>BB</td><td>40-60</td><td>🟠</td></tr>
+      <tr data-num="11" data-funder="bssw fellowship 2027" data-award="25000" data-deadline="2026-10-31" data-lead="BB" data-hrs="20"><td>11</td><td><a href="https://bssw.io/pages/apply-for-the-bssw-fellowship-program" target="_blank">BSSw Fellowship 2027</a></td><td>Up to $25K</td><td><span class="deadline">~Oct 31, 2026</span></td><td>BB</td><td>15-25</td><td>⚫</td></tr>
+      <tr data-num="12" data-funder="goldwater scholarship 2027" data-award="7500" data-deadline="2026-11-01" data-lead="BB" data-hrs="40"><td>12</td><td><a href="https://goldwaterscholarship.gov/" target="_blank">Goldwater Scholarship 2027</a></td><td>$7.5K/yr + STEM credential</td><td><span class="deadline">Berea Oct-Nov 2026; nat'l Feb 2027</span></td><td>BB</td><td>30-50</td><td>🟢</td></tr>
+      <tr data-num="14" data-funder="meaf" data-award="100000" data-deadline="2026-11-01" data-lead="BB" data-hrs="20"><td>14</td><td><a href="https://www.meaf.org/" target="_blank">MEAF (Mitsubishi Electric)</a></td><td>$10-100K/yr × 1-2yr</td><td><span class="deadline">Nov 1, 2026</span></td><td>BB</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="16" data-funder="nsf grfp" data-award="111000" data-deadline="2026-11-14" data-lead="BB" data-hrs="80"><td>16</td><td><a href="https://www.nsfgrfp.org/" target="_blank">NSF GRFP</a></td><td>$37K/yr × 3 + tuition (~$111K)</td><td><span class="deadline">Nov 14, 2026 (Chem); refs ~Nov 6</span></td><td>BB</td><td>60-100</td><td>⚫</td></tr>
+      <tr data-num="15" data-funder="treehacks 2027" data-award="50000" data-deadline="2026-11-15" data-lead="BB" data-hrs="41"><td>15</td><td><a href="https://treehacks-2026.devpost.com/" target="_blank">TreeHacks 2027</a></td><td>$5K credits + HC Fellowship $50K equity-free</td><td><span class="deadline">~Nov 2026 app</span></td><td>BB</td><td>36hr + 5 prep</td><td>🟠</td></tr>
+      <tr data-num="17" data-funder="ndseg fellowship" data-award="145000" data-deadline="2026-11-15" data-lead="BB" data-hrs="50"><td>17</td><td><a href="https://ndseg.org/" target="_blank">NDSEG Fellowship</a></td><td>$3.4K/mo × 3yr + tuition + health</td><td><span class="deadline">~Nov 15, 2026</span></td><td>BB</td><td>40-60</td><td>🟠</td></tr>
+      <tr data-num="13" data-funder="yessenov foundation" data-award="3000" data-deadline="2026-11-30" data-lead="BM" data-hrs="7"><td>13</td><td><a href="https://yessenovfoundation.org/en/" target="_blank">Yessenov Foundation</a></td><td>$1-3K</td><td><span class="deadline">Annual Oct-Dec 2026</span></td><td>BM</td><td>5-10</td><td>🟡</td></tr>
+      <tr data-num="18" data-funder="microsoft ai for accessibility" data-award="65000" data-deadline="2026-12-15" data-lead="Either" data-hrs="20"><td>18</td><td><a href="https://www.microsoft.com/en-us/ai/ai-for-accessibility-grants" target="_blank">Microsoft AI for Accessibility</a></td><td>$50K cash + $15-20K Azure</td><td><span class="deadline">Fall 2026 / early 2027</span></td><td>Either</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="19" data-funder="fel small grants" data-award="1000" data-deadline="2026-12-31" data-lead="Either" data-hrs="10"><td>19</td><td><a href="https://www.ogmios.org/grants/" target="_blank">FEL Small Grants</a></td><td>$1K</td><td><span class="deadline">Dec 31, 2026</span></td><td>Either</td><td>8-12</td><td>🟢</td></tr>
+      <tr data-num="25" data-funder="nidilrr fip research" data-award="245000" data-deadline="2027-02-01" data-lead="BB" data-hrs="115"><td>25</td><td><a href="https://acl.gov/programs/research-and-development/field-initiated-projects-fip-program" target="_blank">NIDILRR FIP Research</a></td><td>$245-250K × 36mo</td><td><span class="deadline">FY26 reissue Oct 2026-Apr 2027</span></td><td>BB</td><td>80-150</td><td>⚫</td></tr>
+      <tr data-num="20" data-funder="cisco global problem solver" data-award="100000" data-deadline="2027-02-15" data-lead="Either" data-hrs="20"><td>20</td><td><a href="https://www.ciscoglobalproblemsolver.com/" target="_blank">Cisco Global Problem Solver</a></td><td>$25K-$100K (Grand $100K)</td><td><span class="deadline">Jan-Mar 2027 (est)</span></td><td>Either</td><td>15-25</td><td>🟢</td></tr>
+      <tr data-num="21" data-funder="mit solve global challenges" data-award="250000" data-deadline="2027-04-15" data-lead="Either" data-hrs="40"><td>21</td><td><a href="https://solve.mit.edu/" target="_blank">MIT Solve early-stage</a></td><td>$100K + stack up to $150K AI for Humanity</td><td><span class="deadline">~Mar-May 2027 (opens Sep 2026)</span></td><td>Either</td><td>30-50</td><td>🟡</td></tr>
+      <tr data-num="22" data-funder="endangered language fund" data-award="4000" data-deadline="2027-04-15" data-lead="Either" data-hrs="8"><td>22</td><td><a href="https://www.endangeredlanguagefund.org/lang-legacies-grants.php" target="_blank">Endangered Language Fund</a></td><td>$2-4K</td><td><span class="deadline">~Apr 2027</span></td><td>Either</td><td>8</td><td>🟢</td></tr>
+      <tr data-num="23" data-funder="neurips 2027 d&b track" data-award="2000" data-deadline="2027-05-15" data-lead="Either" data-hrs="115"><td>23</td><td><a href="https://neurips.cc/Conferences/2026/CallForEvaluationsDatasets" target="_blank">NeurIPS 2027 D&B Track</a></td><td>Recognition + D&I reg+hotel (no flights)</td><td><span class="deadline">~May 2027</span></td><td>Either</td><td>80-150</td><td>🟠</td></tr>
+      <tr data-num="24" data-funder="acl 2027 di subsidies" data-award="2000" data-deadline="2027-05-15" data-lead="BM" data-hrs="4"><td>24</td><td><a href="https://2026.aclweb.org/calls/di_subsidies/" target="_blank">ACL 2027 + ARR D&I Subsidies</a></td><td>Reg waiver + travel reimbursement</td><td><span class="deadline">ARR bimonthly; D&I ~May 2027</span></td><td>BM</td><td>3-5</td><td>🟠</td></tr>
+      <tr data-num="28" data-funder="anthropic research credits" data-award="25000" data-deadline="9999-01-01" data-lead="Either" data-hrs="3"><td>28</td><td><a href="https://www.anthropic.com/research" target="_blank">Anthropic Research Credits</a></td><td>$500-25K compute</td><td><span class="deadline">Rolling, contact form</span></td><td>Either</td><td>2-5</td><td>🟢</td></tr>
+      <tr data-num="29" data-funder="eldp rapid grant" data-award="15000" data-deadline="9999-01-02" data-lead="Either" data-hrs="17"><td>29</td><td><a href="https://eldp.net/" target="_blank">ELDP Rapid Grant</a></td><td>$5-15K</td><td><span class="deadline">Rolling, 6-wk turnaround</span></td><td>Either</td><td>15-20</td><td>🟢</td></tr>
+      <tr data-num="30" data-funder="gallaudet tap partnership" data-award="25000" data-deadline="9999-01-03" data-lead="Either" data-hrs="7"><td>30</td><td><a href="https://tap.gallaudet.edu/" target="_blank">Gallaudet TAP partnership</a></td><td>$5-25K subaward possible</td><td><span class="deadline">Rolling, direct outreach</span></td><td>Either</td><td>5-10</td><td>🟡</td></tr>
+      <tr data-num="31" data-funder="microsoft techspark soar" data-award="5000" data-deadline="9999-01-04" data-lead="BB" data-hrs="7"><td>31</td><td><a href="https://soar-ky.org/" target="_blank">Microsoft TechSpark via SOAR</a></td><td>In-kind compute + TEALS</td><td><span class="deadline">Rolling (relationship)</span></td><td>BB</td><td>5-10</td><td>🟡</td></tr>
+      <tr data-num="32" data-funder="aws cloud credit research" data-award="5000" data-deadline="9999-01-05" data-lead="Either" data-hrs="5"><td>32</td><td><a href="https://pages.awscloud.com/aws-cloud-credit-for-research.html" target="_blank">AWS Cloud Credit for Research</a></td><td>Up to $5K credits (student); uncapped via faculty PI</td><td><span class="deadline">Rolling (30-60 day)</span></td><td>Either</td><td>4-6</td><td>🟢</td></tr>
+      <tr data-num="33" data-funder="google cloud research credits" data-award="5000" data-deadline="9999-01-06" data-lead="BB" data-hrs="4"><td>33</td><td><a href="https://edu.google.com/intl/ALL_us/programs/credits/research/" target="_blank">Google Cloud Research Credits</a></td><td>$1K (PhD) / $5K (faculty) credits/yr</td><td><span class="deadline">Rolling (4-8 wk)</span></td><td>BB</td><td>3-5</td><td>🟢</td></tr>
+      <tr data-num="34" data-funder="digitalocean open source credits" data-award="20000" data-deadline="9999-01-07" data-lead="Either" data-hrs="2"><td>34</td><td><a href="https://www.digitalocean.com/open-source/credits-for-projects" target="_blank">DigitalOcean Open Source Credits</a></td><td>$60-20K credits/yr</td><td><span class="deadline">Rolling</span></td><td>Either</td><td>2-3</td><td>🟢</td></tr>
+      <tr data-num="35" data-funder="huggingface gpu grants" data-award="10000" data-deadline="9999-01-08" data-lead="Either" data-hrs="1"><td>35</td><td><a href="https://huggingface.co/pricing" target="_blank">Hugging Face GPU Grants</a></td><td>A100/H100 time (in-kind)</td><td><span class="deadline">Rolling (in-thread)</span></td><td>Either</td><td>1-2</td><td>🟢</td></tr>
+      <tr data-num="36" data-funder="devpost accessibility hackathons" data-award="5000" data-deadline="9999-01-09" data-lead="Either" data-hrs="30"><td>36</td><td><a href="https://devpost.com/hackathons" target="_blank">Devpost accessibility/AI-for-good hackathons</a></td><td>$500-5K cash + sponsor credits per challenge</td><td><span class="deadline">Rolling (selective)</span></td><td>Either</td><td>20-40/event</td><td>🟢</td></tr>
+      <tr data-num="37" data-funder="open source collective" data-award="0" data-deadline="9999-01-10" data-lead="Either" data-hrs="4"><td>37</td><td><a href="https://www.oscollective.org/" target="_blank">Open Source Collective</a></td><td>Infrastructure (10% host fee)</td><td><span class="deadline">2-4 wk onboarding</span></td><td>Either</td><td>3-5</td><td>🟢</td></tr>
+      <tr data-num="38" data-funder="github sponsors" data-award="0" data-deadline="9999-12-30" data-lead="Either" data-hrs="4"><td>38</td><td><a href="https://github.com/sponsors" target="_blank">GitHub Sponsors</a></td><td>Recurring donations</td><td><span class="deadline">Always-on</span></td><td>Either</td><td>3-5 setup</td><td>🟢</td></tr>
+      <tr data-num="26" data-funder="nsf convergence accelerator track h" data-award="5750000" data-deadline="9999-12-31" data-lead="BB" data-hrs="100"><td>26</td><td><a href="https://www.nsf.gov/funding/initiatives/convergence-accelerator/" target="_blank">NSF Convergence Accelerator Track H</a></td><td>Phase 1 $750K / Phase 2 $5M</td><td><span class="deadline">TBD (track reissue)</span></td><td>BB</td><td>80-120</td><td>⚫</td></tr>
+    
+      <tr data-num="39" data-funder="emergent ventures" data-award="50000" data-deadline="9999-12-30" data-lead="Either" data-hrs="3-5"><td>39</td><td><a href="https://www.mercatus.org/emergent-ventures" target="_blank">Emergent Ventures (Mercatus)</a></td><td>Grant, varies (~$1K&ndash;$50K+ typical)</td><td><span class="deadline">Rolling &middot; ~2&ndash;3 wk response</span></td><td>Either</td><td>3-5</td><td>🟢</td></tr>
+      <tr data-num="40" data-funder="z fellows" data-award="10000" data-deadline="9999-12-30" data-lead="Either" data-hrs="1-2"><td>40</td><td><a href="https://www.zfellows.com/" target="_blank">Z Fellows</a></td><td>Optional $10K SAFE @ $1B cap + network</td><td><span class="deadline">Rolling cohorts (1-wk, mostly virtual)</span></td><td>Either</td><td>1-2</td><td>🟡</td></tr>
+      <tr data-num="41" data-funder="1517 fund medici" data-award="1000" data-deadline="9999-12-30" data-lead="BB" data-hrs="1-2"><td>41</td><td><a href="https://www.1517fund.com/" target="_blank">1517 Fund &mdash; Medici (&rarr; invest)</a></td><td>$1K no-strings grant &middot; ~$100K Invisible College follow-on</td><td><span class="deadline">Rolling &middot; North America only</span></td><td>BB</td><td>1-2</td><td>🟢</td></tr>
+      <tr data-num="42" data-funder="futo microgrants" data-award="5000" data-deadline="9999-12-30" data-lead="Either" data-hrs="1-2"><td>42</td><td><a href="https://futo.org/grants/" target="_blank">FUTO microgrants</a></td><td>$1K&ndash;$5K (open-source / user-empowerment thesis)</td><td><span class="deadline">Rolling &mdash; email grantapps@futo.org</span></td><td>Either</td><td>1-2</td><td>🟢</td></tr>
+      <tr data-num="43" data-funder="unicef venture fund" data-award="100000" data-deadline="9999-12-28" data-lead="BM" data-hrs="20"><td>43</td><td><a href="https://www.unicef.org/innovation/venturefund" target="_blank">UNICEF Venture Fund</a></td><td>Up to $100K equity-free (+$400K growth) &middot; open-source mandatory</td><td><span class="deadline">Watch next AI/ML call &middot; GATE: registered co. in programme country (KZ &#10003;)</span></td><td>BM</td><td>20+</td><td>🟢</td></tr>
+      <tr data-num="44" data-funder="dpg alliance registration" data-award="0" data-deadline="9999-12-30" data-lead="Either" data-hrs="4-8"><td>44</td><td><a href="https://digitalpublicgoods.net/submission-guide/" target="_blank">DPG Alliance registration</a></td><td>$0 &mdash; Digital-Public-Good credential (UNICEF/UNDP visibility)</td><td><span class="deadline">Rolling nomination</span></td><td>Either</td><td>4-8</td><td>🟢</td></tr>
+      <tr data-num="45" data-funder="css fiscal sponsorship" data-award="0" data-deadline="9999-12-30" data-lead="Either" data-hrs="5-8"><td>45</td><td><a href="https://www.codeforsociety.org/fiscal-sponsorship" target="_blank">Code for Science &amp; Society &mdash; fiscal sponsorship</a></td><td>Fiscal host &mdash; receive grants WITHOUT incorporating</td><td><span class="deadline">Rolling (reopened 2025; ED transition &mdash; verify)</span></td><td>Either</td><td>5-8</td><td>🟢</td></tr>
+      <tr data-num="46" data-funder="astana hub seed iic" data-award="20000" data-deadline="9999-12-27" data-lead="BM" data-hrs="10"><td>46</td><td><a href="https://astanahub.com/en/" target="_blank">Astana Hub &mdash; Seed Money + IIC</a></td><td>Seed $5&ndash;20K &middot; inclusive-innovation (IIC) line</td><td><span class="deadline">Rolling intakes &middot; GATE: KZ entity + 2% rev-share</span></td><td>BM</td><td>10+</td><td>🟡</td></tr>
+      <tr data-num="47" data-funder="astana hub battle" data-award="18000" data-deadline="2026-10-01" data-lead="BM" data-hrs="5-8"><td>47</td><td><a href="https://astanahub.com/en/" target="_blank">Astana Hub Battle (Digital Bridge)</a></td><td>~$18K prize pool</td><td><span class="deadline">Annual &mdash; 2026 forum (Shymkent), watch</span></td><td>BM</td><td>5-8</td><td>🔴</td></tr>
+      <tr data-num="48" data-funder="nlnet open internet stack" data-award="50000" data-deadline="2026-09-01" data-lead="Either" data-hrs="8-12"><td>48</td><td><a href="https://nlnet.nl/propose/" target="_blank">NLnet &mdash; Open Internet Stack (Commons successor)</a></td><td>&euro;5&ndash;50K first grant (&rarr;&euro;150K) &middot; best OSS-fund fit</td><td><span class="deadline">Reopens ~post-summer 2026 &mdash; WATCH nlnet.nl/propose</span></td><td>Either</td><td>8-12</td><td>🟢</td></tr>
+      <tr data-num="49" data-funder="mozilla technology fund" data-award="50000" data-deadline="9999-12-29" data-lead="Either" data-hrs="8-10"><td>49</td><td><a href="https://foundation.mozilla.org/en/what-we-fund/" target="_blank">Mozilla Technology Fund</a></td><td>Up to $50K + mentorship &middot; needs US 501(c)(3) host (CS&amp;S &#8593;)</td><td><span class="deadline">Annual themed CFP &mdash; watch for a matching theme</span></td><td>Either</td><td>8-10</td><td>🟢</td></tr>
+      <tr data-num="50" data-funder="remarkable us global" data-award="55000" data-deadline="2027-04-01" data-lead="Either" data-hrs="5-7"><td>50</td><td><a href="https://www.remarkable.org/" target="_blank">Remarkable US / Global accelerator</a></td><td>US: $55K SAFE (GATE: US inc.) &middot; Global: A$100K for 5%</td><td><span class="deadline">~Spring cohorts &mdash; watch</span></td><td>Either</td><td>5-7</td><td>🟡</td></tr>
+      <tr data-num="51" data-funder="2gether international" data-award="10000" data-deadline="9999-12-26" data-lead="BM" data-hrs="5-8"><td>51</td><td><a href="https://www.2gether-international.org/" target="_blank">2Gether-International</a></td><td>Venture Labs + $10K accelerator &middot; GATE: founder w/ disability &mdash; BM plausibly qualifies (hearing)</td><td><span class="deadline">Cohort calls &mdash; watch</span></td><td>BM</td><td>5-8</td><td>🟢</td></tr>
+      <tr data-num="52" data-funder="zero project zerocall28" data-award="0" data-deadline="2027-05-01" data-lead="Either" data-hrs="4-6"><td>52</td><td><a href="https://zeroproject.org/" target="_blank">Zero Project #ZeroCall28</a></td><td>$0 &mdash; UN Vienna assistive-tech visibility/network</td><td><span class="deadline">Call ~May 2027</span></td><td>Either</td><td>4-6</td><td>🔴</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="koz-4-attendance-legend">Attendance legend</h3>
+  <p class="sub" style="margin-top:-8px;">🟢 virtual · 🟡 hybrid · 🟠 in-person travel covered · 🔴 in-person not covered · ⚫ funded activity = in-person work</p>
+
+  <details style="margin-top:24px;">
+    <summary style="cursor:pointer; font-weight:600; padding:8px 0;">Cut from tracker (bad ROI even with AI-assisted boilerplate)</summary>
+    <ul style="margin-top:8px;">
+      <li><strong>Berea-internal:</strong> Berea Discovery Fund · Berea URCPP (friend won't engage with these 2 specifically)</li>
+      <li><strong>Weak thematic fit:</strong> Spencer Small Research Grants · DOE CSGF · W4A 2027 (no advertised cash, travel not covered) · AAAL 2027 Distinguished Service (recognition only)</li>
+      <li><strong>Framing mismatch:</strong> Astana Hub Battle (commercial pitch + revenue share)</li>
+      <li><strong>Pivot required:</strong> ARC INSPIRE/POWER FY27 · ASHFoundation (requires CSD program; BB is chemistry)</li>
+      <li><strong>Narrow scope:</strong> Code for Science & Society Event Fund (only if Kozha hosts an event)</li>
+      <li><strong>Travel cost &gt; prize:</strong> Falling Walls Lab Baden-Württemberg · EF × Raspberry Pi London Hackathon</li>
+      <li><strong>Eligibility DQ:</strong> Davidson Fellows (age ≤18 + US citizen) · Astronaut Scholarship (Berea not on participating list) · Collegiate Inventors / NIHF (BM not at US institution → ineligible to be on team; prior public disclosure risk from open-source repo + RESNA 2026 finalist listing; BB-solo workaround judged not worth the friction)</li>
+      <li><strong>Effort/win mismatch:</strong> CHI 2027 Papers (80-120hr at 6-12%) · DeveloperWeek 2027 virtual (~$5/hr EV) · LSA Student Abstract Award ($500 at 5-10%) · EMNLP 2026 SV/Best Resource (paper-conditional, no travel) · Experiment.com crowdfunding (outreach burden)</li>
+    </ul>
+  </details>
+
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer; font-weight:600; padding:8px 0;">Deferred (memory only — pursue when condition met)</summary>
+    <ul style="margin-top:8px;">
+      <li><strong>NeurIPS 2026 Financial Assistance</strong> — only if D&B paper accepted (reg+hotel, no flights)</li>
+      <li><strong>AWS Imagine Grant</strong> — March 2027 + needs fiscal sponsor</li>
+      <li><strong>AWS Nonprofit Credit</strong> — needs 501(c)(3) confirmed via TechSoup</li>
+      <li><strong>Eurasia Foundation CSSP</strong> — verify post-USAID status + KZ NGO partner</li>
+      <li><strong>NVIDIA Inception</strong> — only if Kozha incorporates ($100K AWS + $150K Nebius credits)</li>
+      <li><strong>Cloudflare for Startups Nonprofit</strong> — monitor next call + needs fiscal sponsor</li>
+      <li><strong>Beinecke Scholarship 2027</strong> — verify Berea participation + STEM eligibility</li>
+      <li><strong>Google PhD / Meta PhD Fellowships</strong> — BB-future once enrolled in chemistry PhD</li>
+      <li><strong>US Embassy Astana Small Grants</strong> — needs KZ NGO partner</li>
+    </ul>
+  </details>
+
+  <h3 style="margin-top:24px;" id="koz-5-critical-path-actions">Critical-path actions</h3>
+  <ol>
+    <li>BB verifies Soros eligibility (naturalized US citizen / child of 2 immigrant non-citizens / DACA/refugee/asylee) — determines whether #10 stays in scope.</li>
+    <li>BB confirms Berea CFFR + Government Grant Services endorsement for external grants (MEAF #14, BSSw #11, NIDILRR #25, NSF CA #26, Goldwater #12 nomination). Email <code>cffr@berea.edu</code> + <code>governmentgrants@berea.edu</code>.</li>
+    <li>BB recruits Berea faculty PI sponsor: NIDILRR #25, NSF CA #26 (3-yr commit); BSSw #11, Google Cloud #33 (co-applicant). <strong>Hardest single gating step.</strong></li>
+    <li>NumFOCUS Affiliated Project application when reopens ~Q3 2026 (prerequisite for #8).</li>
+    <li>Verify ASSETS 2026 location — if NA-based, #3 ROI improves substantially with cheap intra-US travel.</li>
+    <li>Stack cloud-infra credits ASAP: AWS #32 + DigitalOcean #34 + HuggingFace #35 + Anthropic #28 + Google Cloud #33 + OpenAI #1 (~15-25hr total for $5-30K credits).</li>
+    <li><strong>DEBUT #2 decision by Jun 4, 2026</strong> (1-day buffer before Jun 5 deadline): without a Berea BME-dept teammate AND foreign-student-prize-eligibility constraints, 2026 cycle is essentially unworkable. Defer to 2027 cycle if BME teammate recruited; else drop.</li>
+    <li><strong>E-Team #6 decision by ~Sep 1, 2026</strong>: verify Berea VentureWell-network status + recruit Berea faculty advisor + ≥1 Berea student. BB-solo path with Berea-only team for Sep 29 deadline.</li>
+  </ol>
+
+  <h3 id="koz-6-key-notes">Key notes</h3>
+  <ul>
+    <li>Apply to everything in the table. AI assists with boilerplate.</li>
+    <li><strong>Oct 31 – Nov 15, 2026 cluster:</strong> 8 applications inside ~2 weeks (BSSw, Goldwater Berea internal, Soros, MEAF, TreeHacks, Hertz, NSF GRFP, NDSEG). Start drafting essays Aug-Sep 2026.</li>
+    <li><strong>Publication anchor:</strong> NeurIPS 2027 D&B Track #23 is highest-fit venue for the cross-corpus sign-language dataset paper. ACL D&I #24 stacks reg+travel if parallel ACL paper accepted.</li>
+    <li>Realistic combined 2026-2027 revenue: $20-210K cash + $15-60K cloud credits (Wikimedia dropped ~$50-155K cash ceiling). Dominated by 1-2 hits (Microsoft A4A or MIT Solve + one US-citizen fellowship + possibly NIDILRR/NSF CA if faculty PI lands + ITU AI for Good moonshot).</li>
+  </ul>
+
+
 
 </section>
 </div>
@@ -139,6 +282,61 @@ function renderCurrentWeek() {
     document.querySelectorAll('input.dt-check').forEach(function(x){x.checked=false;try{localStorage.setItem('dt-'+(x.id||''),'0');}catch(e){}});prog();
   });
   prog();
+})();
+
+/* === Kozha funding table: sort + filter (restored 2026-08-24) === */
+(function(){
+  var table=document.getElementById('kozha-table'); if(!table) return;
+  var tbody=table.querySelector('tbody');
+  var headers=table.querySelectorAll('th[data-sort-key]');
+  var labels={num:'#',funder:'Funder',award:'Award',deadline:'Deadline',lead:'Lead',hrs:'Hrs'};
+  var st={key:'deadline',dir:'asc'};
+  function applySort(){
+    var rows=Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+    var isNum=function(k){return k==='num'||k==='award'||k==='hrs';};
+    rows.sort(function(a,b){
+      var av=a.dataset[st.key],bv=b.dataset[st.key],c;
+      if(isNum(st.key)) c=Number(av)-Number(bv); else c=String(av).localeCompare(String(bv));
+      return st.dir==='asc'?c:-c;
+    });
+    rows.forEach(function(r){tbody.appendChild(r);});
+    headers.forEach(function(th){
+      var k=th.dataset.sortKey;
+      th.textContent=labels[k]+(st.key===k?(st.dir==='asc'?' \u25B2':' \u25BC'):'');
+    });
+  }
+  headers.forEach(function(th){
+    th.addEventListener('click',function(){
+      var k=th.dataset.sortKey;
+      if(st.key===k) st.dir=st.dir==='asc'?'desc':'asc'; else {st.key=k;st.dir='asc';}
+      applySort();
+    });
+  });
+  var total=tbody.querySelectorAll('tr').length;
+  document.querySelectorAll('.kozha-filter').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.kozha-filter').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var lead=btn.dataset.lead, visible=0;
+      tbody.querySelectorAll('tr').forEach(function(row){
+        var rl=row.dataset.lead, show;
+        if(lead==='all') show=true;
+        else if(lead==='BB') show=(rl==='BB'||rl==='Either');
+        else if(lead==='BM') show=(rl==='BM'||rl==='Either');
+        else show=(rl==='Either');
+        row.style.display=show?'':'none'; if(show) visible++;
+      });
+      document.querySelectorAll('.kozha-filter').forEach(function(b){
+        b.textContent=b.textContent.replace(/\s*\(\d+\)\s*$/,'');
+      });
+      var allBtn=document.querySelector('.kozha-filter[data-lead="all"]');
+      if(allBtn) allBtn.textContent='All ('+total+')';
+      if(lead!=='all') btn.textContent=btn.textContent+' ('+visible+')';
+    });
+  });
+  var allBtn=document.querySelector('.kozha-filter[data-lead="all"]');
+  if(allBtn) allBtn.textContent='All ('+total+')';
+  applySort();
 })();
 
 
