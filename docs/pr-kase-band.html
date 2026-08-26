@@ -113,15 +113,25 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="projects.html" class="">Projects</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="">Publish</a><a href="funding.html" class="">Funding</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Price-limit band</div><a href="#pri-1-the-finding" class="">The finding</a><a href="#pri-2-venues" class="">Venues</a></div>
+<div class="site-subnav"><div class="lbl">Price-limit band</div><a href="#pri-1-what-survives-and-it-is-still-worth-publishi" class="">What survives &mdash; and it is still worth publishing</a><a href="#pri-2-actions" class="">Actions</a></div>
 <div class="site-main"><section class="page-section" id="pr-kase-band">
 
-<h1>3 &middot; KASE "bid/ask" fields are a price-limit band</h1>
-<p class="sub">Source: <b>KASE</b> &middot; <a href="projects.html#projects">&larr; Projects</a> &middot; Confidence: HIGH</p>
-<h2 id="pri-1-the-finding">The finding</h2><p>KASE board data exposes <code>bid</code>/<code>ask</code> fields that are crossed in <b>88.7%</b> of snapshots &mdash; impossible for real quotes. They are the exchange's <b>daily price-limit band</b>. Evidence: band midpoint &divide; prior close = 0.9973&ndash;1.0073 across six tickers; <b>100%</b> of 448 trades fall inside; <b>zero</b> changes across 1,103 in-session snapshots; resets at each open. Two rival hypotheses (swapped labels, session high-water marks) tested and rejected.</p>
-<p><b>Why it matters:</b> the error had propagated into a 526bp "spread" that killed every candidate strategy on cost grounds. True one-way spread: <b>Roll 0.24% / Corwin-Schultz 0.47%</b>. The generalisable lesson &mdash; a persistently crossed book is prima facie a field-semantics error, not a venue quirk &mdash; is the publishable part.</p>
-<h2 id="pri-2-venues">Venues</h2><ul class="dt-list"><li><b>SSRN + a blog post</b> &mdash; SSRN needs no endorsement, so it is faster than arXiv.</li><li><b>Also &sect;2 (institutional setting) of output 4</b>, where it demonstrates venue mastery to a referee. Thin as a standalone paper; strong as a section plus a note.</li></ul>
-<div class="callout warn"><b>Guardrail:</b> never cite 526bp again. Cite Roll/Corwin-Schultz <em>as estimates</em> &mdash; KASE exposes no true top-of-book, so the spread remains unmeasured.</div>
+<h1>3 &middot; Quote-field semantics &mdash; a negative note</h1>
+<p class="sub">Source: <b>KASE</b> &middot; <a href="projects.html#projects">&larr; Projects</a> &middot; <b>Identification REFUTED 30 Aug 2026 &mdash; demoted from lead</b></p>
+<div class="callout warn"><b>What the verification pass found.</b> <code>kase.kz/api/trade-results/</code> is a <b>post-close daily board, frozen at T-1 for the whole session</b> (confirmed live mid-session and across 2,316 snapshots). Consequences: the "zero intraday variation across 1,103 snapshots" evidence is <b>void</b> (every field is frozen, <code>dealcnt</code> included); the recorded snapshot set carries <b>no intraday content</b>; and the 2026-08-25 probe recorded staleness, not a market holiday. Separately the identification is refuted from primary sources &mdash; KASE's real corridor is a clearing-centre limit published at kacc.kz with a <b>12.0% half-width, identical across tickers</b>, matching the observed bounds on <b>0 of 546 ticker-days</b>.</div>
+<h2 id="pri-1-what-survives-and-it-is-still-worth-publishi">What survives &mdash; and it is still worth publishing</h2>
+<ul class="dt-list">
+<li><b>The negative result is solid:</b> the fields labelled <code>bid</code>/<code>ask</code> are crossed in 88.7% of snapshots and are <b>not quotes</b>; four candidate identifications were tested and rejected; the 526bp "spread" built on them was void, and every strategy killed on that cost basis deserved re-examination.</li>
+<li><b>The generalisable lesson is unchanged:</b> a persistently crossed book in a public exchange API is prima facie a field-semantics error, not a venue quirk &mdash; and cost assumptions are where such errors do the most damage.</li>
+<li><b>The surviving positive reading (session extreme quotes) is a ~75% conjecture, labelled as one</b>, with its failure mode stated &mdash; including the 2026-06-04 anomaly where the same fields briefly carried a real tick-wide book.</li>
+</ul>
+<h2 id="pri-2-actions">Actions</h2>
+<ul class="dt-list">
+<li><b>Rename to <code>docs/quote-field-semantics.md</code></b> &mdash; the old filename asserts what the content now refutes.</li>
+<li><b>Publish as a negative note</b> (SSRN + blog). Output 6 leads the repo, not this.</li>
+<li><b>Optional and non-blocking:</b> one day of top-of-book polling on a liquid name would settle the identification &mdash; needs a genuinely live source, since the frozen kase.kz endpoint cannot. Run it passively; <b>do not gate the repo or the outreach on it.</b></li>
+<li><b>Feed the refutation into output 6</b> &mdash; it is a stronger audit-trail entry than the original claim was as a result.</li>
+</ul>
 
 </section>
 </div>

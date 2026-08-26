@@ -127,7 +127,13 @@ h2[id],h3[id]{scroll-margin-top:130px}
 <li>Final position: best strategy +6.2% CAGR but Sharpe <b>0.30 &plusmn; 0.66</b>, CI [&minus;0.98, +1.58], <b>lower-confidence-bound Kelly = exactly zero</b> &mdash; against a local risk-free rate of ~17% in USD terms</li>
 </ul>
 <div class="callout ok"><b>The rarest signal in the set:</b> one correction made a strategy look <em>better</em> and it was still rejected on significance grounds.</div>
-<div class="callout warn"><b>Analytical caveat to fix before publishing:</b> the ~17% risk-free hurdle has a <b>peso problem</b> &mdash; measuring tenge depreciation over 2019&ndash;2026 excludes the 2015 devaluation, and high local rates are the price of exactly that jump risk. A blocked deposit also isn't usable trading capital. Direction: the hurdle is <b>overstated</b>, so "nothing clears it" is too strong &mdash; though nowhere near enough to rescue Sharpe 0.30.</div>
+<div class="callout ok"><b>Three chapters added by the 30 Aug 2026 verification pass &mdash; each strengthens this document:</b>
+<ul class="dt-list">
+<li><b>The flagship finding was refuted by its own author.</b> The price-limit-band identification collapsed once the feed proved frozen at T-1; the corridor it claimed to detect matches the real published limit on 0 of 546 ticker-days.</li>
+<li><b>A hardcoded sentinel masqueraded as a result</b> &mdash; the published ADF p-value of 0.005 was a placeholder replicated across five files; the true value is orders of magnitude smaller.</li>
+<li><b>Two corrections that improve the numbers were reported with equal prominence:</b> half-life is 3.24 days not 2.5, and the 8.57% IRP "fair premium" does not apply, having been shaving ~40% off profitability estimates.</li>
+</ul></div>
+<div class="callout warn"><b>Rest the conclusion on significance, not the hurdle.</b> The IRP correction removes ~40% of the profitability haircut and the peso caveat below says the hurdle was overstated &mdash; but <b>Sharpe 0.30 &plusmn; 0.66 with LCB-Kelly at exactly zero fails on statistical grounds wherever the hurdle sits.</b> Argue it that way. <b>Analytical caveat:</b> the ~17% risk-free hurdle has a <b>peso problem</b> &mdash; measuring tenge depreciation over 2019&ndash;2026 excludes the 2015 devaluation, and high local rates are the price of exactly that jump risk. A blocked deposit also isn't usable trading capital. Direction: the hurdle is <b>overstated</b>, so "nothing clears it" is too strong &mdash; though nowhere near enough to rescue Sharpe 0.30.</div>
 <h2 id="neg-2-venue">Venue</h2><p><b>The GitHub write-up, led by this.</b> Highest return per hour of anything on the board. October, post-ship.</p>
 
 </section>
