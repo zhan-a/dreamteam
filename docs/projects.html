@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — Artifacts</title>
+<title>Dreamteam — Projects</title>
 <style>
 :root{
   --bg:#0d1117; --bg-2:#11161d; --bg-3:#1a212b;
@@ -110,40 +110,37 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="artifacts.html" class="cur">Artifacts</a><a href="p3.html" class="">P3</a><a href="kase.html" class="">KASE</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="">Publish</a><a href="funding.html" class="">Funding</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="projects.html" class="cur">Projects</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="">Publish</a><a href="funding.html" class="">Funding</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">Artifacts</div><a href="#art-1-the-board" class="">The board</a><a href="#art-2-pipeline-what-converts-into-what" class="">Pipeline &mdash; what converts into what</a><a href="#art-3-deferred-deliberately-not-being-built" class="">Deferred &mdash; deliberately not being built</a></div>
-<div class="site-main"><section class="page-section" id="artifacts">
+<div class="site-subnav"><div class="lbl">Projects</div><a href="#pro-1-rules-that-govern-the-table" class="">Rules that govern the table</a></div>
+<div class="site-main"><section class="page-section" id="projects">
 
-<h1>Artifacts &amp; Publications</h1>
-<p class="sub">Everything in flight, what state it's in, and which door each one opens. Detail pages: <a href="p3.html#p3">P3 &mdash; LW shrinkage</a> &middot; <a href="kase.html#kase">KASE &mdash; kspi-monitor</a>. Venue dates live on <a href="publish.html#publish">Publish &amp; Compete</a>.</p>
+<h1>Projects</h1>
+<p class="sub">Every distinct publishable output, one row each. A row exists per <b>manuscript/artefact that ships on its own</b> &mdash; not per source project. Venue dates live on <a href="publish.html#publish">Publish &amp; Compete</a>; funding on <a href="funding.html#funding">Funding</a>.</p>
 
-<div class="callout warn">
-<b>The portfolio rule &mdash; one manuscript, many doors.</b> Assets are not one-per-venue. Two artifacts produce a handful of documents, and each document is routed to several venues. Never start a new research project to fill a venue slot; route an existing one. <b>Caps:</b> P3 owns the build hours; KASE conversion is a <em>writing</em> task and never re-opens research; Kozha stays at 4 h/wk.
-</div>
+<div class="callout warn"><b>Two source projects, nine outputs.</b> P3 (Ledoit-Wolf, <em>building</em>) yields 2 manuscripts; KASE (<em>research complete, unconverted</em>) yields 4 outputs + 1 embedded section; then the Mynbaev numerics note, the ESOP pre-proposal, and the A3 thesis. <b>Kozha is not on this agenda</b> &mdash; it is passive, grant-applications only, and lives on its own page.</div>
 
-<h2 id="art-1-the-board">The board</h2>
-<div style="overflow-x:auto"><table class="dt" style="min-width:900px">
-<tr><th>Asset</th><th>State</th><th>Next action</th><th>What it feeds</th></tr>
-<tr><td><b><a href="p3.html#p3">P3 &mdash; Ledoit-Wolf shrinkage</a></b><br><small>reproduction + JM extension</small></td><td><span class="tag t-ac">BUILDING</span> Week 2 gate passed (oracle to 8.2e-15); <b>Week 3 outstanding</b>, ~1 wk behind</td><td><code>draw_covariance</code> + <code>simulate_grid</code>; gate = PRIAL &rarr; analytic 50% at (p=20, n=40)</td><td>ReScience-C <i>or</i> TMLR &middot; ICLR-27 workshop &middot; SIURO &middot; ASA SCSG &middot; ESOP pre-proposal &middot; arXiv &middot; the specialization story at application</td></tr>
-<tr><td><b><a href="kase.html#kase">KASE &mdash; kspi-monitor</a></b><br><small>frontier-market microstructure</small></td><td><span class="tag t-res">COMPLETE, UNCONVERTED</span> 5 candidate outputs; Apr&ndash;Aug 2026 work, all analysis done</td><td>Nothing until <b>October</b>. Then: the GitHub write-up (highest return/hour)</td><td>GitHub research sample (Cluster-B firms read these) &middot; SSRN note &middot; CFE-CMStatistics virtual talk &middot; a finance-journal paper &middot; Zenodo code DOI</td></tr>
-<tr><td><b>A3 &mdash; bachelor thesis</b><br><small>quadruple duty</small></td><td><span class="tag t-de">NOT STARTED</span> by design</td><td>Aiming session <b>~Feb&ndash;Mar 2027</b> &mdash; the next artifact-<i>design</i> goalpost</td><td>Thesis grade &middot; the advisor letter &middot; possible preprint &middot; portfolio</td></tr>
-<tr><td><b><a href="kozha.html#kozha">Kozha</a></b><br><small>live startup, orthogonal</small></td><td><span class="tag t-code">LIVE, CAPPED</span> 4 h/wk (2 h in crunch windows)</td><td>Grant pipeline &mdash; 23 live deadlines, nearest ~1 Sep</td><td>Ownership/builder signal &middot; possible internship placement (see below)</td></tr>
+<div style="overflow-x:auto"><table class="dt" style="min-width:1000px">
+<tr><th>#</th><th>Output</th><th>Source</th><th>State</th><th>Target venues</th><th>Next action</th></tr>
+<tr><td>1</td><td><b><a href="pr-lw-repro.html#pr-lw-repro">LW reproduction write-up</a></b></td><td>P3</td><td><span class="tag t-ac">BUILDING</span> Wk 2/10 passed; Wk 3 outstanding</td><td>arXiv &middot; ReScience C <i>or</i> TMLR</td><td>Simulation harness (Wk 3)</td></tr>
+<tr><td>2</td><td><b><a href="pr-lw-ext.html#pr-lw-ext">JM constraint-implied shrinkage</a></b></td><td>P3</td><td><span class="tag t-de">QUEUED</span> needs Wks 6&ndash;8</td><td>ICLR-27 workshop &middot; SIURO &middot; ASA SCSG</td><td>Blocked on output 1</td></tr>
+<tr><td>3</td><td><b><a href="pr-kase-band.html#pr-kase-band">Price-limit band note</a></b></td><td>KASE</td><td><span class="tag t-res">COMPLETE</span> analysis done</td><td>SSRN + blog; also &sect;2 of output 4</td><td>Write (Nov&ndash;Dec)</td></tr>
+<tr><td>4</td><td><b><a href="pr-kase-disc.html#pr-kase-disc">Non-overlapping price discovery</a></b></td><td>KASE</td><td><span class="tag t-res">COMPLETE</span> needs writing + one upgrade</td><td>arXiv &middot; CFE virtual talk (Dec) &middot; finance journal</td><td>CFE abstract (~Oct&ndash;Nov)</td></tr>
+<tr><td>5</td><td><b><a href="pr-kase-data.html#pr-kase-data">KASE dataset + pipeline</a></b></td><td>KASE</td><td><span class="tag t-res">COMPLETE</span> legal constraint applies</td><td>Zenodo code DOI &middot; public code-only repo</td><td>Strip data, build clean repo</td></tr>
+<tr><td>6</td><td><b><a href="pr-kase-neg.html#pr-kase-neg">Negative-results audit trail</a></b></td><td>KASE</td><td><span class="tag t-res">COMPLETE</span></td><td>GitHub write-up &mdash; <b>the top QR research sample</b></td><td>Write (Oct)</td></tr>
+<tr><td>&mdash;</td><td><i>Year-end calendar effect</i></td><td>KASE</td><td>n=10, half global</td><td><b>Section only</b> &mdash; embedded in output 4, never standalone</td><td>&mdash;</td></tr>
+<tr><td>7</td><td><b><a href="pr-mynbaev.html#pr-mynbaev">Mynbaev numerics companion</a></b></td><td>ml-research</td><td><span class="tag t-de">NOT STARTED</span></td><td>Co-authored numerics note; acknowledgment floor</td><td>Offer the notebook Oct&ndash;Nov</td></tr>
+<tr><td>8</td><td><b><a href="pr-esop.html#pr-esop">ESOP pre-proposal</a></b></td><td>P3 re-aimed</td><td><span class="tag t-de">NOT STARTED</span></td><td>Submitted <i>inside</i> the ETH application, Nov 2027</td><td>Draft ≤ 1 Oct 2027</td></tr>
+<tr><td>9</td><td><b><a href="pr-thesis.html#pr-thesis">Bachelor thesis (A3)</a></b></td><td>KBTU final year</td><td><span class="tag t-de">NOT STARTED</span> by design</td><td>Thesis + advisor letter + possible preprint</td><td>Aiming session ~Feb&ndash;Mar 2027</td></tr>
 </table></div>
 
-<h2 id="art-2-pipeline-what-converts-into-what">Pipeline &mdash; what converts into what</h2>
+<h2 id="pro-1-rules-that-govern-the-table">Rules that govern the table</h2>
 <ul class="dt-list">
-<li><b>P3 repo</b> &rarr; reproduction write-up (Nov) &rarr; arXiv preprint + ReScience-C/TMLR submission (~1 Dec) &middot; extension paper (Dec&ndash;Jan) &rarr; ICLR-27 workshop (late Jan&ndash;mid Feb) + ASA SCSG (~4 Dec) + SIURO (Feb&ndash;Mar).</li>
-<li><b>KASE repo</b> &rarr; GitHub write-up (Oct) &middot; the price-limit-band note &rarr; SSRN + blog &middot; the price-discovery study &rarr; CFE virtual talk (Dec) then a journal paper (Jan&ndash;Mar).</li>
-<li><b>Both</b> &rarr; the research record Cluster-B firms actually read, and the "independent research" line every MSc application asks for.</li>
-</ul>
-
-<h2 id="art-3-deferred-deliberately-not-being-built">Deferred &mdash; deliberately not being built</h2>
-<ul class="dt-list">
-<li class="cut"><b>A2 &mdash; end-to-end production system</b> &rarr; the master year (2028&ndash;29). It is a job-interview proof, not an admission signal, and stacking it on summer 2027 is the plan's sharpest structural flaw.</li>
-<li class="cut"><b>Any third research project</b> before Dec 2027. The ESOP pre-proposal is P3 re-aimed, not a new build.</li>
-<li>Open-source contributions + a technical blog stay <b>casual and continuous</b> &mdash; real contributions and a clear write-up beat a badge chase, but they never compete with P3 hours.</li>
+<li><b>One manuscript, many doors.</b> Rows are outputs, not venues &mdash; output 4 alone goes to arXiv, a conference talk and a journal.</li>
+<li><b>No new source projects before Dec 2027.</b> Rows 7&ndash;9 come from existing material or existing relationships; nothing here starts a new research front.</li>
+<li><b>P3 owns the build hours.</b> KASE conversion is a <em>writing</em> task and must never re-open its research (specifically: no VECM work before the artifact ships).</li>
+<li><b>Deferred, deliberately:</b> A2 production system &rarr; the master's years. Open-source + blog &rarr; casual, continuous, never competing with P3.</li>
 </ul>
 
 </section>

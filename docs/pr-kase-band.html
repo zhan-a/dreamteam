@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamteam — P3</title>
+<title>Dreamteam — Price-limit band</title>
 <style>
 :root{
   --bg:#0d1117; --bg-2:#11161d; --bg-3:#1a212b;
@@ -110,59 +110,18 @@ h2[id],h3[id]{scroll-margin-top:130px}
 .cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
 .cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
 </style></head><body>
-<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="artifacts.html" class="">Artifacts</a><a href="p3.html" class="cur">P3</a><a href="kase.html" class="">KASE</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="">Publish</a><a href="funding.html" class="">Funding</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="projects.html" class="">Projects</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="">Publish</a><a href="funding.html" class="">Funding</a><a href="kozha.html" class="">Kozha</a></div>
 <div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
 <div class="site-layout">
-<div class="site-subnav"><div class="lbl">P3</div><a href="#p3-1-where-it-lives" class="">Where it lives</a><a href="#p3-2-done-so-far" class="">Done so far</a><a href="#p3-3-the-build-calendar-spec-7" class="">The build calendar (SPEC &sect;7)</a><a href="#p3-4-the-safety-net" class="">The safety net</a><a href="#p3-5-next-action-concretely" class="">Next action &mdash; concretely</a></div>
-<div class="site-main"><section class="page-section" id="p3">
+<div class="site-subnav"><div class="lbl">Price-limit band</div><a href="#pri-1-the-finding" class="">The finding</a><a href="#pri-2-venues" class="">Venues</a></div>
+<div class="site-main"><section class="page-section" id="pr-kase-band">
 
-<h1>P3 &mdash; Ledoit-Wolf shrinkage</h1>
-<p class="sub">Reproduce Ledoit&ndash;Wolf (2004, JMVA) + extend with Jagannathan&ndash;Ma constraint-implied shrinkage. The keystone artifact: on-specialization (high-dimensional covariance estimation), and the gate everything downstream hangs off.</p>
-
-<div class="callout warn">
-<b>State as of 26 Aug 2026:</b> Week 2 gate <b>PASSED</b> &mdash; and passed hard. <b>Week 3 is outstanding</b> (the crash + funeral week), so the build is ~1 week behind. Absorbable: Week 3 was the last pre-semester hour-banking week, the MVA cut line is end of Week 5 + write-up, and the Week-4 switch trigger cannot fire until Week 3 exists, so it slides rather than being missed.
-</div>
-
-<h2 id="p3-1-where-it-lives">Where it lives</h2>
-<ul class="dt-list">
-<li><b>Spec (governing):</b> <code>~/Documents/ml-research/projects/proj4-lw-shrinkage-artifact/SPEC.md</code></li>
-<li><b>Code repo:</b> <code>~/Documents/lw-shrinkage-artifact/</code> &mdash; git <code>main</code>, 5 commits, <b>not yet pushed to GitHub</b> (needed before the ~Nov outreach)</li>
-<li><b>Live log:</b> <code>~/Documents/ml-research/progress-log.md</code> (append-only) &middot; <b>resume prompt:</b> <code>~/Documents/ml-research/PROMPT-NEW-SESSION-artifact-build.md</code></li>
-</ul>
-
-<h2 id="p3-2-done-so-far">Done so far</h2>
-<ul class="dt-list">
-<li><b>Week 1 &#10003;</b> &mdash; targets pinned in <code>TARGETS.md</code> (Table-2 numbers, Fig-8/9 grids, the analytic-PRIAL arbiter, ambiguities A1&ndash;A4 flagged for Week 4); formulas transcribed in <code>FORMULAS.md</code> with journal-page anchors; scaffold + pytest + GitHub Actions CI. A 4-agent adversarial pass caught real figure-reading errors &rarr; fixed.</li>
-<li><b>Week 2 &#10003; (gate passed a day early)</b> &mdash; <code>lw_identity</code> + <code>lw_scalars</code> written from the formulas, no sklearn in <code>src/</code>. Gate was 1e-6 agreement with the sklearn oracle; <b>measured worst case 8.2e-15 across 220 combinations</b>, Fig-9 corner (n=4, p=200) bitwise identical. <b>32 tests pass / 6 week-gated skips.</b> A 9-agent adversarial verification killed <b>9/9 planted mutation bugs</b>; one real test-gap found and fixed.</li>
-</ul>
-
-<h2 id="p3-3-the-build-calendar-spec-7">The build calendar (SPEC &sect;7)</h2>
-<div style="overflow-x:auto"><table class="dt" style="min-width:820px">
-<tr><th>Wk</th><th>Dates</th><th>Work</th><th>Gate</th></tr>
-<tr><td>1</td><td>Aug 3&ndash;9</td><td>Paper study, targets, formulas, scaffold + CI</td><td>&#10003; done</td></tr>
-<tr><td>2</td><td>Aug 10&ndash;16</td><td><code>lw_identity</code> from formulas; oracle + PSD/conditioning tests</td><td>&#10003; passed</td></tr>
-<tr><td><b>3</b></td><td>Aug 17&ndash;23</td><td><b>Simulation harness</b> &mdash; &sect;4.2 DGP, PRIAL, analytic curve</td><td><b>&larr; YOU ARE HERE.</b> Sim converges to analytic curve</td></tr>
-<tr><td>4</td><td>Aug 24&ndash;30</td><td>Figures 8&ndash;9 + Table 2 matching; digitized overlays; reconciliation</td><td><b>SWITCH TRIGGER:</b> PRIAL within MC error, or cut to glasso</td></tr>
-<tr><td>5</td><td>Aug 31&ndash;Sep 6</td><td>Finish reconciliation; French loader + tests</td><td><b>CORE GATE:</b> reproduction done, else fire the de-scope</td></tr>
-<tr><td>6</td><td>Sep 7&ndash;13</td><td><code>lw_const_corr</code> + <code>oas</code>; backtest skeleton</td><td>&mdash;</td></tr>
-<tr><td>7</td><td>Sep 14&ndash;20</td><td>CVXPY/OSQP long-only QP; analogue backtest; metrics</td><td>No-lookahead + QP-vs-closed-form tests</td></tr>
-<tr><td>8</td><td>Sep 21&ndash;27</td><td>Extension: KKT extraction, JM self-oracle, implied intensity, 4&times;2 table</td><td>Stretch gate</td></tr>
-<tr><td>9</td><td>Sep 28&ndash;Oct 4</td><td>Write-up draft</td><td>Collision week &mdash; write-up is the priority</td></tr>
-<tr><td>10</td><td>Oct 5&ndash;11</td><td>Polish, README, figures, buffer</td><td><b>SHIP</b></td></tr>
-</table></div>
-
-<h2 id="p3-4-the-safety-net">The safety net</h2>
-<p><b>Minimum viable artifact (hard cut line, end of Week 5 + write-up):</b> the from-formula LW estimator with the 1e-6 oracle cross-check, reproduced Figures 8&ndash;9 + Table 2 within MC error anchored by the analytic curve, pytest + CI, and a 2&ndash;3 page write-up. <b>That alone is a complete, defensible reproduction.</b> Everything from Week 6 upgrades it; its absence does not sink it.</p>
-<p><b>Pre-committed de-scope order</b> if hours run out: (1) drop the 100-portfolio universe &rarr; (2) drop the long-only variant, and with it the extension &rarr; (3) drop the backtest entirely &rarr; MVA. <b>Ship backstop: 1 Nov.</b></p>
-
-<h2 id="p3-5-next-action-concretely">Next action &mdash; concretely</h2>
-<div class="callout">Two stubs in <code>src/covest/simulation.py</code> both raising <code>NotImplementedError("Week 3")</code>; everything around them (<code>inner</code>, <code>norm_sq</code>, <code>loss</code>, <code>prial</code>, <code>analytic_prial</code>) is implemented and tested.
-<ol>
-<li><b><code>draw_covariance(p, alpha2, rng)</code></b> &mdash; diagonal &Sigma;, log-normal eigenvalues. The convention is already written in its own docstring (A1 default): <code>sigma2_log = ln(1+alpha2)</code>, <code>mu_log = -sigma2_log/2</code> &rarr; E[&lambda;]=1, Var[&lambda;]=&alpha;&sup2;, fresh draw per replication.</li>
-<li><b><code>simulate_grid()</code></b> &mdash; 1000 replications per grid point over the T1/T2/T3 grids in <code>TARGETS.md</code>, seeded.</li>
-</ol>
-<b>Gate:</b> simulated PRIAL converges to the analytic 50% at the central design (p=20, n=40, &alpha;&sup2;=&frac12;).<br>
-<b>A 25-minute version of day one:</b> <code>draw_covariance</code> plus one test that the drawn eigenvalues have mean &asymp;1 and variance &asymp;&alpha;&sup2;. That is a complete, honest block.</div>
+<h1>3 &middot; KASE "bid/ask" fields are a price-limit band</h1>
+<p class="sub">Source: <b>KASE</b> &middot; <a href="projects.html#projects">&larr; Projects</a> &middot; Confidence: HIGH</p>
+<h2 id="pri-1-the-finding">The finding</h2><p>KASE board data exposes <code>bid</code>/<code>ask</code> fields that are crossed in <b>88.7%</b> of snapshots &mdash; impossible for real quotes. They are the exchange's <b>daily price-limit band</b>. Evidence: band midpoint &divide; prior close = 0.9973&ndash;1.0073 across six tickers; <b>100%</b> of 448 trades fall inside; <b>zero</b> changes across 1,103 in-session snapshots; resets at each open. Two rival hypotheses (swapped labels, session high-water marks) tested and rejected.</p>
+<p><b>Why it matters:</b> the error had propagated into a 526bp "spread" that killed every candidate strategy on cost grounds. True one-way spread: <b>Roll 0.24% / Corwin-Schultz 0.47%</b>. The generalisable lesson &mdash; a persistently crossed book is prima facie a field-semantics error, not a venue quirk &mdash; is the publishable part.</p>
+<h2 id="pri-2-venues">Venues</h2><ul class="dt-list"><li><b>SSRN + a blog post</b> &mdash; SSRN needs no endorsement, so it is faster than arXiv.</li><li><b>Also &sect;2 (institutional setting) of output 4</b>, where it demonstrates venue mastery to a referee. Thin as a standalone paper; strong as a section plus a note.</li></ul>
+<div class="callout warn"><b>Guardrail:</b> never cite 526bp again. Cite Roll/Corwin-Schultz <em>as estimates</em> &mdash; KASE exposes no true top-of-book, so the spread remains unmeasured.</div>
 
 </section>
 </div>
