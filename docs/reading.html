@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamteam — Reading</title>
+<style>
+:root{
+  --bg:#0d1117; --bg-2:#11161d; --bg-3:#1a212b;
+  --fg:#e6edf3; --fg-dim:#9aa7b8; --fg-dimmer:#6b7684;
+  --border:#222b36; --border-strong:#2f3a48;
+  --accent:#4f8cff; --accent-soft:#16233d; --accent-2:#a970ff;
+  --urgent:#ff6b6b; --urgent-soft:#3a1d1d;
+  --ok:#3fb950; --ok-soft:#12261a;
+  --info:#3fb6d3; --info-soft:#0f2830;
+}
+:root[data-theme="light"]{
+  --bg:#f6f8fa; --bg-2:#ffffff; --bg-3:#eef1f5;
+  --fg:#1f2328; --fg-dim:#57606a; --fg-dimmer:#8b949e;
+  --border:#d0d7de; --border-strong:#afb8c1;
+  --accent:#2954c8; --accent-soft:#dbe6ff; --accent-2:#8250df;
+  --urgent:#cf222e; --urgent-soft:#ffe3e3;
+  --ok:#1a7f37; --ok-soft:#dafbe1;
+  --info:#0b7285; --info-soft:#d3f3f8;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0}
+h1{font-size:23px;margin:0 0 4px} h2{font-size:19px;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:15.5px;margin:18px 0 6px;color:var(--accent)}
+p{margin:8px 0} a{color:var(--accent)} code{background:var(--bg-3);padding:1px 5px;border-radius:4px;font-size:12.5px}
+small{color:var(--fg-dimmer)}
+.sub{color:var(--fg-dim);font-size:13.5px;margin:2px 0 14px}
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:11px;padding:14px 16px;margin:10px 0}
+.card.accent{border-left:4px solid var(--accent)}
+.card.star{border-left:4px solid var(--urgent)}
+.card h3{margin-top:2px}
+.callout{background:var(--bg-2);border:1px solid var(--border);border-left:4px solid var(--info);border-radius:0 10px 10px 0;padding:12px 15px;margin:14px 0;font-size:13.5px}
+.callout.warn{border-left-color:var(--urgent);background:var(--urgent-soft)}
+.callout.ok{border-left-color:var(--ok)}
+.callout b{color:var(--fg)}
+ul.dt-list{list-style:none;padding:0;margin:8px 0}
+ul.dt-list>li{position:relative;padding:6px 0 6px 22px;border-bottom:1px solid var(--border);font-size:13.8px}
+ul.dt-list>li:last-child{border-bottom:none}
+ul.dt-list>li::before{content:"\203A";position:absolute;left:4px;top:6px;color:var(--accent);font-weight:800}
+ul.dt-list>li.star::before{content:"\2605";color:var(--urgent);font-size:12px}
+ul.dt-list>li.cut::before{content:"\2013";color:var(--fg-dimmer)}
+ul.dt-list b{color:var(--fg)}
+.when{color:var(--fg-dim);font-weight:600;font-size:12.5px}
+.tag{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.t-ac{background:var(--accent-soft);color:var(--accent)} .t-de{background:var(--info-soft);color:var(--info)}
+.t-ms{background:var(--urgent-soft);color:var(--urgent)} .t-res{background:var(--ok-soft);color:var(--ok)}
+.t-code{background:var(--accent-soft);color:var(--accent-2)}
+.t-st{background:var(--ok-soft);color:var(--ok)}
+.tl{position:relative;margin:10px 0}
+.tl::before{content:"";position:absolute;left:96px;top:6px;bottom:6px;width:2px;background:var(--border-strong)}
+.tl-band{margin:20px 0 10px 116px;font-weight:800;font-size:12.5px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.tl-row{position:relative;display:flex;margin-bottom:11px;align-items:flex-start}
+.tl-date{width:90px;flex-shrink:0;text-align:right;font-weight:700;font-size:12px;color:var(--fg-dim);padding:3px 0 0}
+.tl-date small{display:block;font-weight:600;font-size:10px;color:var(--fg-dimmer)}
+.tl-dot{position:absolute;left:90px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);z-index:2}
+.tl-row.star .tl-dot{border-color:var(--urgent);box-shadow:0 0 0 3px var(--urgent-soft)}
+.tl-card{flex:1;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:8px 13px;margin-left:26px}
+.tl-row.star .tl-card{border-left:3px solid var(--urgent)}
+.tl-name{font-weight:700;font-size:13.5px}
+.tl-what{font-size:12.3px;color:var(--fg-dim);margin-top:2px;line-height:1.42}
+.tl-name label{cursor:pointer} .tl-name input{margin-right:7px;vertical-align:middle}
+table.dt{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+table.dt th,table.dt td{border:1px solid var(--border);padding:7px 10px;text-align:left;vertical-align:top}
+table.dt th{background:var(--bg-3);font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dim)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.two{grid-template-columns:1fr}}
+
+/* === Kozha funding table (restored 2026-08-24) === */
+.kozha-filter{background:var(--bg-3);color:var(--fg-dim);border:1px solid var(--border);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit}
+.kozha-filter:hover{background:var(--bg-3);color:var(--fg)}
+.kozha-filter.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);font-weight:700}
+#kozha-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px}
+#kozha-table th,#kozha-table td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top}
+#kozha-table th{background:var(--bg-3);font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--fg-dim);position:sticky;top:0}
+#kozha-table th[data-sort-key]{cursor:pointer;user-select:none}
+#kozha-table th[data-sort-key]:hover{color:var(--fg)}
+#kozha-table tbody tr:hover{background:var(--bg-2)}
+.kozha-wrap{overflow-x:auto;max-height:70vh;overflow-y:auto;border:1px solid var(--border);border-radius:8px}
+
+
+/* === multi-page layout overrides === */
+body{display:block !important;margin:0;background:var(--bg);color:var(--fg)}
+.page-section{display:block !important;margin-bottom:46px;scroll-margin-top:130px}
+h2[id],h3[id]{scroll-margin-top:130px}
+.dt-controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:6px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.dt-controls button{font-size:12px;padding:4px 11px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-3);color:var(--fg);cursor:pointer}
+.site-layout{display:flex;align-items:flex-start;max-width:1500px;margin:0 auto}
+.site-subnav{position:sticky;top:96px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;padding:20px 10px;border-right:1px solid var(--border)}
+.site-subnav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg-dimmer);padding:0 10px 8px}
+.site-subnav a{display:block;color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.35;margin-bottom:1px}
+.site-subnav a.h3{padding-left:22px;font-size:12.5px;color:var(--fg-dimmer)}
+.site-subnav a:hover{background:var(--bg-3);color:var(--fg)}
+.site-subnav a.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.site-main{flex:1;min-width:0;padding:24px 34px;max-width:1000px}
+@media(max-width:880px){.site-layout{flex-direction:column}.site-subnav{position:static;width:auto;max-height:none;border-right:none;border-bottom:1px solid var(--border)}}
+/* === calendar === */
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.cal-filter{cursor:pointer;border:1px solid var(--border-strong);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;background:var(--bg-2);color:var(--fg)}
+.cal-filter.off{opacity:.38}
+.cal-row{display:flex;gap:16px;padding:11px 15px;border-left:4px solid var(--border-strong);background:var(--bg-2);border-radius:0 8px 8px 0;margin-bottom:8px}
+.cal-when{flex-shrink:0;width:140px;font-weight:700;font-size:13px}
+.cal-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.cal-item{font-weight:600}
+.cal-note{font-size:12.5px;color:var(--fg-dim);margin-top:3px}
+.cat-gate{border-left-color:var(--urgent)} .cat-gate .cal-cat{background:var(--urgent-soft);color:var(--urgent)}
+.cat-prog{border-left-color:var(--accent)} .cat-prog .cal-cat{background:var(--accent-soft);color:var(--accent)}
+.cat-reu{border-left-color:var(--ok)} .cat-reu .cal-cat{background:var(--ok-soft);color:var(--ok)}
+.cat-kozha{border-left-color:var(--accent-2)} .cat-kozha .cal-cat{background:var(--accent-soft);color:var(--accent-2)}
+.cat-test{border-left-color:var(--info)} .cat-test .cal-cat{background:var(--info-soft);color:var(--info)}
+</style></head><body>
+<div class="dt-sitenav"><style>.dt-sitenav{position:sticky;top:0;z-index:99;background:#11161d;border-bottom:1px solid #2a313d;display:flex;flex-wrap:wrap;gap:2px;padding:6px 12px;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.dt-sitenav a{color:#9aa7b8;text-decoration:none;padding:7px 12px;border-radius:7px}.dt-sitenav a:hover{color:#e6edf3;background:#1d232c}.dt-sitenav a.cur{color:#fff;background:#2954c8}.dt-sitenav .br{color:#e6edf3;padding:7px 14px 7px 2px;margin-right:6px;border-right:1px solid #2a313d;font-weight:800}</style><span class="br">Dreamteam</span><a href="index.html" class="">Home</a><a href="spine.html" class="">Roadmap</a><a href="curriculum.html" class="">Curriculum</a><a href="reading.html" class="cur">Reading</a><a href="projects.html" class="">Projects</a><a href="summer27.html" class="">Summer '27</a><a href="gates.html" class="">Gates</a><a href="publish.html" class="">Publish</a><a href="funding.html" class="">Funding</a><a href="kozha.html" class="">Kozha</a></div>
+<div class="dt-controls"><span id="task-progress" class="small"></span><button id="theme-toggle">Toggle theme</button><button class="reset-btn" id="reset-btn">Reset checks</button></div>
+<div class="site-layout">
+<div class="site-subnav"><div class="lbl">Reading</div><a href="#rea-1-queue-a-the-defensibility-five-tomorrow" class="">Queue A &mdash; the defensibility five TOMORROW</a><a href="#rea-2-queue-b-the-literature-your-findings-sit-ins" class="">Queue B &mdash; the literature your findings sit inside</a><a href="#rea-3-queue-c-ledoitwolf-critical-path-blocks-the-" class="">Queue C &mdash; Ledoit&ndash;Wolf critical path BLOCKS THE A</a><a href="#rea-4-queue-d-the-mynbaev-channel" class="">Queue D &mdash; the Mynbaev channel</a><a href="#rea-5-queue-e-the-reproduction-ladder-exercise-tra" class="">Queue E &mdash; the reproduction ladder exercise track, priv</a><a href="#rea-6-getting-the-pdfs" class="">Getting the PDFs</a></div>
+<div class="site-main"><section class="page-section" id="reading">
+
+<h1>Reading &mdash; the unified queue</h1>
+<p class="sub">Consolidated 26 Aug 2026 from <code>_master-report/READING-own-work-dependencies.md</code>, <code>ml-research/reading/reading-list-mynbaev-ml.md</code>, the reference lists of all three KASE papers, and <code>lw-shrinkage-artifact/TARGETS.md</code>. Thirty-six papers. At one a day that is about five weeks.</p>
+
+<div class="callout warn"><b>&#9888; Honest calibration before you start.</b> One paper a day is 365 a year, and a Tier-1 statistics paper read properly is 45&ndash;90 minutes. That does not survive alongside a 20 h/week study floor unless most days are <b>targeted 30-minute reads</b> rather than full comprehension passes. The realistic failure mode is not laziness: it is reading ten tomorrow and none after. So the queue is tiered by depth, the streak <b>pauses during the May 2027 and May 2028 sittings</b>, and a 20-minute skim that answers the four questions counts as a day.</p>
+<b>What "read" means here.</b> Not cover to cover. For each paper you want four things: <b>(1)</b> what question it answers, <b>(2)</b> what it assumes, <b>(3)</b> what happens when the assumption fails, <b>(4)</b> the one result you cite, and whether you cite it correctly. Write those four lines down. If you cannot write line 3, you have not read it.</div>
+
+<h2 id="rea-1-queue-a-the-defensibility-five-tomorrow">Queue A &mdash; the defensibility five <span class="tag t-ms">TOMORROW</span></h2>
+<p class="sub">These are the five methods in your own papers you would be asked about first, by Aldashev, by a summer-programme reviewer, or in an interview. Until these are done the KASE repos are a liability rather than an asset.</p>
+<ul class="dt-list">
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-newey"><b>Newey &amp; West (1987)</b>, "A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimator", <i>Econometrica</i> 55(3)</label><br><span class="small">Every t-statistic in your paper is now HAC. Know what it corrects for and why lag 5 is defensible.</span></li>
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-roll"><b>Roll (1984)</b>, "A Simple Implicit Measure of the Effective Bid-Ask Spread in an Efficient Market", <i>Journal of Finance</i> 39(4)</label><br><span class="small">One of your two spread estimates. Rests on serial covariance of price changes; know when the assumption fails.</span></li>
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-corwin"><b>Corwin &amp; Schultz (2012)</b>, "A Simple Way to Estimate Bid-Ask Spreads from Daily High and Low Prices", <i>Journal of Finance</i> 67(2), 719&ndash;760</label><br><span class="small">Your other estimate. The two disagree by a factor of two in your data and you will be asked why.</span></li>
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-hasbrouck"><b>Hasbrouck (1995)</b>, "One Security, Many Markets: Determining the Contributions to Price Discovery", <i>Journal of Finance</i> 50(4)</label><br><span class="small">You explicitly rejected this method. State its contemporaneous-observation assumption and why the KSPI pair violates it.</span></li>
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-gonzalo"><b>Gonzalo &amp; Granger (1995)</b>, "Estimation of Common Long-Memory Components in Cointegrated Systems", <i>JBES</i> 13(1), 27&ndash;35</label><br><span class="small">Your paper reports it as specification-fragile for the non-overlapping pair. Know what the permanent-transitory decomposition does.</span></li>
+</ul>
+
+<h2 id="rea-2-queue-b-the-literature-your-findings-sit-ins">Queue B &mdash; the literature your findings sit inside</h2>
+<ul class="dt-list">
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-becker"><b>Becker, Finnerty &amp; Gupta (1990)</b>, "The Intertemporal Relation Between the U.S. and Japanese Stock Markets", <i>JF</i> 45, 1297&ndash;1306</label><br><span class="small">Runs essentially your gap-and-drift regression for Tokyo. This is the paper that makes your beta a rediscovery, so know exactly how your design differs.</span></li>
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-craig"><b>Craig, Dravid &amp; Richardson (1995)</b>, "Market Efficiency Around the Clock", <i>JFE</i> 38(2), 161&ndash;180</label><br><span class="small">The hostile citation. Your paper now tests it directly and survives; know why the lagged coefficient rising is the answer.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-patell"><b>Patell &amp; Wolfson (1984)</b>, "The Intraday Speed of Adjustment of Stock Prices to Earnings and Dividend Announcements", <i>JFE</i> 13(2)</label><br><span class="small">The absorption-speed benchmark your lead finding is measured against.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-chordia"><b>Chordia, Roll &amp; Subrahmanyam (2005)</b>, "Evidence on the Speed of Convergence to Market Efficiency", <i>JFE</i></label><br><span class="small">5&ndash;15 minutes for large NYSE names. The other half of the benchmark.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-rozeff"><b>Rozeff &amp; Kinney (1976)</b>, "Capital Market Seasonality: The Case of Stock Returns", <i>JFE</i> 3(4)</label><br><span class="small">The turn-of-the-year effect. Your year-end section is a local instance of it.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-ince"><b>Ince &amp; Porter (2006)</b>, "Individual Equity Return Data from Thomson Datastream: Handle with Care!", <i>Journal of Financial Research</i> 29(4)</label><br><span class="small">The canonical cite for your quote-field-semantics finding: vendor fields that do not mean what their names say.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-sullivan"><b>Sullivan, Timmermann &amp; White (1999)</b>, "Data-Snooping, Technical Trading Rule Performance, and the Bootstrap", <i>JF</i> 54(5)</label><br><span class="small">The formal version of what your 253-combination screen did by hand.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-harvey"><b>Harvey, Liu &amp; Zhu (2016)</b>, "&hellip;and the Cross-Section of Expected Returns", <i>RFS</i> 29(1)</label><br><span class="small">Why a t-statistic of 2 is not enough when many things were tried.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-lo"><b>Lo (2002)</b>, "The Statistics of Sharpe Ratios", <i>Financial Analysts Journal</i> 58(4)</label><br><span class="small">Your Sharpe standard error and the power calculation come from here.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-bh"><b>Benjamini &amp; Hochberg (1995)</b>, "Controlling the False Discovery Rate", <i>JRSS-B</i> 57(1)</label><br><span class="small">The alternative to Bonferroni you did not use. Be able to say why not.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-bailey"><b>Bailey &amp; L&oacute;pez de Prado (2014)</b>, "The Deflated Sharpe Ratio", <i>Journal of Portfolio Management</i></label><br><span class="small">Cited in your strategy audit. Selection bias and backtest overfitting, formalised.</span></li>
+</ul>
+
+<h2 id="rea-3-queue-c-ledoitwolf-critical-path-blocks-the-">Queue C &mdash; Ledoit&ndash;Wolf critical path <span class="tag t-res">BLOCKS THE ARTIFACT</span></h2>
+<ul class="dt-list">
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-lw2004"><b>Ledoit &amp; Wolf (2004)</b>, "A Well-Conditioned Estimator for Large-Dimensional Covariance Matrices", <i>JMA</i> 88(2), 365&ndash;411 &mdash; <b>&sect;2&ndash;4</b></label><br><span class="small">Outstanding since 7 August. PDF already at <code>lw-shrinkage-artifact/papers/</code>. This is the only item on this page that is on the October critical path.</span></li>
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-jm2003"><b>Jagannathan &amp; Ma (2003)</b>, "Risk Reduction in Large Portfolios: Why Imposing the Wrong Constraints Helps", <i>JF</i> 58(4), 1651&ndash;1683</label><br><span class="small">The extension. You cannot build the KKT extraction in <code>implied.py</code> without it.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-oas"><b>Chen, Wiesel, Eldar &amp; Hero (2010)</b>, "Shrinkage Algorithms for MMSE Covariance Estimation", <i>IEEE Trans. Signal Processing</i> 58(10)</label><br><span class="small">OAS, one of the post-2003 estimators the extension tests and Jagannathan&ndash;Ma never did.</span></li>
+</ul>
+
+<h2 id="rea-4-queue-d-the-mynbaev-channel">Queue D &mdash; the Mynbaev channel</h2>
+<p class="sub">From the 39-paper verified list at <code>ml-research/reading/reading-list-mynbaev-ml.md</code>. These five are the surface you would actually discuss with him. Free preprints exist for all of them on MPRA or arXiv.</p>
+<ul class="dt-list">
+<li class="star"><label><input type="checkbox" class="dt-check" id="r-mmf2010"><b>Mynbaev &amp; Martins-Filho (2010)</b>, "Bias Reduction in Kernel Density Estimation via Lipschitz Condition", <i>J. Nonparametric Statistics</i> 22(2), 219&ndash;235</label><br><span class="small">The foundational seed; every later density paper reuses the trick. PDF already in <code>ml-research/reading/</code>. Read first.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-mmf2017"><b>Mynbaev &amp; Martins-Filho (2017)</b>, "Reducing Bias in Nonparametric Density Estimation via Bandwidth Dependent Kernels: L1 View", <i>SPL</i> 123, 17&ndash;22</label><br><span class="small">Free full text at arXiv:1611.10203. Short.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-mmf2015"><b>Mynbaev &amp; Martins-Filho (2015)</b>, "Consistency and Asymptotic Normality for a Nonparametric Prediction under Measurement Errors", <i>JMVA</i> 139, 166&ndash;188</label><br><span class="small">The genuine deconvolution branch, and the seed the dead project-3 code was written against.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-mmf2019"><b>Mynbaev &amp; Martins-Filho (2019)</b>, "Unified Estimation of Densities on Bounded and Unbounded Domains", <i>AISM</i> 71(4), 853&ndash;887</label><br><span class="small">The capstone of the density line. MPRA 87044.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-sdkde"><b>Epstein et al. (2025)</b>, "SD-KDE: Score-Debiased Kernel Density Estimation", NeurIPS 2025, arXiv:2504.19084</label><br><span class="small">The modern ML seam with his 2010 paper &mdash; both chase bias reduction while avoiding higher-order-kernel negativity, and the paper says so verbatim.</span></li>
+</ul>
+
+<h2 id="rea-5-queue-e-the-reproduction-ladder-exercise-tra">Queue E &mdash; the reproduction ladder <span class="tag t-st">exercise track, private</span></h2>
+<p class="sub">Read-then-implement, solo, no LLM during. Rising difficulty. One private repo for all of them, never published, never mentioned to a PI. The promotable case is a reproduction that <b>fails</b>, which is why the targets get pinned in writing first.</p>
+<ul class="dt-list">
+<li><label><input type="checkbox" class="dt-check" id="r-x1"><b>Efron &amp; Morris (1977)</b>, "Stein's Paradox in Statistics", <i>Scientific American</i></label> <span class="tag t-ms">weekend</span><br><span class="small">18 batting averages. James&ndash;Stein must beat the MLE by the published ratio. The ancestor of your LW work.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x2"><b>Efron (1979)</b>, "Bootstrap Methods: Another Look at the Jackknife", <i>Ann. Statist.</i> 7(1)</label> <span class="tag t-ms">weekend</span><br><span class="small">His standard-error tables for the median and the correlation coefficient.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x3"><b>Diebold &amp; Mariano (1995)</b>, "Comparing Predictive Accuracy", <i>JBES</i></label> <span class="tag t-ms">weekend</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x4"><b>Benjamini &amp; Hochberg (1995)</b> &mdash; the simulation, not just the read</label> <span class="tag t-ms">week</span><br><span class="small">FDR held at q while power beats Bonferroni. Overlaps Queue B, so do it there first and implement here.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x5"><b>Tibshirani (1996)</b>, "Regression Shrinkage and Selection via the Lasso", <i>JRSS-B</i> 58(1)</label> <span class="tag t-ms">week</span><br><span class="small">Section 7 simulation plus the prostate example. Solve the constrained problem as the paper does; coordinate descent did not exist yet.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x6"><b>Breiman (1996)</b>, "Bagging Predictors", <i>Machine Learning</i> 24(2)</label> <span class="tag t-ms">week</span><br><span class="small">The UCI datasets have drifted since 1996, and discovering that is part of the exercise.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x7"><b>Zou &amp; Hastie (2005)</b>, "Regularization and Variable Selection via the Elastic Net", <i>JRSS-B</i> 67(2)</label> <span class="tag t-ms">2&ndash;3 wk</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x8"><b>Efron, Hastie, Johnstone &amp; Tibshirani (2004)</b>, "Least Angle Regression", <i>Ann. Statist.</i> 32(2)</label> <span class="tag t-ms">2&ndash;3 wk</span><br><span class="small">The diabetes coefficient path, Figure 1. LARS has subtle bookkeeping; the first one that will actually fight you.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x9"><b>White (2000)</b>, "A Reality Check for Data Snooping", <i>Econometrica</i> 68(5)</label> <span class="tag t-ms">2&ndash;3 wk</span><br><span class="small">The formal version of your strategy audit. Do this one before the audit paper is final.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x10"><b>Johnstone (2001)</b>, "On the Distribution of the Largest Eigenvalue in Principal Components Analysis", <i>Ann. Statist.</i> 29(2)</label> <span class="tag t-ms">2&ndash;3 wk</span><br><span class="small">Tracy&ndash;Widom. Random matrix theory is the foundation under Ledoit&ndash;Wolf.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x11"><b>Bickel &amp; Levina (2008)</b>, "Regularized Estimation of Large Covariance Matrices", <i>Ann. Statist.</i> 36(1)</label> <span class="tag t-ms">2&ndash;3 wk</span><br><span class="small">Thresholding and banding. Same neighbourhood as your artifact, different estimator class.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x12"><b>Friedman, Hastie &amp; Tibshirani (2008)</b>, "Sparse Inverse Covariance Estimation with the Graphical Lasso", <i>Biostatistics</i> 9(3)</label> <span class="tag t-ms">month+</span><br><span class="small">The runner-up in your own P3 spec.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x13"><b>Cai &amp; Liu (2011)</b>, "Adaptive Thresholding for Sparse Covariance Matrix Estimation", <i>JASA</i> 106(494)</label> <span class="tag t-ms">month+</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x14"><b>Fan &amp; Li (2001)</b>, "Variable Selection via Nonconcave Penalized Likelihood", <i>JASA</i> 96(456)</label> <span class="tag t-ms">month+</span><br><span class="small">SCAD. Your first nonconvex optimisation.</span></li>
+<li><label><input type="checkbox" class="dt-check" id="r-x15"><b>Chernozhukov et al. (2018)</b>, "Double/Debiased Machine Learning", <i>Econometrics Journal</i> 21(1)</label> <span class="tag t-ms">month+</span><br><span class="small">Cross-fitting and Neyman orthogonality. The most machinery on this list.</span></li>
+</ul>
+
+<h2 id="rea-6-getting-the-pdfs">Getting the PDFs</h2>
+<ul class="dt-list">
+<li><b>KBTU library proxy</b> first, and check separately what the <b>University of London</b> subscription gives you &mdash; EMFSS students often have access the KBTU login does not cover.</li>
+<li><b>Author preprints.</b> Wolf's UZH page carries the Ledoit&ndash;Wolf papers openly. Mynbaev's are nearly all free on <b>MPRA</b>; the 2017 one is on arXiv.</li>
+<li><b>Google Scholar "All versions"</b> surfaces open PDFs the main result hides. This works more often than the paywall suggests.</li>
+<li><b>SSRN and NBER</b> for the finance papers.</li>
+<li>For the iPad: pull them into one folder and sync once, rather than fetching per day. The friction of finding the PDF is what kills a daily habit, not the reading.</li>
+</ul>
+
+<div class="callout"><b>Where this came from.</b> Queue A and B: <code>_master-report/READING-own-work-dependencies.md</code> plus the reference lists of all three KASE papers. Queue C: <code>lw-shrinkage-artifact/TARGETS.md</code>. Queue D: the 39-paper verified list at <code>ml-research/reading/reading-list-mynbaev-ml.md</code> (produced July 2026 with per-paper trust tags &mdash; the full version has 34 more). Queue E is the exercise ladder, which exists nowhere else.</div>
+
+</section>
+</div>
+</div>
+<script>
+function renderCurrentWeek() {
+    if(!document.getElementById('week-tasks'))return; /* build-compat stub */ }
+(function(){
+  var root=document.documentElement;
+  try{var s=localStorage.getItem('dt-theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  var tb=document.getElementById('theme-toggle');
+  if(tb) tb.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')==='light'?'light':'dark';
+    var next=cur==='light'?'dark':'light'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('dt-theme',next);}catch(e){}
+  });
+  function prog(){
+    var b=document.querySelectorAll('input.dt-check'),d=0;
+    b.forEach(function(x){if(x.checked)d++;});
+    var el=document.getElementById('task-progress');
+    if(el) el.textContent=b.length?(d+'/'+b.length+' done'):'';
+  }
+  document.querySelectorAll('input.dt-check').forEach(function(x){
+    var k='dt-'+(x.id||'');
+    try{if(localStorage.getItem(k)==='1')x.checked=true;}catch(e){}
+    x.addEventListener('change',function(){try{localStorage.setItem(k,x.checked?'1':'0');}catch(e){}prog();});
+  });
+  var rb=document.getElementById('reset-btn');
+  if(rb) rb.addEventListener('click',function(){
+    document.querySelectorAll('input.dt-check').forEach(function(x){x.checked=false;try{localStorage.setItem('dt-'+(x.id||''),'0');}catch(e){}});prog();
+  });
+  prog();
+})();
+
+/* === Kozha funding table: sort + filter (restored 2026-08-24) === */
+(function(){
+  var table=document.getElementById('kozha-table'); if(!table) return;
+  var tbody=table.querySelector('tbody');
+  var headers=table.querySelectorAll('th[data-sort-key]');
+  var labels={num:'#',funder:'Funder',award:'Award',deadline:'Deadline',lead:'Lead',hrs:'Hrs'};
+  var st={key:'deadline',dir:'asc'};
+  function applySort(){
+    var rows=Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+    var isNum=function(k){return k==='num'||k==='award'||k==='hrs';};
+    rows.sort(function(a,b){
+      var av=a.dataset[st.key],bv=b.dataset[st.key],c;
+      if(isNum(st.key)) c=Number(av)-Number(bv); else c=String(av).localeCompare(String(bv));
+      return st.dir==='asc'?c:-c;
+    });
+    rows.forEach(function(r){tbody.appendChild(r);});
+    headers.forEach(function(th){
+      var k=th.dataset.sortKey;
+      th.textContent=labels[k]+(st.key===k?(st.dir==='asc'?' \u25B2':' \u25BC'):'');
+    });
+  }
+  headers.forEach(function(th){
+    th.addEventListener('click',function(){
+      var k=th.dataset.sortKey;
+      if(st.key===k) st.dir=st.dir==='asc'?'desc':'asc'; else {st.key=k;st.dir='asc';}
+      applySort();
+    });
+  });
+  var total=tbody.querySelectorAll('tr').length;
+  document.querySelectorAll('.kozha-filter').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.kozha-filter').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var lead=btn.dataset.lead, visible=0;
+      tbody.querySelectorAll('tr').forEach(function(row){
+        var rl=row.dataset.lead, show;
+        if(lead==='all') show=true;
+        else if(lead==='BB') show=(rl==='BB'||rl==='Either');
+        else if(lead==='BM') show=(rl==='BM'||rl==='Either');
+        else show=(rl==='Either');
+        row.style.display=show?'':'none'; if(show) visible++;
+      });
+      document.querySelectorAll('.kozha-filter').forEach(function(b){
+        b.textContent=b.textContent.replace(/\s*\(\d+\)\s*$/,'');
+      });
+      var allBtn=document.querySelector('.kozha-filter[data-lead="all"]');
+      if(allBtn) allBtn.textContent='All ('+total+')';
+      if(lead!=='all') btn.textContent=btn.textContent+' ('+visible+')';
+    });
+  });
+  var allBtn=document.querySelector('.kozha-filter[data-lead="all"]');
+  if(allBtn) allBtn.textContent='All ('+total+')';
+  applySort();
+})();
+
+
+(function(){const links=[...document.querySelectorAll('.site-subnav a[href^=\"#\"]')];if(!links.length)return;
+ const map={};links.forEach(a=>{const id=a.getAttribute('href').slice(1);if(document.getElementById(id))map[id]=a;});
+ const ids=Object.keys(map);function onScroll(){let cur=ids[0];for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<170)cur=id;}links.forEach(a=>a.classList.remove('cur'));if(map[cur])map[cur].classList.add('cur');}
+ window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();
+
+</script>
+</body></html>
