@@ -28,6 +28,13 @@ causal-ra-outreach-db.md
 causal-ra-outreach-db.csv
 situation-report-*.md
 us-msc-stats-funding-*.md
+
+# Added 2026-09-12 — PRIVATE research dossiers and personal records.
+# _master-report/ contains LOR-CAMPAIGN-2026-27.md (referee strategy) and
+# prof profiles. These must never reach the public GitHub Pages repo.
+_master-report/
+_income/
+_life/
 quant-qr-backgrounds/
 ope-benchmark-scoping.md
 *-project-spec.md
